@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('anggota', function (Blueprint $table) {
             $table->id();
-            $table->string('nik', 16);
+            $table->string('nik', 16)->unique();
             $table->string('password');
             $table->string('nama', 70);
             $table->date('tanggal_lahir');
             $table->string('tempat_lahir', 100);
             $table->string('pekerjaan', 100);
             $table->text('alamat');
-            $table->char('no_telepon', 13);
+            $table->char('no_telepon', 13)->unique();
             $table->enum('golongan_darah', array('A', 'B', 'AB', 'O'));
             $table->timestamps();
             $table->softDeletes();
