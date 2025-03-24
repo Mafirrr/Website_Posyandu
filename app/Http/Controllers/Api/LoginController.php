@@ -13,14 +13,14 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email',
+            'identifier' => 'required|string', // Bisa NIK atau NIP
             'password' => 'required|string',
         ]);
 
-        $user = Anggota::where('nik', $request->nik)->first();
+        $user = Anggota::where('nik', $request->identifier)->first();
 
         if (!$user) {
-            $user = Petugas::where('nip', $request->nip)->first();
+            $user = Petugas::where('nip', $request->identifier)->first();
         }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -30,14 +30,27 @@ class LoginController extends Controller
             ], 401);
         }
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        // Buat token berdasarkan role
+        $tokenName = ($user instanceof Anggota) ? 'anggota_token' : 'petugas_token';
+        $token = $user->createToken($tokenName)->plainTextToken;
 
         return response()->json([
             'success' => true,
             'message' => 'Login successful.',
             'user' => $user,
-            'role' => $user instanceof Anggota ? 'anggota' : 'petugas',
+            'role' => ($user instanceof Anggota) ? 'anggota' : 'petugas',
             'token' => $token
+        ], 200);
+    }
+
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Logged out successfully'
         ], 200);
     }
 }
