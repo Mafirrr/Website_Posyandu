@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kehamilan', function (Blueprint $table) {
+        Schema::create('keluarga_anggota', function (Blueprint $table) {
             $table->id();
             $table->foreignId('anggota_id')->references('id')->on('anggota');
-            $table->date('tanggal_awal');
-            $table->integer('usia_kehamilan_awal');
-            $table->text('riwayat_penyakit');
-            $table->text('riwayat_kehamilan');
-            $table->date('perkiraan_kehamilan');
-            $table->enum('status', array('proses', 'keguguran'));
+            $table->string('nik', 16)->unique();
+            $table->string('nama', 70);
+            $table->date('tanggal_lahir');
+            $table->string('tempat_lahir', 100);
+            $table->string('pekerjaan', 100);
+            $table->text('alamat');
+            $table->char('no_telepon', 13)->unique();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kehamilans');
+        Schema::dropIfExists('keluarga_anggotas');
     }
 };

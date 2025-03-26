@@ -19,12 +19,14 @@ class Kehamilan extends Model
         'riwayat_penyakit',
         'riwayat_kehamilan',
         'perkiraan_kehamilan',
+        'status'
     ];
 
     protected $casts = [
         'tanggal_awal' => 'date',
         'usia_kehamilan_awal' => 'integer',
         'perkiraan_kehamilan' => 'date',
+        'status' => 'string'
     ];
 
     public function anggota()
