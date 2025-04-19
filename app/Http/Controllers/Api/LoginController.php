@@ -53,4 +53,40 @@ class LoginController extends Controller
             'message' => 'Logged out successfully'
         ], 200);
     }
+
+    public function lupaPass(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'phone' => 'required',
+            'password' => 'required|min:8',
+        ]);
+
+        $phone = $request->phone;
+        $password = $request->password;
+
+        if (substr($phone, 0, 2) === '08') {
+            $phone = '+628' . substr($phone, 2);
+        }
+
+        // Find the user
+        $user = Anggota::where('no_telepon', $phone)->first();
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User with this phone number not found.',
+            ], 404);
+        }
+
+        // Update password
+        $user->password = Hash::make($password);
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Password has been successfully updated.',
+            'phone' => $phone
+        ]);
+    }
 }

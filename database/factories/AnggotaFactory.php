@@ -22,8 +22,8 @@ class AnggotaFactory extends Factory
             'tempat_lahir' => $this->faker->city(),
             'pekerjaan' => $this->faker->jobTitle(),
             'alamat' => $this->faker->address(),
-            'no_telepon' => $this->faker->unique()->numerify('08##########'), // 13 digit
-            'golongan_darah' => $this->faker->randomElement(['A', 'B', 'AB', 'O']),
+            'no_telepon' => $this->faker->unique()->numerify('+628#############'), // 13 digit
+            'golongan_darah' => $this->faker->randomElement(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
             'created_at' => now(),
             'updated_at' => now(),
         ];
