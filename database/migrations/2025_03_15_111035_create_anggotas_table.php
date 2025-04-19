@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('tempat_lahir', 100);
             $table->string('pekerjaan', 100);
             $table->text('alamat');
-            $table->char('no_telepon', 13)->unique();
+            $table->char('no_telepon', 16)->unique();
             $table->enum('golongan_darah', array('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'));
             $table->timestamps();
             $table->softDeletes();
