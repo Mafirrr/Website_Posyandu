@@ -47,7 +47,7 @@ class ProfileController extends Controller
             'golongan_darah' => 'nullable|string|max:5',
         ]);
 
-        $user->update($request->only([
+        $data = $request->only([
             'nama',
             'nik',
             'no_telepon',
@@ -56,12 +56,24 @@ class ProfileController extends Controller
             'alamat',
             'pekerjaan',
             'golongan_darah'
-        ]));
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Data berhasil diperbarui.',
-            'user' => $user,
         ]);
+
+
+        $user->fill($data);
+
+        if ($user->isDirty()) {
+            $user->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil diperbarui.',
+                'user' => $user,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tidak ada perubahan data.',
+                'user' => $user,
+            ], 202);
+        }
     }
 }
