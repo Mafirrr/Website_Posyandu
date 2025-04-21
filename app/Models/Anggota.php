@@ -22,12 +22,19 @@ class Anggota extends Model
         'pekerjaan',
         'alamat',
         'no_telepon',
-        'golongan_darah'
+        'golongan_darah',
+        'aktif',
     ];
 
     protected $hidden = [
         'password',
     ];
+
+    public function setAktifAttribute($value)
+    {
+        $this->attributes['aktif'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
 
     // Relasi ke tabel lain (jika ada)
     public function kehamilan()

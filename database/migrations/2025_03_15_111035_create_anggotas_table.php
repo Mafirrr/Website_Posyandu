@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->char('no_telepon', 16)->unique();
             $table->enum('golongan_darah', array('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'));
+            $table->boolean('aktif')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
