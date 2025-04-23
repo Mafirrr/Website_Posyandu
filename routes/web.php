@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\AnggotaTable;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,10 @@ Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name
 Route::get('/anggota/{id}/edit', [AnggotaController::class, 'anggota_edit'])->name('anggota.edit');
 Route::put('/anggota/{id}', [AnggotaController::class, 'anggota_update'])->name('anggota.update');
 Route::delete('/anggota/{id}', [AnggotaController::class, 'anggota_destroy'])->name('anggota.destroy');
-
-
+Route::get('/berita', [BeritaController::class,'index'])->name('berita.index');
+Route::get('/tambahberita',[BeritaController::class,'create'])->name('berita.tambah');
+Route::get('/beritaedit', [BeritaController::class, 'berita.edit'])->name('berita.edit');
+Route::put('/beritaupdate', [BeritaController::class, 'berita.update'])->name('berita.update');
+Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
+Route::delete('/beritaupdate', [BeritaController::class, 'berita.delete'])->name('berita.destroy');
 require __DIR__.'/auth.php';

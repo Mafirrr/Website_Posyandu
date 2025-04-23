@@ -29,29 +29,29 @@
                         <a href="{{route("dashboard")}}" class="block   px-4 py-2 {{request()->routeIs(("profile.edit")) ? 'bg-indigo-600 text-white' : 'text-slate-700 md:hover:bg-white/80'}} transition-all  rounded-md text-base flex items-center gap-2"><i class="fa w-[30px] fa-users text-lg"></i> Petugas</a>
                     </li>
                     <li>
-                        <a href="{{route("dashboard")}}" class="block   px-4 py-2 {{request()->routeIs(("profile.edit")) ? 'bg-indigo-600 text-white' : 'text-slate-700 md:hover:bg-white/80'}} transition-all  rounded-md text-base flex items-center gap-2"><i class="fa w-[30px] fa-border-all text-lg"></i> Berita</a>
+                        <a href="{{route("berita.index")}}" class="block   px-4 py-2 {{request()->routeIs(("berita.index")) ? 'bg-indigo-600 text-white' : 'text-slate-700 md:hover:bg-white/80'}} transition-all  rounded-md text-base flex items-center gap-2"><i class="fa w-[30px] fa-border-all text-lg"></i> Berita</a>
                     </li>
                     <li x-data="{ open: false }" class="relative">
-    <button 
-        @click="open = !open" 
+    <button
+        @click="open = !open"
         class="block w-full text-left px-4 py-2 {{ request()->routeIs('profile.edit') ? 'bg-indigo-600 text-white' : 'text-slate-700 md:hover:bg-white/80' }} transition-all rounded-md text-base flex items-center gap-2"
     >
         <i class="fa w-[30px] fa-users text-lg"></i> Anggota
         <!-- Panah dinamis -->
-        <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            class="ml-auto h-4 w-4 transform transition-transform duration-300" 
-            :class="{ 'rotate-90': open }" 
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ml-auto h-4 w-4 transform transition-transform duration-300"
+            :class="{ 'rotate-90': open }"
             fill="none" viewBox="0 0 24 24" stroke="currentColor"
         >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
     </button>
 
-    <div 
-        x-show="open" 
-        @click.away="open = false" 
-        x-transition 
+    <div
+        x-show="open"
+        @click.away="open = false"
+        x-transition
         class="absolute left-0 mt-2 w-52 bg-white border border-gray-200 rounded-md shadow-md z-10"
     >
         <a href="{{ route('anggota.index') }}" class="block px-4 py-2 text-slate-700 hover:bg-indigo-100">Data Anggota</a>

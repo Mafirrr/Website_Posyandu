@@ -74,6 +74,7 @@
                                     <th scope="col" class="px-4 py-3">Status</th>
                                     <th scope="col" class="px-4 py-3">
                                         <span class="sr-only">Actions</span>
+                                        
                                     </th>
                                 </tr>
                             </thead>
