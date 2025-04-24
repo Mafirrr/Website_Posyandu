@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 Route::get('/data-anggota', [AnggotaController::class,'index'])->name('anggota.index');
 Route::get('/tambah-anggota',[AnggotaController::class,'anggota_add'])->name('anggota.add');
 Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
