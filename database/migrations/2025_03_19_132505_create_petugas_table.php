@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('nip', 16)->unique();
             $table->string('password');
             $table->string('nama', 70);
-            $table->char('no_telepon', 13)->unique();
+            $table->char('no_telepon', 16)->unique();
             $table->string('email', 100)->unique();
             $table->enum('role', array('kader', 'petugas', 'admin'));
             $table->timestamps();
