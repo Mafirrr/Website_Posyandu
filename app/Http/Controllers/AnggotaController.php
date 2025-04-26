@@ -11,6 +11,7 @@ class AnggotaController extends Controller
     {
         $perPage = $request->input('per_page', 5);
         $search = $request->input('search');
+        $aktif = $request->input('aktif');
 
         $anggotas = Anggota::query()
             ->when($search, function ($query, $search) {
@@ -20,11 +21,16 @@ class AnggotaController extends Controller
                         ->orWhere('alamat', 'like', "%{$search}%");
                 });
             })
+            ->when($aktif !== null && $aktif !== '', function ($query) use ($aktif) {
+                $query->where('aktif', $aktif);
+            })
             ->orderBy('created_at', 'asc')
-            ->paginate($perPage);
+            ->paginate($perPage)
+            ->appends(request()->query());
 
         return view('anggota.anggota', compact('anggotas'));
     }
+
 
 
     public function anggota_add()
@@ -79,7 +85,7 @@ class AnggotaController extends Controller
             'alamat' => 'required|string',
             'no_telepon' => 'required|string|max:20',
             'golongan_darah' => 'required|string|max:3',
-            'status' => 'required|string|max10',
+            'aktif' => 'required|boolean',
         ]);
 
         $anggota = Anggota::findOrFail($id);
@@ -94,7 +100,7 @@ class AnggotaController extends Controller
         $anggota->alamat = $validated['alamat'];
         $anggota->no_telepon = $validated['no_telepon'];
         $anggota->golongan_darah = $validated['golongan_darah'];
-        $anggota->status = $validated['status'];
+        $anggota->aktif = $validated['aktif'];
         $anggota->save();
 
         return redirect()->route('anggota.index')->with('success', 'Data anggota berhasil diperbarui.');

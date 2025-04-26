@@ -50,17 +50,17 @@
 
                             </div>
                         </div>
-                        <div class="flex space-x-3">
+                        <form method="GET" action="{{ route('anggota.index') }}">
                             <div class="flex space-x-3 items-center">
                                 <label class="w-40 text-sm font-medium text-gray-900">Keaktifan :</label>
-                                <select
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                <select name="aktif" onchange="this.form.submit()"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                     <option value="">All</option>
-                                    <option value="0">Aktif</option>
-                                    <option value="1">Nonaktif</option>
+                                    <option value="1" {{ request('aktif') === '1' ? 'selected' : '' }}>Aktif</option>
+                                    <option value="0" {{ request('aktif') === '0' ? 'selected' : '' }}>Nonaktif</option>
                                 </select>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left text-black dark:text-black">
@@ -88,8 +88,9 @@
                                         <td class="px-4 py-3">{{ $anggota->nama }}</td>
                                         <td class="px-4 py-3">{{ $anggota->alamat }}</td>
                                         <td class="px-4 py-3">{{ $anggota->no_telepon }}</td>
-                                        <td class="px-4 py-3 text-green-500">
-                                            Aktif</td>
+                                        <td class="px-4 py-3 {{ $anggota->aktif ? 'text-green-500' : 'text-red-500' }}">
+                                            {{ $anggota->aktif ? 'Aktif' : 'Nonaktif' }}
+                                        </td>
                                         <td class="px-4 py-3 flex items-center justify-end space-x-2">
                                             <button class="px-3 py-1 bg-green-500 text-white rounded" type="button"
                                                 onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
