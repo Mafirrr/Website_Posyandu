@@ -100,6 +100,18 @@
                         <p class="text-red-500 text-sm mb-4">{{ $message }}</p>
                     @enderror
 
+                    <!-- Aktif Nonaktif -->
+                    <label for="aktif" class="block mb-1 font-bold">Keaktifan :</label>
+                    <div class="w-full">
+                        <select id="aktif" name="aktif" class="w-full p-2 border border-gray-300 rounded-md mb-1">
+                            <option value="1" {{ old('aktif', $anggota->aktif) == 1 ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('aktif', $anggota->aktif) == 0 ? 'selected' : '' }}>Nonaktif</option>
+                        </select>
+                        @error('aktif')
+                            <p class="text-red-500 text-sm mb-4">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     {{-- Tombol Aksi --}}
                     <div class="flex justify-between gap-4 mt-6">
                         <a href="{{ route('anggota.index') }}"
