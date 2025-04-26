@@ -19,12 +19,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/data-anggota', [AnggotaController::class,'index'])->name('anggota.index');
-Route::get('/tambah-anggota',[AnggotaController::class,'anggota_add'])->name('anggota.add');
-Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
-Route::get('/anggota/{id}/edit', [AnggotaController::class, 'anggota_edit'])->name('anggota.edit');
-Route::put('/anggota/{id}', [AnggotaController::class, 'anggota_update'])->name('anggota.update');
-Route::delete('/anggota/{id}', [AnggotaController::class, 'anggota_destroy'])->name('anggota.destroy');
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/data-anggota', [AnggotaController::class,'index'])->name('anggota.index');
+    Route::get('/tambah-anggota', [AnggotaController::class,'anggota_add'])->name('anggota.add');
+    Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
+    Route::get('/anggota/{id}/edit', [AnggotaController::class, 'anggota_edit'])->name('anggota.edit');
+    Route::put('/anggota/{id}', [AnggotaController::class, 'anggota_update'])->name('anggota.update');
+    Route::delete('/anggota/{id}', [AnggotaController::class, 'anggota_destroy'])->name('anggota.destroy');
+});
 
 require __DIR__.'/auth.php';
