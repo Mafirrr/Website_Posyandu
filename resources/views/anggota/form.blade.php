@@ -40,17 +40,15 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            @if ($method === "POST")
-                                <div class="">
-                                    {{-- NIK --}}
-                                    <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                                    <input type="text" id="password" name="password" placeholder="Masukkan password"
-                                        value="{{ old('password', $anggota->nik) }}" class="form-control">
-                                    @error('password')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            @endif
+                            <div class="">
+                                {{-- NIK --}}
+                                <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                <input type="text" id="password" name="password" placeholder="Masukkan password"
+                                    value="{{ old('password', $anggota->nik) }}" class="form-control">
+                                @error('password')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
 
                             <div class="">
                                 {{-- Nama --}}
@@ -140,15 +138,15 @@
 
                             @if($method === "PUT")
                                 <div class="">
-                                    <label for="aktif" class="form-label">Status Pengguna</label>
+                                    <label for="status" class="form-label">Status Pengguna</label>
                                     <div class="w-full">
-                                        <select id="aktif" name="aktif" class="form-control">
+                                        <select id="status" name="status" class="form-control">
                                             <option value="1" {{ old('aktif', $anggota->aktif) == 1 ? 'selected' : '' }}>Aktif
                                             </option>
                                             <option value="0" {{ old('aktif', $anggota->aktif) == 0 ? 'selected' : '' }}>Nonaktif
                                             </option>
                                         </select>
-                                        @error('aktif')
+                                        @error('status')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
