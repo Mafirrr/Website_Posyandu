@@ -23,6 +23,7 @@
                                     </nav>
                                 </div>
                                 <div class="ms-auto">
+
                                     <a href="{{ route('anggota.add') }}" id="btn-add-contact"
                                         class="btn btn-primary d-flex align-items-center">
                                         <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah anggota
@@ -74,11 +75,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($anggotas as $anggota)
+                                        @foreach ($anggotas as $key => $anggota)
                                             <tr class="border-b dark:border-gray-500">
                                                 <th scope="row"
                                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                                                    {{ $anggota->id }}
+                                                    {{ $anggotas->firstItem() + $key }}
                                                 </th>
                                                 <td class="px-4 py-3">{{ $anggota->nik }}</td>
                                                 <td class="px-4 py-3">{{ $anggota->nama }}</td>
@@ -112,6 +113,28 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <form method="GET" action="{{ route('anggota.index') }}">
+                        <div class="py-4 px-3">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center mb-3">
+                                    <label for="per_page" class="form-label w-32 me-3">Per Page</label>
+                                    <select name="per_page" onchange="this.form.submit()"
+                                        class="form-select form-select-sm w-auto">
+                                        <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
+                                        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                                        <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
+                                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                                    </select>
+                                </div>
+                                {{ $anggotas->appends(['per_page' => request('per_page')])->links() }}
+                            </div>
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
         </section>
