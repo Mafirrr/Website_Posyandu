@@ -75,11 +75,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($anggotas as $anggota)
+                                        @foreach ($anggotas as $key => $anggota)
                                             <tr class="border-b dark:border-gray-500">
                                                 <th scope="row"
                                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                                                    {{ $anggota->id }}
+                                                    {{ $anggotas->firstItem() + $key }}
                                                 </th>
                                                 <td class="px-4 py-3">{{ $anggota->nik }}</td>
                                                 <td class="px-4 py-3">{{ $anggota->nama }}</td>
@@ -112,61 +112,11 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="overflow-x-auto">
-                        <table class="datatable w-full text-sm text-left text-black dark:text-black">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-200">
-                                <tr>
-                                    <th scope="col" class="px-4 py-3">NO.</th>
-                                    <th scope="col" class="px-4 py-3">NIK</th>
-                                    <th scope="col" class="px-4 py-3">Nama</th>
-                                    <th scope="col" class="px-4 py-3">Alamat</th>
-                                    <th scope="col" class="px-4 py-3">No Telepon</th>
-                                    <th scope="col" class="px-4 py-3">Status</th>
-                                    <th scope="col" class="px-4 py-3">
-                                        <span class="sr-only">Actions</span>
-
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($anggotas as $anggota)
-                                <tr class="border-b dark:border-gray-500">
-                                    <th scope="row"
-                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                                        {{ $anggota->id }}
-                                    </th>
-                                    <td class="px-4 py-3">{{ $anggota->nik }}</td>
-                                    <td class="px-4 py-3">{{ $anggota->nama }}</td>
-                                    <td class="px-4 py-3">{{ $anggota->alamat }}</td>
-                                    <td class="px-4 py-3">{{ $anggota->no_telepon }}</td>
-                                    <td class="px-4 py-3 {{ $anggota->aktif ? 'text-green-500' : 'text-red-500' }}">
-                                        {{ $anggota->aktif ? 'Aktif' : 'Nonaktif' }}
-                                    </td>
-                                    <td class="px-4 py-3 flex items-center justify-end space-x-2">
-                                        <button class="px-3 py-1 bg-green-500 text-white rounded" type="button"
-                                            onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
-                                            Edit
-                                        </button>
-                                        <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST"
-                                            onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded">
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div> --}}
 
 
                     <form method="GET" action="{{ route('anggota.index') }}">
                         <div class="py-4 px-3">
-                            <div class="d-flex">
+                            <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center mb-3">
                                     <label for="per_page" class="form-label w-32 me-3">Per Page</label>
                                     <select name="per_page" onchange="this.form.submit()"
@@ -178,8 +128,8 @@
                                         <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
                                     </select>
                                 </div>
+                                {{ $anggotas->appends(['per_page' => request('per_page')])->links() }}
                             </div>
-                            {{ $anggotas->appends(['per_page' => request('per_page')])->links() }}
                         </div>
                     </form>
 
