@@ -1,69 +1,118 @@
-<x-app-layout>
+@extends("layouts.app")
+@section("main")
     <div>
-        <div class="flex items-center justify-between m-5">
-            <h2 class="text-2xl font-semibold">Data Anggota</h2>
-            <button type="button" onclick="window.location='{{ route('anggota.add') }}'"
-                class="py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
-                Tambah Anggota
-            </button>
-        </div>
 
-        <section class="mt-5 mb-10">
-            <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <section class="mt-0 mb-10">
+            <div class="mx-auto max-w-screen-xl ">
                 <!-- Start coding here -->
                 <div class="bg-white dark:bg-white relative shadow-md sm:rounded-lg overflow-hidden">
-                    <div class="flex items-center justify-between d p-4">
-                        <div class="flex">
-                            <div class="relative w-full">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                        fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+
+                    <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+                        <div class="card-body px-4 py-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="">
+                                    <h4 class="fw-semibold mb-8">Contact</h4>
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <a class="text-muted text-decoration-none"
+                                                    href="../main/index.html">Home</a>
+                                            </li>
+                                            <li class="breadcrumb-item" aria-current="page">Contact</li>
+                                        </ol>
+                                    </nav>
                                 </div>
-                                <form id="search-form" method="GET" action="{{ route('anggota.index') }}">
-                                    <div class="relative w-full">
-                                        <input id="search-input" type="text" name="search"
-                                            value="{{ request('search') }}" placeholder="Search"
-                                            class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2">
-                                    </div>
-                                </form>
-                                <script>
-                                    function debounce(fn, delay) {
-                                        let timeoutID;
-                                        return function (...args) {
-                                            clearTimeout(timeoutID);
-                                            timeoutID = setTimeout(() => fn.apply(this, args), delay);
-                                        };
-                                    }
-
-                                    const searchInput = document.getElementById('search-input');
-                                    const searchForm = document.getElementById('search-form');
-
-                                    searchInput.addEventListener('input', debounce(() => {
-                                        searchForm.submit();
-                                    }, 1000));
-                                </script>
-
-
+                                <div class="ms-auto">
+                                    <a href="{{ route('anggota.add') }}" id="btn-add-contact"
+                                        class="btn btn-primary d-flex align-items-center">
+                                        <i class="ti ti-users text-white me-1 fs-5"></i> Tambah anggota
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <form method="GET" action="{{ route('anggota.index') }}">
-                            <div class="flex space-x-3 items-center">
-                                <label class="w-40 text-sm font-medium text-gray-900">Keaktifan :</label>
-                                <select name="aktif" onchange="this.form.submit()"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                    <option value="">All</option>
-                                    <option value="1" {{ request('aktif') === '1' ? 'selected' : '' }}>Aktif</option>
-                                    <option value="0" {{ request('aktif') === '0' ? 'selected' : '' }}>Nonaktif</option>
-                                </select>
-                            </div>
-                        </form>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-black dark:text-black">
+                    <div class="card card-body border ">
+                        <div class="row justify-content-between">
+                            <div class="col-md-4 col-xl-4">
+                                <form class="position-relative">
+                                    <input type="text" class="form-control product-search ps-5" id="input-search"
+                                        placeholder="Search Contacts...">
+                                    <i
+                                        class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+                                </form>
+                            </div>
+                            <div class=" col-2">
+                                <a href="{{ route('anggota.add') }}" id="btn-add-contact"
+                                    class="btn text-dark border border-dark d-flex align-items-center">
+                                    <i class="ti ti-filter text-dark me-1 fs-5"></i> Filter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border ">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table search-table align-middle text-nowrap">
+                                    <thead class="header-item">
+                                        <tr>
+                                            <th>
+                                                <div class="n-chk align-self-center text-center">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input primary"
+                                                            id="contact-check-all">
+                                                        <label class="form-check-label" for="contact-check-all"></label>
+                                                        <span class="new-control-indicator"></span>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th>NIK</th>
+                                            <th>Name</th>
+                                            <th>Alamat</th>
+                                            <th>No Telepon</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($anggotas as $anggota)
+                                            <tr class="border-b dark:border-gray-500">
+                                                <th scope="row"
+                                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                                    {{ $anggota->id }}
+                                                </th>
+                                                <td class="px-4 py-3">{{ $anggota->nik }}</td>
+                                                <td class="px-4 py-3">{{ $anggota->nama }}</td>
+                                                <td class="px-4 py-3">{{ $anggota->alamat }}</td>
+                                                <td class="px-4 py-3">{{ $anggota->no_telepon }}</td>
+                                                <td class="px-4 py-3 ">
+                                                    <div class="badge {{ $anggota->aktif ? 'bg-success' : 'bg-danger' }}">
+                                                        {{ $anggota->aktif ? 'Aktif' : 'Nonaktif' }}
+                                                    </div>
+                                                </td>
+                                                <td class="d-flex gap-2">
+                                                    <button class="btn btn-warning" type="button"
+                                                        onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
+                                                        Edit
+                                                    </button>
+                                                    <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST"
+                                                        onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">
+                                                            Hapus
+                                                        </button>
+                                                    </form>
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="overflow-x-auto">
+                        <table class="datatable w-full text-sm text-left text-black dark:text-black">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-200">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">NO.</th>
@@ -74,44 +123,44 @@
                                     <th scope="col" class="px-4 py-3">Status</th>
                                     <th scope="col" class="px-4 py-3">
                                         <span class="sr-only">Actions</span>
-                                        
+
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($anggotas as $anggota)
-                                    <tr class="border-b dark:border-gray-500">
-                                        <th scope="row"
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                                            {{ $anggota->id }}
-                                        </th>
-                                        <td class="px-4 py-3">{{ $anggota->nik }}</td>
-                                        <td class="px-4 py-3">{{ $anggota->nama }}</td>
-                                        <td class="px-4 py-3">{{ $anggota->alamat }}</td>
-                                        <td class="px-4 py-3">{{ $anggota->no_telepon }}</td>
-                                        <td class="px-4 py-3 {{ $anggota->aktif ? 'text-green-500' : 'text-red-500' }}">
-                                            {{ $anggota->aktif ? 'Aktif' : 'Nonaktif' }}
-                                        </td>
-                                        <td class="px-4 py-3 flex items-center justify-end space-x-2">
-                                            <button class="px-3 py-1 bg-green-500 text-white rounded" type="button"
-                                                onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
-                                                Edit
+                                <tr class="border-b dark:border-gray-500">
+                                    <th scope="row"
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                        {{ $anggota->id }}
+                                    </th>
+                                    <td class="px-4 py-3">{{ $anggota->nik }}</td>
+                                    <td class="px-4 py-3">{{ $anggota->nama }}</td>
+                                    <td class="px-4 py-3">{{ $anggota->alamat }}</td>
+                                    <td class="px-4 py-3">{{ $anggota->no_telepon }}</td>
+                                    <td class="px-4 py-3 {{ $anggota->aktif ? 'text-green-500' : 'text-red-500' }}">
+                                        {{ $anggota->aktif ? 'Aktif' : 'Nonaktif' }}
+                                    </td>
+                                    <td class="px-4 py-3 flex items-center justify-end space-x-2">
+                                        <button class="px-3 py-1 bg-green-500 text-white rounded" type="button"
+                                            onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
+                                            Edit
+                                        </button>
+                                        <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST"
+                                            onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded">
+                                                Hapus
                                             </button>
-                                            <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded">
-                                                    Hapus
-                                                </button>
-                                            </form>
-                                        </td>
+                                        </form>
+                                    </td>
 
-                                    </tr>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
+                    </div> --}}
 
                     <form method="GET" action="{{ route('anggota.index') }}">
                         <div class="py-4 px-3">
@@ -138,4 +187,4 @@
         </section>
 
     </div>
-</x-app-layout>
+@endsection

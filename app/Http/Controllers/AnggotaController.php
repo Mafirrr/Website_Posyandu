@@ -35,7 +35,24 @@ class AnggotaController extends Controller
 
     public function anggota_add()
     {
-        return view('anggota.anggota-add');
+        $params = [
+            "title"=>"Tambah Anggota",
+            "action_form"=>route("anggota.store"),
+            "method"=>"POST",
+            "anggota"=>(object)[
+                "nik"=>"",
+                'password'=>"",
+                'nama'=>"",
+                'tanggal_lahir'=>"",
+                'tempat_lahir'=>"",
+                'pekerjaan'=>"",
+                'alamat'=>"",
+                'no_telepon'=>"",
+                'golongan_darah'=>"",
+                'aktif'=>"",
+            ]
+        ];
+        return view('anggota.form', $params);
     }
 
     public function anggota_store(Request $request)
@@ -70,7 +87,13 @@ class AnggotaController extends Controller
     public function anggota_edit($id)
     {
         $anggota = Anggota::findOrFail($id);
-        return view('anggota.anggota-edit', compact('anggota'));
+        $params = [
+            "title"=>"Ubah Anggota",
+            "action_form"=>route("anggota.update",$id),
+            "method"=>"PUT",
+            "anggota"=> $anggota
+        ];
+        return view('anggota.form', $params);
     }
 
     public function anggota_update(Request $request, $id)
@@ -85,7 +108,7 @@ class AnggotaController extends Controller
             'alamat' => 'required|string',
             'no_telepon' => 'required|string|max:20',
             'golongan_darah' => 'required|string|max:3',
-            'aktif' => 'required|boolean',
+            'status' => 'required|boolean',
         ]);
 
         $anggota = Anggota::findOrFail($id);
@@ -100,7 +123,7 @@ class AnggotaController extends Controller
         $anggota->alamat = $validated['alamat'];
         $anggota->no_telepon = $validated['no_telepon'];
         $anggota->golongan_darah = $validated['golongan_darah'];
-        $anggota->aktif = $validated['aktif'];
+        $anggota->aktif = $validated['status'];
         $anggota->save();
 
         return redirect()->route('anggota.index')->with('success', 'Data anggota berhasil diperbarui.');
