@@ -9,7 +9,7 @@ class AnggotaController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page', 1);
+        $perPage = $request->input('per_page', 5);
         $search = $request->input('search');
         $aktif = $request->input('aktif');
 
