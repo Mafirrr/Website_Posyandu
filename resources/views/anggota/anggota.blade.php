@@ -23,6 +23,7 @@
                                     </nav>
                                 </div>
                                 <div class="ms-auto">
+
                                     <a href="{{ route('anggota.add') }}" id="btn-add-contact"
                                         class="btn btn-primary d-flex align-items-center">
                                         <i class="ti ti-users text-white me-1 fs-5"></i> Tambah anggota
@@ -162,25 +163,26 @@
                         </table>
                     </div> --}}
 
+
                     <form method="GET" action="{{ route('anggota.index') }}">
                         <div class="py-4 px-3">
-                            <div class="flex">
-                                <div class="flex space-x-4 items-center mb-3">
-                                    <label class="w-32 text-sm font-medium text-gray-900">Per Page</label>
+                            <div class="d-flex">
+                                <div class="d-flex align-items-center mb-3">
+                                    <label for="per_page" class="form-label w-32 me-3">Per Page</label>
                                     <select name="per_page" onchange="this.form.submit()"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                        class="form-select form-select-sm w-auto">
                                         <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
                                         <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                                         <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
                                         <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
-                                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100
-                                        </option>
+                                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
                                     </select>
                                 </div>
                             </div>
                             {{ $anggotas->appends(['per_page' => request('per_page')])->links() }}
                         </div>
                     </form>
+
 
                 </div>
             </div>

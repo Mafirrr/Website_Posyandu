@@ -27,7 +27,6 @@ class AnggotaController extends Controller
             ->orderBy('created_at', 'asc')
             ->paginate($perPage)
             ->appends(request()->query());
-
         return view('anggota.anggota', compact('anggotas'));
     }
 
