@@ -4,7 +4,6 @@
 
         <section class="mt-0 mb-10">
             <div class="mx-auto max-w-screen-xl ">
-                <!-- Start coding here -->
                 <div class="bg-white dark:bg-white relative shadow-md sm:rounded-lg overflow-hidden">
 
                     <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
@@ -18,14 +17,14 @@
                                                 <a class="text-muted text-decoration-none" href="../main/index.html">Data
                                                     Pengguna</a>
                                             </li>
-                                            <li class="breadcrumb-item" aria-current="page">Ibu Hamil</li>
+                                            <li class="breadcrumb-item" aria-current="page">Petugas</li>
                                         </ol>
                                     </nav>
                                 </div>
                                 <div class="ms-auto">
-                                    <a href="{{ route('anggota.add') }}" id="btn-add-contact"
+                                    <a href="{{ route('petugas.add') }}" id="btn-add-contact"
                                         class="btn btn-primary d-flex align-items-center">
-                                        <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah anggota
+                                        <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah petugas
                                     </a>
                                 </div>
                             </div>
@@ -42,7 +41,7 @@
                                 </form>
                             </div>
                             <div class=" col-2">
-                                <a href="{{ route('anggota.add') }}" id="btn-add-contact"
+                                <a href="{{ route('petugas.add') }}" id="btn-add-contact"
                                     class="btn text-dark border border-dark d-flex align-items-center">
                                     <i class="ti ti-filter text-dark me-1 fs-5"></i> Filter
                                 </a>
@@ -65,42 +64,37 @@
                                                     </div>
                                                 </div>
                                             </th>
-                                            <th>NIK</th>
-                                            <th>Name</th>
-                                            <th>Alamat</th>
+                                            <th>NIP</th>
+                                            <th>Nama</th>
                                             <th>No Telepon</th>
-                                            <th>Status</th>
+                                            <th>Email</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($anggotas as $anggota)
+                                        @foreach ($petugas as $petugas)
                                             <tr class="border-b dark:border-gray-500">
                                                 <th scope="row"
                                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                                                    {{ $anggota->id }}
+                                                    {{ $petugas->id }}
                                                 </th>
-                                                <td class="px-4 py-3">{{ $anggota->nik }}</td>
-                                                <td class="px-4 py-3">{{ $anggota->nama }}</td>
-                                                <td class="px-4 py-3">{{ $anggota->alamat }}</td>
-                                                <td class="px-4 py-3">{{ $anggota->no_telepon }}</td>
-                                                <td class="px-4 py-3 ">
-                                                    <div class="badge {{ $anggota->aktif ? 'bg-success' : 'bg-danger' }}">
-                                                        {{ $anggota->aktif ? 'Aktif' : 'Nonaktif' }}
-                                                    </div>
-                                                </td>
+                                                <td class="px-4 py-3">{{ $petugas->nip }}</td>
+                                                <td class="px-4 py-3">{{ $petugas->nama }}</td>
+                                                <td class="px-4 py-3">{{ $petugas->no_telepon }}</td>
+                                                <td class="px-4 py-3">{{ $petugas->email }}</td>
                                                 <td class="d-flex gap-2">
-                                                    <button class="btn btn-warning" type="button"
-                                                        onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
-                                                        Edit
-                                                    </button>
-                                                    <form action="{{ route('anggota.destroy', $anggota->id) }}"
+                                                    <a href="{{ route('petugas.edit', $petugas->id) }}"
+                                                        class="btn btn-warning d-flex align-items-center" title="Edit">
+                                                        <i class="ti ti-edit text-white fs-5"></i>
+                                                    </a>
+                                                    <form action="{{ route('petugas.destroy', $petugas->id) }}"
                                                         method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">
-                                                            Hapus
+                                                        <button type="submit"
+                                                            class="btn btn-danger d-flex align-items-center" title="Hapus">
+                                                            <i class="ti ti-trash text-white fs-5"></i>
                                                         </button>
                                                     </form>
                                                 </td>
@@ -115,6 +109,5 @@
                 </div>
             </div>
         </section>
-
     </div>
 @endsection
