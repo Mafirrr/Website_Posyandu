@@ -7,7 +7,6 @@
                 Tambah Anggota
             </button>
         </div>
-
         <section class="mt-5 mb-10">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->
@@ -74,7 +73,7 @@
                                     <th scope="col" class="px-4 py-3">Status</th>
                                     <th scope="col" class="px-4 py-3">
                                         <span class="sr-only">Actions</span>
-                                        
+
                                     </th>
                                 </tr>
                             </thead>

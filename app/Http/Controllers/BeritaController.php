@@ -21,7 +21,7 @@ class BeritaController extends Controller
     public function create()
     {
         $kategoris = Kategori::all();
-        return view('artikel.tambah', compact('kategoris'));
+        return view('artikel.berita', compact('kategoris'));
     }
 
     public function store(Request $request)
@@ -31,7 +31,7 @@ class BeritaController extends Controller
             'slug' => 'required|unique:beritas,slug',
             'isi' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'kategori_id' => 'required|exists:kategoris,id',
+            'kategori_id' => 'required|exists:kategori,id',
         ]);
 
         $gambar = null;

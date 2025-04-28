@@ -33,12 +33,12 @@
                                             {{ $loop->iteration }}
                                         </th>
                                         <td class="px-4 py-3">
-                                            <img src="{{ $berita->thumbnail }}" alt="Thumbnail" class="w-16 h-16 object-cover rounded">
+                                            <img src="storage/{{ $berita->gambar }}" alt="Thumbnail" class="w-16 h-16 object-cover rounded">
                                         </td>
-                                        <td class="px-4 py-3">{{ $berita->title }}</td>
-                                        <td class="px-4 py-3">{{ Str::limit($berita->deskripsi, 50, '...') }}</td>
-                                        <td class="px-4 py-3">{{ $berita->kategori }}</td>
-                                        <td class="px-4 py-3">{{ $berita->date->format('d-m-Y') }}</td>
+                                        <td class="px-4 py-3">{{ $berita->judul }}</td>
+                                        <td class="px-4 py-3">{{ Str::limit($berita->isi, 50, '...') }}</td>
+                                        <td class="px-4 py-3">{{ $berita->kategori ->nama }}</td>
+                                        <td class="px-4 py-3">{{ $berita->created_at}}</td>
                                         <td class="px-4 py-3 flex items-center justify-end space-x-2">
                                             <button class="px-3 py-1 bg-green-500 text-white rounded" type="button"
                                                 onclick="window.location='{{ route('berita.edit', $berita->id) }}'">
