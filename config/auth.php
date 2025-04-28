@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
+        'guard' => env('AUTH_GUARD', 'admin'),
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 
@@ -36,13 +36,17 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+        // 'web' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
         'anggota' => [
-            'driver' => 'sanctum', // atau token, jwt, session
+            'driver' => 'sanctum',
             'provider' => 'anggota',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
         ],
     ],
 
@@ -64,14 +68,19 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => env('AUTH_MODEL', App\Models\User::class),
+        // ],
         'anggota' => [
             'driver' => 'eloquent',
             'model' => App\Models\Anggota::class, // pastikan ini benar
         ],
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Petugas::class, // pastikan ini benar
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',

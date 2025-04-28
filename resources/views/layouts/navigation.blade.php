@@ -1,62 +1,49 @@
-<nav class="bg-white border-b border-gray-100 shadow-sm">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <!-- <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a> -->
-                    <div class="me-2 flex items-center sm:hidden">
-                        <button @click="sidebarOpen = ! sidebarOpen" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                <path :class="{'hidden': sidebarOpen, 'inline-flex': ! sidebarOpen }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                <path :class="{'hidden': ! sidebarOpen, 'inline-flex': sidebarOpen }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
+<header class="app-header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+                <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                    <i class="ti ti-menu-2"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                    <i class="ti ti-bell-ringing"></i>
+                    <div class="notification bg-primary rounded-circle"></div>
+                </a>
+            </li>
+        </ul>
+        <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                <span>Muhammad Nor Kholit</span>
+                {{-- <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank"
+                    class="btn btn-primary">Download Free</a> --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="{{asset("template")}}/assets/images/profile/user-1.jpg" alt="" width="35" height="35"
+                            class="rounded-circle">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                        <div class="message-body">
+                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-user fs-6"></i>
+                                <p class="mb-0 fs-3">My Profile</p>
+                            </a>
+                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-mail fs-6"></i>
+                                <p class="mb-0 fs-3">My Account</p>
+                            </a>
+                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-list-check fs-6"></i>
+                                <p class="mb-0 fs-3">My Task</p>
+                            </a>
+                            <a href="./authentication-login.html"
+                                class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                        </div>
                     </div>
-                </div>
-
-            </div>
-
-            <!-- Settings Dropdown -->
-            <div class="flex items-center ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div></div>
-
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-
-
+                </li>
+            </ul>
         </div>
-    </div>
-
-
-</nav>
+    </nav>
+</header>
