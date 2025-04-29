@@ -4,6 +4,8 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JadwalController;
 use App\Livewire\AnggotaTable;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Route;
@@ -12,9 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name("dashboard");
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 // ->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -42,4 +42,6 @@ Route::get('/beritaedit', [BeritaController::class, 'berita.edit'])->name('berit
 Route::put('/beritaupdate', [BeritaController::class, 'berita.update'])->name('berita.update');
 Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
 Route::delete('/beritaupdate', [BeritaController::class, 'berita.delete'])->name('berita.destroy');
+Route::get('/jadwal', [JadwalController::class, 'view'])->name('jadwal');
+
 require __DIR__ . '/auth.php';
