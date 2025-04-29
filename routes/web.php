@@ -4,6 +4,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\KaderController;
 use App\Livewire\AnggotaTable;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,13 @@ Route::post('/petugas-store', [petugasController::class, 'petugas_store'])->name
 Route::get('/petugas/{id}/edit', [PetugasController::class, 'petugas_edit'])->name('petugas.edit');
 Route::put('/petugas/{id}', [PetugasController::class, 'petugas_update'])->name('petugas.update');
 Route::delete('/petugas/{id}', [PetugasController::class, 'petugas_destroy'])->name('petugas.destroy');
+
+Route::get('/data-kader', [KaderController::class, 'index'])->name('kader.index');
+Route::get('/tambah-kader', [KaderController::class, 'kader_add'])->name('kader.add');
+Route::post('/kader-store', [KaderController::class, 'kader_store'])->name('kader.store');
+Route::get('/kader/{id}/edit', [KaderController::class, 'kader_edit'])->name('kader.edit');
+Route::put('/kader/{id}', [KaderController::class, 'kader_update'])->name('kader.update');
+Route::delete('/kader/{id}', [KaderController::class, 'kader_destroy'])->name('kader.destroy');
 
 Route::get('/data-anggota', [AnggotaController::class, 'index'])->name('anggota.index');
 Route::get('/tambah-anggota', [AnggotaController::class, 'anggota_add'])->name('anggota.add');

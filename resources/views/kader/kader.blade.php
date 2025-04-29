@@ -63,22 +63,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($petugas as $p)
+                                        @foreach ($kader as $petugas)
                                             <tr class="border-b dark:border-gray-500">
                                                 <th scope="row"
                                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                                                    {{ $p->id }}
+                                                    {{ $petugas->id }}
                                                 </th>
-                                                <td class="px-4 py-3">{{ $p->nip }}</td>
-                                                <td class="px-4 py-3">{{ $p->nama }}</td>
-                                                <td class="px-4 py-3">{{ $p->no_telepon }}</td>
-                                                <td class="px-4 py-3">{{ $p->email }}</td>
+                                                <td class="px-4 py-3">{{ $petugas->nip }}</td>
+                                                <td class="px-4 py-3">{{ $petugas->nama }}</td>
+                                                <td class="px-4 py-3">{{ $petugas->no_telepon }}</td>
+                                                <td class="px-4 py-3">{{ $petugas->email }}</td>
                                                 <td class="d-flex gap-2">
-                                                    <a href="{{ route('petugas.edit', $p->id) }}"
+                                                    <a href="{{ route('petugas.edit', $petugas->id) }}"
                                                         class="btn btn-warning d-flex align-items-center" title="Edit">
                                                         <i class="ti ti-edit text-white fs-5"></i>
                                                     </a>
-                                                    <form action="{{ route('petugas.destroy', $p->id) }}" method="POST"
+                                                    <form action="{{ route('petugas.destroy', $petugas->id) }}"
+                                                        method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                                         @csrf
                                                         @method('DELETE')
@@ -96,28 +97,6 @@
                             </div>
                         </div>
                     </div>
-                    <form method="GET" action="{{ route('petugas.index') }}">
-                        <div class="py-4 px-3">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex align-items-center mb-3">
-                                    <label for="per_page" class="form-label w-32 me-3">Per Page</label>
-                                    <select name="per_page" onchange="this.form.submit()"
-                                        class="form-select form-select-sm w-auto">
-                                        <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
-                                        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10
-                                        </option>
-                                        <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20
-                                        </option>
-                                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50
-                                        </option>
-                                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100
-                                        </option>
-                                    </select>
-                                </div>
-                                {{ $petugas->appends(['per_page' => request('per_page')])->links() }}
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </section>
