@@ -43,10 +43,24 @@
                                 </form>
                             </div>
                             <div class=" col-2">
-                                <a href="{{ route('anggota.add') }}" id="btn-add-contact"
-                                    class="btn text-dark border border-dark d-flex align-items-center">
-                                    <i class="ti ti-filter text-dark me-1 fs-5"></i> Filter
+                                <a class="btn text-dark border border-dark d-flex align-items-center" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ti ti-chevron-down fs-4">Status Pengguna</i>
                                 </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                                    aria-labelledby="drop2">
+                                    <div class="message-body">
+                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <p class="mb-0 fs-3">All</p>
+                                        </a>
+                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <p class="mb-0 fs-3">Aktif</p>
+                                        </a>
+                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <p class="mb-0 fs-3">Nonaktif</p>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,16 +70,7 @@
                                 <table class="table search-table align-middle text-nowrap">
                                     <thead class="header-item">
                                         <tr>
-                                            <th>
-                                                <div class="n-chk align-self-center text-center">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input primary"
-                                                            id="contact-check-all">
-                                                        <label class="form-check-label" for="contact-check-all"></label>
-                                                        <span class="new-control-indicator"></span>
-                                                    </div>
-                                                </div>
-                                            </th>
+                                            <th>No</th>
                                             <th>NIK</th>
                                             <th>Name</th>
                                             <th>Alamat</th>
@@ -113,8 +118,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <form method="GET" action="{{ route('anggota.index') }}">
                         <div class="py-4 px-3">
                             <div class="d-flex justify-content-between">
@@ -123,18 +126,20 @@
                                     <select name="per_page" onchange="this.form.submit()"
                                         class="form-select form-select-sm w-auto">
                                         <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
-                                        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
-                                        <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
-                                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
-                                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                                        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10
+                                        </option>
+                                        <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20
+                                        </option>
+                                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50
+                                        </option>
+                                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100
+                                        </option>
                                     </select>
                                 </div>
                                 {{ $anggotas->appends(['per_page' => request('per_page')])->links() }}
                             </div>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </section>
