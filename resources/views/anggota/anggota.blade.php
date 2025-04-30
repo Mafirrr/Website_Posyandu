@@ -2,10 +2,6 @@
     <div>
         <div class="flex items-center justify-between m-5">
             <h2 class="text-2xl font-semibold">Data Anggota</h2>
-            <button type="button" onclick="window.location='{{ route('anggota.add') }}'"
-                class="py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
-                Tambah Anggota
-            </button>
         </div>
 
         <section class="mt-5 mb-10">
