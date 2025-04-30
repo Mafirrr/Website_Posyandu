@@ -1,9 +1,12 @@
 @extends('layouts.app')
 @section('main')
     <div>
+        <div class="flex items-center justify-between m-5">
+            <h2 class="text-2xl font-semibold">Data Anggota</h2>
+        </div>
 
-        <section class="mt-0 mb-10">
-            <div class="mx-auto max-w-screen-xl ">
+        <section class="mt-5 mb-10">
+            <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->
                 <div class="bg-white dark:bg-white relative shadow-md sm:rounded-lg overflow-hidden">
 
