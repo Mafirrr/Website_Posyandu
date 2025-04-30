@@ -10,7 +10,7 @@ class artikel extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'beritas';
+    protected $table = 'artikels';
 
     protected $fillable = [
         'judul',

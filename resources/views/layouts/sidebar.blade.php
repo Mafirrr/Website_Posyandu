@@ -66,14 +66,6 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('berita.index') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-login"></i>
-                        </span>
-                        <span class="hide-menu">Berita</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
                         <span>
                             <i class="ti ti-clipboard-heart"></i>
@@ -94,7 +86,7 @@
                     <span class="hide-menu">Lainnya</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('berita.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-news"></i>
                         </span>
@@ -102,7 +94,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
                         <span>
                             <i class="ti ti-logout"></i>
                         </span>

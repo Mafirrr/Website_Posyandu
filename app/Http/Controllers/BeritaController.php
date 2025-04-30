@@ -16,15 +16,13 @@ class BeritaController extends Controller
     public function index()
     {
         $search = (request()->input('search'));
-        $beritas = artikel::with('kategori')
-         ->when($search, function ($query, $search) {
-            $query->where(function ($q) use ($search) {
-                $q->where('judul', 'like', "%{$search}%");
-
-            });
-        })->paginate(10);
-        return view('artikel.berita', compact('beritas'));
-
+        $artikels = artikel::with('kategori')
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('judul', 'like', "%{$search}%");
+                });
+            })->paginate(10);
+        return view('artikel.berita', compact('artikels'));
     }
 
     public function create()
@@ -33,7 +31,7 @@ class BeritaController extends Controller
             "title" => "Tambah Berita",
             "action_form" => route("berita.store"),
             "method" => "POST",
-            "kategori"=>Kategori::all(),
+            "kategori" => Kategori::all(),
             "berita" => (object)[
                 'judul' => '',
                 'slug' => '',
@@ -71,54 +69,54 @@ class BeritaController extends Controller
     //     ]);
     //     return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
     // }
-        public function store(Request $request)
-        {
+    public function store(Request $request)
+    {
 
-            $validated = $request->validate([
-                'judul' => 'required|string|max:255',
-                'slug' => 'required|unique:beritas,slug',
-                'isi' => 'required',
-                'tanggal' => 'required|date',
-                'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'kategori_id' => 'required|exists:kategori,id',
-            ]);
-            // dd(request()->all());
-            $berita = new artikel(); // Pastikan model sesuai dengan tabel database
-            $berita->judul = $validated['judul'];
-            $berita->slug = $validated['slug'];
-            $berita->isi = $validated['isi'];
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'slug' => 'required|unique:artikels,slug',
+            'isi' => 'required',
+            'tanggal' => 'required|date',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kategori_id' => 'required|exists:kategori,id',
+        ]);
+        // dd(request()->all());
+        $berita = new artikel(); // Pastikan model sesuai dengan tabel database
+        $berita->judul = $validated['judul'];
+        $berita->slug = $validated['slug'];
+        $berita->isi = $validated['isi'];
 
-            $berita->kategori_id = $validated['kategori_id'];
+        $berita->kategori_id = $validated['kategori_id'];
 
-            // Cek apakah ada file gambar yang diunggah
-            if ($request->hasFile('gambar')) {
-                $berita->gambar = $request->file('gambar')->store('images', 'public');// Simpan nama file ke database
-            }
-
-            $berita->save();
-
-            return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
-
+        // Cek apakah ada file gambar yang diunggah
+        if ($request->hasFile('gambar')) {
+            $berita->gambar = $request->file('gambar')->store('images', 'public'); // Simpan nama file ke database
         }
+
+        $berita->save();
+
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
+    }
 
 
 
     public function edit($id)
-    {   $params = [
-        "title" => "Edit Berita",
-        "action_form" => route("berita.update",$id),
-        "method" => "put",
-        "kategori"=>Kategori::all(),
-        "berita" =>
-      artikel::find($id)
-    ];
-    return view('artikel.tambah', $params);
+    {
+        $params = [
+            "title" => "Edit Berita",
+            "action_form" => route("berita.update", $id),
+            "method" => "put",
+            "kategori" => Kategori::all(),
+            "berita" =>
+            artikel::find($id)
+        ];
+        return view('artikel.tambah', $params);
     }
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
-            'slug' => "required|unique:beritas,slug,$id,id",
+            'slug' => "required|unique:artikels,slug,$id,id",
             'isi' => 'required',
             'tanggal' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -145,7 +143,6 @@ class BeritaController extends Controller
         $berita->save();
 
         return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
-
     }
 
     public function destroy($id)
