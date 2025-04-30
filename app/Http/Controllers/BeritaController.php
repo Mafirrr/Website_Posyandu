@@ -16,14 +16,14 @@ class BeritaController extends Controller
     public function index()
     {
         $search = (request()->input('search'));
-        $beritas = artikel::with('kategori')
+        $artikels = artikel::with('kategori')
          ->when($search, function ($query, $search) {
             $query->where(function ($q) use ($search) {
                 $q->where('judul', 'like', "%{$search}%");
 
             });
         })->paginate(10);
-        return view('artikel.berita', compact('beritas'));
+        return view('artikel.berita', compact('artikels'));
 
     }
 
@@ -76,7 +76,7 @@ class BeritaController extends Controller
 
             $validated = $request->validate([
                 'judul' => 'required|string|max:255',
-                'slug' => 'required|unique:beritas,slug',
+                'slug' => 'required|unique:artikels,slug',
                 'isi' => 'required',
                 'tanggal' => 'required|date',
                 'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -118,7 +118,7 @@ class BeritaController extends Controller
     {
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
-            'slug' => "required|unique:beritas,slug,$id,id",
+            'slug' => "required|unique:artikels,slug,$id,id",
             'isi' => 'required',
             'tanggal' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

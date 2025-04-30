@@ -64,7 +64,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($beritas as $berita)
+                        @foreach ($artikels as $berita)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>
@@ -121,7 +121,7 @@
             </form>
 
             <div class="mt-3">
-                {{ $beritas->appends(['per_page' => request('per_page')])->links() }}
+                {{ $artikels->appends(['per_page' => request('per_page')])->links() }}
             </div>
         </section>
     </div>
