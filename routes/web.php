@@ -40,13 +40,6 @@ Route::get('/kader/{id}/edit', [KaderController::class, 'kader_edit'])->name('ka
 Route::put('/kader/{id}', [KaderController::class, 'kader_update'])->name('kader.update');
 Route::delete('/kader/{id}', [KaderController::class, 'kader_destroy'])->name('kader.destroy');
 
-Route::get('/data-anggota', [AnggotaController::class, 'index'])->name('anggota.index');
-Route::get('/tambah-anggota', [AnggotaController::class, 'anggota_add'])->name('anggota.add');
-Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
-Route::get('/anggota/{id}/edit', [AnggotaController::class, 'anggota_edit'])->name('anggota.edit');
-Route::put('/anggota/{id}', [AnggotaController::class, 'anggota_update'])->name('anggota.update');
-Route::delete('/anggota/{id}', [AnggotaController::class, 'anggota_destroy'])->name('anggota.destroy');
-
 Route::get('/berita', [BeritaController::class,'index'])->name('berita.index');
 Route::get('/tambahberita',[BeritaController::class,'create'])->name('berita.tambah');
 Route::post('/beritastore',[BeritaController::class,'store'])->name('berita.store');
