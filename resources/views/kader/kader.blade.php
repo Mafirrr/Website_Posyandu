@@ -40,12 +40,6 @@
                                         class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                 </form>
                             </div>
-                            <div class=" col-2">
-                                <a href="{{ route('petugas.add') }}" id="btn-add-contact"
-                                    class="btn text-dark border border-dark d-flex align-items-center">
-                                    <i class="ti ti-filter text-dark me-1 fs-5"></i> Filter
-                                </a>
-                            </div>
                         </div>
                     </div>
                     <div class="card border ">

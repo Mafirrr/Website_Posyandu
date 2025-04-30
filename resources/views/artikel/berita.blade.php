@@ -79,7 +79,7 @@
                                         <a href="{{ route('berita.edit', $berita->id) }}"
                                            class="btn btn-warning d-flex align-items-center gap-2 px-3 py-2 rounded"
                                            title="Edit">
-                                           <i class="ti ti-edit text-white fs-5"></i>
+                                    
                                            <span class="text-white fw-bold">Edit</span>
                                         </a>
 
@@ -92,7 +92,7 @@
                                             <button type="submit"
                                                     class="btn btn-danger d-flex align-items-center gap-2 px-3 py-2 rounded"
                                                     title="Hapus">
-                                                <i class="ti ti-trash text-white fs-5"></i>
+                                               
                                                 <span class="text-white fw-bold">Hapus</span>
                                             </button>
                                         </form>
