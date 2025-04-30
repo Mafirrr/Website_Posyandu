@@ -1,67 +1,47 @@
-@props(['title'])
-
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!doctype html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>
-        @if (isset($title))
-            {{ $title }} |
-        @endif
-        {{ config('app.name', 'SiBADEAN') }}
-    </title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="{{asset("template")}}/assets/images/logos/favicon.png" />
+    <link rel="stylesheet" href="{{asset("template")}}/assets/css/styles.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
 </head>
 
-<body class=" antialiased">
-    <div class="min-h-screen flex" x-data="{ sidebarOpen: false, message: '-', url: '-' }">
-        @include('layouts.sidebar')
+<body>
+    <!--  Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+        <!-- Sidebar Start -->
+        @include("layouts.sidebar")
+        <!--  Sidebar End -->
+        <!--  Main wrapper -->
+        <div class="body-wrapper">
+            <!--  Header Start -->
+            @include("layouts.navigation")
+            <!--  Header End -->
+            <div class="container-fluid">
+                <!--  Row 1 -->
+                @yield("main")
 
-        <!-- Page Content -->
-        <main class="w-full bg-white">
-            @include('layouts.navigation')
-            {{ $slot }}
-        </main>
-
-        <!-- Modal -->
-        <x-modal :name="'delete'">
-            <form :action="url" method="post" class="p-4">
-                <h6 class="font-bold text-lg">Pemberitahuan</h6>
-                @csrf
-                @method('delete')
-                <p x-text="message" class="text-lg"></p>
-                <p class="text-slate-500 text-sm">Data akan dihapus secara permanent dan tidak dapat dipulihkan</p>
-                <div class="flex md:justify-end flex-wrap-reverse gap-2 mt-10">
-                    <button x-data x-on:click="$dispatch('close-modal',{name:'delete'})" type="button"
-                        class="md:w-auto w-full px-4 py-2 bg-slate-200 rounded-md text-black">Batal</button>
-                    <button type="submit"
-                        class="md:w-auto w-full px-4 py-2 bg-red-500 rounded-md text-white">Hapus</button>
-                </div>
-            </form>
-        </x-modal>
-
+            </div>
+        </div>
     </div>
+    <script src="{{asset("template")}}/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="{{asset("template")}}/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset("template")}}/assets/js/sidebarmenu.js"></script>
+    <script src="{{asset("template")}}/assets/js/app.min.js"></script>
+    <script src="{{asset("template")}}/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="{{asset("template")}}/assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="{{asset("template")}}/assets/js/dashboard.js"></script>
+    <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
 
 
-
-    @if (isset($script))
-        {{ $script }}
-    @endif
-
-
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        let table = new DataTable('.datatable');
+    </script>
 </body>
 
 </html>

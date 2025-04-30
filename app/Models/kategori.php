@@ -20,4 +20,11 @@ class kategori extends Model
     {
         return $this->hasMany(Artikel::class, 'kategori_id');
     }
+
+public function create()
+{
+    $categories = Kategori::all(); // Ambil semua kategori dari database
+    return view('form', compact('categories'));
+}
+
 }
