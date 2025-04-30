@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ArtikelController;
+use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\OtpController;
 use App\Http\Controllers\Api\ProfileController;
@@ -22,3 +24,8 @@ Route::get('/user', function (Request $request) {
 
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
+
+Route::get('/artikel',[ArtikelController::class,'index']);
+Route::get('/artikel/{id}', [ArtikelController::class, 'show']);
+Route::get('/kategori',[KategoriController::class,'index']);
+Route::get('/kategori/{id}', [KategoriController::class, 'show']);

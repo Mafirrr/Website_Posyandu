@@ -58,7 +58,7 @@
                     <span class="hide-menu">Pelayanan Posyandu</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+                    <a class="sidebar-link" href="./jadwal" aria-expanded="false">
                         <span>
                             <i class="ti ti-calendar"></i>
                         </span>
@@ -86,7 +86,7 @@
                     <span class="hide-menu">Lainnya</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('berita.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-news"></i>
                         </span>
@@ -94,7 +94,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
+                    <a class="sidebar-link" href="#" aria-expanded="false">
                         <span>
                             <i class="ti ti-logout"></i>
                         </span>
