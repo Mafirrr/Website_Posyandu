@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama', 70);
             $table->char('no_telepon', 16)->unique();
             $table->string('email', 100)->unique();
-            $table->enum('role', array('kader', 'petugas', 'admin'));
+            $table->enum('role', array('kader', 'bidan', 'admin'));
             $table->timestamps();
             $table->softDeletes();
         });

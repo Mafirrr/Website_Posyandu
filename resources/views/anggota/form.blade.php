@@ -1,5 +1,5 @@
-@extends("layouts.app")
-@section("main")
+@extends('layouts.app')
+@section('main')
     <section class="mt-0 mb-10">
         <div class="mx-auto max-w-screen-xl ">
             <!-- Start coding here -->
@@ -9,12 +9,12 @@
                     <div class="card-body px-4 py-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="">
-                                <h4 class="fw-semibold mb-8">{{$title}}</h4>
+                                <h4 class="fw-semibold mb-8">{{ $title }}</h4>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
                                             <a class="text-muted text-decoration-none"
-                                                href="{{route("dashboard")}}">Home</a>
+                                                href="{{ route('dashboard') }}">Home</a>
                                         </li>
                                         <li class="breadcrumb-item" aria-current="page">Ibu Hamil</li>
                                     </ol>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="card card-body border ">
-                    <form action="{{$action_form}}" method="post">
+                    <form action="{{ $action_form }}" method="post">
                         @csrf
                         @method($method)
                         <div class=" d-flex flex-column gap-3">
@@ -52,7 +52,8 @@
 
                             <div class="">
                                 {{-- Nama --}}
-                                <label for="nama" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                                <label for="nama" class="form-label">Nama Lengkap <span
+                                        class="text-danger">*</span></label>
                                 <input type="text" id="nama" name="nama" placeholder="Nama Ibu Hamil"
                                     value="{{ old('nama', $anggota->nama) }}" class="form-control">
                                 @error('nama')
@@ -75,18 +76,30 @@
                                     <label for="jenis-kelamin" class="form-label">Golongan Darah</label>
                                     <select id="golongan_darah" name="golongan_darah" class="form-control">
                                         <option value="">Pilih</option>
-                                        <option value="A-" {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'A-' ? 'selected' : '' }}>A-</option>
-                                        <option value="A+" {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'A+' ? 'selected' : '' }}>A+</option>
-                                        <option value="B-" {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'B-' ? 'selected' : '' }}>B-</option>
-                                        <option value="B+" {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'B+' ? 'selected' : '' }}>B+</option>
+                                        <option value="A-"
+                                            {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'A-' ? 'selected' : '' }}>
+                                            A-</option>
+                                        <option value="A+"
+                                            {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'A+' ? 'selected' : '' }}>
+                                            A+</option>
+                                        <option value="B-"
+                                            {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'B-' ? 'selected' : '' }}>
+                                            B-</option>
+                                        <option value="B+"
+                                            {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'B+' ? 'selected' : '' }}>
+                                            B+</option>
                                         <option
                                             value="AB- {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'AB-' ? 'selected' : '' }}">
                                             AB-</option>
                                         <option
                                             value="AB+ {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'AB+' ? 'selected' : '' }}">
                                             AB+</option>
-                                        <option value="O-" {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'O-' ? 'selected' : '' }}>O-</option>
-                                        <option value="O+" {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'O-' ? 'selected' : '' }}>O+</option>
+                                        <option value="O-"
+                                            {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'O-' ? 'selected' : '' }}>
+                                            O-</option>
+                                        <option value="O+"
+                                            {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'O-' ? 'selected' : '' }}>
+                                            O+</option>
                                     </select>
                                     @error('golongan_darah')
                                         <small class="text-danger">{{ $message }}</small>
@@ -136,14 +149,16 @@
                                 @enderror
                             </div>
 
-                            @if($method === "PUT")
+                            @if ($method === 'PUT')
                                 <div class="">
                                     <label for="status" class="form-label">Status Pengguna</label>
                                     <div class="w-full">
                                         <select id="status" name="status" class="form-control">
-                                            <option value="1" {{ old('aktif', $anggota->aktif) == 1 ? 'selected' : '' }}>Aktif
+                                            <option value="1"
+                                                {{ old('aktif', $anggota->aktif) == 1 ? 'selected' : '' }}>Aktif
                                             </option>
-                                            <option value="0" {{ old('aktif', $anggota->aktif) == 0 ? 'selected' : '' }}>Nonaktif
+                                            <option value="0"
+                                                {{ old('aktif', $anggota->aktif) == 0 ? 'selected' : '' }}>Nonaktif
                                             </option>
                                         </select>
                                         @error('status')
@@ -168,5 +183,4 @@
             </div>
         </div>
     </section>
-
 @endsection
