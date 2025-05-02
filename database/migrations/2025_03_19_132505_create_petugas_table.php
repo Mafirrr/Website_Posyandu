@@ -19,6 +19,7 @@ return new class extends Migration
             $table->char('no_telepon', 16)->unique();
             $table->string('email', 100)->unique();
             $table->enum('role', array('kader', 'bidan', 'admin'));
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });

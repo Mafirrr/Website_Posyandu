@@ -3,15 +3,17 @@
 namespace App\Models;
 
 
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Auth\Passwords\CanResetPassword as ResetPasswordTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Petugas extends Authenticatable
+class Petugas extends Authenticatable implements CanResetPassword
 {
-    use HasFactory, SoftDeletes, HasApiTokens,Notifiable;
+    use HasFactory, SoftDeletes, HasApiTokens, Notifiable, ResetPasswordTrait;
 
     protected $table = 'petugas';
 

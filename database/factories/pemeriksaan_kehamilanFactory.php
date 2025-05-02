@@ -7,7 +7,7 @@ use App\Models\Petugas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ *
  */
 class pemeriksaan_kehamilanFactory extends Factory
 {
