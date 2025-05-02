@@ -26,99 +26,103 @@
                                 </div>
                                 <div class="ms-auto">
 
-                                <a href="{{ route('anggota.add') }}" id="btn-add-contact"
-                                    class="btn btn-primary d-flex align-items-center">
-                                    <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah anggota
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card card-body border ">
-                    <div class="row justify-content-between">
-                        <div class="col-md-4 col-xl-4">
-                            <form class="position-relative">
-                                <input type="text" class="form-control product-search ps-5" id="input-search"
-                                    placeholder="Search...">
-                                <i
-                                    class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
-                            </form>
-                        </div>
-                        <div class=" col-2">
-                            <a class="btn text-dark border border-dark d-flex align-items-center" id="drop2"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ti ti-chevron-down fs-3">Status pengguna</i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                                <div class="message-body">
-                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                        <p class="mb-0 fs-3">All</p>
-                                    </a>
-                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                        <p class="mb-0 fs-3">Aktif</p>
-                                    </a>
-                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                        <p class="mb-0 fs-3">Nonaktif</p>
+                                    <a href="{{ route('anggota.add') }}" id="btn-add-contact"
+                                        class="btn btn-primary d-flex align-items-center">
+                                        <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah anggota
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card border ">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table search-table align-middle text-nowrap">
-                                <thead class="header-item">
-                                    <tr>
-                                        <th>
-                                            <div class="n-chk align-self-center text-center">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input primary"
-                                                        id="contact-check-all">
-                                                    <label class="form-check-label" for="contact-check-all"></label>
-                                                    <span class="new-control-indicator"></span>
+                    <div class="card card-body border ">
+                        <div class="row justify-content-between">
+                            <div class="col-md-4 col-xl-4">
+                                <form class="position-relative" method="GET" action="{{ route('anggota.index') }}">
+                                    <input type="text" class="form-control product-search ps-5" id="input-search"
+                                        name="search" placeholder="Search..." value="{{ request('search') }}">
+                                    <i
+                                        class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+                                </form>
+                            </div>
+                            <div class=" col-2">
+                                <a class="btn text-dark border border-dark d-flex align-items-center" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ti ti-chevron-down fs-3">Status pengguna</i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                                    aria-labelledby="drop2">
+                                    <div class="message-body">
+                                        <a href="{{ route('anggota.index') }}"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                            <p class="mb-0 fs-3">All</p>
+                                        </a>
+                                        <a href="{{ route('anggota.index', ['aktif' => 1]) }}"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                            <p class="mb-0 fs-3">Aktif</p>
+                                        </a>
+                                        <a href="{{ route('anggota.index', ['aktif' => 0]) }}"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                            <p class="mb-0 fs-3">Nonaktif</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border ">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table search-table align-middle text-nowrap">
+                                    <thead class="header-item">
+                                        <tr>
+                                            <th>
+                                                <div class="n-chk align-self-center text-center">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input primary"
+                                                            id="contact-check-all">
+                                                        <label class="form-check-label" for="contact-check-all"></label>
+                                                        <span class="new-control-indicator"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </th>
-                                        <th>NIK</th>
-                                        <th>Name</th>
-                                        <th>Alamat</th>
-                                        <th>No Telepon</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($anggotas as $key => $anggota)
-                                        <tr class="border-b dark:border-gray-500">
-                                            <th scope="row"
-                                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                                                {{ $anggotas->firstItem() + $key }}
                                             </th>
-                                            <td class="px-4 py-3">{{ $anggota->nik }}</td>
-                                            <td class="px-4 py-3">{{ $anggota->nama }}</td>
-                                            <td class="px-4 py-3">{{ $anggota->alamat }}</td>
-                                            <td class="px-4 py-3">{{ $anggota->no_telepon }}</td>
-                                            <td class="px-4 py-3 ">
-                                                <div class="badge {{ $anggota->aktif ? 'bg-success' : 'bg-danger' }}">
-                                                    {{ $anggota->aktif ? 'Aktif' : 'Nonaktif' }}
-                                                </div>
-                                            </td>
-                                            <td class="d-flex gap-2">
-                                                <button class="btn btn-warning" type="button"
-                                                    onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
-                                                    Edit
-                                                </button>
-                                                <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST"
-                                                    onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Hapus
+                                            <th>NIK</th>
+                                            <th>Name</th>
+                                            <th>Alamat</th>
+                                            <th>No Telepon</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($anggotas as $key => $anggota)
+                                            <tr class="border-b dark:border-gray-500">
+                                                <th scope="row"
+                                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                                    {{ $anggotas->firstItem() + $key }}
+                                                </th>
+                                                <td class="px-4 py-3">{{ $anggota->nik }}</td>
+                                                <td class="px-4 py-3">{{ $anggota->nama }}</td>
+                                                <td class="px-4 py-3">{{ $anggota->alamat }}</td>
+                                                <td class="px-4 py-3">{{ $anggota->no_telepon }}</td>
+                                                <td class="px-4 py-3 ">
+                                                    <div class="badge {{ $anggota->aktif ? 'bg-success' : 'bg-danger' }}">
+                                                        {{ $anggota->aktif ? 'Aktif' : 'Nonaktif' }}
+                                                    </div>
+                                                </td>
+                                                <td class="d-flex gap-2">
+                                                    <button class="btn btn-warning" type="button"
+                                                        onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
+                                                        Edit
                                                     </button>
-                                                </form>
-                                            </td>
+                                                    <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST"
+                                                        onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">
+                                                            Hapus
+                                                        </button>
+                                                    </form>
+                                                </td>
 
                                             </tr>
                                         @endforeach
