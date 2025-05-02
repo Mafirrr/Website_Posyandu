@@ -45,7 +45,7 @@ class PetugasController extends Controller
                 'email' => "",
             ]
         ];
-        return view('petugas.form', $params);
+        return view('petugas.petugasform', $params);
     }
 
     public function petugas_store(Request $request)
@@ -64,7 +64,7 @@ class PetugasController extends Controller
         $petugas->nama = $validated['nama'];
         $petugas->no_telepon = $validated['no_telepon'];
         $petugas->email = $validated['email'];
-        $petugas->role = 'bidan';
+        $petugas->role = 'petugas';
         $petugas->save();
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil ditambahkan.');
     }
