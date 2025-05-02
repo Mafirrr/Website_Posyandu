@@ -20,9 +20,11 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
+            <button type="submit"
+                class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition">
                 {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+            </button>
+
         </div>
     </form>
 </x-guest-layout>
