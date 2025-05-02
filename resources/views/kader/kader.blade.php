@@ -22,7 +22,7 @@
                                     </nav>
                                 </div>
                                 <div class="ms-auto">
-                                    <a href="{{ route('petugas.add') }}" id="btn-add-contact"
+                                    <a href="{{ route('kader.add') }}" id="btn-add-contact"
                                         class="btn btn-primary d-flex align-items-center">
                                         <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah petugas
                                     </a>
@@ -41,7 +41,7 @@
                                 </form>
                             </div>
                             <div class=" col-2">
-                                <a href="{{ route('petugas.add') }}" id="btn-add-contact"
+                                <a href="{{ route('kader.add') }}" id="btn-add-contact"
                                     class="btn text-dark border border-dark d-flex align-items-center">
                                     <i class="ti ti-filter text-dark me-1 fs-5"></i> Filter
                                 </a>
@@ -74,12 +74,11 @@
                                                 <td class="px-4 py-3">{{ $petugas->no_telepon }}</td>
                                                 <td class="px-4 py-3">{{ $petugas->email }}</td>
                                                 <td class="d-flex gap-2">
-                                                    <a href="{{ route('petugas.edit', $petugas->id) }}"
+                                                    <a href="{{ route('kader.edit', $petugas->id) }}"
                                                         class="btn btn-warning d-flex align-items-center" title="Edit">
                                                         <i class="ti ti-edit text-white fs-5"></i>
                                                     </a>
-                                                    <form action="{{ route('petugas.destroy', $petugas->id) }}"
-                                                        method="POST"
+                                                    <form action="{{ route('kader.destroy', $petugas->id) }}" method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                                         @csrf
                                                         @method('DELETE')
