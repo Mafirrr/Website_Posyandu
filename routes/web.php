@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KaderController;
 use App\Http\Controllers\RiwayatPemeriksaanController;
+use App\Http\Controllers\PemeriksaanController;
 use App\Livewire\AnggotaTable;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Route;
@@ -60,8 +61,8 @@ Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name
 Route::delete('/beritaupdate', [BeritaController::class, 'berita.delete'])->name('berita.destroy');
 Route::get('/jadwal', [JadwalController::class, 'view'])->name('jadwal');
 
-Route::get('/riwayat-pemeriksaan',[RiwayatPemeriksaanController::class,'index'])->name('riwayat.index');
+Route::get('/riwayat-pemeriksaan', [RiwayatPemeriksaanController::class, 'index'])->name('riwayat.index');
 Route::get('/pemeriksaan/detail/{jenis}/{id}', [RiwayatPemeriksaanController::class, 'detail'])->name('pemeriksaan.detail');
 
-
+Route::get('/pemeriksaan', [PemeriksaanController::class, 'index'])->name('pemeriksaan.index');
 require __DIR__ . '/auth.php';

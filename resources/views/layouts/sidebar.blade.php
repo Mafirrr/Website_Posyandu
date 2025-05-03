@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('pemeriksaan.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-clipboard-heart"></i>
                         </span>
