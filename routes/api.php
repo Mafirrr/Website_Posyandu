@@ -22,12 +22,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
-Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
-
-Route::get('/artikel',[ArtikelController::class,'index']);
+Route::get('/artikel', [ArtikelController::class, 'index']);
 Route::get('/artikel/{id}', [ArtikelController::class, 'show']);
-Route::get('/kategori',[KategoriController::class,'index']);
+Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/kategori/{id}', [KategoriController::class, 'show']);
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
