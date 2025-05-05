@@ -45,7 +45,7 @@ class KaderController extends Controller
                 'email' => "",
             ]
         ];
-        return view('kader.form', $params);
+        return view('kader.kaderform', $params);
     }
 
     public function kader_store(Request $request)

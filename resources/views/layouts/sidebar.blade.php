@@ -1,3 +1,15 @@
+<style>
+    button.sidebar-link {
+        background-color: transparent;
+        color: #000000;
+    }
+
+    button.sidebar-link:hover {
+        background-color: rgba(93, 135, 255, 0.1);
+        color: #5D87FF;
+    }
+</style>
+
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
     <div>
@@ -38,7 +50,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('petugas.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-user"></i>
                         </span>
@@ -66,7 +78,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('pemeriksaan.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-clipboard-heart"></i>
                         </span>
@@ -94,12 +106,16 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-logout"></i>
-                        </span>
-                        <span class="hide-menu">Logout</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class=" w-100 border-0 sidebar-link" href=""
+                            aria-expanded="false">
+                            <span>
+                                <i class="ti ti-logout"></i>
+                            </span>
+                            <span class="hide-menu">Logout</span>
+                        </button>
+                    </form>
                 </li>
             </ul>
 

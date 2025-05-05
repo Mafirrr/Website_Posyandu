@@ -1,11 +1,9 @@
 @extends('layouts.app')
 @section('main')
     <div>
-        <div class="flex items-center justify-between m-5">
-            <h2 class="text-2xl font-semibold">Data Anggota</h2>
-        </div>
-        <section class="mt-5 mb-10">
-            <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+
+        <section class="mt-0 mb-10">
+            <div class="mx-auto max-w-screen-xl ">
                 <!-- Start coding here -->
                 <div class="bg-white dark:bg-white relative shadow-md sm:rounded-lg overflow-hidden">
 
@@ -13,7 +11,7 @@
                         <div class="card-body px-4 py-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="">
-                                    <h4 class="fw-semibold mb-8">Home</h4>
+                                    <h4 class="fw-semibold mb-8">Data Pengguna</h4>
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
@@ -36,9 +34,9 @@
                     <div class="card card-body border ">
                         <div class="row justify-content-between">
                             <div class="col-md-4 col-xl-4">
-                                <form class="position-relative" method="GET" action="{{ route('anggota.index') }}">
+                                <form class="position-relative">
                                     <input type="text" class="form-control product-search ps-5" id="input-search"
-                                        name="search" placeholder="Search..." value="{{ request('search') }}">
+                                        placeholder="Search...">
                                     <i
                                         class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                 </form>
@@ -46,21 +44,18 @@
                             <div class=" col-2">
                                 <a class="btn text-dark border border-dark d-flex align-items-center" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-chevron-down fs-3">Status pengguna</i>
+                                    <i class="ti ti-chevron-down fs-4">Status Pengguna</i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="{{ route('anggota.index') }}"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                             <p class="mb-0 fs-3">All</p>
                                         </a>
-                                        <a href="{{ route('anggota.index', ['aktif' => 1]) }}"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                             <p class="mb-0 fs-3">Aktif</p>
                                         </a>
-                                        <a href="{{ route('anggota.index', ['aktif' => 0]) }}"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                             <p class="mb-0 fs-3">Nonaktif</p>
                                         </a>
                                     </div>
@@ -74,16 +69,7 @@
                                 <table class="table search-table align-middle text-nowrap">
                                     <thead class="header-item">
                                         <tr>
-                                            <th>
-                                                <div class="n-chk align-self-center text-center">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input primary"
-                                                            id="contact-check-all">
-                                                        <label class="form-check-label" for="contact-check-all"></label>
-                                                        <span class="new-control-indicator"></span>
-                                                    </div>
-                                                </div>
-                                            </th>
+                                            <th>No</th>
                                             <th>NIK</th>
                                             <th>Name</th>
                                             <th>Alamat</th>
@@ -113,7 +99,8 @@
                                                         onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
                                                         Edit
                                                     </button>
-                                                    <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST"
+                                                    <form action="{{ route('anggota.destroy', $anggota->id) }}"
+                                                        method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                                         @csrf
                                                         @method('DELETE')

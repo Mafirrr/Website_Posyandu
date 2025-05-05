@@ -13,7 +13,11 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        $artikel = Artikel::orderBy('created_at', 'desc')->get();
+        $artikel = Artikel::orderBy('created_at', 'desc')->get()->map(function ($item) {
+            $item->gambar = asset('storage/' . $item->gambar);
+            return $item;
+        });
+
 
         return response()->json([
             'success' => true,
@@ -45,6 +49,7 @@ class ArtikelController extends Controller
         }
 
         $artikel->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+        $artikel->gambar = asset('storage/' . $artikel->gambar);
 
         return response()->json([
             'success' => true,

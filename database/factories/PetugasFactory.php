@@ -23,7 +23,7 @@ class PetugasFactory extends Factory
             'no_telepon' => fake()->unique()->numerify('08###########'),
             'email' => fake()->unique()->safeEmail(),
             'password' => Hash::make('password'),
-            'role' => fake()->randomElement(['admin', 'petugas', 'kader'])
+            'role' => fake()->randomElement(['admin', 'bidan', 'kader'])
         ];
     }
 }

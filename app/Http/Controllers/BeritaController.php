@@ -17,13 +17,11 @@ class BeritaController extends Controller
     {
         $search = (request()->input('search'));
         $artikels = artikel::with('kategori')
-
-         ->when($search, function ($query, $search) {
-            $query->where(function ($q) use ($search) {
-                $q->where('judul', 'like', "%{$search}%");
-
-            });
-        })->paginate(10);
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('judul', 'like', "%{$search}%");
+                });
+            })->paginate(10);
         return view('artikel.berita', compact('artikels'));
     }
 
@@ -73,19 +71,33 @@ class BeritaController extends Controller
     // }
     public function store(Request $request)
     {
-            $validated = $request->validate([
-                'judul' => 'required|string|max:255',
-                'slug' => 'required|unique:artikels,slug',
-                'isi' => 'required',
-                'tanggal' => 'required|date',
-                'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'kategori_id' => 'required|exists:kategori,id',
-            ]);
-            // dd(request()->all());
-            $berita = new artikel(); // Pastikan model sesuai dengan tabel database
-            $berita->judul = $validated['judul'];
-            $berita->slug = $validated['slug'];
-            $berita->isi = $validated['isi'];
+
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'slug' => 'required|unique:artikels,slug',
+            'isi' => 'required',
+            'tanggal' => 'required|date',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kategori_id' => 'required|exists:kategori,id',
+        ]);
+        // dd(request()->all());
+        $berita = new artikel(); // Pastikan model sesuai dengan tabel database
+        $berita->judul = $validated['judul'];
+        $berita->slug = $validated['slug'];
+        $berita->isi = $validated['isi'];
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'slug' => 'required|unique:artikels,slug',
+            'isi' => 'required',
+            'tanggal' => 'required|date',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kategori_id' => 'required|exists:kategori,id',
+        ]);
+        // dd(request()->all());
+        $berita = new artikel(); // Pastikan model sesuai dengan tabel database
+        $berita->judul = $validated['judul'];
+        $berita->slug = $validated['slug'];
+        $berita->isi = $validated['isi'];
 
         $berita->kategori_id = $validated['kategori_id'];
 
@@ -115,6 +127,7 @@ class BeritaController extends Controller
     }
     public function update(Request $request, $id)
     {
+        // dd(request()->all());
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'slug' => "required|unique:artikels,slug,$id,id",
