@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Api\ArtikelController;
 use App\Http\Controllers\Api\KategoriController;
+use App\Http\Controllers\Api\KehamilanControlller;
 use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\Api\OtpController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\UploadImage;
 use Illuminate\Http\Request;
@@ -26,5 +26,7 @@ Route::get('/artikel', [ArtikelController::class, 'index']);
 Route::get('/artikel/{id}', [ArtikelController::class, 'show']);
 Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/kategori/{id}', [KategoriController::class, 'show']);
+
+Route::get('/kehamilan/{id}', [KehamilanControlller::class, 'find']);
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);

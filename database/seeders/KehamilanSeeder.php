@@ -13,6 +13,6 @@ class KehamilanSeeder extends Seeder
      */
     public function run(): void
     {
-        Kehamilan::factory()->count(10)->create(); 
+        Kehamilan::factory()->count(2)->create();
     }
 }
