@@ -21,7 +21,7 @@
                                     </nav>
                                 </div>
                                 <div class="ms-auto">
-                                    <a href="{{ route('berita.create') }}" id="btn-add-contact"
+                                    <a href="{{ route('berita.tambah') }}" id="btn-add-contact"
                                         class="btn btn-primary d-flex align-items-center">
                                         <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah berita
                                     </a>
@@ -41,7 +41,7 @@
                                 </form>
                             </div>
                             <div class=" col-2">
-                                <a href="{{ route('berita.create') }}" id="btn-add-contact"
+                                <a href="{{ route('berita.tambah') }}" id="btn-add-contact"
                                     class="btn text-dark border border-dark d-flex align-items-center">
                                     <i class="ti ti-filter text-dark me-1 fs-5"></i> Filter
                                 </a>

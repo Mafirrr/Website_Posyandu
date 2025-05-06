@@ -10,14 +10,14 @@
                         <div class="card-body px-4 py-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="">
-                                    <h4 class="fw-semibold mb-8">Home</h4>
+                                    <h4 class="fw-semibold mb-8">Data Pengguna</h4>
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a class="text-muted text-decoration-none" href="../main/index.html">Data
-                                                    Pengguna</a>
+                                                <a class="text-muted text-decoration-none"
+                                                    href="../main/index.html">Petugas</a>
                                             </li>
-                                            <li class="breadcrumb-item" aria-current="page">Petugas</li>
+                                            <li class="breadcrumb-item" aria-current="page">Bidan</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -40,12 +40,12 @@
                                         class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                 </form>
                             </div>
-                            <div class=" col-2">
+                            {{-- <div class=" col-2">
                                 <a href="{{ route('petugas.add') }}" id="btn-add-contact"
                                     class="btn text-dark border border-dark d-flex align-items-center">
                                     <i class="ti ti-filter text-dark me-1 fs-5"></i> Filter
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="card border ">
