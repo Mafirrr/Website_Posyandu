@@ -25,11 +25,26 @@ class UploadImage extends Controller
             ->resizeDown(1080, null) // resizeDown jaga proporsi
             ->toJpeg(80); // kompres ke jpeg dengan kualitas 80
 
-        Storage::disk('public')->put("profiles/{$filename}", (string) $image);
+        Storage::disk('private')->put("profiles/{$filename}", (string) $image);
 
         return response()->json([
             'message' => 'Uploaded & compressed',
             'photo_url' => asset("storage/profiles/{$filename}")
         ]);
+    }
+
+    public function getImage(string $filename)
+    {
+        $path = 'images/' . $filename;
+
+        if (!Storage::disk('private')->exists($path)) {
+            Log::error("File not found: " . $path);
+            abort(404);
+        }
+
+        $file = Storage::disk('private')->get($path);
+        $type = Storage::disk('private')->mimeType($path);
+
+        return response($file, 200)->header('Content-Type', $type);
     }
 }
