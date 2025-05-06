@@ -1,4 +1,4 @@
- <?php
+<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('jadwal', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anggota_id')->references('id')->on('anggota');
-            $table->string('kegiatan');
-            $table->string('tanggal');
-            $table->string('keterangan');
+            $table->foreignId('anggota_id')->nullable()->constrained('anggota')->onDelete('set null');
+            $table->string('judul');
+            $table->date('tanggal');
+            $table->string('keterangan')->nullable();
+            $table->string('lokasi');
+            $table->time('jam_mulai');
+            $table->time('jam_selesai');
             $table->timestamps();
-
         });
     }
 
