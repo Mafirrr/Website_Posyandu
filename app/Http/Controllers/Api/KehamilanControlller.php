@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kehamilan;
 use App\Models\PemeriksaanTrimester1;
 use App\Models\PemeriksaanTrimester3;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class KehamilanControlller extends Controller
@@ -24,17 +25,30 @@ class KehamilanControlller extends Controller
             return $item;
         });
 
-        return response()->json($result);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data berhasil diambil',
+            'data' => $result
+        ]);
     }
 
     public function detail(string $id)
     {
-        $tri1 = PemeriksaanTrimester1::where('kehamilan_id', $id);
-        $tri3 = PemeriksaanTrimester3::where('kehamilan_id', $id);
-
+        $tri1 = PemeriksaanTrimester1::where('kehamilan_id', $id)->get();
+        $tri3 = PemeriksaanTrimester3::where('kehamilan_id', $id)->get();
+        $tri1->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+        $tri3->makeHidden(['created_at', 'updated_at', 'deleted_at']);
         return response()->json([
-            'trimester1' => $tri1,
-            'trimester3' => $tri3,
+            'status' => 'success',
+            'message' => 'Data berhasil diambil',
+            'data' => [
+                'trimester1' => $tri1,
+                'trimester3' => $tri3,
+            ],
+            'meta' => [
+                'total_trimester1' => $tri1->count(),
+                'total_trimester3' => $tri3->count(),
+            ]
         ]);
     }
 }

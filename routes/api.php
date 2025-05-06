@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\UploadImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\Group;
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/lupa-password', [LoginController::class, 'lupaPass']);
@@ -27,6 +28,10 @@ Route::get('/artikel/{id}', [ArtikelController::class, 'show']);
 Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/kategori/{id}', [KategoriController::class, 'show']);
 
-Route::get('/kehamilan/{id}', [KehamilanControlller::class, 'find']);
+
+Route::prefix('kehamilan')->group(function () {
+    Route::get('/{id}', [KehamilanControlller::class, 'find']);
+    Route::get('{id}/detail', [KehamilanControlller::class, 'detail']);
+});
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
