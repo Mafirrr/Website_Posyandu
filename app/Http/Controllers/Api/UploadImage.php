@@ -13,38 +13,50 @@ class UploadImage extends Controller
     public function uploadPhoto(Request $request, ImageManagerInterface $imageManager)
     {
         $request->validate([
+            'id' => 'required',
             'photo' => 'required|image|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         $file = $request->file('photo');
-        $filename = uniqid('profile_') . '.' . $file->getClientOriginalExtension();
-        // $path = storage_path("app/public/profiles/{$filename}");
+        $filename = 'profile_' . $request->id . '.' . 'jpeg';
+
 
         // Buat instance gambar dan kompres
         $image = $imageManager->read($file->getRealPath())
-            ->resizeDown(1080, null) // resizeDown jaga proporsi
-            ->toJpeg(80); // kompres ke jpeg dengan kualitas 80
+            ->resizeDown(1080, null)
+            ->toJpeg(80);
 
-        Storage::disk('private')->put("profiles/{$filename}", (string) $image);
+        Storage::disk('public')->put("profiles/{$filename}", (string) $image);
+        $url = asset('storage/profiles/' . $filename);
 
         return response()->json([
+            'status' => 'succcess',
             'message' => 'Uploaded & compressed',
-            'photo_url' => asset("storage/profiles/{$filename}")
+            'url' => $url
         ]);
     }
 
-    public function getImage(string $filename)
+    public function getImage(Request $request)
     {
-        $path = 'images/' . $filename;
+        $request->validate([
+            'id' => 'required',
+        ]);
+
+        $path = 'profiles/profile_' . $request->id . '.jpeg';
 
         if (!Storage::disk('private')->exists($path)) {
-            Log::error("File not found: " . $path);
-            abort(404);
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Image tidak ditemukan',
+            ], 404);
         }
 
-        $file = Storage::disk('private')->get($path);
-        $type = Storage::disk('private')->mimeType($path);
+        $url = asset('storage/' . $path);
 
-        return response($file, 200)->header('Content-Type', $type);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Image ditemukan',
+            'url' => $url,
+        ]);
     }
 }
