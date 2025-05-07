@@ -20,7 +20,7 @@
                                     </nav>
                                 </div>
                                 <div class="ms-auto">
-                                    <a href="{{ route('berita.tambah') }}" id="btn-add-contact"
+                                    <a href="{{ route('berita.create') }}" id="btn-add-contact"
                                         class="btn btn-primary d-flex align-items-center">
                                         <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah berita
                                     </a>
@@ -39,10 +39,12 @@
                                         class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                 </form>
                             </div>
-                            <div class=" col-2">
-                                <a href="{{ route('berita.tambah') }}" id="btn-add-contact"
-                                    class="btn text-dark border border-dark d-flex align-items-center">
-                                    <i class="ti ti-filter text-dark me-1 fs-5"></i> Filter
+                            <div class="col-2">
+                                <a href="{{ route('berita.index', ['search' => request('search'), 'kategori' => 'olahraga']) }}"
+                                   id="btn-add-contact"
+                                   class="btn text-dark border border-dark d-flex align-items-center">
+                                    <i class="ti ti-filter text-dark me-1 fs-5"></i> Aktif
+                                </a>
                                 </a>
                             </div>
                         </div>
@@ -57,7 +59,7 @@
                             <th scope="col">NO.</th>
                             <th scope="col">Thumbnail</th>
                             <th scope="col">Title</th>
-                            <th scope="col">Deskripsi</th>
+                            {{-- <th scope="col">Deskripsi</th> --}}
                             <th scope="col">Kategori</th>
                             <th scope="col">Date</th>
                             <th scope="col">Actions</th>
@@ -71,7 +73,7 @@
                                     <img src="storage/{{ $berita->gambar }}" alt="Thumbnail" class="img-thumbnail" style="width: 64px; height: 64px; object-fit: cover;">
                                 </td>
                                 <td>{{ $berita->judul }}</td>
-                                <td>{{ Str::limit($berita->isi, 50, '...') }}</td>
+                                {{-- <td>{{ Str::limit($berita->isi, 50, '...') }}</td> --}}
                                 <td>{{ $berita->kategori->nama }}</td>
                                 <td>{{ $berita->created_at }}</td>
                                 <td>
@@ -79,7 +81,7 @@
                                         <a href="{{ route('berita.edit', $berita->id) }}"
                                            class="btn btn-warning d-flex align-items-center gap-2 px-3 py-2 rounded"
                                            title="Edit">
-                                    
+
                                            <span class="text-white fw-bold">Edit</span>
                                         </a>
 
@@ -92,7 +94,7 @@
                                             <button type="submit"
                                                     class="btn btn-danger d-flex align-items-center gap-2 px-3 py-2 rounded"
                                                     title="Hapus">
-                                               
+
                                                 <span class="text-white fw-bold">Hapus</span>
                                             </button>
                                         </form>

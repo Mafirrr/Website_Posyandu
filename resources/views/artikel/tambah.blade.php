@@ -39,28 +39,58 @@
                             </div>
 
                             <div class="">
-                                <label for="slug" class="form-label">Slug <span class="text-danger">*</span></label>
-                                <input type="text" id="slug" name="slug" placeholder="Slug Berita" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug',$berita->slug) }}">
-                                @error('slug')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="">
                                 <label for="judul" class="form-label">Title <span class="text-danger">*</span></label>
-                                <input type="text" id="judul" name="judul" placeholder="Judul Berita" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul',$berita->judul) }}">
+                                <input type="text" id="judul" name="judul" placeholder="Judul Berita"
+                                    class="form-control @error('judul') is-invalid @enderror"
+                                    value="{{ old('judul', $berita->judul) }}">
                                 @error('judul')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
 
                             <div class="">
+                                <label for="slug" class="form-label">Slug <span class="text-danger">*</span></label>
+                                <input type="text" id="slug" name="slug" placeholder="Slug Berita"
+                                    class="form-control @error('slug') is-invalid @enderror"
+                                    value="{{ old('slug', $berita->slug) }}">
+                                @error('slug')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <script>
+                                document.getElementById('judul').addEventListener('input', function () {
+                                    const title = this.value;
+                                    const slug = title
+                                        .toLowerCase() // Ubah ke huruf kecil
+                                        .trim() // Hapus spasi di awal dan akhir
+                                        .replace(/[^a-z0-9\s-]/g, '') // Hapus karakter spesial
+                                        .replace(/\s+/g, '-') // Ganti spasi dengan tanda "-"
+                                        .replace(/-+/g, '-'); // Ganti tanda "-" yang berulang dengan satu "-"
+
+                                    document.getElementById('slug').value = slug;
+                                });
+                            </script>
+
+
+                            <div class="">
                                 <label for="isi" class="form-label">Deskripsi <span class="text-danger">*</span></label>
-                                <textarea id="isi" name="isi" rows="4" placeholder="Deskripsi Berita" class="form-control @error('isi') is-invalid @enderror">{{ old('isi',$berita->isi) }}</textarea>
+                                <textarea id="isi" name="isi" rows="4" placeholder="Deskripsi Berita" class="form-control @error('isi') is-invalid @enderror">{{ old('isi', $berita->isi) }}</textarea>
                                 @error('isi')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+
+                            <!-- CKEditor Script -->
+                            <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+                            <script>
+                                ClassicEditor.create(document.querySelector('#isi'), {
+                                    toolbar: ['bold', 'italic', 'link', 'numberedList', 'bulletedList'],
+                                    height: 200 // CKEditor 5 tidak mendukung pengaturan tinggi secara langsung, gunakan CSS jika perlu
+                                }).catch(error => {
+                                    console.error(error);
+                                });
+                            </script>
 
                             <div class="">
                                 <label for="kategori" class="form-label">Kategori <span class="text-danger">*</span></label>

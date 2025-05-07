@@ -15,13 +15,18 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $search = (request()->input('search'));
-        $artikels = artikel::with('kategori')
+        $search = request()->input('search');
+        // $filter = request()->input('olahraga');
+
+        $artikels = Artikel::with('kategori')
             ->when($search, function ($query, $search) {
-                $query->where(function ($q) use ($search) {
-                    $q->where('judul', 'like', "%{$search}%");
-                });
-            })->paginate(10);
+                $query->where('judul', 'like', "%{$search}%");
+            })
+            // // ->when($filter, function ($query, $filter) {
+            // //     $query->where('olahraga', $filter);
+            // })
+            ->paginate(10);
+
         return view('artikel.berita', compact('artikels'));
     }
 
