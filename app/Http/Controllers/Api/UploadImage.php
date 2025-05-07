@@ -14,7 +14,7 @@ class UploadImage extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'photo' => 'required|image|mimes:jpg,jpeg,png|max:5120',
+            'photo' => 'required|image|mimes:jpg,jpeg,png',
         ]);
 
         $file = $request->file('photo');
@@ -44,7 +44,7 @@ class UploadImage extends Controller
 
         $path = 'profiles/profile_' . $request->id . '.jpeg';
 
-        if (!Storage::disk('private')->exists($path)) {
+        if (!Storage::disk('public')->exists($path)) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Image tidak ditemukan',
