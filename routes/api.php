@@ -35,3 +35,4 @@ Route::prefix('kehamilan')->group(function () {
 });
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
+Route::post('/image', [UploadImage::class, 'getImage']);
