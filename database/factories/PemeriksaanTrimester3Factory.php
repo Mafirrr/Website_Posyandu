@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Petugas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,8 @@ class PemeriksaanTrimester3Factory extends Factory
     public function definition(): array
     {
         return [
-            'kehamilan_id' => \App\Models\Kehamilan::factory(), // atau pakai ID yang sudah ada
-            'petugas_id' => \App\Models\Petugas::factory(),
+            'kehamilan_id' => '1', // atau pakai ID yang sudah ada
+            'petugas_id' => Petugas::factory(),
             'tanggal_pemeriksaan' => $this->faker->date(),
             'konjungtiva' => $this->faker->word(),
             'sklera' => $this->faker->word(),
