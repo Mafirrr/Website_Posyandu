@@ -21,14 +21,14 @@
         <!-- Form Login Section -->
         <div class="w-full lg:w-1/2 flex flex-col justify-center px-10 lg:px-32 pt-0">
             <div class="mb-16 flex items-center space-x-4">
-                <img src="{{ asset('storage/logo.png') }}" alt="logo" class="w-100 h-100">
+                <img src="{{ asset('storage/images/logo.png') }}" alt="logo" class="w-100 h-100">
                 <h2 class="text-3xl font-semibold">Posyandu</h2>
             </div>
             {{ $slot }}
         </div>
         <!-- Image Section -->
         <div class="hidden lg:flex w-1/2 items-center justify-center ">
-            <img src="{{ asset('storage/log.png') }}" alt="Login Illustration" class="max-w-full">
+            <img src="{{ asset('storage/images/log.png') }}" alt="Login Illustration" class="max-w-full">
         </div>
     </div>
 </body>
