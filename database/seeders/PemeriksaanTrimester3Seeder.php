@@ -12,6 +12,6 @@ class PemeriksaanTrimester3Seeder extends Seeder
      */
     public function run(): void
     {
-        PemeriksaanTrimester3::factory()->count(10)->create();
+        PemeriksaanTrimester3::factory()->count(1)->create();
     }
 }
