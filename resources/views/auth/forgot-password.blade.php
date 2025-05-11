@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :image="'lupa_pw.png'">
     <h2 class="text-3xl font-bold mb-2">Lupa Password?</h2>
     <p class="text-gray-500 mb-6">
         Jangan khawatir, itu bisa terjadi pada siapa saja. Masukkan No Telepon Anda di bawah ini untuk memulihkan kata

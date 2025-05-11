@@ -1,3 +1,4 @@
+@props(['image'])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -27,8 +28,8 @@
             {{ $slot }}
         </div>
         <!-- Image Section -->
-        <div class="hidden lg:flex w-1/2 items-center justify-center ">
-            <img src="{{ asset('storage/images/log.png') }}" alt="Login Illustration" class="max-w-full">
+        <div class="hidden lg:flex w-1/2 items-center justify-center">
+            <img src="{{ asset('storage/images/' . ($image ?? 'log.png')) }}" alt="Illustration" class="max-w-full">
         </div>
     </div>
 </body>

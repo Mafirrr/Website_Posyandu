@@ -11,12 +11,14 @@
                         <div class="card-body px-4 py-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h4 class="fw-semibold mb-8">Home</h4>
+                                    <h4 class="fw-semibold mb-8">Riwayat Pemeriksaan</h4>
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a class="text-muted text-decoration-none" href="{{ route('riwayat.index') }}">Riwayat
-                                                    Pemeriksaan</a>
+                                                <a class="text-muted text-decoration-none"
+                                                    href="{{ route('riwayat.index') }}">Pelayanan Posyandu</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">Riwayat Pemeriksaan
                                             </li>
                                         </ol>
                                     </nav>
@@ -31,8 +33,8 @@
                             <div class="row g-3 justify-content-between">
                                 <!-- Search Nama Anggota -->
                                 <div class="col-md-4">
-                                    <input name="search" type="text" class="form-control" placeholder="Cari nama anggota..."
-                                        value="{{ request('search') }}">
+                                    <input name="search" type="text" class="form-control"
+                                        placeholder="Cari nama anggota..." value="{{ request('search') }}">
                                 </div>
 
                                 <!-- Hidden Input untuk Jenis Pemeriksaan -->
@@ -60,17 +62,26 @@
                                         </div>
                                         <div class="modal-body">
                                             <select name="jenis_pemeriksaan" class="form-select">
-                                                <option value="" {{ request('jenis_pemeriksaan') == '' ? 'selected' : '' }}>--
+                                                <option value=""
+                                                    {{ request('jenis_pemeriksaan') == '' ? 'selected' : '' }}>--
                                                     Semua Jenis Pemeriksaan --</option>
-                                                <option value="Pemeriksaan Kehamilan" {{ request('jenis_pemeriksaan') == 'Pemeriksaan Kehamilan' ? 'selected' : '' }}>Pemeriksaan Kehamilan</option>
-                                                <option value="Pemeriksaan Trimester 1" {{ request('jenis_pemeriksaan') == 'Pemeriksaan Trimester 1' ? 'selected' : '' }}>Pemeriksaan Trimester 1</option>
-                                                <option value="Pemeriksaan Lab Kehamilan" {{ request('jenis_pemeriksaan') == 'Pemeriksaan Lab Kehamilan' ? 'selected' : '' }}>Pemeriksaan Lab Kehamilan</option>
-                                                <option value="Pemeriksaan Trimester 3" {{ request('jenis_pemeriksaan') == 'Pemeriksaan Trimester 3' ? 'selected' : '' }}>Pemeriksaan Trimester 3</option>
+                                                <option value="Pemeriksaan Kehamilan"
+                                                    {{ request('jenis_pemeriksaan') == 'Pemeriksaan Kehamilan' ? 'selected' : '' }}>
+                                                    Pemeriksaan Kehamilan</option>
+                                                <option value="Pemeriksaan Trimester 1"
+                                                    {{ request('jenis_pemeriksaan') == 'Pemeriksaan Trimester 1' ? 'selected' : '' }}>
+                                                    Pemeriksaan Trimester 1</option>
+                                                <option value="Pemeriksaan Lab Kehamilan"
+                                                    {{ request('jenis_pemeriksaan') == 'Pemeriksaan Lab Kehamilan' ? 'selected' : '' }}>
+                                                    Pemeriksaan Lab Kehamilan</option>
+                                                <option value="Pemeriksaan Trimester 3"
+                                                    {{ request('jenis_pemeriksaan') == 'Pemeriksaan Trimester 3' ? 'selected' : '' }}>
+                                                    Pemeriksaan Trimester 3</option>
                                             </select>
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
+                                            <button type="button" class="btn btn-danger"
                                                 data-bs-dismiss="modal">Batal</button>
                                             <button type="submit" class="btn btn-primary"
                                                 id="applyFilterBtn">Submit</button>
@@ -97,7 +108,8 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header"
                                                 id="heading-{{ \Illuminate\Support\Str::slug($group['tanggal']) }}">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
                                                     data-bs-target="#collapse-{{ \Illuminate\Support\Str::slug($group['tanggal']) }}"
                                                     aria-expanded="false"
                                                     aria-controls="collapse-{{ \Illuminate\Support\Str::slug($group['tanggal']) }}">
@@ -158,15 +170,20 @@
                                                 <label for="per_page" class="form-label w-32 me-3">Per Page</label>
                                                 <select name="per_page" onchange="this.form.submit()"
                                                     class="form-select form-select-sm w-auto">
-                                                    <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5
+                                                    <option value="5"
+                                                        {{ request('per_page') == 5 ? 'selected' : '' }}>5
                                                     </option>
-                                                    <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10
+                                                    <option value="10"
+                                                        {{ request('per_page') == 10 ? 'selected' : '' }}>10
                                                     </option>
-                                                    <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20
+                                                    <option value="20"
+                                                        {{ request('per_page') == 20 ? 'selected' : '' }}>20
                                                     </option>
-                                                    <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50
+                                                    <option value="50"
+                                                        {{ request('per_page') == 50 ? 'selected' : '' }}>50
                                                     </option>
-                                                    <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100
+                                                    <option value="100"
+                                                        {{ request('per_page') == 100 ? 'selected' : '' }}>100
                                                     </option>
                                                 </select>
                                             </div>
@@ -183,7 +200,7 @@
 @endsection
 @push('scripts')
     <script>
-        document.getElementById('applyFilterBtn').addEventListener('click', function () {
+        document.getElementById('applyFilterBtn').addEventListener('click', function() {
             var selectedJenis = document.getElementById('jenisPemeriksaanSelect').value;
 
             document.getElementById('jenisPemeriksaanInput').value = selectedJenis;
