@@ -19,7 +19,7 @@ class pemeriksaan_kehamilanFactory extends Factory
     public function definition(): array
     {
         return [
-            'kehamilan_id' => Kehamilan::factory(),
+            'kehamilan_id' => '2',
             'petugas_id' => Petugas::factory(),
             'tanggal_periksa' => $this->faker->date(),
             'tempat_periksa' => $this->faker->city(),

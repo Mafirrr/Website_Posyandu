@@ -6,11 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Kehamilan;
 use App\Models\PemeriksaanTrimester1;
 use App\Models\PemeriksaanTrimester3;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class KehamilanControlller extends Controller
 {
+
+    public function handle($id, Request $request)
+    {
+        $detail = $request->query('detail');
+
+        if ($detail) {
+            return $this->detail($detail);
+        } else {
+            return $this->find($id);
+        }
+    }
     public function find(string $id)
     {
         $kehamilanList = Kehamilan::select('id', 'anggota_id', 'status', 'tanggal_awal')->where('anggota_id', $id)
@@ -42,6 +52,7 @@ class KehamilanControlller extends Controller
             'status' => 'success',
             'message' => 'Data berhasil diambil',
             'data' => [
+                'id' => $id,
                 'trimester1' => $tri1,
                 'trimester3' => $tri3,
             ],

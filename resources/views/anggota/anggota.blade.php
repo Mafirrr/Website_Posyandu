@@ -96,17 +96,18 @@
                                                     </div>
                                                 </td>
                                                 <td class="d-flex gap-2">
-                                                    <button class="btn btn-warning" type="button"
-                                                        onclick="window.location='{{ route('anggota.edit', $anggota->id) }}'">
-                                                        Edit
-                                                    </button>
-                                                    <form action="{{ route('anggota.destroy', $anggota->id) }}"
+                                                    <a href="{{ route('petugas.edit', $anggota->id) }}"
+                                                        class="btn btn-warning d-flex align-items-center" title="Edit">
+                                                        <i class="ti ti-edit text-white fs-5"></i>
+                                                    </a>
+                                                    <form action="{{ route('petugas.destroy', $anggota->id) }}"
                                                         method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">
-                                                            Hapus
+                                                        <button type="submit"
+                                                            class="btn btn-danger d-flex align-items-center" title="Hapus">
+                                                            <i class="ti ti-trash text-white fs-5"></i>
                                                         </button>
                                                     </form>
                                                 </td>

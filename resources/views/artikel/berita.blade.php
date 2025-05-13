@@ -9,14 +9,15 @@
                         <div class="card-body px-4 py-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="">
-                                    <h4 class="fw-semibold mb-8">Home</h4>
+                                    <h4 class="fw-semibold mb-8">Lainnya</h4>
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a class="text-muted text-decoration-none" href="../main/index.html">Data
-                                                    Berita</a>
+                                                <a class="text-muted text-decoration-none"
+                                                    href="{{ route('dashboard') }}">Data
+                                                    Edukasi</a>
                                             </li>
-                                            <li class="breadcrumb-item" aria-current="page">Berita</li>
+                                            <li class="breadcrumb-item" aria-current="page">Edukasi</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -77,30 +78,21 @@
                                                 <td>{{ Str::limit($berita->isi, 50, '...') }}</td>
                                                 <td>{{ $berita->kategori->nama }}</td>
                                                 <td>{{ $berita->created_at }}</td>
-                                                <td>
-                                                    <div class="d-flex gap-2">
-                                                        <a href="{{ route('berita.edit', $berita->id) }}"
-                                                            class="btn btn-warning d-flex align-items-center gap-2 px-3 py-2 rounded"
-                                                            title="Edit">
-
-                                                            <span class="text-white fw-bold">Edit</span>
-                                                        </a>
-
-                                                        <form action="{{ route('berita.destroy', $berita->id) }}"
-                                                            method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus data ini?');"
-                                                            class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="btn btn-danger d-flex align-items-center gap-2 px-3 py-2 rounded"
-                                                                title="Hapus">
-
-                                                                <span class="text-white fw-bold">Hapus</span>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-
+                                                <td class="d-flex gap-2">
+                                                    <a href="{{ route('petugas.edit', $berita->id) }}"
+                                                        class="btn btn-warning d-flex align-items-center" title="Edit">
+                                                        <i class="ti ti-edit text-white fs-5"></i>
+                                                    </a>
+                                                    <form action="{{ route('petugas.destroy', $berita->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-danger d-flex align-items-center" title="Hapus">
+                                                            <i class="ti ti-trash text-white fs-5"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
