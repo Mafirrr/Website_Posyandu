@@ -48,7 +48,7 @@ public function store(Request $request)
         $messageText = "{$hari}\nTanggal: {$tanggalFormatted}\nJam: {$jadwal->jam_mulai}\n- {$jadwal->jam_selesai}";
 
         $data = [
-            'title' => 'Jadwal Baru Posyandu!',
+            'title' => 'Jadwal Posyandu!',
             'body' => $messageText,
         ];
 
@@ -91,6 +91,35 @@ public function update(Request $request, $id)
     $jadwal = Jadwal::findOrFail($id);
     $jadwal->update($request->all());
 
-    return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil diperbarui');
+    $tokens = Anggota::whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
+
+    if (!empty($tokens)) {
+        $firebase = (new Factory)
+            ->withServiceAccount(config('services.firebase.credentials'))
+            ->createMessaging();
+
+        Carbon::setLocale('id');
+
+        $tanggal = Carbon::parse($jadwal->tanggal);
+        $hari = $tanggal->isoFormat('dddd');
+        $tanggalFormatted = $tanggal->format('d-m-Y');
+
+        $messageText = "{$hari}\nTanggal: {$tanggalFormatted}\nJam: {$jadwal->jam_mulai}\n- {$jadwal->jam_selesai}";
+
+        $data = [
+            'title' => 'Jadwal Posyandu Diperbarui!',
+            'body' => $messageText,
+        ];
+
+        foreach ($tokens as $token) {
+            $message = CloudMessage::new()
+                ->withNotification(Notification::create($data['title'], $data['body']))
+                ->withData($data);
+
+            $firebase->send($message->withChangedTarget('token', $token));
+        }
+    }
+
+    return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil diperbarui dan notifikasi terkirim.');
 }
 }
