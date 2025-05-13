@@ -67,3 +67,4 @@ Route::get('/pemeriksaan', [PemeriksaanController::class, 'index'])->name('pemer
 
 Route::resource('/jadwal', JadwalController::class);
 require __DIR__ . '/auth.php';
+

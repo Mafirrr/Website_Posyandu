@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\UploadImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\Group;
+use App\Http\Controllers\Api\FCMTokenController;
+use App\Http\Controllers\NotificationController;
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/lupa-password', [LoginController::class, 'lupaPass']);
@@ -35,3 +37,4 @@ Route::prefix('kehamilan')->group(function () {
 });
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
+Route::middleware('auth:sanctum')->post('/update_fcm_token', [FCMTokenController::class, 'update']);

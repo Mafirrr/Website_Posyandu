@@ -24,6 +24,7 @@ class Anggota extends Model
         'no_telepon',
         'golongan_darah',
         'aktif',
+        'fcm_token',
     ];
 
     protected $hidden = [
