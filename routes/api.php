@@ -32,9 +32,9 @@ Route::get('/kategori/{id}', [KategoriController::class, 'show']);
 
 
 Route::prefix('kehamilan')->group(function () {
-    Route::get('/{id}', [KehamilanControlller::class, 'find']);
-    Route::get('{id}/detail', [KehamilanControlller::class, 'detail']);
+    Route::get('/{id}', [KehamilanControlller::class, 'handle']);
 });
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
+Route::post('/image', [UploadImage::class, 'getImage']);
 Route::middleware('auth:sanctum')->post('/update_fcm_token', [FCMTokenController::class, 'update']);
