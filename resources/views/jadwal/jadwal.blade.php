@@ -88,10 +88,10 @@
                                         <a href="{{ route('jadwal.edit', $jadwal->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                     @endif
 
-                                    <form action="{{ route('jadwal.destroy', $jadwal->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('jadwal.destroy', $jadwal->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Yakin ingin menghapus?')" class="btn btn-sm btn-danger">
+                                        <button type="submit" class="btn btn-sm btn-danger">
                                             Hapus
                                         </button>
                                     </form>
