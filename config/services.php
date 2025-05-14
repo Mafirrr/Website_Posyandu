@@ -36,7 +36,7 @@ return [
     ],
 
     'firebase' => [
-    'credentials' => storage_path('app\jendela-dunia-61c3a-firebase-adminsdk-fbsvc-ffc2c82881.json'),
+        'credentials' => storage_path('app\services.json'),
     ],
 
 
