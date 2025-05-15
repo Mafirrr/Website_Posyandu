@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('pemeriksaan.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-clipboard-heart"></i>
                         </span>
@@ -86,7 +86,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('riwayat.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-history"></i>
                         </span>
