@@ -17,6 +17,7 @@
         "vite": "^6.2.5"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^41.4.2",
         "@visx/visx": "^3.12.0",
         "apexcharts": "^4.7.0",
         "bootstrap-icons": "^1.11.3"

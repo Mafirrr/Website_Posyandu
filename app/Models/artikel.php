@@ -17,16 +17,16 @@ class artikel extends Model
         'slug',
         'isi',
         'gambar',
-        'kategori_id',
+        'Kategori_edukasi',
     ];
 
-    protected $casts = [
-        'kategori_id' => 'integer',
-    ];
+    // protected $casts = [
+    //     'kategori_id' => 'integer',
+    // ];
 
     // Relasi ke tabel Kategori
-    public function kategori()
-    {
-        return $this->belongsTo(Kategori::class, 'kategori_id');
-    }
+    // public function kategori()
+    // {
+    //     return $this->belongsTo(Kategori::class, 'kategori_id');
+    // }
 }
