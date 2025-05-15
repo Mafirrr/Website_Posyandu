@@ -17,6 +17,9 @@ class Anggota extends Model
         'nik',
         'password',
         'nama',
+        'no_jkn',
+        'faskes_tk1',
+        'faskes_rujukan',
         'tanggal_lahir',
         'tempat_lahir',
         'pekerjaan',
@@ -41,15 +44,5 @@ class Anggota extends Model
     public function kehamilan()
     {
         return $this->hasMany(Kehamilan::class, 'anggota_id');
-    }
-
-    public function riwayatImunisasi()
-    {
-        return $this->hasMany(RiwayatImunisasiTetanus::class, 'anggota_id');
-    }
-
-    public function kesehatan()
-    {
-        return $this->hasOne(Kesehatan_Anggota::class, 'anggota_id');
     }
 }

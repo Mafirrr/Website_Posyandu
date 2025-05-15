@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('riwayat_imunisasi_tetanus', function (Blueprint $table) {
+        Schema::create('pemeriksaan_kehamilan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anggota_id')->references('id')->on('anggota');
-            $table->date('tanggal_pemberian');
-            $table->string('dosis', 50);
+            $table->foreignId('kehamilan_id')->references('id')->on('kehamilan');
+            $table->foreignId('petugas_id')->references('id')->on('petugas');
+            $table->date('tanggal_pemeriksaan');
+            $table->enum('jenis_pemeriksaan', ['trimester1, trimester2, trimester3, nifas']);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('riwayat_imunisasi_tetanuses');
+        Schema::dropIfExists('pemeriksaan_kehamilan');
     }
 };

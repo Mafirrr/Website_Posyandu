@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kesehatan_anggota', function (Blueprint $table) {
+        Schema::create('skrining_kesehatan_jiwa', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anggota_id')->references('id')->on('anggota');
-            $table->integer('tinggi_badan');
-            $table->double('berat_badan');
-            $table->integer('tekanan_darah_sistolik');
-            $table->integer('tekanan_darah_diastolik');
+            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
+            $table->enum('skrining_jiwa', ['ya', 'tidak']);
+            $table->enum('tindak_lanjut_jiwa', ['rujuk', 'konseling', 'tidak_ada']);
+            $table->enum('perlu_rujukan', ['ya', 'tidak']);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kesehatan_anggotas');
+        Schema::dropIfExists('skrining_kesehatan_jiwa');
     }
 };

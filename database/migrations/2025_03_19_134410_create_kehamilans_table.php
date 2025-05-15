@@ -19,7 +19,10 @@ return new class extends Migration
             $table->text('riwayat_penyakit');
             $table->text('riwayat_kehamilan');
             $table->date('perkiraan_kehamilan');
-            $table->enum('status', array('proses', 'keguguran'));
+            $table->enum('status', array('dalam_pemantauan', 'keguguran'));
+            $table->string('proses_melahirkan')->nullable();
+            $table->string('penolong')->nullable();
+            $table->string('masalah')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
