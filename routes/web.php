@@ -7,6 +7,8 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KaderController;
+use App\Http\Controllers\RiwayatPemeriksaanController;
+use App\Http\Controllers\PemeriksaanController;
 use App\Livewire\AnggotaTable;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Route;
@@ -55,3 +57,4 @@ Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name
 Route::get('/jadwal', [JadwalController::class, 'view'])->name('jadwal');
 
 require __DIR__ . '/auth.php';
+

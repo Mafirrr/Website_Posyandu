@@ -44,9 +44,15 @@ return [
             'driver' => 'sanctum',
             'provider' => 'anggota',
         ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admin',
+        ],
+
+        'petugas' => [
+            'driver' => 'session',
+            'provider' => 'petugas',
         ],
     ],
 
@@ -68,10 +74,10 @@ return [
     */
 
     'providers' => [
-        // 'users' => [
-        //     'driver' => 'eloquent',
-        //     'model' => env('AUTH_MODEL', App\Models\User::class),
-        // ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\Petugas::class),
+        ],
         'anggota' => [
             'driver' => 'eloquent',
             'model' => App\Models\Anggota::class, // pastikan ini benar
@@ -109,7 +115,7 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'admin',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,

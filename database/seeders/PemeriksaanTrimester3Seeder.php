@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Petugas;
+use App\Models\PemeriksaanTrimester3;
 use Illuminate\Database\Seeder;
 
-class PetugasSeeder extends Seeder
+class PemeriksaanTrimester3Seeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Petugas::factory()->count(5)->create();
+        PemeriksaanTrimester3::factory()->count(1)->create();
     }
 }

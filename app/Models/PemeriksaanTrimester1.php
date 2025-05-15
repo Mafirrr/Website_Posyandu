@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,7 +35,6 @@ class PemeriksaanTrimester1 extends Model
     ];
 
     protected $casts = [
-        'tanggal_pemeriksaan' => 'date',
         'gestational_sac' => 'double',
         'crown_rump_length' => 'double',
         'denyut_jantung_janin' => 'integer',
@@ -42,6 +42,10 @@ class PemeriksaanTrimester1 extends Model
         'kantong_kehamilan' => 'boolean',
     ];
 
+    public function getTanggalPemeriksaanAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
     // Relasi ke tabel Kehamilan
     public function kehamilan()
     {

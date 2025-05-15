@@ -89,6 +89,7 @@ class BeritaController extends Controller
     }
     public function update(Request $request, $id)
     {
+        // dd(request()->all());
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'slug' => "required|unique:artikels,slug,$id,id",
