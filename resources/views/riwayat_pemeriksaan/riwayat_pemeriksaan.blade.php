@@ -33,8 +33,8 @@
                             <div class="row g-3 justify-content-between">
                                 <!-- Search Nama Anggota -->
                                 <div class="col-md-4">
-                                    <input name="search" type="text" class="form-control"
-                                        placeholder="Cari nama anggota..." value="{{ request('search') }}">
+                                    <input name="search" type="text" class="form-control" placeholder="Cari nama anggota..."
+                                        value="{{ request('search') }}">
                                 </div>
 
                                 <!-- Hidden Input untuk Jenis Pemeriksaan -->
@@ -61,24 +61,17 @@
                                                 aria-label="Tutup"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <select name="jenis_pemeriksaan" class="form-select">
-                                                <option value=""
-                                                    {{ request('jenis_pemeriksaan') == '' ? 'selected' : '' }}>--
-                                                    Semua Jenis Pemeriksaan --</option>
-                                                <option value="Pemeriksaan Kehamilan"
-                                                    {{ request('jenis_pemeriksaan') == 'Pemeriksaan Kehamilan' ? 'selected' : '' }}>
-                                                    Pemeriksaan Kehamilan</option>
-                                                <option value="Pemeriksaan Trimester 1"
-                                                    {{ request('jenis_pemeriksaan') == 'Pemeriksaan Trimester 1' ? 'selected' : '' }}>
-                                                    Pemeriksaan Trimester 1</option>
-                                                <option value="Pemeriksaan Lab Kehamilan"
-                                                    {{ request('jenis_pemeriksaan') == 'Pemeriksaan Lab Kehamilan' ? 'selected' : '' }}>
-                                                    Pemeriksaan Lab Kehamilan</option>
-                                                <option value="Pemeriksaan Trimester 3"
-                                                    {{ request('jenis_pemeriksaan') == 'Pemeriksaan Trimester 3' ? 'selected' : '' }}>
-                                                    Pemeriksaan Trimester 3</option>
+                                            <select name="jenis_pemeriksaan" id="jenisPemeriksaanSelect"
+                                                class="form-select">
+                                                <option value="" {{ request('jenis_pemeriksaan') == '' ? 'selected' : '' }}>
+                                                    -- Semua Jenis Pemeriksaan --
+                                                </option>
+                                                @foreach($jenisPemeriksaans as $jenis)
+                                                    <option value="{{ $jenis }}" {{ request('jenis_pemeriksaan') == $jenis ? 'selected' : '' }}>
+                                                        {{ $jenis }}
+                                                    </option>
+                                                @endforeach
                                             </select>
-
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger"
@@ -108,8 +101,7 @@
                                         <div class="accordion-item">
                                             <h2 class="accordion-header"
                                                 id="heading-{{ \Illuminate\Support\Str::slug($group['tanggal']) }}">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse"
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#collapse-{{ \Illuminate\Support\Str::slug($group['tanggal']) }}"
                                                     aria-expanded="false"
                                                     aria-controls="collapse-{{ \Illuminate\Support\Str::slug($group['tanggal']) }}">
@@ -141,13 +133,13 @@
                                                                 @foreach ($group['pemeriksaans'] as $index => $pemeriksaan)
                                                                     <tr>
                                                                         <td>{{ $index + 1 }}</td>
-                                                                        <td>{{ $pemeriksaan->nama_anggota }}</td>
-                                                                        <td>{{ $pemeriksaan->jenis_pemeriksaan }}</td>
-                                                                        <td>{{ \Carbon\Carbon::parse($pemeriksaan->tanggal_pemeriksaan)->format('Y-m-d') }}
+                                                                        <td>{{ $pemeriksaan['nama_anggota'] }}</td>
+                                                                        <td>{{ $pemeriksaan['jenis_pemeriksaan'] }}</td>
+                                                                        <td>{{ \Carbon\Carbon::parse($pemeriksaan['tanggal'])->format('Y-m-d') }}
                                                                         </td>
-                                                                        <td>{{ $pemeriksaan->waktu_pemeriksaan }}</td>
+                                                                        <td>{{ $pemeriksaan['waktu'] }}</td>
                                                                         <td>
-                                                                            <a href="{{ route('pemeriksaan.detail', ['jenis' => $pemeriksaan->jenis_pemeriksaan, 'id' => $pemeriksaan->id]) }}"
+                                                                            <a href="{{ route('pemeriksaan.detail', ['tipe' => $pemeriksaan['tipe'], 'id' => $pemeriksaan['id']]) }}"
                                                                                 class="btn btn-sm btn-primary">Detail</a>
                                                                         </td>
                                                                     </tr>
@@ -170,20 +162,15 @@
                                                 <label for="per_page" class="form-label w-32 me-3">Per Page</label>
                                                 <select name="per_page" onchange="this.form.submit()"
                                                     class="form-select form-select-sm w-auto">
-                                                    <option value="5"
-                                                        {{ request('per_page') == 5 ? 'selected' : '' }}>5
+                                                    <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5
                                                     </option>
-                                                    <option value="10"
-                                                        {{ request('per_page') == 10 ? 'selected' : '' }}>10
+                                                    <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10
                                                     </option>
-                                                    <option value="20"
-                                                        {{ request('per_page') == 20 ? 'selected' : '' }}>20
+                                                    <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20
                                                     </option>
-                                                    <option value="50"
-                                                        {{ request('per_page') == 50 ? 'selected' : '' }}>50
+                                                    <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50
                                                     </option>
-                                                    <option value="100"
-                                                        {{ request('per_page') == 100 ? 'selected' : '' }}>100
+                                                    <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100
                                                     </option>
                                                 </select>
                                             </div>
@@ -200,7 +187,7 @@
 @endsection
 @push('scripts')
     <script>
-        document.getElementById('applyFilterBtn').addEventListener('click', function() {
+        document.getElementById('applyFilterBtn').addEventListener('click', function () {
             var selectedJenis = document.getElementById('jenisPemeriksaanSelect').value;
 
             document.getElementById('jenisPemeriksaanInput').value = selectedJenis;

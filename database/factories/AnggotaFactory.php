@@ -15,15 +15,19 @@ class AnggotaFactory extends Factory
     public function definition(): array
     {
         return [
-            'nik' => $this->faker->unique()->numerify('###############'),
+            'nik' => $this->faker->unique()->numerify('################'), // 16 digit
             'password' => Hash::make('password123'),
             'nama' => $this->faker->name(),
+            'no_jkn' => $this->faker->unique()->numerify('#############'), // 13 digit
+            'faskes_tk1' => $this->faker->company(),
+            'faskes_rujukan' => $this->faker->company(),
             'tanggal_lahir' => $this->faker->date(),
             'tempat_lahir' => $this->faker->city(),
             'pekerjaan' => $this->faker->jobTitle(),
             'alamat' => $this->faker->address(),
-            'no_telepon' => $this->faker->unique()->numerify('+628#########'), // 13 digit
+            'no_telepon' => $this->faker->unique()->numerify('08###########'), // max 16 digit
             'golongan_darah' => $this->faker->randomElement(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
+            'aktif' => true,
             'created_at' => now(),
             'updated_at' => now(),
         ];

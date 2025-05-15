@@ -40,13 +40,7 @@
                                     </tr>
                                     <tr>
                                         <th>Nama Anggota</th>
-                                        <td>
-                                            @if ($jenis == 'Pemeriksaan Lab Kehamilan')
-                                                {{ $pemeriksaan->pemeriksaanKehamilan->kehamilan->anggota->nama ?? '-' }}
-                                            @else
-                                                {{ $pemeriksaan->kehamilan->anggota->nama ?? '-' }}
-                                            @endif
-                                        </td>
+                                        <td>{{ $namaAnggota }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -62,17 +56,15 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($pemeriksaan->toArray() as $key => $value)
-                                            @if (
-                                                !in_array($key, [
-                                                    'id',
-                                                    'created_at',
-                                                    'updated_at',
-                                                    'deleted_at',
-                                                    'kehamilan',
-                                                    'pemeriksaanKehamilan',
-                                                    'petugas_id',
-                                                    'kehamilan_id',
-                                                ]))
+                                            @php
+                                                // Exclude keys yang tidak mau ditampilkan
+                                                $excludedKeys = ['id','pemeriksaan_id', 'created_at', 'updated_at', 'deleted_at', 'kehamilan', 'pemeriksaanKehamilan', 'petugas_id', 'kehamilan_id', 'pemeriksaan'];
+
+                                                // Jika value adalah array atau objek, exclude juga agar tidak tampil sebagai json panjang
+                                                $isRelation = is_array($value) || is_object($value);
+                                            @endphp
+
+                                            @if (!in_array($key, $excludedKeys) && !$isRelation)
                                                 <tr>
                                                     <td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
                                                     <td>{{ $value }}</td>
