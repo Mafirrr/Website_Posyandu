@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('pemeriksaan_fisik', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
-            $table->enum('konjungtiva', ['normal, tidak_normal']);
-            $table->enum('sklera', ['normal, tidak_normal']);
-            $table->enum('kulit', ['normal, tidak_normal']);
-            $table->enum('leher', ['normal, tidak_normal']);
-            $table->enum('gigi_mulut', ['normal, tidak_normal']);
-            $table->enum('tht', ['normal, tidak_normal']);
-            $table->enum('jantung', ['normal, tidak_normal']);
-            $table->enum('paru', ['normal, tidak_normal']);
-            $table->enum('perut', ['normal, tidak_normal']);
-            $table->enum('tungkai', ['normal, tidak_normal']);
+            $table->enum('konjungtiva', ['normal', 'tidak_normal']);
+            $table->enum('sklera', ['normal', 'tidak_normal']);
+            $table->enum('leher', ['normal', 'tidak_normal']);
+            $table->enum('kulit', ['normal', 'tidak_normal']);
+            $table->enum('gigi_mulut', ['normal', 'tidak_normal']);
+            $table->enum('tht', ['normal', 'tidak_normal']);
+            $table->enum('jantung', ['normal', 'tidak_normal']);
+            $table->enum('paru', ['normal', 'tidak_normal']);
+            $table->enum('perut', ['normal', 'tidak_normal']);
+            $table->enum('tungkai', ['normal', 'tidak_normal']);
             $table->timestamps();
             $table->softDeletes();
         });
