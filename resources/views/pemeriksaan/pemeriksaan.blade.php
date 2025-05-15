@@ -18,132 +18,105 @@
                         </nav>
                     </div>
                 </div>
-
+                <div class="d-flex gap-2 mb-4">
+                    <button type="button" class="btn btn-outline-primary btn-toggle-form active"
+                        onclick="showForm('form-trimester-1')">Trimester 1</button>
+                    <button type="button" class="btn btn-outline-primary btn-toggle-form"
+                        onclick="showForm('form-trimester-3')">Trimester 2</button>
+                    <button class="btn btn-outline-primary">Trimester 3</button>
+                </div>
                 <div class="card card-body border">
-                    <div class="d-flex gap-2 mb-4">
-                        <button type="button" class="btn btn-outline-primary btn-toggle-form active"
-                            onclick="showForm('form-trimester-1')">Trimester 1</button>
-                        <button type="button" class="btn btn-outline-primary btn-toggle-form"
-                            onclick="showForm('form-trimester-3')">Trimester 3</button>
-                        <button class="btn btn-outline-primary">Pemeriksaan Lab Kehamilan</button>
-                        <button class="btn btn-outline-primary">Pemeriksaan Kehamilan</button>
-                    </div>
-
                     <div id="form-trimester-1" class="form-section">
-                        <form action="#" method="post">
+                        <form action="#" method="post" id="formTrimester1">
                             @csrf
-                            <div class="row g-3">
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Tanggal Periksa</label>
-                                    <input type="date" name="tanggal_periksa" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Anggota</label>
-                                    <div class="input-group">
+                            <div class="step-section" id="step-1">
+                                <div class="row g-3">
+                                    <!-- Input step 1 -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tanggal Periksa</label>
+                                        <input type="date" name="tanggal_periksa" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Anggota</label>
                                         <input type="text" name="anggota" class="form-control"
                                             placeholder="Nama Anggota">
                                     </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Tempat Periksa</label>
-                                    <input type="text" name="tempat_periksa" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Timbang BB</label>
-                                    <div class="input-group">
-                                        <input type="text" name="berat_badan" class="form-control">
-                                        <span class="input-group-text">Kg</span>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tempat Periksa</label>
+                                        <input type="text" name="tempat_periksa" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Timbang BB</label>
+                                        <div class="input-group">
+                                            <input type="text" name="berat_badan" class="form-control">
+                                            <span class="input-group-text">Kg</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Pengukuran Tinggi Badan</label>
+                                        <div class="input-group">
+                                            <input type="text" name="tinggi_badan" class="form-control">
+                                            <span class="input-group-text">Cm</span>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="col-md-6">
-                                    <label class="form-label">Pengukuran Tinggi Badan</label>
-                                    <div class="input-group">
-                                        <input type="text" name="tinggi_badan" class="form-control">
-                                        <span class="input-group-text">Cm</span>
+                            <div class="step-section d-none" id="step-2">
+                                <div class="row g-3">
+                                    <!-- Input step 2 -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Ukur Lingkar Lengan Atas</label>
+                                        <input type="text" name="lingkar_lengan" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tekanan Darah</label>
+                                        <div class="input-group">
+                                            <input type="text" name="tekanan_darah" class="form-control">
+                                            <span class="input-group-text">mmHg</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Periksa Tinggi Rahim</label>
+                                        <input type="text" name="tinggi_rahim" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Letak dan Denyut Jantung Janin</label>
+                                        <input type="text" name="denyut_janin" class="form-control">
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="col-md-6">
-                                    <label class="form-label">Ukur Lingkar Lengan Atas</label>
-                                    <input type="text" name="lingkar_lengan" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Tekanan Darah</label>
-                                    <div class="input-group">
-                                        <input type="text" name="tekanan_darah" class="form-control">
-                                        <span class="input-group-text">mmHg</span>
+                            <div class="step-section d-none" id="step-3">
+                                <div class="row g-3">
+                                    <!-- Input step 3 -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Status dan Imunisasi Tetanus</label>
+                                        <input type="text" name="imunisasi_tetanus" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Konseling</label>
+                                        <input type="text" name="konseling" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Skrining Dokter</label>
+                                        <input type="text" name="skrining_dokter" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tablet Tambah Darah</label>
+                                        <input type="text" name="tambah_darah" class="form-control">
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Periksa Tinggi Rahim</label>
-                                    <input type="text" name="tinggi_rahim" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Letak dan Denyut Jantung Janin</label>
-                                    <input type="text" name="denyut_janin" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Status dan Imunisasi Tetanus</label>
-                                    <input type="text" name="imunisasi_tetanus" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Konseling</label>
-                                    <input type="text" name="konseling" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Skrining Dokter</label>
-                                    <input type="text" name="skrining_dokter" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Tablet Tambah Darah</label>
-                                    <input type="text" name="tambah_darah" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Test Lab Hemoglobin</label>
-                                    <input type="text" name="hb" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Test Golongan Darah</label>
-                                    <input type="text" name="tes_gol_darah" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Test Lab Gula Darah</label>
-                                    <input type="text" name="gula_darah" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">PPIA</label>
-                                    <input type="text" name="ppia" class="form-control">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Tata Laksana Kasus</label>
-                                    <input type="text" name="laksana_kasus" class="form-control">
-                                </div>
-
                             </div>
 
                             <div class="d-flex justify-content-end gap-2 mt-4">
-                                <a href="{{ route('dashboard') }}" class="btn btn-danger">Batal</a>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="button" class="btn btn-danger" id="btnKembali"
+                                    style="display:none;">Kembali</button>
+                                <button type="button" class="btn btn-primary" id="btnLanjutkan">Lanjutkan</button>
                             </div>
                         </form>
                     </div>
+
 
                     <div id="form-trimester-3" class="form-section d-none">
                         <form action="#" method="post">
@@ -180,5 +153,49 @@
             });
             event.target.classList.add('active');
         }
+    </script>
+    <script>
+        let currentStep = 1;
+        const totalSteps = document.querySelectorAll('#formTrimester1 .step-section').length;
+
+        const btnLanjutkan = document.getElementById('btnLanjutkan');
+        const btnKembali = document.getElementById('btnKembali');
+
+        function showStep(step) {
+            // Sembunyikan semua step
+            document.querySelectorAll('#formTrimester1 .step-section').forEach(section => {
+                section.classList.add('d-none');
+            });
+            document.getElementById('step-' + step).classList.remove('d-none');
+
+            if (step === 1) {
+                btnKembali.style.display = 'none';
+            } else {
+                btnKembali.style.display = 'inline-block';
+            }
+
+            if (step === totalSteps) {
+                btnLanjutkan.textContent = 'Selesai';
+                btnLanjutkan.type = 'submit';
+            } else {
+                btnLanjutkan.textContent = 'Lanjutkan';
+                btnLanjutkan.type = 'button';
+            }
+        }
+
+        btnLanjutkan.addEventListener('click', function() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            } else {}
+        });
+
+        btnKembali.addEventListener('click', function() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+        showStep(currentStep);
     </script>
 @endsection

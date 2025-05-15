@@ -52,9 +52,15 @@ Route::delete('/anggota/{id}', [AnggotaController::class, 'anggota_destroy'])->n
 // Route::post('/beritastore',[BeritaController::class,'store'])->name('berita.store');
 // Route::put('/beritaedit{id}', [BeritaController::class, 'update'])->name('berita.update');
 // Route::get('/beritaedit{id}/edit', [BeritaController::class, 'edit'])->name('berita.edit');
-Route::resource("berita",BeritaController::class);
+Route::resource("berita", BeritaController::class);
 Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
 Route::get('/jadwal', [JadwalController::class, 'view'])->name('jadwal');
 
-require __DIR__ . '/auth.php';
+Route::get('/riwayat-pemeriksaan', [RiwayatPemeriksaanController::class, 'index'])->name('riwayat.index');
+Route::get('/riwayat-pemeriksaan', [RiwayatPemeriksaanController::class, 'index'])->name('riwayat.index');
+Route::get('/pemeriksaan/detail/{jenis}/{id}', [RiwayatPemeriksaanController::class, 'detail'])->name('pemeriksaan.detail');
+Route::get('/pemeriksaan', [PemeriksaanController::class, 'index'])->name('pemeriksaan.index');
 
+
+
+require __DIR__ . '/auth.php';
