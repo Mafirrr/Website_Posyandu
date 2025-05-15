@@ -15,8 +15,7 @@
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a class="text-muted text-decoration-none" href="../main/index.html">Data
-                                                    Pengguna</a>
+                                                Data Pengguna
                                             </li>
                                             <li class="breadcrumb-item" aria-current="page">Ibu Hamil</li>
                                         </ol>
@@ -35,11 +34,19 @@
                     <div class="card card-body border ">
                         <div class="row justify-content-between">
                             <div class="col-md-4 col-xl-4">
-                                <form class="position-relative">
-                                    <input type="text" class="form-control product-search ps-5" id="input-search"
-                                        placeholder="Search...">
+                                <form class="position-relative" method="GET" action="{{ route('anggota.index') }}">
+                                    <input type="text" name="search" class="form-control product-search ps-5"
+                                        value="{{ request('search') }}" placeholder="Search...">
                                     <i
                                         class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+
+                                    <!-- pertahankan parameter lain -->
+                                    @if(request()->has('aktif'))
+                                        <input type="hidden" name="aktif" value="{{ request('aktif') }}">
+                                    @endif
+                                    @if(request()->has('per_page'))
+                                        <input type="hidden" name="per_page" value="{{ request('per_page') }}">
+                                    @endif
                                 </form>
                             </div>
                             <div class=" col-2">
@@ -50,13 +57,16 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="{{ route('anggota.index', array_merge(request()->query(), ['aktif' => null])) }}"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
                                             <p class="mb-0 fs-3">All</p>
                                         </a>
-                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="{{ route('anggota.index', array_merge(request()->query(), ['aktif' => 1])) }}"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
                                             <p class="mb-0 fs-3">Aktif</p>
                                         </a>
-                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="{{ route('anggota.index', array_merge(request()->query(), ['aktif' => 0])) }}"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
                                             <p class="mb-0 fs-3">Nonaktif</p>
                                         </a>
                                     </div>
@@ -96,17 +106,16 @@
                                                     </div>
                                                 </td>
                                                 <td class="d-flex gap-2">
-                                                    <a href="{{ route('petugas.edit', $anggota->id) }}"
+                                                    <a href="{{ route('anggota.edit', $anggota->id) }}"
                                                         class="btn btn-warning d-flex align-items-center" title="Edit">
                                                         <i class="ti ti-edit text-white fs-5"></i>
                                                     </a>
-                                                    <form action="{{ route('petugas.destroy', $anggota->id) }}"
-                                                        method="POST"
+                                                    <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit"
-                                                            class="btn btn-danger d-flex align-items-center" title="Hapus">
+                                                        <button type="submit" class="btn btn-danger d-flex align-items-center"
+                                                            title="Hapus">
                                                             <i class="ti ti-trash text-white fs-5"></i>
                                                         </button>
                                                     </form>
