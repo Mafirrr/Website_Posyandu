@@ -91,7 +91,18 @@
                                     console.error(error);
                                 });
                             </script>
-
+ <div class="col-md-6 col-12">
+                                    <label for="jenis-kelamin" class="form-label">kategori Edukasi</label>
+                                    <select id="kategori_edukasi" name="kategori_edukasi" class="form-control">
+                                        <option value="">Pilih</option>
+                                        <option value="kesehata" {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'kesehata' ? 'selected' : '' }}>kesehata</option>
+                                        <option value="sosial" {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'sosial' ? 'selected' : '' }}>sosial</option>
+                                        <option value="lainnya" {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'lainnya' ? 'selected' : '' }}>lainnya</option>
+                                    </select>
+                                    @error('kategori_edukasi')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                {{-- </div>
                             <div class="">
                                 <label for="kategori" class="form-label">Kategori <span class="text-danger">*</span></label>
                                 <select id="kategori" name="kategori_id" class="form-select @error('kategori_id') is-invalid @enderror">
@@ -103,7 +114,7 @@
                                 @error('kategori_id')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <div class="">
                                 <label for="tanggal" class="form-label">Tanggal <span class="text-dangr">*</span></label>

@@ -52,7 +52,6 @@ Route::delete('/anggota/{id}', [AnggotaController::class, 'anggota_destroy'])->n
 // Route::get('/beritaedit{id}/edit', [BeritaController::class, 'edit'])->name('berita.edit');
 Route::resource("berita",BeritaController::class);
 Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
-Route::delete('/beritaupdate', [BeritaController::class, 'berita.delete'])->name('berita.destroy');
 Route::get('/jadwal', [JadwalController::class, 'view'])->name('jadwal');
 
 require __DIR__ . '/auth.php';

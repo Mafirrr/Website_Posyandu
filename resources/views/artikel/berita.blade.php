@@ -73,9 +73,9 @@
                                     <img src="storage/{{ $berita->gambar }}" alt="Thumbnail" class="img-thumbnail" style="width: 64px; height: 64px; object-fit: cover;">
                                 </td>
                                 <td>{{ $berita->judul }}</td>
-                                {{-- <td>{{ Str::limit($berita->isi, 50, '...') }}</td> --}}
-                                <td>{{ $berita->kategori->nama }}</td>
-                                <td>{{ $berita->created_at }}</td>
+                                {{-- <td>{!! Str::limit($berita->isi, 50, '') !!}</td> --}}
+                                <td>{{ $berita->kategori_edukasi}}</td>
+                                <td>{{ $berita->created_at->toDateString() }}</td>
                                 <td>
                                     <div class="d-flex gap-2">
                                         <a href="{{ route('berita.edit', $berita->id) }}"
