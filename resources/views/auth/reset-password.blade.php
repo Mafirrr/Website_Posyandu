@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :image="'lupa_pw.png'">
     <h2 class="text-3xl font-bold mb-2">Reset Password</h2>
     <p class="text-gray-500 mb-6">
         Buat kata sandi baru. Pastikan berbeda dari sebelumnya untuk keamanan.

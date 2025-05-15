@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :image="'log.png'">
     <h2 class="text-3xl font-bold mb-2">Masuk</h2>
     <p class="text-gray-500 mb-6">
         Masuk untuk Memantau dan Mencatat Kesehatan Ibu Hamil <br>

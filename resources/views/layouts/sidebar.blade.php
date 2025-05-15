@@ -52,7 +52,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('petugas.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-user"></i>
+                            <i class="ti ti-users"></i>
                         </span>
                         <span class="hide-menu">Bidan</span>
                     </a>
@@ -60,7 +60,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('kader.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-users"></i>
+                            <i class="ti ti-user"></i>
                         </span>
                         <span class="hide-menu">Kader</span>
                     </a>
