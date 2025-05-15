@@ -95,11 +95,11 @@
                                                     </div>
                                                 </td>
                                                 <td class="d-flex gap-2">
-                                                    <a href="{{ route('petugas.edit', $anggota->id) }}"
+                                                    <a href="{{ route('anggota.edit', $anggota->id) }}"
                                                         class="btn btn-warning d-flex align-items-center" title="Edit">
                                                         <i class="ti ti-edit text-white fs-5"></i>
                                                     </a>
-                                                    <form action="{{ route('petugas.destroy', $anggota->id) }}"
+                                                    <form action="{{ route('anggota.destroy', $anggota->id) }}"
                                                         method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                                         @csrf
