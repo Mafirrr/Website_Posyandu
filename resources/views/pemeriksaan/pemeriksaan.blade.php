@@ -40,73 +40,73 @@
                     <form action="{{ route('pemeriksaan.index') }}" method="POST" id="formTrimester1">
                         <div id="form-trimester-1" class="form-section">
                             @csrf
-                            <div class="step-section" id="step-1">
+                            <div class="step-section step-1" id="">
                                 <div class="row g-3">
                                     <h5>Catatan Pemeriksaan</h5>
                                     <div class="col-md-6">
                                         <label class="form-label">Tanggal Periksa</label>
-                                        <input type="date" name="tanggal_periksa" class="form-control">
+                                        <input type="date" name="tanggal_periksa1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tempat Periksa</label>
-                                        <input type="text" name="tempat_eriksa" class="form-control">
+                                        <input type="text" name="tempat_periksa1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Timbang BB</label>
                                         <div class="input-group">
-                                            <input type="text" name="berat_badan" class="form-control">
+                                            <input type="text" name="berat_badan1" class="form-control">
                                             <span class="input-group-text">Kg</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Pengukuran Tinggi Badan</label>
                                         <div class="input-group">
-                                            <input type="text" name="tinggi_badan" class="form-control">
+                                            <input type="text" name="tinggi_badan1" class="form-control">
                                             <span class="input-group-text">Cm</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Ukur Lingkar Lengan Atas</label>
-                                        <input type="text" name="lingkar_lengan" class="form-control">
+                                        <input type="text" name="lingkar_lengan1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tekanan Darah</label>
                                         <div class="input-group">
-                                            <input type="text" name="tekanan_darah" class="form-control">
+                                            <input type="text" name="tekanan_darah1" class="form-control">
                                             <span class="input-group-text">mmHg</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Periksa Tinggi Rahim</label>
-                                        <input type="text" name="tinggi_rahim" class="form-control">
+                                        <input type="text" name="tinggi_rahim1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Letak dan Denyut Jantung Janin</label>
-                                        <input type="text" name="denyut_janin" class="form-control">
+                                        <input type="text" name="denyut_janin1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Status dan Imunisasi Tetanus</label>
-                                        <input type="text" name="imunisasi_tetanus" class="form-control">
+                                        <input type="text" name="imunisasi_tetanus1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Konseling</label>
-                                        <input type="text" name="konseling" class="form-control">
+                                        <input type="text" name="konseling1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Skrining Dokter</label>
-                                        <input type="text" name="skrining_dokter" class="form-control">
+                                        <input type="text" name="skrining_dokter1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tablet Tambah Darah</label>
-                                        <input type="text" name="tambah_darah" class="form-control">
+                                        <input type="text" name="tambah_darah1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Golongan Darah</label>
-                                        <input type="text" name="gol_darah" class="form-control">
+                                        <input type="text" name="gol_darah1" class="form-control">
                                     </div>
                                 </div>
                             </div>
-                            <div class="step-section d-none" id="step-2">
+                            <div class="step-section d-none step-2" id="">
                                 <div class="row g-3">
                                     <h5>Riwayat Kesehatan Ibu Sekarang</h5>
                                     <div class="col-md-12 mb-4">
@@ -456,7 +456,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="step-section d-none" id="step-3">
+                            <div class="step-section d-none step-3" id="">
                                 <div class="row g-3 mb-2">
                                     <h5>Pemeriksaan Fisik</h5>
                                     <div class="table-responsive">
@@ -537,59 +537,57 @@
                                 </div>
                                 <div class="row g-3">
                                     <h5>USG Trimester 1</h5>
-                                    <form>
-                                        <div style="margin-bottom: 12px; display: flex; align-items: center;">
-                                            <label for="hpht" style="width: 300px; font-weight: normal;">HPHT</label>
-                                            <input type="text" id="hpht" name="hpht"
-                                                style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
-                                        </div>
+                                    <div style="margin-bottom: 12px; display: flex; align-items: center;">
+                                        <label for="hpht" style="width: 300px; font-weight: normal;">HPHT</label>
+                                        <input type="text" id="hpht" name="hpht"
+                                            style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
+                                    </div>
 
-                                        <div style="margin-bottom: 12px; display: flex; align-items: center;">
-                                            <label for="haid" style="width: 300px; font-weight: normal;">
-                                                Keteraturan haid: (Teratur/Tidak Teratur)
-                                            </label>
-                                            <select id="haid" name="haid"
-                                                style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
-                                                <option value="" disabled selected>Pilih</option>
-                                                <option value="teratur">Teratur</option>
-                                                <option value="tidak_teratur">Tidak Teratur</option>
-                                            </select>
-                                        </div>
+                                    <div style="margin-bottom: 12px; display: flex; align-items: center;">
+                                        <label for="haid" style="width: 300px; font-weight: normal;">
+                                            Keteraturan haid: (Teratur/Tidak Teratur)
+                                        </label>
+                                        <select id="haid" name="haid"
+                                            style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
+                                            <option value="" disabled selected>Pilih</option>
+                                            <option value="teratur">Teratur</option>
+                                            <option value="tidak_teratur">Tidak Teratur</option>
+                                        </select>
+                                    </div>
 
-                                        <div style="margin-bottom: 12px; display: flex; align-items: center;">
-                                            <label for="umur_kehamilan_hpht" style="width: 300px; font-weight: normal;">
-                                                Umur kehamilan berdasarkan HPHT (pada siklus haid teratur)
-                                            </label>
-                                            <input type="text" id="umur_kehamilan_hpht" name="umur_kehamilan_hpht"
-                                                style="width: 60px; padding: 5px; margin-right: 5px; border: 1px solid #ccc; border-radius: 7px;">
-                                            <span>Minggu</span>
-                                        </div>
+                                    <div style="margin-bottom: 12px; display: flex; align-items: center;">
+                                        <label for="umur_kehamilan_hpht" style="width: 300px; font-weight: normal;">
+                                            Umur kehamilan berdasarkan HPHT (pada siklus haid teratur)
+                                        </label>
+                                        <input type="text" id="umur_kehamilan_hpht" name="umur_kehamilan_hpht"
+                                            style="width: 60px; padding: 5px; margin-right: 5px; border: 1px solid #ccc; border-radius: 7px;">
+                                        <span>Minggu</span>
+                                    </div>
 
-                                        <div style="margin-bottom: 12px; display: flex; align-items: center;">
-                                            <label for="hpl_hpht" style="width: 300px; font-weight: normal;">
-                                                HPL Berdasarkan HPHT (pada siklus haid teratur)
-                                            </label>
-                                            <input type="text" id="hpl_hpht" name="hpl_hpht"
-                                                style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
-                                        </div>
+                                    <div style="margin-bottom: 12px; display: flex; align-items: center;">
+                                        <label for="hpl_hpht" style="width: 300px; font-weight: normal;">
+                                            HPL Berdasarkan HPHT (pada siklus haid teratur)
+                                        </label>
+                                        <input type="text" id="hpl_hpht" name="hpl_hpht"
+                                            style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
+                                    </div>
 
-                                        <div style="margin-bottom: 12px; display: flex; align-items: center;">
-                                            <label for="umur_kehamilan_usg" style="width: 300px; font-weight: normal;">
-                                                Umur kehamilan berdasarkan USG
-                                            </label>
-                                            <input type="text" id="umur_kehamilan_usg" name="umur_kehamilan_usg"
-                                                style="width: 60px; padding: 5px; margin-right: 5px; border: 1px solid #ccc; border-radius: 7px;">
-                                            <span>Minggu</span>
-                                        </div>
+                                    <div style="margin-bottom: 12px; display: flex; align-items: center;">
+                                        <label for="umur_kehamilan_usg" style="width: 300px; font-weight: normal;">
+                                            Umur kehamilan berdasarkan USG
+                                        </label>
+                                        <input type="text" id="umur_kehamilan_usg" name="umur_kehamilan_usg"
+                                            style="width: 60px; padding: 5px; margin-right: 5px; border: 1px solid #ccc; border-radius: 7px;">
+                                        <span>Minggu</span>
+                                    </div>
 
-                                        <div style="margin-bottom: 12px; display: flex; align-items: center;">
-                                            <label for="hpl_usg" style="width: 300px; font-weight: normal;">
-                                                HPL berdasarkan USG
-                                            </label>
-                                            <input type="text" id="hpl_usg" name="hpl_usg"
-                                                style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
-                                        </div>
-                                    </form>
+                                    <div style="margin-bottom: 12px; display: flex; align-items: center;">
+                                        <label for="hpl_usg" style="width: 300px; font-weight: normal;">
+                                            HPL berdasarkan USG
+                                        </label>
+                                        <input type="text" id="hpl_usg" name="hpl_usg"
+                                            style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
+                                    </div>
                                     <div class="table-responsive">
                                         <table class="table table-bordered align-middle text-start">
                                             <tbody>
@@ -679,7 +677,7 @@
                                 </div>
 
                             </div>
-                            <div class="step-section d-none" id="step-4">
+                            <div class="step-section d-none step-4" id="">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <h5 class="mb-0">Pemeriksaan Laboratorium</h5>
                                     <div class="d-flex align-items-center">
@@ -854,68 +852,129 @@
 
                         </div>
                         <div id="form-trimester-2" class="form-section d-none">
-                            <div class="step-section" id="step-1">
+                            <div class="step-section step-1" id="">
                                 <div class="row g-3">
                                     <h5>Catatan Pemeriksaan</h5>
                                     <div class="col-md-6">
                                         <label class="form-label">Tanggal Periksa</label>
-                                        <input type="date" name="tanggal_periksa" class="form-control">
+                                        <input type="date" name="tanggal_periksa2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tempat Periksa</label>
-                                        <input type="text" name="tempat_eriksa" class="form-control">
+                                        <input type="text" name="tempat_periksa2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Timbang BB</label>
                                         <div class="input-group">
-                                            <input type="text" name="berat_badan" class="form-control">
+                                            <input type="text" name="berat_badan2" class="form-control">
                                             <span class="input-group-text">Kg</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Ukur Lingkar Lengan Atas</label>
-                                        <input type="text" name="lingkar_lengan" class="form-control">
+                                        <input type="text" name="lingkar_lengan2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tekanan Darah</label>
                                         <div class="input-group">
-                                            <input type="text" name="tekanan_darah" class="form-control">
+                                            <input type="text" name="tekanan_darah2" class="form-control">
                                             <span class="input-group-text">mmHg</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Periksa Tinggi Rahim</label>
-                                        <input type="text" name="tinggi_rahim" class="form-control">
+                                        <input type="text" name="tinggi_rahim2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Letak dan Denyut Jantung Janin</label>
-                                        <input type="text" name="denyut_janin" class="form-control">
+                                        <input type="text" name="denyut_janin2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Status dan Imunisasi Tetanus</label>
-                                        <input type="text" name="imunisasi_tetanus" class="form-control">
+                                        <input type="text" name="imunisasi_tetanus2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Konseling</label>
-                                        <input type="text" name="konseling" class="form-control">
+                                        <input type="text" name="konseling2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Skrining Dokter</label>
-                                        <input type="text" name="skrining_dokter" class="form-control">
+                                        <input type="text" name="skrining_dokter2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tablet Tambah Darah</label>
-                                        <input type="text" name="tambah_darah" class="form-control">
+                                        <input type="text" name="tambah_darah2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Lab Protein Urine</label>
-                                        <input type="text" name="urine" class="form-control">
+                                        <input type="text" name="urine2" class="form-control">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="form-trimester-3" class="form-section d-none">
-                            <div class="step-section" id="step-1">
+                            <div class="step-section step-1" id="">
+                                <div class="row g-3">
+                                    <h5>Catatan Pemeriksaan</h5>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tanggal Periksa</label>
+                                        <input type="date" name="tanggal_periksa3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tempat Periksa</label>
+                                        <input type="text" name="tempat_periksa3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Timbang BB</label>
+                                        <div class="input-group">
+                                            <input type="text" name="berat_badan3" class="form-control">
+                                            <span class="input-group-text">Kg</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Ukur Lingkar Lengan Atas</label>
+                                        <input type="text" name="lingkar_lengan3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tekanan Darah</label>
+                                        <div class="input-group">
+                                            <input type="text" name="tekanan_darah3" class="form-control">
+                                            <span class="input-group-text">mmHg</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Periksa Tinggi Rahim</label>
+                                        <input type="text" name="tinggi_rahim3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Letak dan Denyut Jantung Janin</label>
+                                        <input type="text" name="denyut_janin3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Status dan Imunisasi Tetanus</label>
+                                        <input type="text" name="imunisasi_tetanus3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Konseling</label>
+                                        <input type="text" name="konseling3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Skrining Dokter</label>
+                                        <input type="text" name="skrining_dokter3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tablet Tambah Darah</label>
+                                        <input type="text" name="tambah_darah3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tes Lab Protein Urine</label>
+                                        <input type="text" name="urine3" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tes Lab Gula Darah</label>
+                                        <input type="text" name="gula_darah" class="form-control">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-end gap-2 mt-4">
@@ -961,7 +1020,7 @@
             document.querySelectorAll(`${currentForm} .step-section`).forEach(section => {
                 section.classList.add('d-none');
             });
-            document.getElementById('step-' + step).classList.remove('d-none');
+            document.querySelector(`${currentForm} .step-${step}`).classList.remove('d-none');
 
             if (step === 1) {
                 btnKembali.style.display = 'none';
@@ -971,7 +1030,7 @@
             console.log(step, totalSteps);
 
             if (step === totalSteps) {
-                btnLanjutkan.textContent = 'Selesai';
+                btnLanjutkan.textContent = 'Simpan';
                 btnLanjutkan.type = 'submit';
             } else {
                 btnLanjutkan.textContent = 'Lanjutkan';
