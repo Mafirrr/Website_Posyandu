@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PemeriksaanLabAkhir extends Model
+class LabTrimester3 extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'pemeriksaan_lab_akhir';
+    protected $table = 'lab_trimester_3';
 
     protected $fillable = [
-        'pemeriksaan_id',
         'Hemoglobin',
         'Protein_urin',
         'urin_reduksi',
@@ -23,8 +22,8 @@ class PemeriksaanLabAkhir extends Model
         'Protein_urin' => 'float',
     ];
 
-    public function pemeriksaan()
+    public function trimester3()
     {
-        return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');
+        return $this->hasOne(Trimester3::class, 'lab_trimester_3');
     }
 }

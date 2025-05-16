@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemeriksaan_usg_awal', function (Blueprint $table) {
+        Schema::create('usg_trimester_1', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
             $table->enum('keteraturan_haid', ['teratur', 'tidak_teratur']);
             $table->integer('umur_kehamilan_berdasar_hpht');
             $table->integer('umur_kehamilan_berdasarkan_usg');
@@ -41,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemeriksaan_usg_awals');
+        Schema::dropIfExists('usg_trimester_1');
     }
 };

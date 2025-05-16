@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('pemeriksaan_awal', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
             $table->float('tinggi_badan');
             $table->enum('golongan_darah', array('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'));
             $table->enum('status_imunisasi', ['t1', 't2', 't3', 't4', 't5']);

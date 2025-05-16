@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemeriksaan_lab_awal', function (Blueprint $table) {
+        Schema::create('lab_trimester_1', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
-            $table->float('hemogoblin');
+            $table->float('hemoglobin');
             $table->string('golongan_darah_dan_rhesus');
             $table->float('gula_darah');
             $table->enum('hiv', ['reaktif', 'nonreaktif']);
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemeriksaan_lab_awal');
+        Schema::dropIfExists('lab_trimester_1');
     }
 };
