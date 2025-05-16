@@ -24,8 +24,8 @@ class ArtikelFactory extends Factory
             'judul' => $judul,
             'slug' => Str::slug($judul),
             'isi' => $this->faker->paragraphs(3, true),
-            'gambar' => $this->faker->imageUrl(640, 480, 'cats', true, 'Faker'), // contoh gambar random
-            'kategori_id' => kategori::factory(),
+            'gambar' => $this->faker->imageUrl(640, 480, 'health', true, 'Artikel'),
+            'kategori_edukasi' => $this->faker->randomElement(['kesehata', 'sosial', 'lainnya']),
             'created_at' => now(),
             'updated_at' => now(),
         ];
