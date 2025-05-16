@@ -856,6 +856,61 @@
                         <div id="form-trimester-2" class="form-section d-none">
                             <div class="step-section" id="step-1">
                                 <div class="row g-3">
+                                    <h5>Catatan Pemeriksaan</h5>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tanggal Periksa</label>
+                                        <input type="date" name="tanggal_periksa" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tempat Periksa</label>
+                                        <input type="text" name="tempat_eriksa" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Timbang BB</label>
+                                        <div class="input-group">
+                                            <input type="text" name="berat_badan" class="form-control">
+                                            <span class="input-group-text">Kg</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Ukur Lingkar Lengan Atas</label>
+                                        <input type="text" name="lingkar_lengan" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tekanan Darah</label>
+                                        <div class="input-group">
+                                            <input type="text" name="tekanan_darah" class="form-control">
+                                            <span class="input-group-text">mmHg</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Periksa Tinggi Rahim</label>
+                                        <input type="text" name="tinggi_rahim" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Letak dan Denyut Jantung Janin</label>
+                                        <input type="text" name="denyut_janin" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Status dan Imunisasi Tetanus</label>
+                                        <input type="text" name="imunisasi_tetanus" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Konseling</label>
+                                        <input type="text" name="konseling" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Skrining Dokter</label>
+                                        <input type="text" name="skrining_dokter" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tablet Tambah Darah</label>
+                                        <input type="text" name="tambah_darah" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tes Lab Protein Urine</label>
+                                        <input type="text" name="urine" class="form-control">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -875,11 +930,12 @@
             </div>
 
         </div>
-        </div>
-        </div>
     </section>
     <script>
+        let currentForm = '#form-trimester-1';
+
         function showForm(formId, trimesterActive) {
+            currentForm = '#' + formId;
             // Sembunyikan semua form
             document.querySelectorAll('.form-section').forEach(function(section) {
                 section.classList.add('d-none');
@@ -896,14 +952,13 @@
     </script>
     <script>
         let currentStep = 1;
-        const totalSteps = document.querySelectorAll('#form-trimester-1 .step-section').length;
-
+        let totalSteps = document.querySelectorAll('#form-trimester-1 .step-section').length;
         const btnLanjutkan = document.getElementById('btnLanjutkan');
         const btnKembali = document.getElementById('btnKembali');
 
         function showStep(step) {
-            // Sembunyikan semua step
-            document.querySelectorAll('#form-trimester-1 .step-section').forEach(section => {
+            totalSteps = document.querySelectorAll(`${currentForm} .step-section`).length;
+            document.querySelectorAll(`${currentForm} .step-section`).forEach(section => {
                 section.classList.add('d-none');
             });
             document.getElementById('step-' + step).classList.remove('d-none');
