@@ -476,60 +476,60 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Konjungtiva</td>
-                                                    <td><input type="radio" name="konjungtiva" value="normal"></td>
-                                                    <td><input type="radio" name="konjungtiva" value="tidak_normal">
+                                                    <td><input type="radio" name="konjungtiva1" value="normal"></td>
+                                                    <td><input type="radio" name="konjungtiva1" value="tidak_normal">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Sklera</td>
-                                                    <td><input type="radio" name="sklera" value="normal"></td>
-                                                    <td><input type="radio" name="sklera" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="sklera1" value="normal"></td>
+                                                    <td><input type="radio" name="sklera1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Kulit</td>
-                                                    <td><input type="radio" name="vagina" value="normal"></td>
-                                                    <td><input type="radio" name="vagina" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="vagina1" value="normal"></td>
+                                                    <td><input type="radio" name="vagina1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Leher</td>
-                                                    <td><input type="radio" name="leher" value="normal"></td>
-                                                    <td><input type="radio" name="leher" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="leher1" value="normal"></td>
+                                                    <td><input type="radio" name="leher1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gigi Mulut </td>
-                                                    <td><input type="radio" name="gigi_mulut" value="normal"></td>
-                                                    <td><input type="radio" name="gigi_mulut" value="tidak_normal">
+                                                    <td><input type="radio" name="gigi_mulut1" value="normal"></td>
+                                                    <td><input type="radio" name="gigi_mulut1" value="tidak_normal">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>THT</td>
-                                                    <td><input type="radio" name="tht" value="normal"></td>
-                                                    <td><input type="radio" name="tht" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="tht1" value="normal"></td>
+                                                    <td><input type="radio" name="tht1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Dada</td>
-                                                    <td><input type="radio" name="dada" value="normal"></td>
-                                                    <td><input type="radio" name="dada" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="dada1" value="normal"></td>
+                                                    <td><input type="radio" name="dada1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jantung</td>
-                                                    <td><input type="radio" name="jantung" value="normal"></td>
-                                                    <td><input type="radio" name="jantung" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="jantung1" value="normal"></td>
+                                                    <td><input type="radio" name="jantung1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Paru</td>
-                                                    <td><input type="radio" name="paru" value="normal"></td>
-                                                    <td><input type="radio" name="paru" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="paru1" value="normal"></td>
+                                                    <td><input type="radio" name="paru1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Perut</td>
-                                                    <td><input type="radio" name="perut" value="positif"></td>
-                                                    <td><input type="radio" name="perut" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="perut1" value="positif"></td>
+                                                    <td><input type="radio" name="perut1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Tungkai</td>
-                                                    <td><input type="radio" name="tungkai" value="positif"></td>
-                                                    <td><input type="radio" name="tungkai" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="tungkai1" value="positif"></td>
+                                                    <td><input type="radio" name="tungkai1" value="tidak_normal"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -788,18 +788,19 @@
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="skrining_jiwa" value="ya" id="skrining_ya">
+                                                                    name="skrining_jiwa_tr1" value="ya"
+                                                                    id="skrining_ya_tr1">
                                                                 <label class="form-check-label"
-                                                                    for="skrining_ya">Ya</label>
+                                                                    for="skrining_ya_tr1">Ya</label>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="skrining_jiwa" value="tidak"
-                                                                    id="skrining_tidak">
+                                                                    name="skrining_jiwa_tr1" value="tidak"
+                                                                    id="skrining_tidak_tr1">
                                                                 <label class="form-check-label"
-                                                                    for="skrining_tidak">Tidak</label>
+                                                                    for="skrining_tidak_tr1">Tidak</label>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -809,18 +810,19 @@
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="tindak_lanjut" value="edukasi" id="edukasi">
+                                                                    name="tindak_lanjut_tr1" value="edukasi"
+                                                                    id="edukasi_tr1">
                                                                 <label class="form-check-label"
-                                                                    for="edukasi">Edukasi</label>
+                                                                    for="edukasi_tr1">Edukasi</label>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="tindak_lanjut" value="konseling"
-                                                                    id="konseling">
+                                                                    name="tindak_lanjut_tr1" value="konseling"
+                                                                    id="konseling_tr1">
                                                                 <label class="form-check-label"
-                                                                    for="konseling">Konseling</label>
+                                                                    for="konseling_tr1">Konseling</label>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -829,17 +831,19 @@
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="rujukan" value="ya" id="rujukan_ya">
+                                                                    name="rujukan_tr1" value="ya"
+                                                                    id="rujukan_ya_tr1">
                                                                 <label class="form-check-label"
-                                                                    for="rujukan_ya">Ya</label>
+                                                                    for="rujukan_ya_tr1">Ya</label>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="rujukan" value="tidak" id="rujukan_tidak">
+                                                                    name="rujukan_tr1" value="tidak"
+                                                                    id="rujukan_tidak_tr1">
                                                                 <label class="form-check-label"
-                                                                    for="rujukan_tidak">Tidak</label>
+                                                                    for="rujukan_tidak_tr1">Tidak</label>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -973,6 +977,621 @@
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Lab Gula Darah</label>
                                         <input type="text" name="gula_darah" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step-section step-2">
+                                <div class="row g-3 mb-2">
+                                    <h5>Pemeriksaan Fisik</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-bordered text-center align-middle">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th rowspan="2"
+                                                        style="text-align: center; vertical-align: middle;">Keadaan Umum
+                                                    </th>
+                                                    <th colspan="2">Kondisi</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Anemia / Ikteria /Normal</th>
+                                                    <th>Tidak Anemia / Tidak Ikteria / Tidak Normal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Konjungtiva</td>
+                                                    <td><input type="radio" name="konjungtiva3" value="normal"></td>
+                                                    <td><input type="radio" name="konjungtiva3" value="tidak_normal">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sklera</td>
+                                                    <td><input type="radio" name="sklera3" value="normal"></td>
+                                                    <td><input type="radio" name="sklera3" value="tidak_normal"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kulit</td>
+                                                    <td><input type="radio" name="vagina3" value="normal"></td>
+                                                    <td><input type="radio" name="vagina3" value="tidak_normal"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Leher</td>
+                                                    <td><input type="radio" name="leher3" value="normal"></td>
+                                                    <td><input type="radio" name="leher3" value="tidak_normal"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gigi Mulut </td>
+                                                    <td><input type="radio" name="gigi_mulut3" value="normal"></td>
+                                                    <td><input type="radio" name="gigi_mulut3" value="tidak_normal">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>THT</td>
+                                                    <td><input type="radio" name="tht3" value="normal"></td>
+                                                    <td><input type="radio" name="tht3" value="tidak_normal"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dada</td>
+                                                    <td><input type="radio" name="dada3" value="normal"></td>
+                                                    <td><input type="radio" name="dada3" value="tidak_normal"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jantung</td>
+                                                    <td><input type="radio" name="jantung3" value="normal"></td>
+                                                    <td><input type="radio" name="jantung3" value="tidak_normal"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Paru</td>
+                                                    <td><input type="radio" name="paru3" value="normal"></td>
+                                                    <td><input type="radio" name="paru3" value="tidak_normal"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Perut</td>
+                                                    <td><input type="radio" name="perut3" value="positif"></td>
+                                                    <td><input type="radio" name="perut3" value="tidak_normal"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tungkai</td>
+                                                    <td><input type="radio" name="tungkai3" value="positif"></td>
+                                                    <td><input type="radio" name="tungkai3" value="tidak_normal"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row g-3">
+                                    <h5>USG Trimester III</h5>
+                                    <div style="margin-bottom: 12px;">
+                                        <label>USG Trimester III telah dilakukan:</label><br>
+                                        <select class="form-select">
+                                            <option>Ya</option>
+                                            <option>Tidak</option>
+                                        </select>
+                                    </div>
+
+                                    <div style="margin-bottom: 12px;">
+                                        <label>Umur Kehamilan berdasarkan USG Trimester I:</label>
+                                        <input type="text" class="form-control" placeholder="... minggu">
+                                    </div>
+
+                                    <div style="margin-bottom: 12px;">
+                                        <label>Umur Kehamilan berdasarkan HPHT:</label>
+                                        <input type="text" class="form-control" placeholder="... minggu">
+                                    </div>
+
+                                    <div style="margin-bottom: 12px;">
+                                        <label>Umur Kehamilan berdasarkan biometrik bayi USG Trimester III:</label>
+                                        <input type="text" class="form-control" placeholder="... minggu">
+                                    </div>
+
+                                    <div style="margin-bottom: 12px;">
+                                        <label>Apakah terdapat selisih 3 minggu atau lebih dengan UK USG Trimester
+                                            I/HPHT:</label>
+                                        <select class="form-select">
+                                            <option>Ya</option>
+                                            <option>Tidak</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered align-middle text-start">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="table-dark text-white">Jumlah bayi</td>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option>Tunggal</option>
+                                                            <option>Kembar</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-dark text-white">Letak bayi</td>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option>Intrauterin</option>
+                                                            <option>Extrauterin</option>
+                                                            <option>Tidak dapat ditentukan</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-dark text-white">Presentasi bayi</td>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option>Kepala</option>
+                                                            <option>Bokong</option>
+                                                            <option>Letak Lintang</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-dark text-white">Keadaan bayi</td>
+                                                    <td>
+                                                        <div class="mb-2">
+                                                            <label class="form-label mb-1">Status:</label>
+                                                            <select class="form-select">
+                                                                <option>Hidup</option>
+                                                                <option>Meninggal</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-2 d-flex align-items-center">
+                                                            <label class="form-label mb-0 me-2">DJJ:</label>
+                                                            <input type="text" class="form-control me-2"
+                                                                style="width: 150px;" placeholder="... X/menit">
+                                                            <select class="form-select">
+                                                                <option>Normal</option>
+                                                                <option>Tidak normal</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="table-dark text-white">Lokasi Plasenta</td>
+                                                    <td>
+                                                        <select class="form-select">
+                                                            <option>Fundus</option>
+                                                            <option>Corpus</option>
+                                                            <option>Letak rendah</option>
+                                                            <option>Previa</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="table-dark text-white">Jumlah Cairan Ketuban</td>
+                                                    <td>
+                                                        <div class="mb-2 d-flex align-items-center">
+                                                            <label class="form-label mb-0 me-2">SDP:</label>
+                                                            <input type="text" class="form-control me-2"
+                                                                style="width: 150px;" placeholder="... cm">
+                                                            <select class="form-select">
+                                                                <option>Cukup</option>
+                                                                <option>Kurang</option>
+                                                                <option>Berlebih</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-dark text-white">Biometri bayi</td>
+                                                    <td>
+                                                        <div class="container-fluid">
+                                                            <div class="row mb-2 align-items-center">
+                                                                <div class="col-md-1 fw-bold">BPD:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... cm">
+                                                                </div>
+                                                                <div class="col-md-2 text-md-end">Sesuai:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... minggu">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mb-2 align-items-center">
+                                                                <div class="col-md-1 fw-bold">HC:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... cm">
+                                                                </div>
+                                                                <div class="col-md-2 text-md-end">Sesuai:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... minggu">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mb-2 align-items-center">
+                                                                <div class="col-md-1 fw-bold">AC:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... cm">
+                                                                </div>
+                                                                <div class="col-md-2 text-md-end">Sesuai:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... minggu">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mb-2 align-items-center">
+                                                                <div class="col-md-1 fw-bold">FL:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... cm">
+                                                                </div>
+                                                                <div class="col-md-2 text-md-end">Sesuai:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... minggu">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mb-2 align-items-center">
+                                                                <div class="col-md-1 fw-bold">EFW/TBJ:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... gram">
+                                                                </div>
+                                                                <div class="col-md-2 text-md-end">Sesuai:</div>
+                                                                <div class="col-md-2">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="... minggu">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-dark text-white">Kecurigaan Temuan Abnormal</td>
+                                                    <td>
+                                                        <select class="form-select mb-2">
+                                                            <option>Ya</option>
+                                                            <option>Tidak</option>
+                                                        </select>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Sebutkan jika ada...">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step-section step-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="mb-0">Pemeriksaan Laboratorium</h5>
+                                    <div class="d-flex align-items-center">
+                                        <label class="me-2 mb-0">Tanggal:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                            style="width: 150px;">
+                                    </div>
+                                </div>
+                                <div class="row g-3 mb-2">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered align-middle text-center">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th>Pemeriksaan</th>
+                                                    <th>Hasil</th>
+                                                    <th>Rencana Tindak Lanjut</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-start">Hemoglobin</td>
+                                                    <td>
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="number" class="form-control"
+                                                                placeholder="Nilai">
+                                                            <span class="input-group-text">g/dL</span>
+                                                        </div>
+                                                    </td>
+                                                    <td><input type="text" class="form-control form-control-sm"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-start">Protein Urine</td>
+                                                    <td>
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="number" class="form-control"
+                                                                placeholder="Nilai">
+                                                            <span class="input-group-text">Mg/dL</span>
+                                                        </div>
+                                                    </td>
+                                                    <td><input type="text" class="form-control form-control-sm"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-start">Urine Reduksi</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-start gap-2">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="urine_reduksi" id="negatif"
+                                                                    value="Negatif">
+                                                                <label class="form-check-label"
+                                                                    for="negatif">Negatif</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="urine_reduksi" id="plus1"
+                                                                    value="+1">
+                                                                <label class="form-check-label"
+                                                                    for="plus1">+1</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="urine_reduksi" id="plus2"
+                                                                    value="+2">
+                                                                <label class="form-check-label"
+                                                                    for="plus2">+2</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="urine_reduksi" id="plus3"
+                                                                    value="+3">
+                                                                <label class="form-check-label"
+                                                                    for="plus3">+3</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="urine_reduksi" id="plus4"
+                                                                    value="+4">
+                                                                <label class="form-check-label"
+                                                                    for="plus4">+4</label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><input type="text" class="form-control form-control-sm"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row g-3 mt-4">
+                                    <h5>Skrining Kesehatan Jiwa</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered text-center align-middle">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-start">Skrining Kesehatan Jiwa</td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="skrining_jiwa_tr3" value="ya"
+                                                                id="skrining_ya_tr3">
+                                                            <label class="form-check-label"
+                                                                for="skrining_ya_tr3">Ya</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="skrining_jiwa_tr3" value="tidak"
+                                                                id="skrining_tidak_tr3">
+                                                            <label class="form-check-label"
+                                                                for="skrining_tidak_tr3">Tidak</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-start">Tindak Lanjut Hasil Skrining Kesehatan Jiwa
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="tindak_lanjut_tr3" value="edukasi"
+                                                                id="edukasi_tr3">
+                                                            <label class="form-check-label"
+                                                                for="edukasi_tr3">Edukasi</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="tindak_lanjut_tr3" value="konseling"
+                                                                id="konseling_tr3">
+                                                            <label class="form-check-label"
+                                                                for="konseling_tr3">Konseling</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-start">Perlu Rujukan</td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="rujukan_tr3" value="ya" id="rujukan_ya_tr3">
+                                                            <label class="form-check-label"
+                                                                for="rujukan_ya_tr3">Ya</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="rujukan_tr3" value="tidak"
+                                                                id="rujukan_tidak_tr3">
+                                                            <label class="form-check-label"
+                                                                for="rujukan_tidak_tr3">Tidak</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row g-3 mt-4">
+                                    <h5>Rencana Konsultasi Lanjut</h5>
+                                    <div class="col-md-12 mb-4">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="rencana_konsultasi[]" value="Gizi" id="gizi">
+                                                    <label class="form-check-label" for="gizi">Gizi</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="rencana_konsultasi[]" value="Kebidanan" id="kebidanan">
+                                                    <label class="form-check-label" for="kebidanan">Kebidanan</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="rencana_konsultasi[]" value="Anak" id="anak">
+                                                    <label class="form-check-label" for="anak">Anak</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="rencana_konsultasi[]" value="Penyakit_Dalam"
+                                                        id="penyakit_dalam">
+                                                    <label class="form-check-label" for="penyakit_dalam">Penyakit
+                                                        Dalam</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="rencana_konsultasi[]" value="Neurologi" id="neurologi">
+                                                    <label class="form-check-label" for="neurologi">Neurologi</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="rencana_konsultasi[]" value="THT" id="tht">
+                                                    <label class="form-check-label" for="tht">THT</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="rencana_konsultasi[]" value="Psikiatri" id="psikiatri">
+                                                    <label class="form-check-label" for="psikiatri">Psikiatri</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="rencana_konsultasi[]" value="lainnya" id="lainnya">
+                                                    <label class="form-check-label" for="lainnya">Lain-lain</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-3 mt-4">
+                                    <h5>Rencana Proses Melahirkan</h5>
+                                    <div class="col-md-12 mb-4">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="rencana_melahirkan" id="normal" value="Normal">
+                                                    <label class="form-check-label" for="normal">Normal</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="rencana_melahirkan" id="pervaginam"
+                                                        value="Pervaginam Berbantu">
+                                                    <label class="form-check-label" for="pervaginam">Pervaginam
+                                                        Berbantu</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="rencana_melahirkan" id="sectio"
+                                                        value="Sectio Caesaria">
+                                                    <label class="form-check-label" for="sectio">Sectio
+                                                        Caesaria</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-3 mt-4">
+                                    <h5>Pilihan Rencana Kontrasepsi</h5>
+                                    <div class="col-md-12 mb-4">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="kontrasepsi"
+                                                        id="akdr" value="AKDR">
+                                                    <label class="form-check-label" for="akdr">AKDR</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="kontrasepsi"
+                                                        id="pil" value="Pil">
+                                                    <label class="form-check-label" for="pil">Pil</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="kontrasepsi"
+                                                        id="suntik" value="Suntik">
+                                                    <label class="form-check-label" for="suntik">Suntik</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="kontrasepsi"
+                                                        id="steril" value="Steril">
+                                                    <label class="form-check-label" for="steril">Steril</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="kontrasepsi"
+                                                        id="mal" value="MAL">
+                                                    <label class="form-check-label" for="mal">MAL</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="kontrasepsi"
+                                                        id="implan" value="Implan">
+                                                    <label class="form-check-label" for="implan">Implan</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="kontrasepsi"
+                                                        id="belum_memilih" value="Belum memilih">
+                                                    <label class="form-check-label" for="belum_memilih">Belum
+                                                        memilih</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-3 mt-4">
+                                    <h5>Kebutuhan Konseling</h5>
+                                    <div class="col-md-12">
+                                        <div class="d-flex gap-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                    name="kebutuhan_konseling" id="konseling_ya" value="ya">
+                                                <label class="form-check-label" for="konseling_ya">Ya</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                    name="kebutuhan_konseling" id="konseling_tidak" value="tidak">
+                                                <label class="form-check-label" for="konseling_tidak">Tidak</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
