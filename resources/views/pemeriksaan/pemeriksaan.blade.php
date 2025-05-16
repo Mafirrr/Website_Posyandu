@@ -20,11 +20,11 @@
                 </div>
                 <div class="d-flex gap-2 mb-4">
                     <button type="button" class="btn btn-outline-primary btn-toggle-form active"
-                        onclick="showForm('form-trimester-1')">Trimester 1</button>
+                        onclick="showForm('form-trimester-1', 1)">Trimester 1</button>
                     <button type="button" class="btn btn-outline-primary btn-toggle-form"
-                        onclick="showForm('form-trimester-2')">Trimester 2</button>
+                        onclick="showForm('form-trimester-2', 2)">Trimester 2</button>
                     <button type="button" class="btn btn-outline-primary btn-toggle-form"
-                        onclick="showForm('form-trimester-3')">Trimester 3</button>
+                        onclick="showForm('form-trimester-3', 3)">Trimester 3</button>
                     <div class="flex-grow-1"></div>
                     <div class="input-group" style="max-width: 300px;">
                         <div class="input-group">
@@ -37,10 +37,9 @@
                     </div>
                 </div>
                 <div class="card card-body border">
-                    <div id="form-trimester-1" class="form-section">
-                        <form action="{{ route('pemeriksaan.index') }}" method="POST" id="formTrimester1">
+                    <form action="{{ route('pemeriksaan.index') }}" method="POST" id="formTrimester1">
+                        <div id="form-trimester-1" class="form-section">
                             @csrf
-                            <input type="hidden" name="id_form" id="id_form" value="1">
                             <div class="step-section" id="step-1">
                                 <div class="row g-3">
                                     <h5>Catatan Pemeriksaan</h5>
@@ -852,31 +851,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="form-trimester-2" class="form-section d-none">
-                                <form action="{{ route('pemeriksaan.index') }}" method="POST" id="formTrimester2">
-                                    @csrf
-                                    <div class="step-section" id="step-1">
-                                        <div class="row g-3">
 
-                                        </div>
-                                    </div>
-                                </form>
+                        </div>
+                        <div id="form-trimester-2" class="form-section d-none">
+                            <div class="step-section" id="step-1">
+                                <div class="row g-3">
+                                </div>
                             </div>
-                            <div id="form-trimester-3" class="form-section d-none">
-                                <form action="{{ route('pemeriksaan.index') }}" method="POST" id="formTrimester3">
-                                    @csrf
-                                    <div class="step-section" id="step-1">
-                                    </div>
-                                </form>
+                        </div>
+                        <div id="form-trimester-3" class="form-section d-none">
+                            <div class="step-section" id="step-1">
                             </div>
-                            <div class="d-flex justify-content-end gap-2 mt-4">
-                                <button type="button" class="btn btn-danger" id="btnKembali"
-                                    style="display:none;">Kembali</button>
-                                <button type="button" class="btn btn-primary" id="btnLanjutkan">Lanjutkan</button>
-                            </div>
-                    </div>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button" class="btn btn-danger" id="btnKembali"
+                                style="display:none;">Kembali</button>
+                            <button type="button" class="btn btn-primary" id="btnLanjutkan" name="trimester"
+                                value="1">Lanjutkan</button>
+                        </div>
+                    </form>
+
                 </div>
-                </form>
             </div>
 
         </div>
@@ -884,7 +879,7 @@
         </div>
     </section>
     <script>
-        function showForm(formId) {
+        function showForm(formId, trimesterActive) {
             // Sembunyikan semua form
             document.querySelectorAll('.form-section').forEach(function(section) {
                 section.classList.add('d-none');
@@ -893,6 +888,7 @@
             document.querySelectorAll('.btn-toggle-form').forEach(function(btn) {
                 btn.classList.remove('active');
             });
+            document.getElementById('btnLanjutkan').value = trimesterActive;
             event.target.classList.add('active');
             currentStep = 1
             showStep(currentStep);
