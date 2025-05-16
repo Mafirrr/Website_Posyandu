@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PemeriksaanUsgAkhir extends Model
+class UsgTrimester3 extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'pemeriksaan_usg_akhir';
+    protected $table = 'usg_trimester_3';
 
     protected $fillable = [
-        'pemeriksaan_id',
         'usg_trimester3',
         'umur_kehamilan_usg_trimester_3',
         'selisih_uk_usg_1_hpht_dengan_trimester_3',
@@ -51,8 +50,8 @@ class PemeriksaanUsgAkhir extends Model
         'EFW_Sesuai_Minggu' => 'integer',
     ];
 
-    public function pemeriksaan()
+    public function trimester3()
     {
-        return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');
+        return $this->hasOne(Trimester3::class, 'usg_trimester_3');
     }
 }

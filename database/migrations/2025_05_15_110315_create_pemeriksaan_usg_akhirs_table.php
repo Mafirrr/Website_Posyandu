@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemeriksaan_usg_akhir', function (Blueprint $table) {
+        Schema::create('usg_trimester_3', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
             $table->enum('usg_trimester3', ['ya', 'tidak']);
             $table->float('umur_kehamilan_usg_trimester_3');
             $table->enum('selisih_uk_usg_1_hpht_dengan_trimester_3', ['ya', 'tidak']);
@@ -46,6 +45,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemeriksaan_usg_akhir');
+        Schema::dropIfExists('usg_trimester_3');
     }
 };

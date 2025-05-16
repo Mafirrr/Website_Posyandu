@@ -12,7 +12,6 @@ class RencanaKonsultasi extends Model
     protected $table = 'rencana_konsultasi';
 
     protected $fillable = [
-        'pemeriksaan_id',
         'rencana_konsultasi_lanjut',
         'rencana_proses_melahirkan',
         'pilihan_kontrasepsi',
@@ -20,8 +19,8 @@ class RencanaKonsultasi extends Model
     ];
 
     // Relasi ke PemeriksaanKehamilan
-    public function pemeriksaanKehamilan()
+    public function trimester3()
     {
-        return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');
+        return $this->hasOne(Trimester3::class, 'rencana_konsultasi');
     }
 }

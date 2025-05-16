@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('pemeriksaan_khusus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
             $table->enum('porsio', ['normal', 'tidak_normal']);
             $table->enum('uretra', ['normal', 'tidak_normal']);
             $table->enum('vagina', ['normal', 'tidak_normal']);

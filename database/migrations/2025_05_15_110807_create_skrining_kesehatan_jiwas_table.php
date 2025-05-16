@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('skrining_kesehatan_jiwa', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
             $table->enum('skrining_jiwa', ['ya', 'tidak']);
             $table->enum('tindak_lanjut_jiwa', ['rujuk', 'konseling', 'tidak_ada']);
             $table->enum('perlu_rujukan', ['ya', 'tidak']);
