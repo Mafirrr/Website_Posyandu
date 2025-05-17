@@ -869,10 +869,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
-                        //Trimester 2
                         <div id="form-trimester-2" class="form-section d-none">
                             <div class="step-section step-1" id="">
                                 <div class="row g-3">
@@ -934,8 +932,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        //trimester 3
                         <div id="form-trimester-3" class="form-section d-none">
                             <div class="step-section step-1" id="">
                                 <div class="row g-3">
@@ -1692,7 +1688,6 @@
         });
         showStep(currentStep);
     </script>
-    // untuk search
     <script>
         const input = document.getElementById('input-anggota');
         const suggestionBox = document.getElementById('suggestion-box');
