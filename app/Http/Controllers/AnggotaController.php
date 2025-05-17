@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AnggotaController extends Controller
 {
 
-     use SoftDeletes;
+    use SoftDeletes;
 
     public function index(Request $request)
     {
@@ -40,23 +40,23 @@ class AnggotaController extends Controller
     public function anggota_add()
     {
         $params = [
-            "title"=>"Tambah Anggota",
-            "action_form"=>route("anggota.store"),
-            "method"=>"POST",
-            "anggota"=>(object)[
-                "nik"=>"",
-                'password'=>"",
-                'nama'=>"",
+            "title" => "Tambah Anggota",
+            "action_form" => route("anggota.store"),
+            "method" => "POST",
+            "anggota" => (object)[
+                "nik" => "",
+                'password' => "",
+                'nama' => "",
                 'no_jkn' => "",
                 'faskes_tk1' => "",
                 'faskes_rujukan' => "",
-                'tanggal_lahir'=>"",
-                'tempat_lahir'=>"",
-                'pekerjaan'=>"",
-                'alamat'=>"",
-                'no_telepon'=>"",
-                'golongan_darah'=>"",
-                'aktif'=>true,
+                'tanggal_lahir' => "",
+                'tempat_lahir' => "",
+                'pekerjaan' => "",
+                'alamat' => "",
+                'no_telepon' => "",
+                'golongan_darah' => "",
+                'aktif' => true,
             ]
         ];
         return view('anggota.form', $params);
@@ -101,10 +101,10 @@ class AnggotaController extends Controller
     {
         $anggota = Anggota::findOrFail($id);
         $params = [
-            "title"=>"Ubah Anggota",
-            "action_form"=>route("anggota.update",$id),
-            "method"=>"PUT",
-            "anggota"=> $anggota
+            "title" => "Ubah Anggota",
+            "action_form" => route("anggota.update", $id),
+            "method" => "PUT",
+            "anggota" => $anggota
         ];
         return view('anggota.form', $params);
     }
@@ -156,4 +156,14 @@ class AnggotaController extends Controller
         return redirect()->route('anggota.index')->with('success', 'Data anggota berhasil dihapus.');
     }
 
+    public function suggest(Request $request)
+    {
+        $query = $request->get('q');
+
+        $anggota = Anggota::where('nama', 'like', "%$query%")
+            ->limit(10)
+            ->get(['id', 'nama']);
+
+        return response()->json($anggota);
+    }
 }
