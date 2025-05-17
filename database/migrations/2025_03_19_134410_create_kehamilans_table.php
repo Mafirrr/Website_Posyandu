@@ -14,13 +14,8 @@ return new class extends Migration
         Schema::create('kehamilan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('anggota_id')->references('id')->on('anggota');
-            $table->date('tanggal_awal');
-            $table->integer('usia_kehamilan_awal');
-            $table->text('riwayat_penyakit');
-            $table->text('riwayat_kehamilan');
-            $table->date('perkiraan_kehamilan');
-            $table->enum('status', array('dalam_pemantauan', 'keguguran', 'berhasil'));
-            $table->int('tahun')->nullable();
+            $table->enum('status', array('dalam_pemantauan', 'keguguran', 'berhasil'))->default('dalam_pemantauan');
+            $table->integer('tahun')->nullable();
             $table->float('berat_badan_bayi')->nullable();
             $table->string('proses_melahirkan')->nullable();
             $table->string('penolong')->nullable();

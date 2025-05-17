@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
             $table->float('berat_badan');
+            $table->string('tinggi_rahim');
             $table->integer('tekanan_darah_sistol');
             $table->integer('tekanan_darah_diastol');
             $table->string('letak_dan_denyut_nadi_bayi');

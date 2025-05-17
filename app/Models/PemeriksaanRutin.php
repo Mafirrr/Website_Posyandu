@@ -14,6 +14,7 @@ class PemeriksaanRutin extends Model
     protected $fillable = [
         'pemeriksaan_id',
         'berat_badan',
+        'tinggi_rahim',
         'tekanan_darah_sistol',
         'tekanan_darah_diastol',
         'letak_dan_denyut_nadi_bayi',

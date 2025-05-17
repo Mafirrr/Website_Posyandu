@@ -131,10 +131,14 @@
                                         <label class="form-label">Tes Golongan Darah</label>
                                         <select name="gol_darah1" class="form-control">
                                             <option value="">-- Pilih Golongan Darah --</option>
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="AB">AB</option>
-                                            <option value="O">O</option>
+                                            <option value="A-">A-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="O-">O-</option>
+                                            <option value="O+">O+</option>
                                         </select>
                                     </div>
                                 </div>
@@ -529,19 +533,19 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Konjungtiva</td>
-                                                    <td><input type="radio" name="konjungtiva1" value="normal"></td>
-                                                    <td><input type="radio" name="konjungtiva1" value="tidak_normal">
+                                                    <td><input type="radio" name="konjungtiva1" value="anemia"></td>
+                                                    <td><input type="radio" name="konjungtiva1" value="tidak_anemia">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Sklera</td>
-                                                    <td><input type="radio" name="sklera1" value="normal"></td>
-                                                    <td><input type="radio" name="sklera1" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="sklera1" value="ikterik"></td>
+                                                    <td><input type="radio" name="sklera1" value="tidak_ikterik"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Kulit</td>
-                                                    <td><input type="radio" name="vagina1" value="normal"></td>
-                                                    <td><input type="radio" name="vagina1" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="kulit1" value="normal"></td>
+                                                    <td><input type="radio" name="kulit1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Leher</td>
@@ -576,12 +580,12 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Perut</td>
-                                                    <td><input type="radio" name="perut1" value="positif"></td>
+                                                    <td><input type="radio" name="perut1" value="normal"></td>
                                                     <td><input type="radio" name="perut1" value="tidak_normal"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Tungkai</td>
-                                                    <td><input type="radio" name="tungkai1" value="positif"></td>
+                                                    <td><input type="radio" name="tungkai1" value="normal"></td>
                                                     <td><input type="radio" name="tungkai1" value="tidak_normal"></td>
                                                 </tr>
                                             </tbody>
@@ -647,23 +651,23 @@
                                                 <tr>
                                                     <td class="table-dark text-white">Jumlah GS</td>
                                                     <td>
-                                                        <select class="form-select">
-                                                            <option>Tunggal</option>
-                                                            <option>Kembar</option>
+                                                        <select name="jumlah_gs" class="form-select">
+                                                            <option value="tunggal">Tunggal</option>
+                                                            <option value="kembar">Kembar</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="table-dark text-white">Diameter GS</td>
                                                     <td>
-                                                        <input type="number" step="any" class="form-control mb-2"
-                                                            placeholder="... cm">
+                                                        <input type="number" step="any" name="diameter_gs"
+                                                            class="form-control mb-2" placeholder="... cm">
                                                         <span class="d-block mb-1">Sesuai dengan umur kehamilan:</span>
                                                         <div class="input-group mb-1">
-                                                            <input type="number" class="form-control"
+                                                            <input type="number" name="gs_minggu" class="form-control"
                                                                 placeholder="... minggu">
                                                             <span class="input-group-text">Minggu</span>
-                                                            <input type="number" class="form-control"
+                                                            <input type="number" name="gs_hari" class="form-control"
                                                                 placeholder="... hari">
                                                             <span class="input-group-text">Hari</span>
                                                         </div>
@@ -672,23 +676,23 @@
                                                 <tr>
                                                     <td class="table-dark text-white">Jumlah Bayi</td>
                                                     <td>
-                                                        <select class="form-select">
-                                                            <option>Tunggal</option>
-                                                            <option>Kembar</option>
+                                                        <select name="jumlah_bayi" class="form-select">
+                                                            <option value="tunggal">Tunggal</option>
+                                                            <option value="kembar">Kembar</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="table-dark text-white">CRL</td>
                                                     <td>
-                                                        <input type="number" class="form-control mb-2"
+                                                        <input type="number" name="crl" class="form-control mb-2"
                                                             placeholder="... cm">
                                                         <span class="d-block mb-1">Sesuai dengan umur kehamilan:</span>
                                                         <div class="input-group mb-1">
-                                                            <input type="number" class="form-control"
+                                                            <input type="number" name="crl_minggu" class="form-control"
                                                                 placeholder="... minggu">
                                                             <span class="input-group-text">Minggu</span>
-                                                            <input type="number" class="form-control"
+                                                            <input type="number" name="crl_hari" class="form-control"
                                                                 placeholder="... hari">
                                                             <span class="input-group-text">Hari</span>
                                                         </div>
@@ -697,30 +701,31 @@
                                                 <tr>
                                                     <td class="table-dark text-white">Letak Produk Kehamilan</td>
                                                     <td>
-                                                        <select class="form-select">
-                                                            <option>Intrauterin</option>
-                                                            <option>Extrauterin</option>
-                                                            <option>Tidak dapat ditentukan</option>
+                                                        <select name="letak_produk" class="form-select">
+                                                            <option value="intrauterin">Intrauterin</option>
+                                                            <option value="extrauterin">Extrauterin</option>
+                                                            <option value="tidak_dapat_ditentukan">Tidak dapat ditentukan
+                                                            </option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="table-dark text-white">Pulsasi Jantung</td>
                                                     <td>
-                                                        <select class="form-select">
-                                                            <option>Tampak</option>
-                                                            <option>Tidak tampak</option>
+                                                        <select name="pulsasi_jantung" class="form-select">
+                                                            <option value="tampak">Tampak</option>
+                                                            <option value="tidak_tampak">Tidak tampak</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="table-dark text-white">Kecurigaan Temuan Abnormal</td>
                                                     <td>
-                                                        <select class="form-select mb-2">
-                                                            <option>Ya</option>
-                                                            <option>Tidak</option>
+                                                        <select name="kecurigaan_temuan" class="form-select mb-2">
+                                                            <option value="ya">Ya</option>
+                                                            <option value="tidak">Tidak</option>
                                                         </select>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" name="alasan" class="form-control"
                                                             placeholder="Sebutkan jika ada...">
                                                     </td>
                                                 </tr>
@@ -753,28 +758,32 @@
                                                     <td class="text-start">Hemoglobin</td>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <input type="number" class="form-control" step="any"
-                                                                placeholder="Nilai">
+                                                            <input type="number" name="hemoglobin1" class="form-control"
+                                                                step="any" placeholder="Nilai">
                                                             <span class="input-group-text">g/dL</span>
                                                         </div>
                                                     </td>
-                                                    <td><input type="text" class="form-control form-control-sm"></td>
+                                                    <td><input type="text" name="hemoglobin1_rtl"
+                                                            class="form-control form-control-sm"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-start">Golongan Darah & Rhesus</td>
-                                                    <td><input type="text" class="form-control form-control-sm"></td>
-                                                    <td><input type="text" class="form-control form-control-sm"></td>
+                                                    <td><input type="text" name="golDarah_rhesus"
+                                                            class="form-control form-control-sm"></td>
+                                                    <td><input type="text" name="rhesus_rtl"
+                                                            class="form-control form-control-sm"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-start">Gula Darah Sewaktu</td>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <input type="number" step="any" class="form-control"
-                                                                placeholder="Nilai">
+                                                            <input type="number" name="gulaDarah1" step="any"
+                                                                class="form-control" placeholder="Nilai">
                                                             <span class="input-group-text">Mg/dL</span>
                                                         </div>
                                                     </td>
-                                                    <td><input type="text" class="form-control form-control-sm"></td>
+                                                    <td><input type="text" name="gulaDarah1_rtl"
+                                                            class="form-control form-control-sm"></td>
                                                 </tr>
                                                 <tr class="table">
                                                     <td class="text-start" colspan="3"><strong>Tripel
@@ -1080,23 +1089,27 @@
                                                 <tr>
                                                     <td>Konjungtiva</td>
                                                     <td><input type="radio" name="konjungtiva3" value="normal"></td>
-                                                    <td><input type="radio" name="konjungtiva3" value="tidak_normal">
+                                                    <td><input type="radio" name="konjungtiva3"
+                                                            value="tidak_normal">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Sklera</td>
                                                     <td><input type="radio" name="sklera3" value="normal"></td>
-                                                    <td><input type="radio" name="sklera3" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="sklera3" value="tidak_normal">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Kulit</td>
                                                     <td><input type="radio" name="vagina3" value="normal"></td>
-                                                    <td><input type="radio" name="vagina3" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="vagina3" value="tidak_normal">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Leher</td>
                                                     <td><input type="radio" name="leher3" value="normal"></td>
-                                                    <td><input type="radio" name="leher3" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="leher3" value="tidak_normal">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gigi Mulut </td>
@@ -1107,12 +1120,14 @@
                                                 <tr>
                                                     <td>THT</td>
                                                     <td><input type="radio" name="tht3" value="normal"></td>
-                                                    <td><input type="radio" name="tht3" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="tht3" value="tidak_normal">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Dada</td>
                                                     <td><input type="radio" name="dada3" value="normal"></td>
-                                                    <td><input type="radio" name="dada3" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="dada3" value="tidak_normal">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jantung</td>
@@ -1741,11 +1756,20 @@
             }
         }
 
-        btnLanjutkan.addEventListener('click', function() {
+        btnLanjutkan.addEventListener('click', function(e) {
             if (currentStep < totalSteps) {
+                e.preventDefault();
                 currentStep++;
                 showStep(currentStep);
-            } else {}
+            } else {
+                const anggotaId = document.getElementById('anggota-id').value;
+
+                if (!anggotaId) {
+                    e.preventDefault();
+                    alert('Silakan pilih anggota terlebih dahulu sebelum menyimpan.');
+                    return;
+                }
+            }
         });
 
         btnKembali.addEventListener('click', function() {

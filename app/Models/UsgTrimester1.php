@@ -13,12 +13,13 @@ class UsgTrimester1 extends Model
 
     protected $fillable = [
         'keteraturan_haid',
+        'hpht',
         'umur_kehamilan_berdasar_hpht',
         'umur_kehamilan_berdasarkan_usg',
         'hpl_berdasarkan_hpht',
         'hpl_berdasarkan_usg',
         'jumlah_bayi',
-        'Jumlah_GS',
+        'jumlah_gs',
         'diametes_gs',
         'gs_hari',
         'gs_minggu',
