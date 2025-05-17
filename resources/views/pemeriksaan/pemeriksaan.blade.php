@@ -1,5 +1,19 @@
 @extends('layouts.app')
 @section('main')
+    <style>
+        #suggestion-box {
+            border-top: none;
+            border-bottom-left-radius: 0.375rem;
+            border-bottom-right-radius: 0.375rem;
+            background-color: white;
+            color: black;
+        }
+
+        #suggestion-box .dropdown-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+    </style>
     <section class="mt-0 mb-10">
         <div class="mx-auto max-w-screen-xl">
             <div class="bg-white shadow-md sm:rounded-lg overflow-hidden">
@@ -26,20 +40,22 @@
                     <button type="button" class="btn btn-outline-primary btn-toggle-form"
                         onclick="showForm('form-trimester-3', 3)">Trimester 3</button>
                     <div class="flex-grow-1"></div>
-                    <div class="input-group" style="max-width: 300px;">
+                    <div class="position-relative" style="max-width: 300px;">
                         <div class="input-group">
-                            <input type="text" name="anggota" class="form-control" placeholder=" Nama Anggota"
-                                aria-describedby="icon-anggota">
-                            <span class="input-group-text" id="icon-anggota">
-                                <i class="ti ti-search"></i>
-                            </span>
+                            <input type="text" class="form-control" id="input-anggota" placeholder="Nama Anggota"
+                                autocomplete="off">
+                            <span class="input-group-text"><i class="ti ti-search"></i></span>
+                        </div>
+                        <div id="suggestion-box"
+                            style="position: absolute; top: 100%; left: 0; right: 0; max-height: 200px; overflow-y: auto; z-index: 1000; background-color: gray; color: white;">
                         </div>
                     </div>
                 </div>
                 <div class="card card-body border">
-                    <form action="{{ route('pemeriksaan.index') }}" method="POST" id="formTrimester1">
+                    <form action="{{ route('pemeriksaan.store') }}" method="POST" id="formTrimester1">
                         <div id="form-trimester-1" class="form-section">
                             @csrf
+                            <input type="hidden" name="anggota_id" id="anggota-id">
                             <div class="step-section step-1" id="">
                                 <div class="row g-3">
                                     <h5>Catatan Pemeriksaan</h5>
@@ -890,8 +906,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
                         <div id="form-trimester-2" class="form-section d-none">
                             <div class="step-section step-1" id="">
                                 <div class="row g-3">
@@ -1739,5 +1755,52 @@
             }
         });
         showStep(currentStep);
+    </script>
+    <script>
+        const input = document.getElementById('input-anggota');
+        const suggestionBox = document.getElementById('suggestion-box');
+        const anggotaIdInput = document.getElementById('anggota-id');
+
+        input.addEventListener('keyup', function() {
+            const query = this.value;
+
+            if (query.length < 2) {
+                suggestionBox.innerHTML = '';
+                return;
+            }
+
+            fetch(`/anggota/saran?q=${query}`)
+                .then(res => res.json())
+                .then(data => {
+                    suggestionBox.innerHTML = '';
+
+                    if (data.length === 0) {
+                        suggestionBox.innerHTML = '<div class="p-2 text-muted">Tidak ditemukan</div>';
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        console.log(data);
+                        const div = document.createElement('div');
+                        div.textContent = item.nama;
+                        div.classList.add('p-2', 'suggestion-item', 'border-bottom', 'cursor-pointer');
+                        div.dataset.id = item.id;
+
+                        div.addEventListener('click', function() {
+                            input.value = this.textContent;
+                            anggotaIdInput.value = this.dataset.id;
+                            suggestionBox.innerHTML = '';
+                        });
+
+                        suggestionBox.appendChild(div);
+                    });
+                });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
+                suggestionBox.innerHTML = '';
+            }
+        });
     </script>
 @endsection

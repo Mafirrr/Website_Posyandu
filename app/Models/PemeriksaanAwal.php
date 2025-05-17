@@ -15,7 +15,7 @@ class PemeriksaanAwal extends Model
         'tinggi_badan',
         'golongan_darah',
         'status_imunisasi',
-        'hemogoblin',
+        'hemoglobin',
         'gula_darah_puasa',
         'riwayat_kesehatan_ibu_sekarang',
         'riwayat_perilaku',
