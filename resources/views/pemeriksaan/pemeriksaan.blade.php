@@ -54,26 +54,30 @@
                                     <div class="col-md-6">
                                         <label class="form-label">Timbang BB</label>
                                         <div class="input-group">
-                                            <input type="text" name="berat_badan1" class="form-control">
+                                            <input type="number" name="berat_badan1" class="form-control" step="any">
                                             <span class="input-group-text">Kg</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Pengukuran Tinggi Badan</label>
                                         <div class="input-group">
-                                            <input type="text" name="tinggi_badan1" class="form-control">
+                                            <input type="number" name="tinggi_badan1" step="any" class="form-control">
                                             <span class="input-group-text">Cm</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Ukur Lingkar Lengan Atas</label>
-                                        <input type="text" name="lingkar_lengan1" class="form-control">
+                                        <input type="number" name="lingkar_lengan1" step="any" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tekanan Darah</label>
                                         <div class="input-group">
-                                            <input type="text" name="tekanan_darah1" class="form-control">
-                                            <span class="input-group-text">mmHg</span>
+                                            <input type="number" name="sistolik" class="form-control"
+                                                placeholder="Sistolik" step="any" min="0">
+                                            <span class="input-group-text">/Sistol</span>
+                                            <input type="number" name="diastolik" class="form-control"
+                                                placeholder="Diastolik" step="any" min="0">
+                                            <span class="input-group-text">/Diastol</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -86,7 +90,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Status dan Imunisasi Tetanus</label>
-                                        <input type="text" name="imunisasi_tetanus1" class="form-control">
+                                        <select name="imunisasi_tetanus1" class="form-control">
+                                            <option value="">-- Pilih Status Imunisasi --</option>
+                                            <option value="T1">T1</option>
+                                            <option value="T2">T2</option>
+                                            <option value="T3">T3</option>
+                                            <option value="T4">T4</option>
+                                            <option value="T5">T5</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Konseling</label>
@@ -102,7 +113,13 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Golongan Darah</label>
-                                        <input type="text" name="gol_darah1" class="form-control">
+                                        <select name="gol_darah1" class="form-control">
+                                            <option value="">-- Pilih Golongan Darah --</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="AB">AB</option>
+                                            <option value="O">O</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -114,72 +131,78 @@
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Alergi" id="alergi">
-                                                    <label class="form-check-label" for="alergi">Alergi</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="Alergi" id="ibu_alergi">
+                                                    <label class="form-check-label" for="ibu_alergi">Alergi</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Asma" id="asma">
-                                                    <label class="form-check-label" for="asma">Asma</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="Asma" id="ibu_asma">
+                                                    <label class="form-check-label" for="ibu_asma">Asma</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Autoimun" id="autoimun">
-                                                    <label class="form-check-label" for="autoimun">Autoimun</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="Autoimun"
+                                                        id="ibu_autoimun">
+                                                    <label class="form-check-label" for="ibu_autoimun">Autoimun</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Diabetes" id="diabetes">
-                                                    <label class="form-check-label" for="diabetes">Diabetes</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="Diabetes"
+                                                        id="ibu_diabetes">
+                                                    <label class="form-check-label" for="ibu_diabetes">Diabetes</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Hepatitis B" id="hepatitisB">
-                                                    <label class="form-check-label" for="hepatitisB">Hepatitis B</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="Hepatitis B"
+                                                        id="ibu_hepatitisB">
+                                                    <label class="form-check-label" for="ibu_hepatitisB">Hepatitis
+                                                        B</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Hipertensi" id="hipertensi">
-                                                    <label class="form-check-label" for="hipertensi">Hipertensi</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="Hipertensi"
+                                                        id="ibu_hipertensi">
+                                                    <label class="form-check-label"
+                                                        for="ibu_hipertensi">Hipertensi</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Jantung" id="jantung">
-                                                    <label class="form-check-label" for="jantung">Jantung</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="Jantung" id="ibu_jantung">
+                                                    <label class="form-check-label" for="ibu_jantung">Jantung</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Jiwa" id="jiwa">
-                                                    <label class="form-check-label" for="jiwa">Jiwa</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="Jiwa" id="ibu_jiwa">
+                                                    <label class="form-check-label" for="ibu_jiwa">Jiwa</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Sifilis" id="sifilis">
-                                                    <label class="form-check-label" for="sifilis">Sifilis</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="Sifilis" id="ibu_sifilis">
+                                                    <label class="form-check-label" for="ibu_sifilis">Sifilis</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="TB" id="tb">
-                                                    <label class="form-check-label" for="tb">TB</label>
+                                                        name="riwayat_kesehatan_ibu[]" value="TB" id="ibu_tb">
+                                                    <label class="form-check-label" for="ibu_tb">TB</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -247,72 +270,86 @@
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Alergi" id="alergi">
-                                                    <label class="form-check-label" for="alergi">Alergi</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="Alergi"
+                                                        id="keluarga_alergi">
+                                                    <label class="form-check-label" for="keluarga_alergi">Alergi</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Asma" id="asma">
-                                                    <label class="form-check-label" for="asma">Asma</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="Asma"
+                                                        id="keluarga_asma">
+                                                    <label class="form-check-label" for="keluarga_asma">Asma</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Autoimun" id="autoimun">
-                                                    <label class="form-check-label" for="autoimun">Autoimun</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="Autoimun"
+                                                        id="keluarga_autoimun">
+                                                    <label class="form-check-label"
+                                                        for="keluarga_autoimun">Autoimun</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Diabetes" id="diabetes">
-                                                    <label class="form-check-label" for="diabetes">Diabetes</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="Diabetes"
+                                                        id="keluarga_diabetes">
+                                                    <label class="form-check-label"
+                                                        for="keluarga_diabetes">Diabetes</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Hepatitis B" id="hepatitisB">
-                                                    <label class="form-check-label" for="hepatitisB">Hepatitis B</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="Hepatitis B"
+                                                        id="keluarga_hepatitisB">
+                                                    <label class="form-check-label" for="keluarga_hepatitisB">Hepatitis
+                                                        B</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Hipertensi" id="hipertensi">
-                                                    <label class="form-check-label" for="hipertensi">Hipertensi</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="Hipertensi"
+                                                        id="keluarga_hipertensi">
+                                                    <label class="form-check-label"
+                                                        for="keluarga_hipertensi">Hipertensi</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Jantung" id="jantung">
-                                                    <label class="form-check-label" for="jantung">Jantung</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="Jantung"
+                                                        id="keluarga_jantung">
+                                                    <label class="form-check-label" for="keluarga_jantung">Jantung</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Jiwa" id="jiwa">
-                                                    <label class="form-check-label" for="jiwa">Jiwa</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="Jiwa"
+                                                        id="keluarga_jiwa">
+                                                    <label class="form-check-label" for="keluarga_jiwa">Jiwa</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="Sifilis" id="sifilis">
-                                                    <label class="form-check-label" for="sifilis">Sifilis</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="Sifilis"
+                                                        id="keluarga_sifilis">
+                                                    <label class="form-check-label" for="keluarga_sifilis">Sifilis</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="riwayat_kesehatan[]" value="TB" id="tb">
-                                                    <label class="form-check-label" for="tb">TB</label>
+                                                        name="riwayat_kesehatan_keluarga[]" value="TB"
+                                                        id="keluarga_tb">
+                                                    <label class="form-check-label" for="keluarga_tb">TB</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -433,9 +470,9 @@
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
-                                                    <td><input type="text" name="tahun1"
+                                                    <td><input type="number" name="tahun1"
                                                             class="form-control form-control-sm"></td>
-                                                    <td><input type="number" name="bb1"
+                                                    <td><input type="number" step="any" name="bb1"
                                                             class="form-control form-control-sm"></td>
                                                     <td>
                                                         <select name="proses1" class="form-select form-select-sm">
@@ -559,7 +596,7 @@
                                         <label for="umur_kehamilan_hpht" style="width: 300px; font-weight: normal;">
                                             Umur kehamilan berdasarkan HPHT (pada siklus haid teratur)
                                         </label>
-                                        <input type="text" id="umur_kehamilan_hpht" name="umur_kehamilan_hpht"
+                                        <input type="number" id="umur_kehamilan_hpht" name="umur_kehamilan_hpht"
                                             style="width: 60px; padding: 5px; margin-right: 5px; border: 1px solid #ccc; border-radius: 7px;">
                                         <span>Minggu</span>
                                     </div>
@@ -576,7 +613,7 @@
                                         <label for="umur_kehamilan_usg" style="width: 300px; font-weight: normal;">
                                             Umur kehamilan berdasarkan USG
                                         </label>
-                                        <input type="text" id="umur_kehamilan_usg" name="umur_kehamilan_usg"
+                                        <input type="number" id="umur_kehamilan_usg" name="umur_kehamilan_usg"
                                             style="width: 60px; padding: 5px; margin-right: 5px; border: 1px solid #ccc; border-radius: 7px;">
                                         <span>Minggu</span>
                                     </div>
@@ -603,7 +640,7 @@
                                                 <tr>
                                                     <td class="table-dark text-white">Diameter GS</td>
                                                     <td>
-                                                        <input type="text" class="form-control mb-2"
+                                                        <input type="number" step="any" class="form-control mb-2"
                                                             placeholder="... cm">
                                                         <span class="d-block mb-1">Sesuai dengan umur kehamilan:</span>
                                                         <div class="input-group mb-1">
@@ -628,7 +665,7 @@
                                                 <tr>
                                                     <td class="table-dark text-white">CRL</td>
                                                     <td>
-                                                        <input type="text" class="form-control mb-2"
+                                                        <input type="number" class="form-control mb-2"
                                                             placeholder="... cm">
                                                         <span class="d-block mb-1">Sesuai dengan umur kehamilan:</span>
                                                         <div class="input-group mb-1">
@@ -700,7 +737,7 @@
                                                     <td class="text-start">Hemoglobin</td>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <input type="number" class="form-control"
+                                                            <input type="number" class="form-control" step="any"
                                                                 placeholder="Nilai">
                                                             <span class="input-group-text">g/dL</span>
                                                         </div>
@@ -716,7 +753,7 @@
                                                     <td class="text-start">Gula Darah Sewaktu</td>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <input type="number" class="form-control"
+                                                            <input type="number" step="any" class="form-control"
                                                                 placeholder="Nilai">
                                                             <span class="input-group-text">Mg/dL</span>
                                                         </div>
@@ -870,24 +907,30 @@
                                     <div class="col-md-6">
                                         <label class="form-label">Timbang BB</label>
                                         <div class="input-group">
-                                            <input type="text" name="berat_badan2" class="form-control">
+                                            <input type="number" step="any" name="berat_badan2"
+                                                class="form-control">
                                             <span class="input-group-text">Kg</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Ukur Lingkar Lengan Atas</label>
-                                        <input type="text" name="lingkar_lengan2" class="form-control">
+                                        <input type="number" step="any" name="lingkar_lengan2"
+                                            class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tekanan Darah</label>
                                         <div class="input-group">
-                                            <input type="text" name="tekanan_darah2" class="form-control">
-                                            <span class="input-group-text">mmHg</span>
+                                            <input type="number" name="sistolik2" class="form-control"
+                                                placeholder="Sistolik" step="any" min="0">
+                                            <span class="input-group-text">/Sistol</span>
+                                            <input type="number" name="diastolik2" class="form-control"
+                                                placeholder="Diastolik" step="any" min="0">
+                                            <span class="input-group-text">/Diastol</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Periksa Tinggi Rahim</label>
-                                        <input type="text" name="tinggi_rahim2" class="form-control">
+                                        <input type="number" step="any" name="tinggi_rahim2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Letak dan Denyut Jantung Janin</label>
@@ -895,7 +938,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Status dan Imunisasi Tetanus</label>
-                                        <input type="text" name="imunisasi_tetanus2" class="form-control">
+                                        <select name="imunisasi_tetanus2" class="form-control">
+                                            <option value="">-- Pilih Status Imunisasi --</option>
+                                            <option value="T1">T1</option>
+                                            <option value="T2">T2</option>
+                                            <option value="T3">T3</option>
+                                            <option value="T4">T4</option>
+                                            <option value="T5">T5</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Konseling</label>
@@ -911,7 +961,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Lab Protein Urine</label>
-                                        <input type="text" name="urine2" class="form-control">
+                                        <input type="number" step="any" name="urine2" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -931,24 +981,30 @@
                                     <div class="col-md-6">
                                         <label class="form-label">Timbang BB</label>
                                         <div class="input-group">
-                                            <input type="text" name="berat_badan3" class="form-control">
+                                            <input type="number" step="any" name="berat_badan3"
+                                                class="form-control">
                                             <span class="input-group-text">Kg</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Ukur Lingkar Lengan Atas</label>
-                                        <input type="text" name="lingkar_lengan3" class="form-control">
+                                        <input type="number" step="any" name="lingkar_lengan3"
+                                            class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tekanan Darah</label>
                                         <div class="input-group">
-                                            <input type="text" name="tekanan_darah3" class="form-control">
-                                            <span class="input-group-text">mmHg</span>
+                                            <input type="number" name="sistolik3" class="form-control"
+                                                placeholder="Sistolik" step="any" min="0">
+                                            <span class="input-group-text">/Sistol</span>
+                                            <input type="number" name="diastolik3" class="form-control"
+                                                placeholder="Diastolik" step="any" min="0">
+                                            <span class="input-group-text">/Diastol</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Periksa Tinggi Rahim</label>
-                                        <input type="text" name="tinggi_rahim3" class="form-control">
+                                        <input type="number" step="any" name="tinggi_rahim3" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Letak dan Denyut Jantung Janin</label>
@@ -956,7 +1012,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Status dan Imunisasi Tetanus</label>
-                                        <input type="text" name="imunisasi_tetanus3" class="form-control">
+                                        <select name="imunisasi_tetanus3" class="form-control">
+                                            <option value="">-- Pilih Status Imunisasi --</option>
+                                            <option value="T1">T1</option>
+                                            <option value="T2">T2</option>
+                                            <option value="T3">T3</option>
+                                            <option value="T4">T4</option>
+                                            <option value="T5">T5</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Konseling</label>
@@ -972,11 +1035,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Lab Protein Urine</label>
-                                        <input type="text" name="urine3" class="form-control">
+                                        <input type="number" step="any" name="urine3" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Lab Gula Darah</label>
-                                        <input type="text" name="gula_darah" class="form-control">
+                                        <input type="number" step="any" name="gula_darah" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -1038,22 +1101,26 @@
                                                 <tr>
                                                     <td>Jantung</td>
                                                     <td><input type="radio" name="jantung3" value="normal"></td>
-                                                    <td><input type="radio" name="jantung3" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="jantung3" value="tidak_normal">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Paru</td>
                                                     <td><input type="radio" name="paru3" value="normal"></td>
-                                                    <td><input type="radio" name="paru3" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="paru3" value="tidak_normal">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Perut</td>
                                                     <td><input type="radio" name="perut3" value="positif"></td>
-                                                    <td><input type="radio" name="perut3" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="perut3" value="tidak_normal">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Tungkai</td>
                                                     <td><input type="radio" name="tungkai3" value="positif"></td>
-                                                    <td><input type="radio" name="tungkai3" value="tidak_normal"></td>
+                                                    <td><input type="radio" name="tungkai3" value="tidak_normal">
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -1071,17 +1138,17 @@
 
                                     <div style="margin-bottom: 12px;">
                                         <label>Umur Kehamilan berdasarkan USG Trimester I:</label>
-                                        <input type="text" class="form-control" placeholder="... minggu">
+                                        <input type="number" class="form-control" placeholder="... minggu">
                                     </div>
 
                                     <div style="margin-bottom: 12px;">
                                         <label>Umur Kehamilan berdasarkan HPHT:</label>
-                                        <input type="text" class="form-control" placeholder="... minggu">
+                                        <input type="number" class="form-control" placeholder="... minggu">
                                     </div>
 
                                     <div style="margin-bottom: 12px;">
                                         <label>Umur Kehamilan berdasarkan biometrik bayi USG Trimester III:</label>
-                                        <input type="text" class="form-control" placeholder="... minggu">
+                                        <input type="number" class="form-control" placeholder="... minggu">
                                     </div>
 
                                     <div style="margin-bottom: 12px;">
@@ -1137,7 +1204,7 @@
                                                         </div>
                                                         <div class="mb-2 d-flex align-items-center">
                                                             <label class="form-label mb-0 me-2">DJJ:</label>
-                                                            <input type="text" class="form-control me-2"
+                                                            <input type="number" class="form-control me-2"
                                                                 style="width: 150px;" placeholder="... X/menit">
                                                             <select class="form-select">
                                                                 <option>Normal</option>
@@ -1164,8 +1231,9 @@
                                                     <td>
                                                         <div class="mb-2 d-flex align-items-center">
                                                             <label class="form-label mb-0 me-2">SDP:</label>
-                                                            <input type="text" class="form-control me-2"
-                                                                style="width: 150px;" placeholder="... cm">
+                                                            <input type="number" step="any"
+                                                                class="form-control me-2" style="width: 150px;"
+                                                                placeholder="... cm">
                                                             <select class="form-select">
                                                                 <option>Cukup</option>
                                                                 <option>Kurang</option>
@@ -1181,12 +1249,12 @@
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">BPD:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="... cm">
+                                                                    <input type="number" step="any"
+                                                                        class="form-control" placeholder="... cm">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
+                                                                    <input type="number" class="form-control"
                                                                         placeholder="... minggu">
                                                                 </div>
                                                             </div>
@@ -1194,12 +1262,12 @@
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">HC:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="... cm">
+                                                                    <input type="number" step="any"
+                                                                        class="form-control" placeholder="... cm">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
+                                                                    <input type="number" class="form-control"
                                                                         placeholder="... minggu">
                                                                 </div>
                                                             </div>
@@ -1207,12 +1275,12 @@
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">AC:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="... cm">
+                                                                    <input type="number" step="any"
+                                                                        class="form-control" placeholder="... cm">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
+                                                                    <input type="number" class="form-control"
                                                                         placeholder="... minggu">
                                                                 </div>
                                                             </div>
@@ -1220,12 +1288,12 @@
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">FL:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="... cm">
+                                                                    <input type="number" step="any"
+                                                                        class="form-control" placeholder="... cm">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
+                                                                    <input type="number" class="form-control"
                                                                         placeholder="... minggu">
                                                                 </div>
                                                             </div>
@@ -1233,12 +1301,12 @@
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">EFW/TBJ:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="... gram">
+                                                                    <input type="number" step="any"
+                                                                        class="form-control" placeholder="... gram">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="text" class="form-control"
+                                                                    <input type="number" class="form-control"
                                                                         placeholder="... minggu">
                                                                 </div>
                                                             </div>
@@ -1285,7 +1353,7 @@
                                                     <td class="text-start">Hemoglobin</td>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <input type="number" class="form-control"
+                                                            <input type="number" class="form-control" step="any"
                                                                 placeholder="Nilai">
                                                             <span class="input-group-text">g/dL</span>
                                                         </div>
@@ -1296,7 +1364,7 @@
                                                     <td class="text-start">Protein Urine</td>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <input type="number" class="form-control"
+                                                            <input type="number" step="any" class="form-control"
                                                                 placeholder="Nilai">
                                                             <span class="input-group-text">Mg/dL</span>
                                                         </div>
