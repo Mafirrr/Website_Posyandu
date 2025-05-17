@@ -20,6 +20,11 @@ return new class extends Migration
             $table->integer('tekanan_darah_diastol');
             $table->string('letak_dan_denyut_nadi_bayi');
             $table->float('lingkar_lengan_atas');
+            $table->string('tes_lab_gula_darah')->nullable();
+            $table->string('protein_urin')->nullable();
+            $table->string('tablet_tambah_darah')->nullable();
+            $table->string('konseling')->nullable();
+            $table->string('skrining_dokter')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

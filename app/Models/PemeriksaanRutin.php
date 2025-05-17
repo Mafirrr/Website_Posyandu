@@ -19,6 +19,11 @@ class PemeriksaanRutin extends Model
         'tekanan_darah_diastol',
         'letak_dan_denyut_nadi_bayi',
         'lingkar_lengan_atas',
+        'protein_urin',
+        'tablet_tambah_darah',
+        'konseling',
+        'skrining_dokter',
+        'tes_lab_gula_darah',
     ];
 
     /**

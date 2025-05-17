@@ -955,22 +955,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Periksa Tinggi Rahim</label>
-                                        <input type="number" step="any" name="tinggi_rahim2" class="form-control">
+                                        <input type="text" name="tinggi_rahim2" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Letak dan Denyut Jantung Janin</label>
                                         <input type="text" name="denyut_janin2" class="form-control">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Status dan Imunisasi Tetanus</label>
-                                        <select name="imunisasi_tetanus2" class="form-control">
-                                            <option value="">-- Pilih Status Imunisasi --</option>
-                                            <option value="T1">T1</option>
-                                            <option value="T2">T2</option>
-                                            <option value="T3">T3</option>
-                                            <option value="T4">T4</option>
-                                            <option value="T5">T5</option>
-                                        </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Konseling</label>
@@ -986,7 +975,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Lab Protein Urine</label>
-                                        <input type="number" step="any" name="urine2" class="form-control">
+                                        <input type="text" name="urine2" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -1029,22 +1018,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Periksa Tinggi Rahim</label>
-                                        <input type="number" step="any" name="tinggi_rahim3" class="form-control">
+                                        <input type="text" name="tinggi_rahim3" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Letak dan Denyut Jantung Janin</label>
                                         <input type="text" name="denyut_janin3" class="form-control">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Status dan Imunisasi Tetanus</label>
-                                        <select name="imunisasi_tetanus3" class="form-control">
-                                            <option value="">-- Pilih Status Imunisasi --</option>
-                                            <option value="T1">T1</option>
-                                            <option value="T2">T2</option>
-                                            <option value="T3">T3</option>
-                                            <option value="T4">T4</option>
-                                            <option value="T5">T5</option>
-                                        </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Konseling</label>
@@ -1060,11 +1038,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Lab Protein Urine</label>
-                                        <input type="number" step="any" name="urine3" class="form-control">
+                                        <input type="text" name="urine3" class="form-control">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Tes Lab Gula Darah</label>
-                                        <input type="number" step="any" name="gula_darah" class="form-control">
+                                        <input type="text" name="gula_darah3" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -1088,21 +1066,20 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Konjungtiva</td>
-                                                    <td><input type="radio" name="konjungtiva3" value="normal"></td>
-                                                    <td><input type="radio" name="konjungtiva3"
-                                                            value="tidak_normal">
+                                                    <td><input type="radio" name="konjungtiva3" value="anemia"></td>
+                                                    <td><input type="radio" name="konjungtiva3" value="tidak_anemia">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Sklera</td>
-                                                    <td><input type="radio" name="sklera3" value="normal"></td>
-                                                    <td><input type="radio" name="sklera3" value="tidak_normal">
+                                                    <td><input type="radio" name="sklera3" value="ikterik"></td>
+                                                    <td><input type="radio" name="sklera3" value="tidak_ikterik">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Kulit</td>
-                                                    <td><input type="radio" name="vagina3" value="normal"></td>
-                                                    <td><input type="radio" name="vagina3" value="tidak_normal">
+                                                    <td><input type="radio" name="kulit3" value="normal"></td>
+                                                    <td><input type="radio" name="kulit3" value="tidak_normal">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1143,13 +1120,13 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Perut</td>
-                                                    <td><input type="radio" name="perut3" value="positif"></td>
+                                                    <td><input type="radio" name="perut3" value="normal"></td>
                                                     <td><input type="radio" name="perut3" value="tidak_normal">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Tungkai</td>
-                                                    <td><input type="radio" name="tungkai3" value="positif"></td>
+                                                    <td><input type="radio" name="tungkai3" value="normal"></td>
                                                     <td><input type="radio" name="tungkai3" value="tidak_normal">
                                                     </td>
                                                 </tr>
@@ -1161,33 +1138,36 @@
                                     <h5>USG Trimester III</h5>
                                     <div style="margin-bottom: 12px;">
                                         <label>USG Trimester III telah dilakukan:</label><br>
-                                        <select class="form-select">
-                                            <option>Ya</option>
-                                            <option>Tidak</option>
+                                        <select name="usg_tr3" class="form-select">
+                                            <option value="ya">Ya</option>
+                                            <option value="tidak">Tidak</option>
                                         </select>
                                     </div>
 
                                     <div style="margin-bottom: 12px;">
                                         <label>Umur Kehamilan berdasarkan USG Trimester I:</label>
-                                        <input type="number" class="form-control" placeholder="... minggu">
+                                        <input type="number" name="umur_kehamilan_usg3" class="form-control"
+                                            placeholder="... minggu">
                                     </div>
 
                                     <div style="margin-bottom: 12px;">
                                         <label>Umur Kehamilan berdasarkan HPHT:</label>
-                                        <input type="number" class="form-control" placeholder="... minggu">
+                                        <input type="number" name="umur_kehamilan_hpht3" class="form-control"
+                                            placeholder="... minggu">
                                     </div>
 
                                     <div style="margin-bottom: 12px;">
                                         <label>Umur Kehamilan berdasarkan biometrik bayi USG Trimester III:</label>
-                                        <input type="number" class="form-control" placeholder="... minggu">
+                                        <input type="number" name="umur_kehamilan_biometrik3" class="form-control"
+                                            placeholder="... minggu">
                                     </div>
 
                                     <div style="margin-bottom: 12px;">
                                         <label>Apakah terdapat selisih 3 minggu atau lebih dengan UK USG Trimester
                                             I/HPHT:</label>
-                                        <select class="form-select">
-                                            <option>Ya</option>
-                                            <option>Tidak</option>
+                                        <select name="selisih_3_minggu" class="form-select">
+                                            <option value="ya">Ya</option>
+                                            <option value="tidak">Tidak</option>
                                         </select>
                                     </div>
 
@@ -1197,29 +1177,30 @@
                                                 <tr>
                                                     <td class="table-dark text-white">Jumlah bayi</td>
                                                     <td>
-                                                        <select class="form-select">
-                                                            <option>Tunggal</option>
-                                                            <option>Kembar</option>
+                                                        <select name="jumlah_bayi3" class="form-select">
+                                                            <option value="tunggal">Tunggal</option>
+                                                            <option value="kembar">Kembar</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="table-dark text-white">Letak bayi</td>
                                                     <td>
-                                                        <select class="form-select">
-                                                            <option>Intrauterin</option>
-                                                            <option>Extrauterin</option>
-                                                            <option>Tidak dapat ditentukan</option>
+                                                        <select name="letak3" class="form-select">
+                                                            <option value="intrauterin">Intrauterin</option>
+                                                            <option value="extrauterin">Extrauterin</option>
+                                                            <option value="tidak_dapat_ditentukan">Tidak dapat ditentukan
+                                                            </option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="table-dark text-white">Presentasi bayi</td>
                                                     <td>
-                                                        <select class="form-select">
-                                                            <option>Kepala</option>
-                                                            <option>Bokong</option>
-                                                            <option>Letak Lintang</option>
+                                                        <select name="presentasi3" class="form-select">
+                                                            <option value="kepala">Kepala</option>
+                                                            <option value="bokong">Bokong</option>
+                                                            <option value="letak_lintang">Letak Lintang</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -1228,18 +1209,19 @@
                                                     <td>
                                                         <div class="mb-2">
                                                             <label class="form-label mb-1">Status:</label>
-                                                            <select class="form-select">
-                                                                <option>Hidup</option>
-                                                                <option>Meninggal</option>
+                                                            <select name="keadaan3" class="form-select">
+                                                                <option value="hidup">Hidup</option>
+                                                                <option value="meninggal">Meninggal</option>
                                                             </select>
                                                         </div>
                                                         <div class="mb-2 d-flex align-items-center">
                                                             <label class="form-label mb-0 me-2">DJJ:</label>
-                                                            <input type="number" class="form-control me-2"
-                                                                style="width: 150px;" placeholder="... X/menit">
-                                                            <select class="form-select">
-                                                                <option>Normal</option>
-                                                                <option>Tidak normal</option>
+                                                            <input type="number" name="djj3"
+                                                                class="form-control me-2" style="width: 150px;"
+                                                                placeholder="... X/menit">
+                                                            <select name="djj_status3" class="form-select">
+                                                                <option value="normal">Normal</option>
+                                                                <option value="tidak_normal">Tidak normal</option>
                                                             </select>
                                                         </div>
                                                     </td>
@@ -1248,11 +1230,11 @@
                                                 <tr>
                                                     <td class="table-dark text-white">Lokasi Plasenta</td>
                                                     <td>
-                                                        <select class="form-select">
-                                                            <option>Fundus</option>
-                                                            <option>Corpus</option>
-                                                            <option>Letak rendah</option>
-                                                            <option>Previa</option>
+                                                        <select name="lokasi_plasenta3" class="form-select">
+                                                            <option value="fundus">Fundus</option>
+                                                            <option value="corpus">Corpus</option>
+                                                            <option value="letak_rendah">Letak rendah</option>
+                                                            <option value="previa">Previa</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -1262,13 +1244,13 @@
                                                     <td>
                                                         <div class="mb-2 d-flex align-items-center">
                                                             <label class="form-label mb-0 me-2">SDP:</label>
-                                                            <input type="number" step="any"
+                                                            <input type="number" name="sdp3" step="any"
                                                                 class="form-control me-2" style="width: 150px;"
                                                                 placeholder="... cm">
-                                                            <select class="form-select">
-                                                                <option>Cukup</option>
-                                                                <option>Kurang</option>
-                                                                <option>Berlebih</option>
+                                                            <select name="jumlah_ketuban3" class="form-select">
+                                                                <option value="cukup">Cukup</option>
+                                                                <option value="kurang">Kurang</option>
+                                                                <option value="berlebih">Berlebih</option>
                                                             </select>
                                                         </div>
                                                     </td>
@@ -1280,65 +1262,70 @@
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">BPD:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" step="any"
-                                                                        class="form-control" placeholder="... cm">
+                                                                    <input type="number" name="bpd3"
+                                                                        step="any" class="form-control"
+                                                                        placeholder="... cm">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="... minggu">
+                                                                    <input type="number" name="bpd_minggu3"
+                                                                        class="form-control" placeholder="... minggu">
                                                                 </div>
                                                             </div>
 
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">HC:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" step="any"
-                                                                        class="form-control" placeholder="... cm">
+                                                                    <input type="number" name="hc3"
+                                                                        step="any" class="form-control"
+                                                                        placeholder="... cm">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="... minggu">
+                                                                    <input type="number" name="hc_minggu3"
+                                                                        class="form-control" placeholder="... minggu">
                                                                 </div>
                                                             </div>
 
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">AC:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" step="any"
-                                                                        class="form-control" placeholder="... cm">
+                                                                    <input type="number" name="ac3"
+                                                                        step="any" class="form-control"
+                                                                        placeholder="... cm">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="... minggu">
+                                                                    <input type="number" name="ac_minggu3"
+                                                                        class="form-control" placeholder="... minggu">
                                                                 </div>
                                                             </div>
 
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">FL:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" step="any"
-                                                                        class="form-control" placeholder="... cm">
+                                                                    <input type="number" name="fl3"
+                                                                        step="any" class="form-control"
+                                                                        placeholder="... cm">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="... minggu">
+                                                                    <input type="number" name="fl_minggu3"
+                                                                        class="form-control" placeholder="... minggu">
                                                                 </div>
                                                             </div>
 
                                                             <div class="row mb-2 align-items-center">
                                                                 <div class="col-md-1 fw-bold">EFW/TBJ:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" step="any"
-                                                                        class="form-control" placeholder="... gram">
+                                                                    <input type="number" name="efw3"
+                                                                        step="any" class="form-control"
+                                                                        placeholder="... gram">
                                                                 </div>
                                                                 <div class="col-md-2 text-md-end">Sesuai:</div>
                                                                 <div class="col-md-2">
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="... minggu">
+                                                                    <input type="number" name="efw_minggu3"
+                                                                        class="form-control" placeholder="... minggu">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1347,11 +1334,11 @@
                                                 <tr>
                                                     <td class="table-dark text-white">Kecurigaan Temuan Abnormal</td>
                                                     <td>
-                                                        <select class="form-select mb-2">
-                                                            <option>Ya</option>
-                                                            <option>Tidak</option>
+                                                        <select name="kecurigaan3" class="form-select mb-2">
+                                                            <option value="ya">Ya</option>
+                                                            <option value="tidak">Tidak</option>
                                                         </select>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" name="alasan3" class="form-control"
                                                             placeholder="Sebutkan jika ada...">
                                                     </td>
                                                 </tr>
@@ -1384,23 +1371,26 @@
                                                     <td class="text-start">Hemoglobin</td>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <input type="number" class="form-control" step="any"
+                                                            <input type="number" name="hemoglobin3"
+                                                                class="form-control" step="any"
                                                                 placeholder="Nilai">
                                                             <span class="input-group-text">g/dL</span>
                                                         </div>
                                                     </td>
-                                                    <td><input type="text" class="form-control form-control-sm"></td>
+                                                    <td><input type="text" name="hemoglobin_rtl3"
+                                                            class="form-control form-control-sm"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-start">Protein Urine</td>
                                                     <td>
                                                         <div class="input-group input-group-sm">
-                                                            <input type="number" step="any" class="form-control"
-                                                                placeholder="Nilai">
+                                                            <input type="number" name="protein_urin3" step="any"
+                                                                class="form-control" placeholder="Nilai">
                                                             <span class="input-group-text">Mg/dL</span>
                                                         </div>
                                                     </td>
-                                                    <td><input type="text" class="form-control form-control-sm"></td>
+                                                    <td><input type="text" name="protein_urin_rtl3"
+                                                            class="form-control form-control-sm"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-start">Urine Reduksi</td>
@@ -1409,7 +1399,7 @@
                                                             <div class="form-check form-check-inline">
                                                                 <input class="form-check-input" type="radio"
                                                                     name="urine_reduksi" id="negatif"
-                                                                    value="Negatif">
+                                                                    value="negatif">
                                                                 <label class="form-check-label"
                                                                     for="negatif">Negatif</label>
                                                             </div>
@@ -1443,7 +1433,8 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td><input type="text" class="form-control form-control-sm"></td>
+                                                    <td><input type="text" name="urin_reduksi_rtl3"
+                                                            class="form-control form-control-sm"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -1594,7 +1585,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
-                                                        name="rencana_melahirkan" id="normal" value="Normal">
+                                                        name="rencana_melahirkan" id="normal" value="normal">
                                                     <label class="form-check-label" for="normal">Normal</label>
                                                 </div>
                                             </div>
@@ -1602,7 +1593,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
                                                         name="rencana_melahirkan" id="pervaginam"
-                                                        value="Pervaginam Berbantu">
+                                                        value="pervaginam_berbantu">
                                                     <label class="form-check-label" for="pervaginam">Pervaginam
                                                         Berbantu</label>
                                                 </div>
@@ -1611,7 +1602,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
                                                         name="rencana_melahirkan" id="sectio"
-                                                        value="Sectio Caesaria">
+                                                        value="sectio_caesaria">
                                                     <label class="form-check-label" for="sectio">Sectio
                                                         Caesaria</label>
                                                 </div>
@@ -1668,7 +1659,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="kontrasepsi"
-                                                        id="belum_memilih" value="Belum memilih">
+                                                        id="belum_memilih" value="belum_memilih">
                                                     <label class="form-check-label" for="belum_memilih">Belum
                                                         memilih</label>
                                                 </div>

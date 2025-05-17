@@ -18,6 +18,9 @@ class RencanaKonsultasi extends Model
         'kebutuhan_konseling',
     ];
 
+    protected $casts = [
+        'rencana_konsultasi_lanjut' => 'array',
+    ];
     // Relasi ke PemeriksaanKehamilan
     public function trimester3()
     {

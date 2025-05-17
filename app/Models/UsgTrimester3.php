@@ -20,6 +20,8 @@ class UsgTrimester3 extends Model
         'presentasi_bayi',
         'keadaan_bayi',
         'djj',
+        'djj_status',
+        'sdp',
         'lokasi_plasenta',
         'jumlah_cairan_ketuban',
         'BPD',
