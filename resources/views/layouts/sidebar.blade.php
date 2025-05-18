@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 @if (Auth::user()->role == 'kader')
-                    l<li class="sidebar-item">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('petugas.index') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-users"></i>
