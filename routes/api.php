@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ArtikelController;
+use App\Http\Controllers\Api\DashboardFController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KehamilanControlller;
 use App\Http\Controllers\Api\LoginController;
@@ -37,4 +38,6 @@ Route::prefix('kehamilan')->group(function () {
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
 Route::post('/image', [UploadImage::class, 'getImage']);
+
+Route::get('/jadwal_FD', [DashboardFController::class, 'show']);
 Route::middleware('auth:sanctum')->post('/update_fcm_token', [FCMTokenController::class, 'update']);
