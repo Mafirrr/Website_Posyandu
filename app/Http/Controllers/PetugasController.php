@@ -31,7 +31,7 @@ class PetugasController extends Controller
 
         return view('petugas.petugas', compact('petugas'));
     }
-    public function petugas_add()
+    public function create()
     {
         $params = [
             "title" => "Tambah Petugas",
@@ -48,7 +48,7 @@ class PetugasController extends Controller
         return view('petugas.petugasform', $params);
     }
 
-    public function petugas_store(Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'nip' => 'required|string|max:20|unique:petugas,nip',
@@ -69,7 +69,7 @@ class PetugasController extends Controller
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil ditambahkan.');
     }
 
-    public function petugas_edit($id)
+    public function edit($id)
     {
         $petugas = Petugas::findOrFail($id);
         $params = [
@@ -81,7 +81,7 @@ class PetugasController extends Controller
         return view('petugas.petugasform', $params);
     }
 
-    public function petugas_update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'nip' => 'required|string|max:20|unique:petugas,nip,' . $id,
@@ -105,7 +105,7 @@ class PetugasController extends Controller
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil diperbarui.');
     }
 
-    public function petugas_destroy($id)
+    public function destroy($id)
     {
         $petugas = Petugas::findOrFail($id);
         $petugas->delete();

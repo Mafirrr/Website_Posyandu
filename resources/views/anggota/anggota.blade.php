@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="ms-auto">
 
-                                    <a href="{{ route('anggota.add') }}" id="btn-add-contact"
+                                    <a href="{{ route('anggota.create') }}" id="btn-add-contact"
                                         class="btn btn-primary d-flex align-items-center">
                                         <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah anggota
                                     </a>
