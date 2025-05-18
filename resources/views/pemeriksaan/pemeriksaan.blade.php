@@ -1725,13 +1725,13 @@
             }
         }
 
-        btnLanjutkan.addEventListener('click', function() {
+        btnLanjutkan.addEventListener('click', function(e) {
             if (currentStep < totalSteps) {
+                e.preventDefault();
                 currentStep++;
                 showStep(currentStep);
-            } else {}
+            }
         });
-
         btnKembali.addEventListener('click', function() {
             if (currentStep > 1) {
                 currentStep--;
