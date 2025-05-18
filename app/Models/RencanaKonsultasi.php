@@ -24,6 +24,6 @@ class RencanaKonsultasi extends Model
     // Relasi ke PemeriksaanKehamilan
     public function trimester3()
     {
-        return $this->hasOne(Trimester3::class, 'rencana_konsultasi');
+        return $this->hasMany(Trimester3::class, 'rencana_konsultasi');
     }
 }
