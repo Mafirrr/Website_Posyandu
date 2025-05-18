@@ -52,6 +52,7 @@ Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name
 Route::resource('/jadwal', JadwalController::class);
 
 Route::get('/riwayat-pemeriksaan', [RiwayatPemeriksaanController::class, 'index'])->name('riwayat.index');
+Route::get('/riwayat-pemeriksaan/{id}', [RiwayatPemeriksaanController::class, 'show'])->name('detail.riwayat');
 Route::resource('pemeriksaan', PemeriksaanController::class);
 
 Route::get('/anggota/saran', [AnggotaController::class, 'suggest']);

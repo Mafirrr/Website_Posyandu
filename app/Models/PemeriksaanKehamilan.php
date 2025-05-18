@@ -35,6 +35,16 @@ class PemeriksaanKehamilan extends Model
         return $this->belongsTo(Petugas::class, 'petugas_id');
     }
 
+    public function trimester1()
+    {
+        return $this->hasOne(Trimester1::class, 'pemeriksaan_id');
+    }
+
+    public function trimester3()
+    {
+        return $this->hasOne(Trimester3::class, 'pemeriksaan_id');
+    }
+
     /**
      * Relasi ke tabel pemeriksaan rutin
      */

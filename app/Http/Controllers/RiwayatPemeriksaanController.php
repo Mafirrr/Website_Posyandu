@@ -2,84 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Nifas;
-use App\Models\pemeriksaan_lab_kehamilan;
-use App\Models\PemeriksaanAwal;
-use App\Models\PemeriksaanFisik;
 use App\Models\PemeriksaanKehamilan;
-use App\Models\PemeriksaanKhusus;
-use App\Models\PemeriksaanLabAwal;
-use App\Models\PemeriksaanRutin;
-use App\Models\PemeriksaanTrimester1;
-use App\Models\PemeriksaanTrimester3;
-use App\Models\PemeriksaanUsgAwal;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-
 
 class RiwayatPemeriksaanController extends Controller
 {
     public function index(Request $request)
     {
-        $riwayat = collect();
+        // Ambil query dasar dengan relasi
+        $query = PemeriksaanKehamilan::with(['kehamilan.anggota']);
 
-        // Menggabungkan semua data riwayat
-        $riwayat->push(...PemeriksaanKehamilan::with('kehamilan.anggota')->get()->map(function ($p) {
-            return $this->formatRiwayat($p->id, 'Pemeriksaan Kehamilan', $p->kehamilan->anggota->nama ?? '-', $p->tanggal_pemeriksaan, $p->created_at, 'kehamilan');
-        }));
-        $riwayat->push(...PemeriksaanFisik::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
-            return $this->formatRiwayat($p->id, 'Pemeriksaan Fisik', $p->pemeriksaan->kehamilan->anggota->nama ?? '-', $p->created_at->toDateString(), $p->created_at, 'fisik');
-        }));
-        $riwayat->push(...PemeriksaanRutin::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
-            return $this->formatRiwayat($p->id, 'Pemeriksaan Rutin', $p->pemeriksaan->kehamilan->anggota->nama ?? '-', $p->created_at->toDateString(), $p->created_at, 'rutin');
-        }));
-        $riwayat->push(...PemeriksaanKhusus::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
-            return $this->formatRiwayat($p->id, 'Pemeriksaan Khusus', $p->pemeriksaan->kehamilan->anggota->nama ?? '-', $p->created_at->toDateString(), $p->created_at, 'khusus');
-        }));
-        $riwayat->push(...PemeriksaanAwal::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
-            return $this->formatRiwayat($p->id, 'Pemeriksaan Awal', $p->pemeriksaan->kehamilan->anggota->nama ?? '-', $p->created_at->toDateString(), $p->created_at, 'awal');
-        }));
-        $riwayat->push(...PemeriksaanUsgAwal::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
-            return $this->formatRiwayat($p->id, 'USG Awal', $p->pemeriksaan->kehamilan->anggota->nama ?? '-', $p->created_at->toDateString(), $p->created_at, 'usg');
-        }));
-        $riwayat->push(...PemeriksaanLabAwal::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
-            return $this->formatRiwayat($p->id, 'Laboratorium Awal', $p->pemeriksaan->kehamilan->anggota->nama ?? '-', $p->created_at->toDateString(), $p->created_at, 'lab');
-        }));
-        $riwayat->push(...Nifas::with('anggota')->get()->map(function ($p) {
-            return $this->formatRiwayat($p->id, 'Nifas', $p->anggota->nama ?? '-', $p->tanggal_pemeriksaan, $p->created_at, 'nifas');
-        }));
-
-        // ===============================
-        // Filter berdasarkan pencarian
-        // ===============================
+        // Filter berdasarkan pencarian nama anggota
         if ($search = $request->search) {
-            $riwayat = $riwayat->filter(function ($item) use ($search) {
-                return str_contains(strtolower($item['nama_anggota']), strtolower($search));
+            $query->whereHas('kehamilan.anggota', function ($q) use ($search) {
+                $q->where('nama', 'like', '%' . $search . '%');
             });
         }
 
-        // ===============================
         // Filter berdasarkan jenis pemeriksaan
-        // ===============================
         if ($jenis = $request->jenis_pemeriksaan) {
-            $riwayat = $riwayat->where('jenis_pemeriksaan', $jenis);
+            $query->where('jenis_pemeriksaan', $jenis);
         }
 
-        // ===============================
-        // Grouping by tanggal
-        // ===============================
-        $grouped = $riwayat->sortByDesc('tanggal')->groupBy('tanggal')->map(function ($items, $tanggal) {
+        // Ambil semua data yang sudah difilter, urut berdasarkan tanggal
+        $allData = $query->orderBy('tanggal_pemeriksaan', 'desc')->get();
+
+        // Map data ke format yang sesuai
+        $mapped = $allData->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'tanggal' => Carbon::parse($item->tanggal_pemeriksaan)->format('Y-m-d'),
+                'nama_anggota' => $item->kehamilan->anggota->nama ?? '-',
+                'jenis_pemeriksaan' => $this->getJenisPemeriksaanLabel($item->jenis_pemeriksaan),
+                'waktu' => $item->created_at->format('H:i:s'),
+                'jenis_pemeriksaan_raw' => $item->jenis_pemeriksaan, // untuk parameter URL
+            ];
+        });
+
+        // Grouping berdasarkan tanggal
+        $grouped = $mapped->groupBy('tanggal')->map(function ($items, $tanggal) {
             return [
                 'tanggal' => $tanggal,
-                'pemeriksaans' => $items->values()
+                'pemeriksaans' => $items->values(),
             ];
         })->values();
 
-        // ===============================
-        // Pagination manual
-        // ===============================
+        // Pagination manual pada data yang sudah grouping
         $perPage = $request->input('per_page', 10);
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
         $currentItems = $grouped->slice(($currentPage - 1) * $perPage, $perPage)->values();
 
         $paginatedGrouped = new LengthAwarePaginator(
@@ -90,102 +63,92 @@ class RiwayatPemeriksaanController extends Controller
             ['path' => $request->url(), 'query' => $request->query()]
         );
 
-        // ===============================
-        // List jenis pemeriksaan untuk filter
-        // ===============================
+        // List jenis pemeriksaan untuk filter di view
         $jenisPemeriksaans = [
-            'Pemeriksaan Kehamilan',
-            'Pemeriksaan Fisik',
-            'Pemeriksaan Rutin',
-            'Pemeriksaan Khusus',
-            'Pemeriksaan Awal',
-            'USG Awal',
-            'Laboratorium Awal',
-            'Nifas',
+            'trimester1' => 'Trimester 1',
+            'trimester2' => 'Trimester 2', 
+            'trimester3' => 'Trimester 3',
+            'nifas' => 'Nifas',
         ];
 
         return view('riwayat_pemeriksaan.riwayat_pemeriksaan', compact('paginatedGrouped', 'jenisPemeriksaans'));
     }
 
-    private function formatRiwayat($id, $jenis, $nama, $tanggal, $waktu, $tipe)
+    public function show($id)
     {
-        return [
-            'id' => $id,
-            'nama_anggota' => $nama,
-            'jenis_pemeriksaan' => $jenis,
-            'tanggal' => $tanggal,
-            'waktu' => $waktu->format('H:i:s'),
-            'tipe' => $tipe,
-        ];
-    }
+        $pemeriksaan = PemeriksaanKehamilan::with(['kehamilan.anggota'])->findOrFail($id);
+        $jenis = $pemeriksaan->jenis_pemeriksaan;
 
-    public function show($tipe, $id)
-    {
-        switch ($tipe) {
-            case 'kehamilan':
-                $data = PemeriksaanKehamilan::with('kehamilan.anggota')->findOrFail($id);
-                $jenis = 'Pemeriksaan Kehamilan';
+        $detail = null;
+        $namaAnggota = $pemeriksaan->kehamilan->anggota->nama ?? '-';
+
+        switch ($jenis) {
+            case 'trimester1':
+                // Ambil data trimester 1 dengan semua relasinya
+                $detail = $pemeriksaan->trimester1()->with([
+                    'pemeriksaanAwal',
+                    'pemeriksaanFisik', 
+                    'pemeriksaanKhusus',
+                    'labTrimester1',
+                    'skriningKesehatan',
+                    'usgTrimester1',
+                ])->first();
+                
+                // Ambil juga data pemeriksaan rutin
+                $pemeriksaanRutin = $pemeriksaan->pemeriksaan_rutin;
                 break;
-            case 'fisik':
-                $data = PemeriksaanFisik::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
-                $jenis = 'Pemeriksaan Fisik';
+
+            case 'trimester2':
+                // Untuk trimester 2, biasanya hanya ada pemeriksaan rutin
+                $detail = $pemeriksaan;
+                $pemeriksaanRutin = $pemeriksaan->pemeriksaan_rutin;
                 break;
-            case 'rutin':
-                $data = PemeriksaanRutin::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
-                $jenis = 'Pemeriksaan Rutin';
+
+            case 'trimester3':
+                // Ambil data trimester 3 dengan semua relasinya
+                $detail = $pemeriksaan->trimester3()->with([
+                    'pemeriksaanFisik',
+                    'labTrimester3', 
+                    'skriningKesehatan',
+                    'rencanaKonsultasi',
+                    'usgTrimester3',
+                ])->first();
+                
+                // Ambil juga data pemeriksaan rutin
+                $pemeriksaanRutin = $pemeriksaan->pemeriksaan_rutin;
                 break;
-            case 'khusus':
-                $data = PemeriksaanKhusus::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
-                $jenis = 'Pemeriksaan Khusus';
-                break;
-            case 'awal':
-                $data = PemeriksaanAwal::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
-                $jenis = 'Pemeriksaan Awal';
-                break;
-            case 'usg':
-                $data = PemeriksaanUsgAwal::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
-                $jenis = 'USG Awal';
-                break;
-            case 'lab':
-                $data = PemeriksaanLabAwal::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
-                $jenis = 'Laboratorium Awal';
-                break;
+
             case 'nifas':
-                $data = Nifas::with('anggota')->findOrFail($id);
-                $jenis = 'Nifas';
+                // Untuk nifas, data ada di pemeriksaan kehamilan itu sendiri
+                $detail = $pemeriksaan;
+                $pemeriksaanRutin = null;
                 break;
+
             default:
-                abort(404, 'Jenis pemeriksaan tidak dikenal');
+                return response()->json(['error' => 'Jenis pemeriksaan tidak dikenal'], 400);
         }
 
-        $namaAnggota = $this->getNamaAnggota($data, $tipe);
-
         return view('riwayat_pemeriksaan.detail_riwayat', [
-            'pemeriksaan' => $data,
-            'jenis' => $jenis,
+            'pemeriksaan' => $pemeriksaan,
+            'detail' => $detail,
+            'pemeriksaanRutin' => $pemeriksaanRutin,
+            'jenis' => $this->getJenisPemeriksaanLabel($jenis),
             'namaAnggota' => $namaAnggota,
         ]);
     }
 
-
-    private function getNamaAnggota($pemeriksaan, $tipe)
+    /**
+     * Convert jenis pemeriksaan ke label yang readable
+     */
+    private function getJenisPemeriksaanLabel($jenis)
     {
-        switch ($tipe) {
-            case 'nifas':
-                return $pemeriksaan->anggota->nama ?? '-';
-            case 'khusus':
-            case 'fisik':
-            case 'rutin':
-            case 'awal':
-            case 'usg':
-            case 'lab':
-                return $pemeriksaan->pemeriksaan->kehamilan->anggota->nama ?? '-';
-            case 'kehamilan':
-                return $pemeriksaan->kehamilan->anggota->nama ?? '-';
-            default:
-                return '-';
-        }
+        $labels = [
+            'trimester1' => 'Trimester 1',
+            'trimester2' => 'Trimester 2',
+            'trimester3' => 'Trimester 3', 
+            'nifas' => 'Nifas',
+        ];
+
+        return $labels[$jenis] ?? ucfirst($jenis);
     }
-
-
 }
