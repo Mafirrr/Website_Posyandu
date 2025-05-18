@@ -1799,6 +1799,7 @@
                 .then(res => res.json())
                 .then(data => {
                     suggestionBox.innerHTML = '';
+                    console.log(data);
 
                     if (data.length === 0) {
                         suggestionBox.innerHTML = '<div class="p-2 text-muted">Tidak ditemukan</div>';
