@@ -35,15 +35,9 @@ class Petugas extends Authenticatable implements CanResetPassword
     ];
 
     // Relasi ke tabel Pemeriksaan Trimester 1
-    public function pemeriksaanTrimester1()
+    public function pemeriksaanKehamilan()
     {
-        return $this->hasMany(PemeriksaanTrimester1::class, 'petugas_id');
-    }
-
-    // Relasi ke tabel Pemeriksaan Trimester 3
-    public function pemeriksaanTrimester3()
-    {
-        return $this->hasMany(PemeriksaanTrimester3::class, 'petugas_id');
+        return $this->hasMany(PemeriksaanKehamilan::class, 'petugas_id');
     }
 
     // Relasi ke tabel Nifas

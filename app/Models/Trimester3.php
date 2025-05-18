@@ -52,6 +52,6 @@ class Trimester3 extends Model
 
     public function pemeriksaanRutin()
     {
-        return $this->hasOne(PemeriksaanRutin::class, 'pemeriksaan_id', 'pemeriksaan_id');
+        return $this->hasMany(PemeriksaanRutin::class, 'pemeriksaan_id', 'pemeriksaan_id');
     }
 }

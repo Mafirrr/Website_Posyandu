@@ -19,10 +19,10 @@ class SkriningKesehatanJiwa extends Model
 
     public function trimester1()
     {
-        return $this->hasOne(Trimester1::class, 'skrining_kesehatan');
+        return $this->hasMany(Trimester1::class, 'skrining_kesehatan');
     }
     public function trimester3()
     {
-        return $this->hasOne(Trimester3::class, 'skrining_kesehatan');
+        return $this->hasMany(Trimester3::class, 'skrining_kesehatan');
     }
 }

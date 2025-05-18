@@ -33,7 +33,7 @@ class PemeriksaanAwal extends Model
 
     public function trimester1()
     {
-        return $this->hasOne(Trimester1::class, 'pemeriksaan_awal');
+        return $this->hasMany(Trimester1::class, 'pemeriksaan_awal');
     }
     public function pemeriksaan()
     {
