@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'roleAkses:bidan,kader'])->group((function () {
     Route::resource('/petugas', PetugasController::class);
 
-    Route::resource('/anggota', AnggotaController::class);
+    Route::resource('/anggota', AnggotaController::class)->except(['show']);
     Route::resource("berita", BeritaController::class);
     Route::resource('/jadwal', JadwalController::class);
 
