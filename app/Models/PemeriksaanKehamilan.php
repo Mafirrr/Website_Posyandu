@@ -15,6 +15,7 @@ class PemeriksaanKehamilan extends Model
         'kehamilan_id',
         'petugas_id',
         'tanggal_pemeriksaan',
+        'tempat_pemeriksaan',
         'jenis_pemeriksaan',
     ];
 

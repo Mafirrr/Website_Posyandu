@@ -14,8 +14,8 @@ class PemeriksaanAwal extends Model
     protected $fillable = [
         'tinggi_badan',
         'golongan_darah',
-        'status_imunisasi',
-        'hemogoblin',
+        'status_imunisasi_td',
+        'hemoglobin',
         'gula_darah_puasa',
         'riwayat_kesehatan_ibu_sekarang',
         'riwayat_perilaku',

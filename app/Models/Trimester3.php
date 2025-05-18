@@ -49,4 +49,9 @@ class Trimester3 extends Model
     {
         return $this->belongsTo(RencanaKonsultasi::class, 'rencana_konsultasi');
     }
+
+    public function pemeriksaanRutin()
+    {
+        return $this->hasOne(PemeriksaanRutin::class, 'pemeriksaan_id', 'pemeriksaan_id');
+    }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('kehamilan_id')->references('id')->on('kehamilan');
             $table->foreignId('petugas_id')->references('id')->on('petugas');
             $table->date('tanggal_pemeriksaan');
+            $table->string('tempat_pemeriksaan')->nullable();
             $table->enum('jenis_pemeriksaan', ['trimester1', 'trimester2', 'trimester3', 'nifas']);
             $table->timestamps();
             $table->softDeletes();

@@ -15,6 +15,9 @@ class LabTrimester3 extends Model
         'Hemoglobin',
         'Protein_urin',
         'urin_reduksi',
+        'hemoglobin_rtl',
+        'protein_urin_rtl',
+        'urin_reduksi_rtl',
     ];
 
     protected $casts = [

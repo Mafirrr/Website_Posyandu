@@ -16,6 +16,9 @@ return new class extends Migration
             $table->float('hemoglobin');
             $table->string('golongan_darah_dan_rhesus');
             $table->float('gula_darah');
+            $table->string('hemoglobin_rtl')->nullable();
+            $table->string('rhesus_rtl')->nullable();
+            $table->string('gula_darah_rtl')->nullable();
             $table->enum('hiv', ['reaktif', 'nonreaktif']);
             $table->enum('sifilis', ['reaktif', 'nonreaktif']);
             $table->enum('hepatitis_b', ['reaktif', 'nonreaktif']);

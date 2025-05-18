@@ -15,11 +15,6 @@ class Kehamilan extends Model
 
     protected $fillable = [
         'anggota_id',
-        'tanggal_awal',
-        'usia_kehamilan_awal',
-        'riwayat_penyakit',
-        'riwayat_kehamilan',
-        'perkiraan_kehamilan',
         'status',
         'proses_melahirkan',
         'penolong',

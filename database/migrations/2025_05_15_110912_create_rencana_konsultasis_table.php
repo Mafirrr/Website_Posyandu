@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('rencana_konsultasi', function (Blueprint $table) {
             $table->id();
-            $table->enum('rencana_konsultasi_lanjut', ['spesialis', 'psikolog', 'lainnya']);
-            $table->enum('rencana_proses_melahirkan', ['puskesmas', 'rumah_sakit', 'bidan', 'lainnya']);
-            $table->enum('pilihan_kontrasepsi', ['implant', 'pil', 'suntik', 'iud', 'kondom', 'lainnya']);
+            $table->json('rencana_konsultasi_lanjut')->nullable();
+            $table->enum('rencana_proses_melahirkan', ['normal', 'pervaginam_berbantu', 'sectio_caesaria'])->nullable();
+            $table->enum('pilihan_kontrasepsi', ['AKDR', 'Pil', 'Suntik', 'Steril', 'MAL', 'Implan', 'belum_memilih'])->nullable();
             $table->enum('kebutuhan_konseling', ['ya', 'tidak']);
             $table->timestamps();
             $table->softDeletes();

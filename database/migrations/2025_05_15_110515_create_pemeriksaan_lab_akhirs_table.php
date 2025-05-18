@@ -16,6 +16,9 @@ return new class extends Migration
             $table->float('Hemoglobin');
             $table->float('Protein_urin');
             $table->enum('urin_reduksi', ['negatif', '+1', '+2', '+3', '+4']);
+            $table->string('hemoglobin_rtl')->nullable();
+            $table->string('protein_urin_rtl')->nullable();
+            $table->string('urin_reduksi_rtl')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
