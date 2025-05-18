@@ -55,21 +55,65 @@ class KehamilanControlller extends Controller
         $tri3_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester3')->pluck('id')->values();
 
         $tri1 = Trimester1::with([
+            'pemeriksaanRutin',
             'skriningKesehatan',
             'pemeriksaanFisik',
             'pemeriksaanAwal',
             'pemeriksaanKhusus',
             'labTrimester1',
-            'usgTrimester1'
-        ])->where('pemeriksaan_id', $tri1_id)->first();
-        $tri2 = PemeriksaanRutin::where('pemeriksaan_id', $tri2_id)->get();
+            'usgTrimester1',
+        ])->where('pemeriksaan_id', $tri1_id)->get()
+            ->each(function ($item) {
+                $item->makeHidden([
+                    'skrining_kesehatan',
+                    'pemeriksaan_fisik',
+                    'pemeriksaan_awal',
+                    'pemeriksaan_khusus',
+                    'lab_trimester_1',
+                    'usg_trimester_1',
+                    'created_at',
+                    'updated_at',
+                    'deleted_at'
+                ]);
+                $item->skriningKesehatan?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->pemeriksaanFisik?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->pemeriksaanAwal?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->pemeriksaanKhusus?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->labTrimester1?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->usgTrimester1?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->pemeriksaanRutin?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+            });
+        $tri2 = PemeriksaanRutin::where('pemeriksaan_id', $tri2_id)->get()
+            ->each(function ($item) {
+                $item->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->pemeriksaan?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+            });
         $tri3 = Trimester3::with([
+            'pemeriksaanRutin',
             'skriningKesehatan',
             'pemeriksaanFisik',
             'labTrimester3',
             'usgTrimester3',
             'rencanaKonsultasi',
-        ])->where('pemeriksaan_id', $tri3_id)->get();
+        ])->where('pemeriksaan_id', $tri3_id)->get()
+            ->each(function ($item) {
+                $item->makeHidden([
+                    'skrining_kesehatan',
+                    'pemeriksaan_fisik',
+                    'lab_trimester_3',
+                    'usg_trimester_3',
+                    'rencana_konsultasi',
+                    'created_at',
+                    'updated_at',
+                    'deleted_at'
+                ]);
+                $item->skriningKesehatan?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->pemeriksaanFisik?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->labTrimester3?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->usgTrimester3?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->rencanaKonsultasi?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                $item->pemeriksaanRutin?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+            });
         $tri1->makeHidden(['created_at', 'updated_at', 'deleted_at']);
         $tri2->makeHidden(['created_at', 'updated_at', 'deleted_at']);
         $tri3->makeHidden(['created_at', 'updated_at', 'deleted_at']);
