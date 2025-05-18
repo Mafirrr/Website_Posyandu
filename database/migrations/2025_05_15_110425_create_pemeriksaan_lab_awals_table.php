@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('hemoglobin_rtl')->nullable();
             $table->string('rhesus_rtl')->nullable();
             $table->string('gula_darah_rtl')->nullable();
-            $table->enum('hiv', ['reaktif', 'nonreaktif']);
-            $table->enum('sifilis', ['reaktif', 'nonreaktif']);
-            $table->enum('hepatitis_b', ['reaktif', 'nonreaktif']);
+            $table->enum('hiv', ['reaktif', 'non_reaktif']);
+            $table->enum('sifilis', ['reaktif', 'non_reaktif']);
+            $table->enum('hepatitis_b', ['reaktif', 'non_reaktif']);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -94,6 +94,7 @@ class PemeriksaanController extends Controller
 
     public function trimester1(Request $request)
     {
+
         $validated = $request->validate([
             'anggota_id' => 'required|exists:anggota,id',
 

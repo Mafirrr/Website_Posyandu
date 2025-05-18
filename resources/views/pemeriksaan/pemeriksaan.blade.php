@@ -788,7 +788,7 @@
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio" name="h"
-                                                                value="non-reaktif">
+                                                                value="non_reaktif">
                                                             <label class="form-check-label">Non reaktif</label>
                                                         </div>
                                                     </td>
@@ -804,7 +804,7 @@
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio" name="s"
-                                                                value="non-reaktif">
+                                                                value="non_reaktif">
                                                             <label class="form-check-label">Non reaktif</label>
                                                         </div>
                                                     </td>
@@ -820,7 +820,7 @@
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="hepatitis" value="non-reaktif">
+                                                                name="hepatitis" value="non_reaktif">
                                                             <label class="form-check-label">Non reaktif</label>
                                                         </div>
                                                     </td>
