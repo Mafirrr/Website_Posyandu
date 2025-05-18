@@ -27,9 +27,10 @@ class KehamilanControlller extends Controller
     }
     public function find(string $id)
     {
-        $kehamilanList = Kehamilan::select('id', 'anggota_id', 'status')->where('anggota_id', $id)
+        $kehamilanList = Kehamilan::where('anggota_id', $id)
             ->orderBy('created_at', 'asc')
-            ->get();
+            ->get()
+            ->makeHidden(['created_at', 'updated_at', 'deleted_at']);
 
         $labelPrefix = 'kehamilan ';
         $angka = ['pertama', 'kedua', 'ketiga', 'keempat', 'kelima', 'keenam', 'ketujuh', 'kedelapan', 'kesembilan', 'kesepuluh'];
@@ -48,8 +49,8 @@ class KehamilanControlller extends Controller
 
     public function detail(string $id)
     {
-        $pemeriksaan = PemeriksaanKehamilan::where('kehamilan_id', $id)->get();
-
+        $pemeriksaan = PemeriksaanKehamilan::where('kehamilan_id', $id)->get()
+            ->makeHidden(['created_at', 'updated_at', 'deleted_at']);
         $tri1_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester1')->pluck('id')->values();
         $tri2_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester2')->pluck('id')->values();
         $tri3_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester3')->pluck('id')->values();
@@ -71,7 +72,6 @@ class KehamilanControlller extends Controller
                     'pemeriksaan_khusus',
                     'lab_trimester_1',
                     'usg_trimester_1',
-                    'created_at',
                     'updated_at',
                     'deleted_at'
                 ]);
@@ -84,10 +84,7 @@ class KehamilanControlller extends Controller
                 $item->pemeriksaanRutin?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
             });
         $tri2 = PemeriksaanRutin::where('pemeriksaan_id', $tri2_id)->get()
-            ->each(function ($item) {
-                $item->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-                $item->pemeriksaan?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-            });
+            ->makeHidden(['updated_at', 'deleted_at']);
         $tri3 = Trimester3::with([
             'pemeriksaanRutin',
             'skriningKesehatan',
@@ -103,7 +100,6 @@ class KehamilanControlller extends Controller
                     'lab_trimester_3',
                     'usg_trimester_3',
                     'rencana_konsultasi',
-                    'created_at',
                     'updated_at',
                     'deleted_at'
                 ]);
@@ -114,14 +110,11 @@ class KehamilanControlller extends Controller
                 $item->rencanaKonsultasi?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
                 $item->pemeriksaanRutin?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
             });
-        $tri1->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-        $tri2->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-        $tri3->makeHidden(['created_at', 'updated_at', 'deleted_at']);
         return response()->json([
             'status' => 'success',
             'message' => 'Data berhasil diambil',
             'data' => [
-                'id' => $id,
+                'pemeriksaan' => $pemeriksaan,
                 'trimester1' => $tri1,
                 'trimester2' => $tri2,
                 'trimester3' => $tri3,
