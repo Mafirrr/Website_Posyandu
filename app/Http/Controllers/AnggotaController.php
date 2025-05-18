@@ -37,7 +37,7 @@ class AnggotaController extends Controller
 
 
 
-    public function anggota_add()
+    public function create()
     {
         $params = [
             "title" => "Tambah Anggota",
@@ -62,7 +62,7 @@ class AnggotaController extends Controller
         return view('anggota.form', $params);
     }
 
-    public function anggota_store(Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'nik' => 'required|string|max:20|unique:anggota,nik',
@@ -97,7 +97,7 @@ class AnggotaController extends Controller
         return redirect()->route('anggota.index')->with('success', 'Data anggota berhasil ditambahkan.');
     }
 
-    public function anggota_edit($id)
+    public function edit($id)
     {
         $anggota = Anggota::findOrFail($id);
         $params = [
@@ -109,7 +109,7 @@ class AnggotaController extends Controller
         return view('anggota.form', $params);
     }
 
-    public function anggota_update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'nik' => 'required|string|max:20|unique:anggota,nik,' . $id,
@@ -148,7 +148,7 @@ class AnggotaController extends Controller
         return redirect()->route('anggota.index')->with('success', 'Data anggota berhasil diperbarui.');
     }
 
-    public function anggota_destroy($id)
+    public function destroy($id)
     {
         $anggota = Anggota::findOrFail($id);
         $anggota->delete();

@@ -30,9 +30,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'roleAkses:bidan,kader'])->group((function () {
     Route::resource('/petugas', PetugasController::class);
 
-    Route::resource('/anggota', AnggotaController::class);
+    Route::resource('/anggota', AnggotaController::class)->except('show');
     Route::resource("berita", BeritaController::class);
     Route::resource('/jadwal', JadwalController::class);
+}));
 
 Route::get('/riwayat-pemeriksaan', [RiwayatPemeriksaanController::class, 'index'])->name('riwayat.index');
 Route::get('/riwayat-pemeriksaan/{id}', [RiwayatPemeriksaanController::class, 'show'])->name('detail.riwayat');
