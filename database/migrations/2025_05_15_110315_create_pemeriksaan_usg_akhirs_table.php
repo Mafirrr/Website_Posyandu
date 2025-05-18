@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('jumlah_bayi', ['tunggal', 'kembar']);
             $table->enum('letak_bayi', ['intrauterin', 'extrauterin', 'tidak_dapat_ditentukan']);
             $table->enum('presentasi_bayi', ['kepala', 'bokong', 'letak_lintang']);
-            $table->enum('keadaan_bayi', ['hidup', 'maninggal']);
+            $table->enum('keadaan_bayi', ['hidup', 'meninggal']);
             $table->enum('djj_status', ['normal', 'tidak_normal']);
             $table->enum('lokasi_plasenta', ['letak_rendah', 'corpus', 'fundus', 'previa']);
             $table->enum('jumlah_cairan_ketuban', ['cukup', 'kurang', 'berlebih']);
