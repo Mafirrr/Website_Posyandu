@@ -29,7 +29,7 @@ class AnggotaController extends Controller
             ->when($aktif !== null && $aktif !== '', function ($query) use ($aktif) {
                 $query->where('aktif', $aktif);
             })
-            ->orderBy('created_at', 'asc')
+            ->orderBy('created_at', 'desc')
             ->paginate($perPage)
             ->appends(request()->query());
         return view('anggota.anggota', compact('anggotas'));

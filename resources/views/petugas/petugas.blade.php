@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('main')
     <div>
-
         <section class="mt-0 mb-10">
             <div class="mx-auto max-w-screen-xl ">
                 <div class="bg-white dark:bg-white relative shadow-md sm:rounded-lg overflow-hidden">
@@ -33,9 +32,9 @@
                     <div class="card card-body border ">
                         <div class="row justify-content-between">
                             <div class="col-md-4 col-xl-4">
-                                <form class="position-relative">
-                                    <input type="text" class="form-control product-search ps-5" id="input-search"
-                                        placeholder="Search...">
+                                <form class="position-relative" method="GET" action="{{ route('petugas.index') }}">
+                                    <input type="text" name="search" class="form-control product-search ps-5"
+                                        id="input-search" placeholder="Search..." value="{{ request('search') }}" />
                                     <i
                                         class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                 </form>
@@ -78,17 +77,18 @@
                                                         class="btn btn-warning d-flex align-items-center" title="Edit">
                                                         <i class="ti ti-edit text-white fs-5"></i>
                                                     </a>
-                                                    <form action="{{ route('petugas.destroy', $p->id) }}" method="POST"
-                                                        onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                                    <form id="form-delete-{{ $p->id }}"
+                                                        action="{{ route('petugas.destroy', $p->id) }}" method="POST"
+                                                        class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit"
-                                                            class="btn btn-danger d-flex align-items-center" title="Hapus">
+                                                        <button type="button"
+                                                            class="btn btn-danger d-flex align-items-center btn-delete"
+                                                            data-id="{{ $p->id }}">
                                                             <i class="ti ti-trash text-white fs-5"></i>
                                                         </button>
                                                     </form>
                                                 </td>
-
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -123,3 +123,16 @@
         </section>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+    </script>
+@endpush

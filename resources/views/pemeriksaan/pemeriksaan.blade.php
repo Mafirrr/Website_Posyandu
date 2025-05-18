@@ -2,16 +2,39 @@
 @section('main')
     <style>
         #suggestion-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+
+            border: 1px solid #ddd;
             border-top: none;
             border-bottom-left-radius: 0.375rem;
             border-bottom-right-radius: 0.375rem;
-            background-color: white;
-            color: black;
+
+            background-color: #fff !important;
+            color: #333 !important;
+            box-shadow: 0 4px 6px rgba(182, 182, 182, 0.1);
         }
 
         #suggestion-box .dropdown-item {
             padding: 0.5rem 1rem;
             cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        #suggestion-box .dropdown-item:hover {
+            background-color: #f1f1f1 !important;
+            color: #000 !important;
+        }
+
+        /* Optional: highlight selected item */
+        #suggestion-box .dropdown-item.active {
+            background-color: #007bff !important;
+            color: #fff !important;
         }
     </style>
     <section class="mt-0 mb-10">
@@ -47,7 +70,7 @@
                             <span class="input-group-text"><i class="ti ti-search"></i></span>
                         </div>
                         <div id="suggestion-box"
-                            style="position: absolute; top: 100%; left: 0; right: 0; max-height: 200px; overflow-y: auto; z-index: 1000; background-color: gray; color: white;">
+                            style="position: absolute; top: 100%; left: 0; right: 0; max-height: 200px; overflow-y: auto; z-index: 1000; background-color: white; color: white;">
                         </div>
                     </div>
                 </div>
@@ -462,7 +485,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="row g-3 mt-4">
+                                {{-- <div class="row g-3 mt-4">
                                     <h5>Riwayat Kehamilan dan Proses Melahirkan</h5>
                                     <div class="table-responsive">
                                         <table class="table table-bordered align-middle text-center">
@@ -500,7 +523,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="step-section d-none step-3" id="">
                                 <div class="row g-3 mb-2">

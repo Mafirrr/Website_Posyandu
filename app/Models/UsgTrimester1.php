@@ -46,4 +46,8 @@ class UsgTrimester1 extends Model
     {
         return $this->hasOne(Trimester1::class, 'usg_trimester_1');
     }
+    public function pemeriksaan()
+    {
+        return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');
+    }
 }

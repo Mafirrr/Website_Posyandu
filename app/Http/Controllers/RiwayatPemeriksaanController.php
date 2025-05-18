@@ -13,6 +13,7 @@ use App\Models\PemeriksaanRutin;
 use App\Models\PemeriksaanTrimester1;
 use App\Models\PemeriksaanTrimester3;
 use App\Models\PemeriksaanUsgAwal;
+use App\Models\UsgTrimester1;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -39,10 +40,10 @@ class RiwayatPemeriksaanController extends Controller
         $riwayat->push(...PemeriksaanAwal::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
             return $this->formatRiwayat($p->id, 'Pemeriksaan Awal', $p->pemeriksaan->kehamilan->anggota->nama ?? '-', $p->created_at->toDateString(), $p->created_at, 'awal');
         }));
-        $riwayat->push(...PemeriksaanUsgAwal::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
+        $riwayat->push(...UsgTrimester1::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
             return $this->formatRiwayat($p->id, 'USG Awal', $p->pemeriksaan->kehamilan->anggota->nama ?? '-', $p->created_at->toDateString(), $p->created_at, 'usg');
         }));
-        $riwayat->push(...PemeriksaanLabAwal::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
+        $riwayat->push(...PemeriksaanAwal::with('pemeriksaan.kehamilan.anggota')->get()->map(function ($p) {
             return $this->formatRiwayat($p->id, 'Laboratorium Awal', $p->pemeriksaan->kehamilan->anggota->nama ?? '-', $p->created_at->toDateString(), $p->created_at, 'lab');
         }));
         $riwayat->push(...Nifas::with('anggota')->get()->map(function ($p) {
@@ -143,11 +144,11 @@ class RiwayatPemeriksaanController extends Controller
                 $jenis = 'Pemeriksaan Awal';
                 break;
             case 'usg':
-                $data = PemeriksaanUsgAwal::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
+                $data = UsgTrimester1::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
                 $jenis = 'USG Awal';
                 break;
             case 'lab':
-                $data = PemeriksaanLabAwal::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
+                $data = PemeriksaanAwal::with('pemeriksaan.kehamilan.anggota')->findOrFail($id);
                 $jenis = 'Laboratorium Awal';
                 break;
             case 'nifas':
@@ -186,6 +187,4 @@ class RiwayatPemeriksaanController extends Controller
                 return '-';
         }
     }
-
-
 }

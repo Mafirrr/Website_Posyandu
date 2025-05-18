@@ -25,7 +25,7 @@ class PetugasController extends Controller
                 $query->where('aktif', $aktif);
             })
             ->where('role', 'bidan')
-            ->orderBy('created_at', 'asc')
+            ->orderBy('created_at', 'desc')
             ->paginate($perPage)
             ->appends(request()->query());
 
@@ -64,7 +64,7 @@ class PetugasController extends Controller
         $petugas->nama = $validated['nama'];
         $petugas->no_telepon = $validated['no_telepon'];
         $petugas->email = $validated['email'];
-        $petugas->role = 'petugas';
+        $petugas->role = 'bidan';
         $petugas->save();
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil ditambahkan.');
     }

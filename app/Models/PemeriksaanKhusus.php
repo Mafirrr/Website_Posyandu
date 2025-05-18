@@ -27,4 +27,8 @@ class PemeriksaanKhusus extends Model
     {
         return $this->hasOne(Trimester1::class, 'pemeriksaan_khusus');
     }
+    public function pemeriksaan()
+    {
+        return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');
+    }
 }

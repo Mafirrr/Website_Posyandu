@@ -35,4 +35,8 @@ class PemeriksaanFisik extends Model
     {
         return $this->hasOne(Trimester3::class, 'pemeriksaan_fisik');
     }
+    public function pemeriksaan()
+    {
+        return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');
+    }
 }

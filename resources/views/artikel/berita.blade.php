@@ -43,8 +43,7 @@
                             </div>
                             <div class="col-2">
                                 <a href="{{ route('berita.index', ['search' => request('search'), 'kategori' => 'olahraga']) }}"
-                                   id="btn-add-contact"
-                                   class="btn text-dark border border-dark d-flex align-items-center">
+                                    id="btn-add-contact" class="btn text-dark border border-dark d-flex align-items-center">
                                     <i class="ti ti-filter text-dark me-1 fs-5"></i> Aktif
                                 </a>
                                 </a>
@@ -58,56 +57,55 @@
                                     <thead class="header-item">
                                         <tr>
 
-                            <th scope="col">NO.</th>
-                            <th scope="col">Thumbnail</th>
-                            <th scope="col">Title</th>
-                            {{-- <th scope="col">Deskripsi</th> --}}
-                            <th scope="col">Kategori</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($artikels as $berita)
-                            <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
-                                <td>
-                                    <img src="storage/{{ $berita->gambar }}" alt="Thumbnail" class="img-thumbnail" style="width: 64px; height: 64px; object-fit: cover;">
-                                </td>
-                                <td>{{ $berita->judul }}</td>
-                                {{-- <td>{!! Str::limit($berita->isi, 50, '') !!}</td> --}}
-                                <td>{{ $berita->kategori_edukasi}}</td>
-                                <td>{{ $berita->created_at->toDateString() }}</td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a href="{{ route('berita.edit', $berita->id) }}"
-                                           class="btn btn-warning d-flex align-items-center gap-2 px-3 py-2 rounded"
-                                           title="Edit">
+                                            <th scope="col">NO.</th>
+                                            <th scope="col">Thumbnail</th>
+                                            <th scope="col">Title</th>
+                                            {{-- <th scope="col">Deskripsi</th> --}}
+                                            <th scope="col">Kategori</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($artikels as $berita)
+                                            <tr>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>
+                                                    <img src="storage/{{ $berita->gambar }}" alt="Thumbnail"
+                                                        class="img-thumbnail"
+                                                        style="width: 64px; height: 64px; object-fit: cover;">
+                                                </td>
+                                                <td>{{ $berita->judul }}</td>
+                                                {{-- <td>{!! Str::limit($berita->isi, 50, '') !!}</td> --}}
+                                                <td>{{ $berita->kategori_edukasi }}</td>
+                                                <td>{{ $berita->created_at->toDateString() }}</td>
+                                                <td>
+                                                    <div class="d-flex gap-2">
+                                                        <a href="{{ route('berita.edit', $berita->id) }}"
+                                                            class="btn btn-warning d-flex align-items-center justify-content-center p-2 rounded"
+                                                            title="Edit" style="width: 38px; height: 38px;">
+                                                            <i class="ti ti-edit text-white fs-5"></i>
+                                                        </a>
 
-                                           <span class="text-white fw-bold">Edit</span>
-                                        </a>
-
-                                        <form action="{{ route('berita.destroy', $berita->id) }}"
-                                              method="POST"
-                                              onsubmit="return confirm('Yakin ingin menghapus data ini?');"
-                                              class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                    class="btn btn-danger d-flex align-items-center gap-2 px-3 py-2 rounded"
-                                                    title="Hapus">
-
-                                                <span class="text-white fw-bold">Hapus</span>
-                                            </button>
-                                        </form>
-                                    </div>
-
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                                                        <form action="{{ route('berita.destroy', $berita->id) }}"
+                                                            method="POST"
+                                                            onsubmit="return confirm('Yakin ingin menghapus data ini?');"
+                                                            class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-danger d-flex align-items-center justify-content-center p-2 rounded"
+                                                                title="Hapus" style="width: 38px; height: 38px;">
+                                                                <i class="ti ti-trash text-white fs-5"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <form method="GET" action="{{ route('berita.index') }}" class="mt-4">
                                 <div class="row">
