@@ -1751,7 +1751,6 @@
                 }
             }
         });
-
         btnKembali.addEventListener('click', function() {
             if (currentStep > 1) {
                 currentStep--;
