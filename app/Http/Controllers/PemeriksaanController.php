@@ -107,7 +107,6 @@ class PemeriksaanController extends Controller
             'diastolik' => 'required|numeric',
             'tinggi_rahim1' => 'nullable|string',
             'denyut_janin1' => 'nullable|string',
-            'imunisasi_tetanus1' => 'nullable|string',
             'konseling1' => 'nullable|string',
             'skrining_dokter1' => 'nullable|string',
             'tambah_darah1' => 'nullable|string',

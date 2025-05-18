@@ -105,17 +105,6 @@
                                         <input type="text" name="denyut_janin1" class="form-control">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Status dan Imunisasi Tetanus</label>
-                                        <select name="imunisasi_tetanus1" class="form-control">
-                                            <option value="">-- Pilih Status Imunisasi --</option>
-                                            <option value="T1">T1</option>
-                                            <option value="T2">T2</option>
-                                            <option value="T3">T3</option>
-                                            <option value="T4">T4</option>
-                                            <option value="T5">T5</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
                                         <label class="form-label">Konseling</label>
                                         <input type="text" name="konseling1" class="form-control">
                                     </div>

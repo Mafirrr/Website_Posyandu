@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kehamilan;
+use App\Models\PemeriksaanKehamilan;
+use App\Models\PemeriksaanRutin;
 use App\Models\PemeriksaanTrimester1;
 use App\Models\PemeriksaanTrimester3;
+use App\Models\Trimester1;
+use App\Models\Trimester3;
 use Illuminate\Http\Request;
 
 class KehamilanControlller extends Controller
@@ -23,8 +27,8 @@ class KehamilanControlller extends Controller
     }
     public function find(string $id)
     {
-        $kehamilanList = Kehamilan::select('id', 'anggota_id', 'status', 'tanggal_awal')->where('anggota_id', $id)
-            ->orderBy('tanggal_awal', 'asc') // urutkan dari yang paling awal
+        $kehamilanList = Kehamilan::select('id', 'anggota_id', 'status')->where('anggota_id', $id)
+            ->orderBy('created_at', 'asc')
             ->get();
 
         $labelPrefix = 'kehamilan ';
@@ -44,9 +48,30 @@ class KehamilanControlller extends Controller
 
     public function detail(string $id)
     {
-        $tri1 = PemeriksaanTrimester1::where('kehamilan_id', $id)->get();
-        $tri3 = PemeriksaanTrimester3::where('kehamilan_id', $id)->get();
+        $pemeriksaan = PemeriksaanKehamilan::where('kehamilan_id', $id)->get();
+
+        $tri1_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester1')->pluck('id')->values();
+        $tri2_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester2')->pluck('id')->values();
+        $tri3_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester3')->pluck('id')->values();
+
+        $tri1 = Trimester1::with([
+            'skriningKesehatan',
+            'pemeriksaanFisik',
+            'pemeriksaanAwal',
+            'pemeriksaanKhusus',
+            'labTrimester1',
+            'usgTrimester1'
+        ])->where('pemeriksaan_id', $tri1_id)->first();
+        $tri2 = PemeriksaanRutin::where('pemeriksaan_id', $tri2_id)->get();
+        $tri3 = Trimester3::with([
+            'skriningKesehatan',
+            'pemeriksaanFisik',
+            'labTrimester3',
+            'usgTrimester3',
+            'rencanaKonsultasi',
+        ])->where('pemeriksaan_id', $tri3_id)->get();
         $tri1->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+        $tri2->makeHidden(['created_at', 'updated_at', 'deleted_at']);
         $tri3->makeHidden(['created_at', 'updated_at', 'deleted_at']);
         return response()->json([
             'status' => 'success',
@@ -54,12 +79,9 @@ class KehamilanControlller extends Controller
             'data' => [
                 'id' => $id,
                 'trimester1' => $tri1,
+                'trimester2' => $tri2,
                 'trimester3' => $tri3,
             ],
-            'meta' => [
-                'total_trimester1' => $tri1->count(),
-                'total_trimester3' => $tri3->count(),
-            ]
         ]);
     }
 }
