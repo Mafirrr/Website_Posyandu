@@ -30,6 +30,6 @@ class LabTrimester1 extends Model
 
     public function trimester1()
     {
-        return $this->hasOne(Trimester1::class, 'lab_trimester_1');
+        return $this->hasMany(Trimester1::class, 'lab_trimester_1');
     }
 }

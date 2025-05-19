@@ -24,34 +24,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-Route::get('/data-petugas', [PetugasController::class, 'index'])->name('petugas.index');
-Route::get('/tambah-petugas', [PetugasController::class, 'petugas_add'])->name('petugas.add');
-Route::post('/petugas-store', [petugasController::class, 'petugas_store'])->name('petugas.store');
-Route::get('/petugas/{id}/edit', [PetugasController::class, 'petugas_edit'])->name('petugas.edit');
-Route::put('/petugas/{id}', [PetugasController::class, 'petugas_update'])->name('petugas.update');
-Route::delete('/petugas/{id}', [PetugasController::class, 'petugas_destroy'])->name('petugas.destroy');
+Route::middleware(['auth', 'roleAkses:bidan,kader'])->group((function () {
+    Route::resource('/petugas', PetugasController::class);
 
-Route::get('/data-kader', [KaderController::class, 'index'])->name('kader.index');
-Route::get('/tambah-kader', [KaderController::class, 'kader_add'])->name('kader.add');
-Route::post('/kader-store', [KaderController::class, 'kader_store'])->name('kader.store');
-Route::get('/kader/{id}/edit', [KaderController::class, 'kader_edit'])->name('kader.edit');
-Route::put('/kader/{id}', [KaderController::class, 'kader_update'])->name('kader.update');
-Route::delete('/kader/{id}', [KaderController::class, 'kader_destroy'])->name('kader.destroy');
-
-Route::get('/data-anggota', [AnggotaController::class, 'index'])->name('anggota.index');
-Route::get('/tambah-anggota', [AnggotaController::class, 'anggota_add'])->name('anggota.add');
-Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
-Route::get('/anggota/{id}/edit', [AnggotaController::class, 'anggota_edit'])->name('anggota.edit');
-Route::put('/anggota/{id}', [AnggotaController::class, 'anggota_update'])->name('anggota.update');
-Route::delete('/anggota/{id}', [AnggotaController::class, 'anggota_destroy'])->name('anggota.destroy');
-
-Route::resource("berita", BeritaController::class);
-Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
-Route::resource('/jadwal', JadwalController::class);
+    Route::resource('/anggota', AnggotaController::class)->except(['show']);
+    Route::resource("berita", BeritaController::class);
+    Route::resource('/jadwal', JadwalController::class);
+}));
 
 Route::get('/riwayat-pemeriksaan', [RiwayatPemeriksaanController::class, 'index'])->name('riwayat.index');
+Route::get('/riwayat-pemeriksaan/{id}', [RiwayatPemeriksaanController::class, 'show'])->name('detail.riwayat');
 Route::resource('pemeriksaan', PemeriksaanController::class);
 
 Route::get('/anggota/saran', [AnggotaController::class, 'suggest']);

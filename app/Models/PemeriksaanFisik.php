@@ -29,11 +29,11 @@ class PemeriksaanFisik extends Model
      */
     public function trimester1()
     {
-        return $this->hasOne(Trimester1::class, 'pemeriksaan_fisik');
+        return $this->hasMany(Trimester1::class, 'pemeriksaan_fisik');
     }
     public function trimester3()
     {
-        return $this->hasOne(Trimester3::class, 'pemeriksaan_fisik');
+        return $this->hasMany(Trimester3::class, 'pemeriksaan_fisik');
     }
     public function pemeriksaan()
     {

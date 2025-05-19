@@ -34,7 +34,7 @@
                             <div class="">
                                 {{-- NIK --}}
                                 <label for="nik" class="form-label">NIK <span class="text-danger">*</span></label>
-                                <input type="text" id="nik" name="nik" placeholder="Masukkan NIK"
+                                <input type="number" id="nik" name="nik" placeholder="Masukkan NIK"
                                     value="{{ old('nik', $anggota->nik) }}" class="form-control">
                                 @error('nik')
                                     <small class="text-danger">{{ $message }}</small>
@@ -56,7 +56,7 @@
                                 {{-- Nomor JKN --}}
                                 <label for="nomor-jkn" class="form-label">Nomor JKN <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="nomor-jkn" name="no_jkn" placeholder="Nomor JKN"
+                                <input type="number" id="nomor-jkn" name="no_jkn" placeholder="Nomor JKN"
                                     value="{{ old('no_jkn', $anggota->no_jkn) }}" class="form-control">
                                 @error('no_jkn')
                                     <small class="text-danger">{{ $message }}</small>
@@ -156,7 +156,7 @@
                                 {{-- Nomor Telepon --}}
                                 <label for="phone-number" class="form-label">Phone number <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="phone-number" name="no_telepon" placeholder="Phone Number"
+                                <input type="tel" id="phone-number" name="no_telepon" placeholder="Phone Number"
                                     value="{{ old('no_telepon', $anggota->no_telepon) }}" class="form-control">
                                 @error('no_telepon')
                                     <small class="text-danger">{{ $message }}</small>

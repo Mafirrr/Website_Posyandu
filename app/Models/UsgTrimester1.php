@@ -44,7 +44,7 @@ class UsgTrimester1 extends Model
     ];
     public function trimester1()
     {
-        return $this->hasOne(Trimester1::class, 'usg_trimester_1');
+        return $this->hasMany(Trimester1::class, 'usg_trimester_1');
     }
     public function pemeriksaan()
     {
