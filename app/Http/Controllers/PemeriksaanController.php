@@ -266,6 +266,7 @@ class PemeriksaanController extends Controller
 
             //usg
             $usg = new UsgTrimester1();
+            $usg->hpht = $validated['hpht'];
             $usg->keteraturan_haid = $validated['haid'];
             $usg->umur_kehamilan_berdasar_hpht = $validated['umur_kehamilan_hpht'];
             $usg->umur_kehamilan_berdasarkan_usg = $validated['umur_kehamilan_usg'];
