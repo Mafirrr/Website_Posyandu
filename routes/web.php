@@ -33,11 +33,11 @@ Route::middleware(['auth', 'roleAkses:bidan,kader'])->group((function () {
     Route::resource('/anggota', AnggotaController::class)->except(['show']);
     Route::resource("berita", BeritaController::class);
     Route::resource('/jadwal', JadwalController::class);
-
-    Route::get('/riwayat-pemeriksaan', [RiwayatPemeriksaanController::class, 'index'])->name('riwayat.index');
-    Route::resource('pemeriksaan', PemeriksaanController::class);
 }));
 
+Route::get('/riwayat-pemeriksaan', [RiwayatPemeriksaanController::class, 'index'])->name('riwayat.index');
+Route::get('/riwayat-pemeriksaan/{id}', [RiwayatPemeriksaanController::class, 'show'])->name('detail.riwayat');
+Route::resource('pemeriksaan', PemeriksaanController::class);
 
 Route::get('/anggota/saran', [AnggotaController::class, 'suggest']);
 

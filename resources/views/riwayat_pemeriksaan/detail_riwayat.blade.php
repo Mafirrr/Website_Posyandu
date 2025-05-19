@@ -45,7 +45,8 @@
                                 </tbody>
                             </table>
 
-                            <h5 class="mt-5 mb-3">Hasil Pemeriksaan:</h5>
+                            {{-- Tabel Pemeriksaan Utama --}}
+                            <h5 class="mt-5 mb-3">Data Pemeriksaan Utama:</h5>
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered">
                                     <thead>
@@ -57,10 +58,7 @@
                                     <tbody>
                                         @foreach ($pemeriksaan->toArray() as $key => $value)
                                             @php
-                                                // Exclude keys yang tidak mau ditampilkan
-                                                $excludedKeys = ['id','pemeriksaan_id', 'created_at', 'updated_at', 'deleted_at', 'kehamilan', 'pemeriksaanKehamilan', 'petugas_id', 'kehamilan_id', 'pemeriksaan'];
-
-                                                // Jika value adalah array atau objek, exclude juga agar tidak tampil sebagai json panjang
+                                                $excludedKeys = ['id', 'pemeriksaan_id', 'created_at', 'updated_at', 'deleted_at', 'kehamilan', 'pemeriksaanKehamilan', 'petugas_id', 'kehamilan_id', 'pemeriksaan'];
                                                 $isRelation = is_array($value) || is_object($value);
                                             @endphp
 
@@ -75,7 +73,71 @@
                                 </table>
                             </div>
 
-                            <a href="{{ url()->previous() }}" class="btn btn-primary ms-2 px-5">Kembali</a>
+                            {{-- Tabel Semua Relasi dari $detail --}}
+                            @if ($detail && is_object($detail))
+                                @foreach ($detail->getRelations() as $relationName => $relationData)
+                                    @if ($relationData && is_object($relationData))
+                                        <h5 class="mt-5 mb-3">{{ ucfirst(str_replace('_', ' ', $relationName)) }}</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Field</th>
+                                                        <th>Value</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($relationData->toArray() as $key => $value)
+                                                        @php
+                                                            $excludedKeys = ['id','created_at', 'updated_at', 'deleted_at'];
+                                                            $isRelationValue = is_array($value) || is_object($value);
+                                                        @endphp
+
+                                                        @if (!in_array($key, $excludedKeys) && !$isRelationValue)
+                                                            <tr>
+                                                                <td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
+                                                                <td>{{ $value }}</td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+
+                            {{-- Pemeriksaan Rutin --}}
+                            @if ($pemeriksaanRutin && is_object($pemeriksaanRutin))
+                                <h5 class="mt-5 mb-3">Pemeriksaan Rutin</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Field</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($pemeriksaanRutin->toArray() as $key => $value)
+                                                @php
+                                                    $excludedKeys = ['id','created_at', 'updated_at', 'deleted_at'];
+                                                    $isRelation = is_array($value) || is_object($value);
+                                                @endphp
+
+                                                @if (!in_array($key, $excludedKeys) && !$isRelation)
+                                                    <tr>
+                                                        <td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
+                                                        <td>{{ $value }}</td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
+
+                            <a href="{{ url()->previous() }}" class="btn btn-primary ms-2 px-5 mt-4">Kembali</a>
                         </div>
                     </div>
                 </div>

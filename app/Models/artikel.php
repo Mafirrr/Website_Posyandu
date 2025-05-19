@@ -20,13 +20,5 @@ class artikel extends Model
         'Kategori_edukasi',
     ];
 
-    // protected $casts = [
-    //     'kategori_id' => 'integer',
-    // ];
-
-    // Relasi ke tabel Kategori
-    // public function kategori()
-    // {
-    //     return $this->belongsTo(Kategori::class, 'kategori_id');
-    // }
+    
 }

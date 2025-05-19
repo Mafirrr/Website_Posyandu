@@ -67,10 +67,9 @@
                                                     {{ request('jenis_pemeriksaan') == '' ? 'selected' : '' }}>
                                                     -- Semua Jenis Pemeriksaan --
                                                 </option>
-                                                @foreach ($jenisPemeriksaans as $jenis)
-                                                    <option value="{{ $jenis }}"
-                                                        {{ request('jenis_pemeriksaan') == $jenis ? 'selected' : '' }}>
-                                                        {{ $jenis }}
+                                                @foreach($jenisPemeriksaans as $key => $label)
+                                                    <option value="{{ $key }}" {{ request('jenis_pemeriksaan') == $key ? 'selected' : '' }}>
+                                                        {{ $label }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -92,7 +91,6 @@
                         <div class="card-body">
 
                             <div class="accordion" id="accordionExample">
-                                <!-- Accordion Item 1 -->
                                 @if ($paginatedGrouped->isEmpty())
                                     <div class="text-center py-5">
                                         <p class="text-muted">Data tidak ditemukan.</p>
@@ -125,7 +123,7 @@
                                                             <thead class="thead-light">
                                                                 <tr>
                                                                     <th scope="col">NO.</th>
-                                                                    <th scope="col">Nama</th>
+                                                                    <th scope="col">Nama Anggota</th>
                                                                     <th scope="col">Jenis Pemeriksaan</th>
                                                                     <th scope="col">Tanggal Pemeriksaan</th>
                                                                     <th scope="col">Waktu Pemeriksaan</th>
@@ -138,11 +136,11 @@
                                                                         <td>{{ $index + 1 }}</td>
                                                                         <td>{{ $pemeriksaan['nama_anggota'] }}</td>
                                                                         <td>{{ $pemeriksaan['jenis_pemeriksaan'] }}</td>
-                                                                        <td>{{ \Carbon\Carbon::parse($pemeriksaan['tanggal'])->format('Y-m-d') }}
+                                                                        <td>{{ \Carbon\Carbon::parse($pemeriksaan['tanggal'])->format('d-m-Y') }}
                                                                         </td>
                                                                         <td>{{ $pemeriksaan['waktu'] }}</td>
                                                                         <td>
-                                                                            <a href="{{ route('pemeriksaan.detail', ['tipe' => $pemeriksaan['tipe'], 'id' => $pemeriksaan['id']]) }}"
+                                                                            <a href="{{ route('detail.riwayat', $pemeriksaan['id']) }}"
                                                                                 class="btn btn-sm btn-primary">Detail</a>
                                                                         </td>
                                                                     </tr>
@@ -156,9 +154,16 @@
                                     @endforeach
                                 @endif
 
-
                                 <!-- Per Page inside card body -->
                                 <form method="GET" action="{{ route('riwayat.index') }}">
+                                    <!-- Preserve existing filters -->
+                                    @if(request('search'))
+                                        <input type="hidden" name="search" value="{{ request('search') }}">
+                                    @endif
+                                    @if(request('jenis_pemeriksaan'))
+                                        <input type="hidden" name="jenis_pemeriksaan" value="{{ request('jenis_pemeriksaan') }}">
+                                    @endif
+                                    
                                     <div class="py-4 px-3">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center mb-3">
@@ -182,7 +187,7 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            {{ $paginatedGrouped->appends(['per_page' => request('per_page')])->links() }}
+                                            {{ $paginatedGrouped->appends(request()->except('page'))->links() }}
                                         </div>
                                     </div>
                                 </form>
@@ -193,13 +198,12 @@
         </section>
     </div>
 @endsection
+
 @push('scripts')
     <script>
         document.getElementById('applyFilterBtn').addEventListener('click', function() {
             var selectedJenis = document.getElementById('jenisPemeriksaanSelect').value;
-
             document.getElementById('jenisPemeriksaanInput').value = selectedJenis;
-
             document.getElementById('searchFilterForm').submit();
         });
     </script>
