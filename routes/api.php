@@ -16,9 +16,14 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/lupa-password', [LoginController::class, 'lupaPass']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user/{id}', [ProfileController::class, 'getUser']);
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::put('/profile/update', [ProfileController::class, 'update']);
+});
+
+Route::prefix('user')->group(function () {
+    Route::get('/{id}', [ProfileController::class, 'getUser']);
+    Route::get('/keluarga/{id}', [ProfileController::class, 'dataKeluarga']);
+    Route::put('/keluarga', [ProfileController::class, 'putData']);
 });
 
 Route::get('/user', function (Request $request) {

@@ -49,12 +49,11 @@ Route::delete('/anggota/{id}', [AnggotaController::class, 'anggota_destroy'])->n
 
 Route::resource("berita", BeritaController::class);
 Route::post('/anggota-store', [AnggotaController::class, 'anggota_store'])->name('anggota.store');
-Route::get('/jadwal', [JadwalController::class, 'view'])->name('jadwal');
+Route::resource('/jadwal', JadwalController::class);
 
 Route::get('/riwayat-pemeriksaan', [RiwayatPemeriksaanController::class, 'index'])->name('riwayat.index');
-Route::get('/pemeriksaan/{tipe}/{id}', [RiwayatPemeriksaanController::class, 'show'])->name('pemeriksaan.detail');
-Route::get('/pemeriksaan', [PemeriksaanController::class, 'index'])->name('pemeriksaan.index');
+Route::resource('pemeriksaan', PemeriksaanController::class);
 
-
+Route::get('/anggota/saran', [AnggotaController::class, 'suggest']);
 
 require __DIR__ . '/auth.php';

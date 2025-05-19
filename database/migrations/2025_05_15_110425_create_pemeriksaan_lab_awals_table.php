@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemeriksaan_lab_awal', function (Blueprint $table) {
+        Schema::create('lab_trimester_1', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
-            $table->float('hemogoblin');
+            $table->float('hemoglobin');
             $table->string('golongan_darah_dan_rhesus');
             $table->float('gula_darah');
-            $table->enum('hiv', ['reaktif', 'nonreaktif']);
-            $table->enum('sifilis', ['reaktif', 'nonreaktif']);
-            $table->enum('hepatitis_b', ['reaktif', 'nonreaktif']);
+            $table->string('hemoglobin_rtl')->nullable();
+            $table->string('rhesus_rtl')->nullable();
+            $table->string('gula_darah_rtl')->nullable();
+            $table->enum('hiv', ['reaktif', 'non_reaktif']);
+            $table->enum('sifilis', ['reaktif', 'non_reaktif']);
+            $table->enum('hepatitis_b', ['reaktif', 'non_reaktif']);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemeriksaan_lab_awal');
+        Schema::dropIfExists('lab_trimester_1');
     }
 };

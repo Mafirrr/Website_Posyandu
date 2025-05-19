@@ -12,11 +12,10 @@ class PemeriksaanAwal extends Model
     protected $table = 'pemeriksaan_awal';
 
     protected $fillable = [
-        'pemeriksaan_id',
         'tinggi_badan',
         'golongan_darah',
-        'status_imunisasi',
-        'hemogoblin',
+        'status_imunisasi_td',
+        'hemoglobin',
         'gula_darah_puasa',
         'riwayat_kesehatan_ibu_sekarang',
         'riwayat_perilaku',
@@ -32,6 +31,10 @@ class PemeriksaanAwal extends Model
         'tinggi_badan' => 'float',
     ];
 
+    public function trimester1()
+    {
+        return $this->hasOne(Trimester1::class, 'pemeriksaan_awal');
+    }
     public function pemeriksaan()
     {
         return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');

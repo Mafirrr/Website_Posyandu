@@ -12,7 +12,6 @@ class PemeriksaanKhusus extends Model
     protected $table = 'pemeriksaan_khusus';
 
     protected $fillable = [
-        'pemeriksaan_id',
         'porsio',
         'uretra',
         'vagina',
@@ -24,6 +23,10 @@ class PemeriksaanKhusus extends Model
     /**
      * Relasi ke tabel pemeriksaan_kehamilan
      */
+    public function trimester1()
+    {
+        return $this->hasOne(Trimester1::class, 'pemeriksaan_khusus');
+    }
     public function pemeriksaan()
     {
         return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');

@@ -12,14 +12,17 @@ class SkriningKesehatanJiwa extends Model
     protected $table = 'skrining_kesehatan_jiwa';
 
     protected $fillable = [
-        'pemeriksaan_id',
         'skrining_jiwa',
         'tindak_lanjut_jiwa',
         'perlu_rujukan',
     ];
 
-    public function pemeriksaanKehamilan()
+    public function trimester1()
     {
-        return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');
+        return $this->hasOne(Trimester1::class, 'skrining_kesehatan');
+    }
+    public function trimester3()
+    {
+        return $this->hasOne(Trimester3::class, 'skrining_kesehatan');
     }
 }

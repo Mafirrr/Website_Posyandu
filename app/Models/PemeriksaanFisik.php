@@ -12,7 +12,6 @@ class PemeriksaanFisik extends Model
     protected $table = 'pemeriksaan_fisik';
 
     protected $fillable = [
-        'pemeriksaan_id',
         'konjungtiva',
         'sklera',
         'kulit',
@@ -28,6 +27,14 @@ class PemeriksaanFisik extends Model
     /**
      * Relasi ke tabel pemeriksaan_kehamilan
      */
+    public function trimester1()
+    {
+        return $this->hasOne(Trimester1::class, 'pemeriksaan_fisik');
+    }
+    public function trimester3()
+    {
+        return $this->hasOne(Trimester3::class, 'pemeriksaan_fisik');
+    }
     public function pemeriksaan()
     {
         return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');

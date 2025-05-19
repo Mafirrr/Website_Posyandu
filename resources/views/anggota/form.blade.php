@@ -40,15 +40,6 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            <div class="">
-                                {{-- NIK --}}
-                                <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                                <input type="text" id="password" name="password" placeholder="Masukkan password"
-                                    value="{{ old('password', $anggota->nik) }}" class="form-control">
-                                @error('password')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
 
                             <div class="">
                                 {{-- Nama --}}
@@ -57,6 +48,39 @@
                                 <input type="text" id="nama" name="nama" placeholder="Nama Ibu Hamil"
                                     value="{{ old('nama', $anggota->nama) }}" class="form-control">
                                 @error('nama')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="">
+                                {{-- Nomor JKN --}}
+                                <label for="nomor-jkn" class="form-label">Nomor JKN <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="nomor-jkn" name="no_jkn" placeholder="Nomor JKN"
+                                    value="{{ old('no_jkn', $anggota->no_jkn) }}" class="form-control">
+                                @error('no_jkn')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="">
+                                {{-- Fasilitas Kesehatan 1 --}}
+                                <label for="faskes-1" class="form-label">Fasilitas Kesehatan Tingkat 1 <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="faskes-1" name="faskes_tk1" placeholder="Fasilitas Kesehatan Tingkat 1"
+                                    value="{{ old('faskes_tk1', $anggota->faskes_tk1) }}" class="form-control">
+                                @error('faskes_tk1')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="">
+                                {{-- Fasilitas Rujukan --}}
+                                <label for="faskes-rujukan" class="form-label">Fasilitas Kesehatan Rujukan <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="faskes-rujukan" name="faskes_rujukan" placeholder="Fasilitas Kesehatan Rujukan"
+                                    value="{{ old('faskes_rujukan', $anggota->faskes_rujukan) }}" class="form-control">
+                                @error('faskes_rujukan')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -88,11 +112,11 @@
                                         <option value="B+"
                                             {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'B+' ? 'selected' : '' }}>
                                             B+</option>
-                                        <option
-                                            value="AB- {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'AB-' ? 'selected' : '' }}">
+                                        <option value="AB-"
+                                            {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'AB-' ? 'selected' : '' }}>
                                             AB-</option>
-                                        <option
-                                            value="AB+ {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'AB+' ? 'selected' : '' }}">
+                                        <option value="AB+"
+                                            {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'AB+' ? 'selected' : '' }}>
                                             AB+</option>
                                         <option value="O-"
                                             {{ old('golongan_darah', $anggota->golongan_darah ?? '') == 'O-' ? 'selected' : '' }}>

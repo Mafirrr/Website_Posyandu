@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemeriksaan_usg_akhir', function (Blueprint $table) {
+        Schema::create('usg_trimester_3', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
             $table->enum('usg_trimester3', ['ya', 'tidak']);
             $table->float('umur_kehamilan_usg_trimester_3');
             $table->enum('selisih_uk_usg_1_hpht_dengan_trimester_3', ['ya', 'tidak']);
             $table->enum('jumlah_bayi', ['tunggal', 'kembar']);
-            $table->enum('letak_bayi', ['kepala', 'sungsang', 'lintang']);
-            $table->enum('presentasi_bayi', ['belakang_kiri', 'belakang_kanan', 'depan_kiri', 'depan_kanan']);
-            $table->enum('keadaan_bayi', ['baik', 'abnormal']);
-            $table->enum('djj', ['positif', 'negatif']);
-            $table->enum('lokasi_plasenta', ['anterior', 'posterior', 'fundus']);
-            $table->enum('jumlah_cairan_ketuban', ['normal', 'kurang', 'banyak']);
+            $table->enum('letak_bayi', ['intrauterin', 'extrauterin', 'tidak_dapat_ditentukan']);
+            $table->enum('presentasi_bayi', ['kepala', 'bokong', 'letak_lintang']);
+            $table->enum('keadaan_bayi', ['hidup', 'meninggal']);
+            $table->enum('djj_status', ['normal', 'tidak_normal']);
+            $table->enum('lokasi_plasenta', ['letak_rendah', 'corpus', 'fundus', 'previa']);
+            $table->enum('jumlah_cairan_ketuban', ['cukup', 'kurang', 'berlebih']);
+            $table->float('djj')->nullable();
+            $table->float('sdp')->nullable();
             $table->float('BPD');
             $table->float('HC');
             $table->float('AC');
@@ -46,6 +47,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemeriksaan_usg_akhir');
+        Schema::dropIfExists('usg_trimester_3');
     }
 };

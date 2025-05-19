@@ -41,10 +41,10 @@
                                         class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
 
                                     <!-- pertahankan parameter lain -->
-                                    @if(request()->has('aktif'))
+                                    @if (request()->has('aktif'))
                                         <input type="hidden" name="aktif" value="{{ request('aktif') }}">
                                     @endif
-                                    @if(request()->has('per_page'))
+                                    @if (request()->has('per_page'))
                                         <input type="hidden" name="per_page" value="{{ request('per_page') }}">
                                     @endif
                                 </form>
@@ -110,17 +110,18 @@
                                                         class="btn btn-warning d-flex align-items-center" title="Edit">
                                                         <i class="ti ti-edit text-white fs-5"></i>
                                                     </a>
-                                                    <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST"
-                                                        onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                                    <form id="form-delete-{{ $anggota->id }}"
+                                                        action="{{ route('anggota.destroy', $anggota->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger d-flex align-items-center"
-                                                            title="Hapus">
+                                                        <button type="button"
+                                                            class="btn btn-danger btn-delete d-flex align-items-center"
+                                                            data-id="{{ $anggota->id }}" title="Hapus">
                                                             <i class="ti ti-trash text-white fs-5"></i>
                                                         </button>
                                                     </form>
                                                 </td>
-
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -156,3 +157,16 @@
 
     </div>
 @endsection
+@push('scripts')
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+    </script>
+@endpush

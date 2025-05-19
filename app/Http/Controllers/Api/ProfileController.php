@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Anggota;
+use App\Models\KeluargaAnggota;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
 
@@ -75,5 +76,45 @@ class ProfileController extends Controller
                 'user' => $user,
             ], 202);
         }
+    }
+
+    public function dataKeluarga(String $id)
+    {
+        $keluarga = KeluargaAnggota::where('anggota_id', $id)->get()
+            ->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+
+        return response()->json([
+            'success' => true,
+            'message' => "data berhasil di dapat",
+            'data' => $keluarga
+        ]);
+    }
+
+    public function putData(Request $request)
+    {
+        $validated = $request->validate([
+            'anggota_id' => 'required',
+            'nik' => 'required|string|max:16',
+            'nama' => 'required|string',
+            'no_jkn' => 'nullable|string',
+            'faskes_tk1' => 'nullable|string',
+            'faskes_rujukan' => 'nullable|string',
+            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'required|string',
+            'pekerjaan' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'no_telepon' => 'nullable|string',
+        ]);
+
+        $keluarga = KeluargaAnggota::updateOrCreate(
+            ['nik' => $validated['nik']],
+            $validated
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => $keluarga->wasRecentlyCreated ? 'Created' : 'Updated',
+            'data' => $keluarga
+        ]);
     }
 }
