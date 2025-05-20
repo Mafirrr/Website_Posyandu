@@ -15,12 +15,10 @@ class Kehamilan extends Model
 
     protected $fillable = [
         'anggota_id',
-        'tanggal_awal',
-        'usia_kehamilan_awal',
-        'riwayat_penyakit',
-        'riwayat_kehamilan',
-        'perkiraan_kehamilan',
-        'status'
+        'status',
+        'proses_melahirkan',
+        'penolong',
+        'masalah',
     ];
 
     protected $casts = [
@@ -37,15 +35,5 @@ class Kehamilan extends Model
     public function anggota()
     {
         return $this->belongsTo(Anggota::class, 'anggota_id');
-    }
-
-    public function pemeriksaanTrimester1()
-    {
-        return $this->hasMany(PemeriksaanTrimester1::class, 'kehamilan_id');
-    }
-
-    public function pemeriksaanTrimester3()
-    {
-        return $this->hasMany(PemeriksaanTrimester3::class, 'kehamilan_id');
     }
 }

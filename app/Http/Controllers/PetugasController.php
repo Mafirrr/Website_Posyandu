@@ -25,13 +25,13 @@ class PetugasController extends Controller
                 $query->where('aktif', $aktif);
             })
             ->where('role', 'bidan')
-            ->orderBy('created_at', 'asc')
+            ->orderBy('created_at', 'desc')
             ->paginate($perPage)
             ->appends(request()->query());
 
         return view('petugas.petugas', compact('petugas'));
     }
-    public function petugas_add()
+    public function create()
     {
         $params = [
             "title" => "Tambah Petugas",
@@ -48,7 +48,7 @@ class PetugasController extends Controller
         return view('petugas.petugasform', $params);
     }
 
-    public function petugas_store(Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'nip' => 'required|string|max:20|unique:petugas,nip',
@@ -64,12 +64,12 @@ class PetugasController extends Controller
         $petugas->nama = $validated['nama'];
         $petugas->no_telepon = $validated['no_telepon'];
         $petugas->email = $validated['email'];
-        $petugas->role = 'petugas';
+        $petugas->role = 'bidan';
         $petugas->save();
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil ditambahkan.');
     }
 
-    public function petugas_edit($id)
+    public function edit($id)
     {
         $petugas = Petugas::findOrFail($id);
         $params = [
@@ -81,7 +81,7 @@ class PetugasController extends Controller
         return view('petugas.petugasform', $params);
     }
 
-    public function petugas_update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'nip' => 'required|string|max:20|unique:petugas,nip,' . $id,
@@ -105,7 +105,7 @@ class PetugasController extends Controller
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil diperbarui.');
     }
 
-    public function petugas_destroy($id)
+    public function destroy($id)
     {
         $petugas = Petugas::findOrFail($id);
         $petugas->delete();

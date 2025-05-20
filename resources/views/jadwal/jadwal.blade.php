@@ -86,8 +86,12 @@
                                     <td>{{ $jadwal->tanggal }}</td>
                                     <td>
                                         @if (\Carbon\Carbon::parse($jadwal->tanggal)->isFuture())
-                                            <a href="{{ route('jadwal.edit', $jadwal->id) }}"
-                                                class="btn btn-sm btn-warning">Edit</a>
+
+                                            <a href="{{ route('jadwal.edit', $jadwal->id) }}" class="btn btn-sm btn-warning"
+                                                title="Edit">
+                                                <i class="ti ti-edit"></i>
+                                            </a>
+
                                         @endif
 
                                         <form action="{{ route('jadwal.destroy', $jadwal->id) }}" method="POST"
@@ -95,8 +99,8 @@
                                             onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                Hapus
+                                            <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
+                                                <i class="ti ti-trash"></i>
                                             </button>
                                         </form>
                                     </td>

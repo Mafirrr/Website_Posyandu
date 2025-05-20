@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('main')
     <div>
-
         <section class="mt-0 mb-10">
             <div class="mx-auto max-w-screen-xl ">
                 <div class="bg-white dark:bg-white relative shadow-md sm:rounded-lg overflow-hidden">
@@ -22,7 +21,7 @@
                                     </nav>
                                 </div>
                                 <div class="ms-auto">
-                                    <a href="{{ route('petugas.add') }}" id="btn-add-contact"
+                                    <a href="{{ route('petugas.create') }}" id="btn-add-contact"
                                         class="btn btn-primary d-flex align-items-center">
                                         <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah petugas
                                     </a>
@@ -33,19 +32,13 @@
                     <div class="card card-body border ">
                         <div class="row justify-content-between">
                             <div class="col-md-4 col-xl-4">
-                                <form class="position-relative">
-                                    <input type="text" class="form-control product-search ps-5" id="input-search"
-                                        placeholder="Search...">
+                                <form class="position-relative" method="GET" action="{{ route('petugas.index') }}">
+                                    <input type="text" name="search" class="form-control product-search ps-5"
+                                        id="input-search" placeholder="Search..." value="{{ request('search') }}" />
                                     <i
                                         class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                 </form>
                             </div>
-                            {{-- <div class=" col-2">
-                                <a href="{{ route('petugas.add') }}" id="btn-add-contact"
-                                    class="btn text-dark border border-dark d-flex align-items-center">
-                                    <i class="ti ti-filter text-dark me-1 fs-5"></i> Filter
-                                </a>
-                            </div> --}}
                         </div>
                     </div>
                     <div class="card border ">
@@ -78,17 +71,18 @@
                                                         class="btn btn-warning d-flex align-items-center" title="Edit">
                                                         <i class="ti ti-edit text-white fs-5"></i>
                                                     </a>
-                                                    <form action="{{ route('petugas.destroy', $p->id) }}" method="POST"
-                                                        onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                                    <form id="form-delete-{{ $p->id }}"
+                                                        action="{{ route('petugas.destroy', $p->id) }}" method="POST"
+                                                        class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit"
-                                                            class="btn btn-danger d-flex align-items-center" title="Hapus">
+                                                        <button type="button"
+                                                            class="btn btn-danger d-flex align-items-center btn-delete"
+                                                            data-id="{{ $p->id }}">
                                                             <i class="ti ti-trash text-white fs-5"></i>
                                                         </button>
                                                     </form>
                                                 </td>
-
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -123,3 +117,16 @@
         </section>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+    </script>
+@endpush

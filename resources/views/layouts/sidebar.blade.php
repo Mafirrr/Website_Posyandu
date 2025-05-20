@@ -41,6 +41,7 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Data Pengguna</span>
                 </li>
+
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('anggota.index') }}" aria-expanded="false">
                         <span>
@@ -49,22 +50,17 @@
                         <span class="hide-menu">Ibu Hamil</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('petugas.index') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-users"></i>
-                        </span>
-                        <span class="hide-menu">Bidan</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('kader.index') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-user"></i>
-                        </span>
-                        <span class="hide-menu">Kader</span>
-                    </a>
-                </li>
+                @if (Auth::user()->role == 'kader')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('petugas.index') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-users"></i>
+                            </span>
+                            <span class="hide-menu">Bidan</span>
+                        </a>
+                    </li>
+                @endif
+
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Pelayanan Posyandu</span>

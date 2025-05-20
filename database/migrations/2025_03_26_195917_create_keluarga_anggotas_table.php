@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('anggota_id')->references('id')->on('anggota');
             $table->string('nik', 16)->unique();
             $table->string('nama', 70);
+            $table->string('no_jkn', 13)->unique();
+            $table->string('faskes_tk1', 100);
+            $table->string('faskes_rujukan', 100);
             $table->date('tanggal_lahir');
             $table->string('tempat_lahir', 100);
             $table->string('pekerjaan', 100);

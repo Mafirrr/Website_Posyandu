@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ArtikelController;
 use App\Http\Controllers\Api\DashboardFController;
+use App\Http\Controllers\Api\JadwalController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KehamilanControlller;
 use App\Http\Controllers\Api\LoginController;
@@ -17,11 +18,19 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/lupa-password', [LoginController::class, 'lupaPass']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user/{id}', [ProfileController::class, 'getUser']);
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::put('/profile/update', [ProfileController::class, 'update']);
 });
 
+Route::prefix('user')->group(function () {
+    Route::get('/{id}', [ProfileController::class, 'getUser']);
+    Route::get('/keluarga/{id}', [ProfileController::class, 'dataKeluarga']);
+    Route::put('/keluarga', [ProfileController::class, 'putData']);
+});
+
+Route::prefix('kehamilan')->group(function () {
+    Route::get('/{id}', [KehamilanControlller::class, 'handle']);
+});
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -32,12 +41,12 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/kategori/{id}', [KategoriController::class, 'show']);
 
 
-Route::prefix('kehamilan')->group(function () {
-    Route::get('/{id}', [KehamilanControlller::class, 'handle']);
-});
+
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
 Route::post('/image', [UploadImage::class, 'getImage']);
 
 Route::get('/jadwal_FD', [DashboardFController::class, 'show']);
 Route::middleware('auth:sanctum')->post('/update_fcm_token', [FCMTokenController::class, 'update']);
+
+Route::apiResource('/jadwal', JadwalController::class);

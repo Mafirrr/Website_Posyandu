@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('nik', 16)->unique();
             $table->string('password');
             $table->string('nama', 70);
+            $table->string('no_jkn', 13)->unique();
+            $table->string('faskes_tk1', 100);
+            $table->string('faskes_rujukan', 100);
             $table->date('tanggal_lahir');
             $table->string('tempat_lahir', 100);
             $table->string('pekerjaan', 100);
@@ -27,21 +30,21 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        // Schema::create('password_reset_tokens', function (Blueprint $table) {
-        //     $table->string('email')->primary();
-        //     $table->string('token');
-        //     $table->timestamp('created_at')->nullable();
-        // });
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
 
-        // Schema::create('sessions', function (Blueprint $table) {
-        //     $table->string('id')->primary();
-        //     $table->foreignId('user_id')->nullable();
-        //     $table->string('user_type')->nullable();
-        //     $table->string('ip_address', 45)->nullable();
-        //     $table->text('user_agent')->nullable();
-        //     $table->longText('payload');
-        //     $table->integer('last_activity')->index();
-        // });
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable();
+            $table->string('user_type')->nullable();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
+        });
     }
 
 

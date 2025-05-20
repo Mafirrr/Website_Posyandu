@@ -18,13 +18,22 @@ class KehamilanFactory extends Factory
     public function definition(): array
     {
         return [
-            'anggota_id' => '3',
+            'anggota_id' => Anggota::factory(),
+
             'tanggal_awal' => $this->faker->date(),
             'usia_kehamilan_awal' => $this->faker->numberBetween(1, 40),
             'riwayat_penyakit' => $this->faker->sentence(),
             'riwayat_kehamilan' => $this->faker->sentence(),
             'perkiraan_kehamilan' => $this->faker->date(),
-            'status' => $this->faker->randomElement(['proses', 'keguguran']),
+
+            'status' => $this->faker->randomElement(['dalam_pemantauan', 'keguguran']),
+
+            'proses_melahirkan' => $this->faker->optional()->word(),
+            'penolong' => $this->faker->optional()->name(),
+            'masalah' => $this->faker->optional()->sentence(),
+
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
