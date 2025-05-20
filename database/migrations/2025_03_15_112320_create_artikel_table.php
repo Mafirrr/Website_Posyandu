@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('isi');
             $table->string('gambar', 255);
             // $table->enum('Kategori_edukasi', array('kesehata', 'sosial', 'lainnya'));
-             $table->enum('kategori_edukasi', ['kesehata', 'sosial', 'lainnya']);
+             $table->enum('kategori_edukasi', ['kesehatan', 'sosial', 'lainnya']);
             // $table->foreignId('kategori_id')->references('id')->on('kategori');
             $table->timestamps();
             $table->softDeletes();
