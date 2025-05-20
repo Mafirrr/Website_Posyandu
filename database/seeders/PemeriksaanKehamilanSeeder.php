@@ -13,6 +13,6 @@ class PemeriksaanKehamilanSeeder extends Seeder
      */
     public function run(): void
     {
-        pemeriksaan_kehamilan::factory()->count(1)->create();
+        pemeriksaan_kehamilan::factory()->count(100)->create();
     }
 }

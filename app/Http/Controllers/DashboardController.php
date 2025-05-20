@@ -7,12 +7,30 @@ use App\Models\pemeriksaan_kehamilan;
 use App\Models\pemeriksaan_lab_kehamilan;
 use App\Models\PemeriksaanTrimester1;
 use App\Models\PemeriksaanTrimester3;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $pemeriksaanKehamilan = pemeriksaan_kehamilan::with('kehamilan.anggota')
+        $allData = collect()
+            ->merge($this->getPemeriksaanKehamilan())
+            ->merge($this->getPemeriksaanTrimester1())
+            ->merge($this->getPemeriksaanLab())
+            ->merge($this->getPemeriksaanTrimester3());
+
+        $merged = $allData
+            ->sortByDesc(fn($item) => $item->tanggal_pemeriksaan . ' ' . $item->waktu_pemeriksaan)
+            ->take(5)
+            ->values();
+
+        $chartData = $this->prepareChartData($allData);
+        return view('dashboard.dashboard', compact('merged', 'chartData'));
+    }
+
+    private function getPemeriksaanKehamilan()
+    {
+        return pemeriksaan_kehamilan::with('kehamilan.anggota')
             ->select('id', 'kehamilan_id', 'tanggal_periksa', 'created_at')
             ->get()
             ->map(function ($item) {
@@ -25,8 +43,11 @@ class DashboardController extends Controller
                     'hasil_pemeriksaan' => '-',
                 ];
             });
+    }
 
-        $pemeriksaanTrimester1 = PemeriksaanTrimester1::with('kehamilan.anggota')
+    private function getPemeriksaanTrimester1()
+    {
+        return PemeriksaanTrimester1::with('kehamilan.anggota')
             ->select('id', 'kehamilan_id', 'tanggal_pemeriksaan', 'created_at')
             ->get()
             ->map(function ($item) {
@@ -39,8 +60,11 @@ class DashboardController extends Controller
                     'hasil_pemeriksaan' => '-',
                 ];
             });
+    }
 
-        $pemeriksaanLab = pemeriksaan_lab_kehamilan::with('pemeriksaanKehamilan.kehamilan.anggota')
+    private function getPemeriksaanLab()
+    {
+        return pemeriksaan_lab_kehamilan::with('pemeriksaanKehamilan.kehamilan.anggota')
             ->select('id', 'pemeriksaan_kehamilan_id', 'created_at')
             ->get()
             ->map(function ($item) {
@@ -53,8 +77,11 @@ class DashboardController extends Controller
                     'hasil_pemeriksaan' => '-',
                 ];
             });
+    }
 
-        $pemeriksaanTrimester3 = PemeriksaanTrimester3::with('kehamilan.anggota')
+    private function getPemeriksaanTrimester3()
+    {
+        return PemeriksaanTrimester3::with('kehamilan.anggota')
             ->select('id', 'kehamilan_id', 'tanggal_pemeriksaan', 'created_at')
             ->get()
             ->map(function ($item) {
@@ -67,17 +94,49 @@ class DashboardController extends Controller
                     'hasil_pemeriksaan' => '-',
                 ];
             });
+    }
 
-        $merged = $pemeriksaanKehamilan
-            ->merge($pemeriksaanTrimester1)
-            ->merge($pemeriksaanLab)
-            ->merge($pemeriksaanTrimester3)
-            ->sortByDesc(function ($item) {
-                return $item->tanggal_pemeriksaan . ' ' . $item->waktu_pemeriksaan;
-            })
-            ->take(5)
-            ->values();
+    private function prepareChartData($allData)
+    {
+        $groupedByYear = [];
 
-        return view('dashboard.dashboard', compact('merged'));
+        foreach ($allData as $item) {
+            $tanggal = Carbon::parse($item->tanggal_pemeriksaan);
+            $year = $tanggal->format('Y');
+            $month = $tanggal->format('F');
+
+            if (!isset($groupedByYear[$year])) {
+                $groupedByYear[$year] = array_fill_keys([
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December'
+                ], 0);
+            }
+
+            $groupedByYear[$year][$month]++;
+        }
+
+        krsort($groupedByYear);
+
+        $chartData = [];
+        foreach ($groupedByYear as $year => $months) {
+            $chartData[$year] = [
+                'labels' => array_keys($months),
+                'data' => array_values($months),
+            ];
+        }
+
+        return $chartData;
     }
 }
+
+

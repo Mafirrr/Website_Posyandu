@@ -18,10 +18,19 @@ class pemeriksaan_kehamilanFactory extends Factory
      */
     public function definition(): array
     {
+        $year = $this->faker->randomElement([2023, 2025]);
+        if ($year == 2025) {
+            $month = $this->faker->numberBetween(1, 5);
+        } else {
+            $month = $this->faker->numberBetween(1, 12);
+        }
+        $day = $this->faker->numberBetween(1, 28);
+        $tanggalPeriksa = sprintf('%04d-%02d-%02d', $year, $month, $day);
+
         return [
-            'kehamilan_id' => '2',
+            'kehamilan_id' => 2,
             'petugas_id' => Petugas::factory(),
-            'tanggal_periksa' => $this->faker->date(),
+            'tanggal_periksa' => $tanggalPeriksa,
             'tempat_periksa' => $this->faker->city(),
             'berat_badan' => $this->faker->randomFloat(1, 40, 120),
             'lingkar_lengan_atas' => $this->faker->randomFloat(1, 15, 40),
@@ -38,4 +47,5 @@ class pemeriksaan_kehamilanFactory extends Factory
             'tata_laksana_kasus' => $this->faker->paragraph(2),
         ];
     }
+
 }
