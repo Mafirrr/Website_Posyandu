@@ -86,10 +86,12 @@
                                     <td>{{ $jadwal->tanggal }}</td>
                                     <td>
                                         @if (\Carbon\Carbon::parse($jadwal->tanggal)->isFuture())
+
                                             <a href="{{ route('jadwal.edit', $jadwal->id) }}" class="btn btn-sm btn-warning"
                                                 title="Edit">
                                                 <i class="ti ti-edit"></i>
                                             </a>
+
                                         @endif
 
                                         <form action="{{ route('jadwal.destroy', $jadwal->id) }}" method="POST"
