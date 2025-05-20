@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ArtikelController;
 use App\Http\Controllers\Api\DashboardFController;
+use App\Http\Controllers\Api\JadwalController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KehamilanControlller;
 use App\Http\Controllers\Api\LoginController;
@@ -46,3 +47,5 @@ Route::post('/image', [UploadImage::class, 'getImage']);
 
 Route::get('/jadwal_FD', [DashboardFController::class, 'show']);
 Route::middleware('auth:sanctum')->post('/update_fcm_token', [FCMTokenController::class, 'update']);
+
+Route::apiResource('/jadwal', JadwalController::class);
