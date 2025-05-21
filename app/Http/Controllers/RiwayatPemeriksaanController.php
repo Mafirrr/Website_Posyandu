@@ -95,18 +95,19 @@ class RiwayatPemeriksaanController extends Controller
                 ])->first();
                 
                 // Ambil juga data pemeriksaan rutin
-                $pemeriksaanRutin = $pemeriksaan->pemeriksaan_rutin;
+                $pemeriksaanRutin = $pemeriksaan->pemeriksaanRutin;
                 break;
 
             case 'trimester2':
                 // Untuk trimester 2, biasanya hanya ada pemeriksaan rutin
                 $detail = $pemeriksaan;
-                $pemeriksaanRutin = $pemeriksaan->pemeriksaan_rutin;
+                $pemeriksaanRutin = $pemeriksaan->pemeriksaanRutin;
                 break;
 
             case 'trimester3':
                 // Ambil data trimester 3 dengan semua relasinya
                 $detail = $pemeriksaan->trimester3()->with([
+                    'pemeriksaanRutin',
                     'pemeriksaanFisik',
                     'labTrimester3', 
                     'skriningKesehatan',
@@ -115,7 +116,7 @@ class RiwayatPemeriksaanController extends Controller
                 ])->first();
                 
                 // Ambil juga data pemeriksaan rutin
-                $pemeriksaanRutin = $pemeriksaan->pemeriksaan_rutin;
+                $pemeriksaanRutin = $pemeriksaan->pemeriksaanRutin;
                 break;
 
             case 'nifas':

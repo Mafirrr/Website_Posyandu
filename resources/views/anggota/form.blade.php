@@ -145,7 +145,7 @@
                                 {{-- Pekerjaan --}}
                                 <label for="pekerjaan" class="form-label">Pekerjaan <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="pekerjaan" name="pekerjaan" placeholder=" Alamat"
+                                <input type="text" id="pekerjaan" name="pekerjaan" placeholder="Pekerjaan"
                                     value="{{ old('pekerjaan', $anggota->pekerjaan) }}" class="form-control">
                                 @error('pekerjaan')
                                     <small class="text-danger">{{ $message }}</small>
