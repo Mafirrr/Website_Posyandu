@@ -28,6 +28,9 @@ Route::prefix('user')->group(function () {
     Route::put('/keluarga', [ProfileController::class, 'putData']);
 });
 
+Route::prefix('kehamilan')->group(function () {
+    Route::get('/{id}', [KehamilanControlller::class, 'handle']);
+});
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -38,9 +41,7 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/kategori/{id}', [KategoriController::class, 'show']);
 
 
-Route::prefix('kehamilan')->group(function () {
-    Route::get('/{id}', [KehamilanControlller::class, 'handle']);
-});
+
 
 Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
 Route::post('/image', [UploadImage::class, 'getImage']);

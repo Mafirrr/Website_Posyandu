@@ -49,7 +49,8 @@ class KehamilanControlller extends Controller
 
     public function detail(string $id)
     {
-        $pemeriksaan = PemeriksaanKehamilan::where('kehamilan_id', $id)->get()
+        $pemeriksaan = PemeriksaanKehamilan::where('kehamilan_id', $id)
+            ->get()
             ->makeHidden(['created_at', 'updated_at', 'deleted_at']);
         $tri1_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester1')->pluck('id')->values();
         $tri2_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester2')->pluck('id')->values();
@@ -63,27 +64,34 @@ class KehamilanControlller extends Controller
             'pemeriksaanKhusus',
             'labTrimester1',
             'usgTrimester1',
-        ])->where('pemeriksaan_id', $tri1_id)->get()
-            ->each(function ($item) {
-                $item->makeHidden([
-                    'skrining_kesehatan',
-                    'pemeriksaan_fisik',
-                    'pemeriksaan_awal',
-                    'pemeriksaan_khusus',
-                    'lab_trimester_1',
-                    'usg_trimester_1',
-                    'updated_at',
-                    'deleted_at'
-                ]);
-                $item->skriningKesehatan?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-                $item->pemeriksaanFisik?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-                $item->pemeriksaanAwal?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-                $item->pemeriksaanKhusus?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-                $item->labTrimester1?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-                $item->usgTrimester1?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-                $item->pemeriksaanRutin?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-            });
-        $tri2 = PemeriksaanRutin::where('pemeriksaan_id', $tri2_id)->get()
+        ])->whereIn('pemeriksaan_id', $tri1_id)->get()->map(function ($item) {
+            $item->makeHidden([
+                'skrining_kesehatan',
+                'pemeriksaan_fisik',
+                'pemeriksaan_awal',
+                'pemeriksaan_khusus',
+                'lab_trimester_1',
+                'usg_trimester_1',
+                'updated_at',
+                'deleted_at'
+            ]);
+
+            $item->skriningKesehatan?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+            $item->pemeriksaanFisik?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+            $item->pemeriksaanAwal?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+            $item->pemeriksaanKhusus?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+            $item->labTrimester1?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+            $item->usgTrimester1?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+
+            if ($item->pemeriksaanRutin && $item->pemeriksaanRutin->isNotEmpty()) {
+                $item->pemeriksaan_rutin = $item->pemeriksaanRutin->first()->makeHidden(['created_at', 'updated_at', 'deleted_at'])->toArray();
+            }
+
+            unset($item->pemeriksaanRutin);
+
+            return $item;
+        });
+        $tri2 = PemeriksaanRutin::whereIn('pemeriksaan_id', $tri2_id)->get()
             ->makeHidden(['updated_at', 'deleted_at']);
         $tri3 = Trimester3::with([
             'pemeriksaanRutin',
@@ -92,7 +100,7 @@ class KehamilanControlller extends Controller
             'labTrimester3',
             'usgTrimester3',
             'rencanaKonsultasi',
-        ])->where('pemeriksaan_id', $tri3_id)->get()
+        ])->whereIn('pemeriksaan_id', $tri3_id)->get()
             ->each(function ($item) {
                 $item->makeHidden([
                     'skrining_kesehatan',
@@ -108,7 +116,13 @@ class KehamilanControlller extends Controller
                 $item->labTrimester3?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
                 $item->usgTrimester3?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
                 $item->rencanaKonsultasi?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
-                $item->pemeriksaanRutin?->makeHidden(['created_at', 'updated_at', 'deleted_at']);
+                if ($item->pemeriksaanRutin && $item->pemeriksaanRutin->isNotEmpty()) {
+                    $item->pemeriksaan_rutin = $item->pemeriksaanRutin->first()->makeHidden(['created_at', 'updated_at', 'deleted_at'])->toArray();
+                }
+
+                unset($item->pemeriksaanRutin);
+
+                return $item;
             });
         return response()->json([
             'status' => 'success',
