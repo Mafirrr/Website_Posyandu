@@ -26,8 +26,8 @@ class UploadImage extends Controller
             ->resizeDown(1080, null)
             ->toJpeg(80);
 
-        Storage::disk('public')->put("profiles/{$filename}", (string) $image);
-        $url = asset('storage/profiles/' . $filename);
+        Storage::disk('public')->put("profiles/anggota/{$filename}", (string) $image);
+        $url = asset('storage/anggota/profiles/' . $filename);
 
         return response()->json([
             'status' => 'succcess',
@@ -42,7 +42,7 @@ class UploadImage extends Controller
             'id' => 'required',
         ]);
 
-        $path = 'profiles/profile_' . $request->id . '.jpeg';
+        $path = 'profiles/anggota/profile_' . $request->id . '.jpeg';
 
         if (!Storage::disk('public')->exists($path)) {
             return response()->json([

@@ -12,22 +12,22 @@ use Illuminate\Support\Str;
 class BeritaController extends Controller
 {
     public function index()
-{
-     $perPage = request()->input('per_page', 5);
-    $search = request()->input('search');
-    $kategori = request()->input('kesehatan'); // variabel pakai huruf kecil sesuai konvensi
+    {
+        $perPage = request()->input('per_page', 5);
+        $search = request()->input('search');
+        $kategori = request()->input('kesehatan'); // variabel pakai huruf kecil sesuai konvensi
 
-    $artikels = Artikel::when($search, function ($query, $search) {
+        $artikels = Artikel::when($search, function ($query, $search) {
             $query->where('judul', 'like', "%{$search}%");
         })
-       ->when($kategori !== null && $kategori !== '', function ($query) use ($kategori) {
-    $query->where('kategori_edukasi', $kategori); // Sesuaikan nama kolom
-})
-->orderBy('created_at', 'desc')
- ->paginate($perPage);
+            ->when($kategori !== null && $kategori !== '', function ($query) use ($kategori) {
+                $query->where('kategori_edukasi', $kategori); // Sesuaikan nama kolom
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage);
 
-    return view('artikel.berita', compact('artikels'));
-}
+        return view('artikel.berita', compact('artikels'));
+    }
 
 
 
@@ -51,13 +51,12 @@ class BeritaController extends Controller
 
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'slug' => 'required|unique:artikels,slug',
             'isi' => 'required',
             'tanggal' => 'required|date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'kategori_edukasi' => 'required|string|max:255',
         ]);
         $berita = new artikel();
@@ -66,7 +65,7 @@ class BeritaController extends Controller
         $berita->isi = $validated['isi'];
         $berita->kategori_edukasi = $validated['kategori_edukasi'];
         if ($request->hasFile('gambar')) {
-            $berita->gambar = $request->file('gambar')->store('images', 'public'); // Simpan nama file ke database
+            $berita->gambar = $request->file('gambar')->store('images/artikel', 'public'); // Simpan nama file ke database
         }
 
         $berita->save();

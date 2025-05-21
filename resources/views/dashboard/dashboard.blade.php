@@ -43,15 +43,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($merged as $item)
+                                @forelse ($mapped as $item)
                                     <tr>
-                                        <td>{{ $item->nama_anggota }}</td>
-                                        <td>{{ $item->jenis_pemeriksaan }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($item->tanggal_pemeriksaan)->format('d-m-Y') }}</td>
-                                        <td>{{ $item->waktu_pemeriksaan }}</td>
-                                        <td>{{ $item->lokasi ?? 'Posyandu' }}</td>
+                                        <td>{{ $item['nama_anggota'] }}</td>
+                                        <td>{{ $item['jenis_pemeriksaan'] }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item['tanggal_pemeriksaan'])->format('d-m-Y') }}</td>
+                                        <td>{{ $item['waktu'] }}</td>
+                                        <td>{{ $item['lokasi'] ?? 'Posyandu' }}</td>
                                         <td>
-                                            <a href="{{ route('pemeriksaan.detail', ['jenis' => $item->jenis_pemeriksaan, 'id' => $item->id]) }}"
+                                            <a href="{{ route('pemeriksaan.show', ['jenis' => $item['jenis_pemeriksaan'], 'pemeriksaan' => $item['id']]) }}"
                                                 class="badge bg-primary text-decoration-none">
                                                 Detail
                                             </a>

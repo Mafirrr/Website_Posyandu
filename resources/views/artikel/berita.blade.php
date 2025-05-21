@@ -40,13 +40,7 @@
                                     <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <a href="{{ route('berita.index', ['search' => request('search'), 'kategori' => 'olahraga']) }}"
-                                    id="btn-add-contact" class="btn text-dark border border-dark d-flex align-items-center">
-                                    <i class="ti ti-filter text-dark me-1 fs-5"></i> Aktif
-                                </a>
-                                </a>
-                            </div>
+                            
                         </form>
                     </div>
 
