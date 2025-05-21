@@ -7,6 +7,7 @@ use App\Models\Anggota;
 use App\Models\KeluargaAnggota;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -116,5 +117,25 @@ class ProfileController extends Controller
             'message' => $keluarga->wasRecentlyCreated ? 'Created' : 'Updated',
             'data' => $keluarga
         ]);
+    }
+
+    public function change(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|exists:anggota,id',
+            'password' => 'required|string',
+            'new_password' => 'required|string|min:6',
+        ]);
+
+        $anggota = Anggota::find($validated['id']);
+
+        if (!Hash::check($validated['password'], $anggota->password)) {
+            return response()->json(['message' => 'Password lama salah'], 401);
+        }
+
+        $anggota->password = Hash::make($validated['new_password']);
+        $anggota->save();
+
+        return response()->json(['message' => 'Password berhasil diubah'], 200);
     }
 }
