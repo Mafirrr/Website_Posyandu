@@ -58,6 +58,8 @@ class PemeriksaanController extends Controller
             default:
                 abort(400, 'Trimester tidak valid');
         }
+
+        return redirect()->back()->with("success", "Data berhasil ditambahkan");
     }
 
     /**
@@ -352,7 +354,9 @@ class PemeriksaanController extends Controller
             $rutin->save();
 
             DB::commit();
-            return response()->json(['message' => 'Data berhasil disimpan'], 201);
+            return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil disimpan.');
+
+            // return response()->json(['message' => 'Data berhasil disimpan'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['message' => 'Gagal menyimpan data', 'error' => $e->getMessage()], 500);
@@ -547,7 +551,8 @@ class PemeriksaanController extends Controller
             $tr3->save();
 
             DB::commit();
-            return response()->json(['message' => 'Data berhasil disimpan'], 201);
+            return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil disimpan.');
+            // return response()->json(['message' => 'Data berhasil disimpan'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['message' => 'Gagal menyimpan data', 'error' => $e->getMessage()], 500);

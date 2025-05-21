@@ -20,7 +20,7 @@ class LoginController extends Controller
         $user = Anggota::where('nik', $request->identifier)->first();
 
         if (!$user) {
-            $user = Petugas::where('nip', $request->identifier)->first();
+            $user = Petugas::where('email', $request->identifier)->first()->makeHidden(['remember_token', 'created_at', 'updated_at', 'deleted_at']);
         }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -29,6 +29,8 @@ class LoginController extends Controller
                 'message' => 'Invalid credentials.',
             ], 401);
         }
+
+
 
         // Buat token berdasarkan role
         $tokenName = ($user instanceof Anggota) ? 'anggota_token' : 'petugas_token';
