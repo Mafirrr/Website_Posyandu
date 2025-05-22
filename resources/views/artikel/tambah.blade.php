@@ -29,11 +29,10 @@
                         @csrf
                         @method("$method")
                         <div class="d-flex flex-column gap-3">
-<div class="">
+                 <div class="mb-3">
     <label for="gambar" class="form-label">Thumbnail <span class="text-danger">*</span></label>
-    <input type="file" id="gambar" name="gambar" class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*">
-
-    @error('thumbnail')
+       <input type="file" id="gambar" name="gambar" class="form-control @error('gambar') is-invalid @enderror" accept="image/*">
+    @error('gambar')
         <small class="text-danger">{{ $message }}</small>
     @enderror
 
@@ -44,8 +43,6 @@
             <img id="gambar-preview" src="#" alt="Preview Gambar" style="max-width: 300px; display: none;">
         @endif
     </div>
-</div>
-
 <script>
     document.getElementById('gambar').addEventListener('change', function(event) {
         const [file] = this.files;

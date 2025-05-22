@@ -40,7 +40,6 @@
                                     <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
                                 </div>
                             </div>
-                            
                         </form>
                     </div>
 
@@ -51,11 +50,9 @@
                                 <table class="table search-table align-middle text-nowrap">
                                     <thead class="header-item">
                                         <tr>
-
                                             <th scope="col">NO.</th>
                                             <th scope="col">Thumbnail</th>
                                             <th scope="col">Title</th>
-                                            {{-- <th scope="col">Deskripsi</th> --}}
                                             <th scope="col">Kategori</th>
                                             <th scope="col">Date</th>
                                             <th scope="col">Actions</th>
@@ -71,7 +68,6 @@
                                                         style="width: 64px; height: 64px; object-fit: cover;">
                                                 </td>
                                                 <td>{{ $berita->judul }}</td>
-                                                {{-- <td>{!! Str::limit($berita->isi, 50, '') !!}</td> --}}
                                                 <td>{{ $berita->kategori_edukasi }}</td>
                                                 <td>{{ $berita->created_at->toDateString() }}</td>
                                                 <td>
@@ -124,3 +120,26 @@
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+    </script>
+@endpush
