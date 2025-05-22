@@ -7,12 +7,13 @@ use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KehamilanControlller;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\Trimester;
 use App\Http\Controllers\Api\UploadImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\Group;
 use App\Http\Controllers\Api\FCMTokenController;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Api\PemeriksaanController;
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/lupa-password', [LoginController::class, 'lupaPass']);
@@ -31,9 +32,11 @@ Route::middleware('auth:sanctum')->group(function () {
     //upload
     Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
     Route::post('/image', [UploadImage::class, 'getImage']);
+    Route::apiResource('/pemeriksaan-kehamilan', Trimester::class);
 });
 
 
+Route::apiResource('/anggota', PemeriksaanController::class);
 Route::prefix('kehamilan')->group(function () {
     Route::get('/{id}', [KehamilanControlller::class, 'handle']);
 });
