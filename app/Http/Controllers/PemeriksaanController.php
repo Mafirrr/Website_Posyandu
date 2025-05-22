@@ -497,7 +497,8 @@ class PemeriksaanController extends Controller
             //usg
             $usg = new UsgTrimester3();
             $usg->usg_trimester3 = $validated['usg_tr3'];
-            $usg->umur_kehamilan_usg_trimester_3 = $validated['umur_kehamilan_usg3'];
+            $usg->umur_kehamilan_usg_trimester_1 = $validated['umur_kehamilan_usg3'] ?? $validated['umur_kehamilan_hpht3'];
+            $usg->umur_kehamilan_usg_trimester_3 = $validated['umur_kehamilan_biometrik3'];
             $usg->selisih_uk_usg_1_hpht_dengan_trimester_3 = $validated['selisih_3_minggu'];
             $usg->jumlah_bayi = $validated['jumlah_bayi3'];
             $usg->letak_bayi = $validated['letak3'];
