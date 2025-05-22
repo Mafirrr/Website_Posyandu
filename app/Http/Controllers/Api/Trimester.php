@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Kehamilan;
 use App\Models\LabTrimester1;
+use App\Models\LabTrimester3;
 use App\Models\PemeriksaanAwal;
 use App\Models\PemeriksaanFisik;
 use App\Models\PemeriksaanKehamilan;
@@ -15,6 +16,7 @@ use App\Models\SkriningKesehatanJiwa;
 use App\Models\Trimester1;
 use App\Models\Trimester3;
 use App\Models\UsgTrimester1;
+use App\Models\UsgTrimester3;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -176,8 +178,8 @@ class Trimester extends Controller
 
             $skriningKesehatan = SkriningKesehatanJiwa::create($data['skrining_kesehatan']);
             $pemeriksaanFisik = PemeriksaanFisik::create($data['pemeriksaan_fisik']);
-            $labTrimester1 = LabTrimester1::create($data['lab_trimester3']);
-            $usgTrimester1 = UsgTrimester1::create($data['usg_trimester3']);
+            $labTrimester1 = LabTrimester3::create($data['lab_trimester3']);
+            $usgTrimester1 = UsgTrimester3::create($data['usg_trimester3']);
             $rencana = RencanaKonsultasi::create($data['rencana_konsultasi']);
 
             // Simpan data Trimester1
@@ -187,7 +189,7 @@ class Trimester extends Controller
                 'pemeriksaan_fisik' => $pemeriksaanFisik->id,
                 'lab_trimester_3' => $labTrimester1->id,
                 'usg_trimester_3' => $usgTrimester1->id,
-                'rencana_konsultasi' => $rencana,
+                'rencana_konsultasi' => $rencana->id,
             ]);
 
             DB::commit();
