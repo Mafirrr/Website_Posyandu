@@ -50,6 +50,6 @@ class PemeriksaanKehamilan extends Model
      */
     public function pemeriksaanRutin()
     {
-        return $this->hasMany(PemeriksaanRutin::class, 'pemeriksaan_id');
+        return $this->hasOne(PemeriksaanRutin::class, 'pemeriksaan_id');
     }
 }
