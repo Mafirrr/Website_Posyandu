@@ -41,7 +41,7 @@
 
                                 <div style="margin-top:10px;">
                                     @if ($berita->gambar && file_exists(storage_path('app/public/' . $berita->gambar)))
-                                        <img id="gambar-preview" src="{{ asset('storage/' . $berita->gambar) }}"
+                                        <img id="gambar-preview" src="{{ asset('storage/isiberita' . $berita->gambar) }}"
                                             alt="Preview Gambar" style="max-width: 300px; display: block;">
                                     @else
                                         <img id="gambar-preview" src="#" alt="Preview Gambar"
@@ -70,7 +70,7 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                
+
                                 <div class="">
                                     <label for="slug" class="form-label">Slug <span class="text-danger">*</span></label>
                                     <input type="text" id="slug" placeholder="Slug Edukasi"

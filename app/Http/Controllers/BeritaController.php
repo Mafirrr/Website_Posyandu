@@ -68,7 +68,7 @@ class BeritaController extends Controller
 
         $berita->kategori_edukasi = $validated['kategori_edukasi'];
         if ($request->hasFile('gambar')) {
-            $berita->gambar = $request->file('gambar')->store('images/artikel', 'public'); // Simpan nama file ke database
+            $berita->gambar = $request->file('gambar')->store('images/isiberita', 'public'); // Simpan nama file ke database
         }
 
         $berita->save();

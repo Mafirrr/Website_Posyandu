@@ -66,7 +66,7 @@
                                             <tr>
                                                <th scope="row">{{ ($artikels->currentPage() - 1) * $artikels->perPage() + $loop->iteration }}</th>
                                                 <td>
-                                                    <img src="storage/artikel/{{ $berita->gambar }}" alt="Thumbnail"
+                                                    <img src="storage/{{ $berita->gambar }}" alt="Thumbnail"
                                                         class="img-thumbnail"
                                                         style="width: 64px; height: 64px; object-fit: cover;">
                                                 </td>
