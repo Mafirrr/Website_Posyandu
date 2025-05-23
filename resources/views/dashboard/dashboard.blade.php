@@ -58,10 +58,11 @@
                                         <td>{{ $item['waktu'] }}</td>
                                         <td>{{ $item['lokasi'] ?? 'Posyandu' }}</td>
                                         <td>
-                                            <a href="{{ route('pemeriksaan.show', ['jenis' => $item['jenis_pemeriksaan'], 'pemeriksaan' => $item['id']]) }}"
+                                            <a href="{{ route('detail.riwayat', ['id' => $item['id']]) }}"
                                                 class="badge bg-primary text-decoration-none">
                                                 Detail
                                             </a>
+
                                         </td>
                                     </tr>
                                 @empty
