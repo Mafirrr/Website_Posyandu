@@ -17,9 +17,10 @@ class JadwalController extends Controller
 {
     public function index()
     {
-        $jadwals = \App\Models\Jadwal::all();
+        $jadwals = Jadwal::orderBy('tanggal', 'desc')->get();
         return view('jadwal.jadwal', compact('jadwals'));
     }
+
 
     public function store(Request $request)
     {
