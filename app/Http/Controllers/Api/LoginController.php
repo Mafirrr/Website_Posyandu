@@ -20,7 +20,7 @@ class LoginController extends Controller
         $user = Anggota::where('nik', $request->identifier)->first();
 
         if (!$user) {
-            $user = Petugas::where('email', $request->identifier)->first()->makeHidden(['remember_token', 'created_at', 'updated_at', 'deleted_at']);
+            $user = Petugas::where('email', $request->identifier)->first();
         }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
