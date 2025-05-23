@@ -13,8 +13,15 @@
                         <div>
                             <select class="form-select w-auto" id="yearSelector">
                                 @foreach (array_keys($chartData) as $year)
-                                    <option value="{{ $year }}">{{ $year }}</option>
+                                    <option value="{{ $year }}" {{ $year == date('Y') ? 'selected' : '' }}>
+                                        {{ $year }}
+                                    </option>
                                 @endforeach
+                                @if (!array_key_exists(date('Y'), $chartData))
+                                    <option value="{{ date('Y') }}" selected>
+                                        {{ date('Y') }}
+                                    </option>
+                                @endif
                             </select>
                         </div>
                     </div>

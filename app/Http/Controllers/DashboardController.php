@@ -2,14 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\pemeriksaan_kehamilan;
-use App\Models\pemeriksaan_lab_kehamilan;
 use App\Models\PemeriksaanKehamilan;
-use App\Models\PemeriksaanTrimester1;
-use App\Models\PemeriksaanTrimester3;
-use App\Models\Trimester1;
-use App\Models\Trimester3;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -17,15 +10,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Ambil query dasar dengan relasi
         $query = PemeriksaanKehamilan::with(['kehamilan.anggota']);
 
-
-
-        // Ambil semua data yang sudah difilter, urut berdasarkan tanggal
         $allData = $query->orderBy('tanggal_pemeriksaan', 'desc')->get();
 
-        // Map data ke format yang sesuai
         $mapped = $allData->map(function ($item) {
             return [
                 'id' => $item->id,
@@ -46,7 +34,6 @@ class DashboardController extends Controller
             ];
         })->values();
 
-        // List jenis pemeriksaan untuk filter di view
         $jenisPemeriksaans = [
             'trimester1' => 'Trimester 1',
             'trimester2' => 'Trimester 2',
