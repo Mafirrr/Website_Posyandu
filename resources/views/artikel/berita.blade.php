@@ -14,14 +14,16 @@
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a class="text-muted text-decoration-none" href="{{ route('dashboard') }}">Dashboard</a>
+                                                <a class="text-muted text-decoration-none"
+                                                    href="{{ route('dashboard') }}">Dashboard</a>
                                             </li>
                                             <li class="breadcrumb-item active" aria-current="page">Edukasi</li>
                                         </ol>
                                     </nav>
                                 </div>
                                 <div class="ms-auto">
-                                    <a href="{{ route('berita.create') }}" class="btn btn-primary d-flex align-items-center">
+                                    <a href="{{ route('berita.create') }}"
+                                        class="btn btn-primary d-flex align-items-center">
                                         <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah Edukasi
                                     </a>
                                 </div>
@@ -37,7 +39,8 @@
                                     <span class="input-group-text">
                                         <i class="ti ti-search"></i>
                                     </span>
-                                    <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
+                                    <input type="text" name="search" class="form-control" placeholder="Cari..."
+                                        value="{{ request('search') }}">
                                 </div>
                             </div>
                         </form>
@@ -52,18 +55,18 @@
                                         <tr>
                                             <th scope="col">NO.</th>
                                             <th scope="col">Thumbnail</th>
-                                            <th scope="col">Title</th>
+                                            <th scope="col">Judul</th>
                                             <th scope="col">Kategori</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Actions</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($artikels as $berita)
                                             <tr>
-                                                <th scope="row">{{ $loop->iteration }}</th>
+                                               <th scope="row">{{ ($artikels->currentPage() - 1) * $artikels->perPage() + $loop->iteration }}</th>
                                                 <td>
-                                                    <img src="storage/{{ $berita->gambar }}" alt="Thumbnail"
+                                                    <img src="storage/artikel/{{ $berita->gambar }}" alt="Thumbnail"
                                                         class="img-thumbnail"
                                                         style="width: 64px; height: 64px; object-fit: cover;">
                                                 </td>
@@ -78,43 +81,47 @@
                                                             <i class="ti ti-edit text-white fs-5"></i>
                                                         </a>
 
-                                                        <form action="{{ route('berita.destroy', $berita->id) }}"
-                                                            method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus data ini?');"
-                                                            class="d-inline">
+                                                        <form id="form-delete-{{ $berita->id }}"
+                                                            action="{{ route('berita.destroy', $berita->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit"
-                                                                class="btn btn-danger d-flex align-items-center justify-content-center p-2 rounded"
-                                                                title="Hapus" style="width: 38px; height: 38px;">
+                                                            <button type="button"
+                                                                class="btn btn-danger btn-delete d-flex align-items-center justify-content-center p-2 rounded"
+                                                                data-id="{{ $berita->id }}" title="Hapus"
+                                                                style="width: 38px; height: 38px;">
                                                                 <i class="ti ti-trash text-white fs-5"></i>
                                                             </button>
                                                         </form>
-                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
-
-                        <!-- Pagination -->
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <form method="GET" action="{{ route('berita.index') }}">
-                                <div class="d-flex align-items-center">
-                                    <label for="per_page" class="form-label me-2">Per Page:</label>
-                                    <select name="per_page" id="per_page" class="form-select form-select-sm w-auto" onchange="this.form.submit()">
-                                        <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
-                                        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
-                                        <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
-                                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
-                                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
-                                    </select>
-                                </div>
-                            </form>
-                            {{ $artikels->appends(['per_page' => request('per_page'), 'search' => request('search')])->links() }}
                         </div>
                     </div>
+                    <form method="GET" action="{{ route('berita.index') }}">
+                        <div class="py-4 px-3">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center mb-3">
+                                    <label for="per_page" class="form-label me-2">Per Page:</label>
+                                    <select name="per_page" id="per_page" class="form-select form-select-sm w-auto"
+                                        onchange="this.form.submit()">
+                                        <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
+                                        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10
+                                        </option>
+                                        <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20
+                                        </option>
+                                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50
+                                        </option>
+                                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100
+                                        </option>
+                                    </select>
+                                </div>
+                                {{ $artikels->appends(['per_page' => request('per_page')])->links() }}
+                            </div>
+                        </div>
                 </div>
             </div>
         </section>
@@ -132,6 +139,7 @@
                 timer: 2000
             });
         @endif
+
         @if (session('error'))
             Swal.fire({
                 icon: 'error',
@@ -141,5 +149,26 @@
                 timer: 2000
             });
         @endif
+
+        // SweetAlert confirmation for deletion
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.dataset.id;
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data yang dihapus tidak dapat dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Tidak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(`form-delete-${id}`).submit();
+                    }
+                });
+            });
+        });
     </script>
 @endpush

@@ -11,11 +11,11 @@ use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $perPage = request()->input('per_page', 5);
-        $search = request()->input('search');
-        $kategori = request()->input('kesehatan'); // variabel pakai huruf kecil sesuai konvensi
+       $perPage = $request->input('per_page', 5); // Default 5 jika tidak ada
+        $search = $request->input('search');
+        $kategori = $request->input('kesehatan'); // variabel pakai huruf kecil sesuai konvensi
 
         $artikels = Artikel::when($search, function ($query, $search) {
             $query->where('judul', 'like', "%{$search}%");
@@ -24,7 +24,9 @@ class BeritaController extends Controller
                 $query->where('kategori_edukasi', $kategori); // Sesuaikan nama kolom
             })
             ->orderBy('created_at', 'desc')
-            ->paginate($perPage);
+              ->paginate($perPage)
+
+            ->appends(request()->query());
 
         return view('artikel.berita', compact('artikels'));
     }
