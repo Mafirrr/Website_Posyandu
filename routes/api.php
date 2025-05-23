@@ -47,7 +47,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
-Route::apiResource('/anggota', PemeriksaanController::class);
 Route::prefix('kehamilan')->group(function () {
     Route::get('/{id}', [KehamilanControlller::class, 'handle']);
 });
