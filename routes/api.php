@@ -17,6 +17,10 @@ use PHPUnit\Framework\Attributes\Group;
 use App\Http\Controllers\Api\FCMTokenController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Api\AnggotaKaderController;
+use App\Http\Controllers\Api\GrafikController;
+use App\Http\Controllers\API\DashboardApiController;
+use App\Http\Controllers\API\NotifController;
+
 
 // Rute API untuk AnggotaKader
 Route::prefix('anggota')->group(function () {
@@ -69,3 +73,10 @@ Route::get('/jadwal_FD', [DashboardFController::class, 'show']);
 Route::middleware('auth:sanctum')->post('/update_fcm_token', [FCMTokenController::class, 'update']);
 
 Route::apiResource('/jadwal', JadwalController::class);
+
+Route::get('/dashboard/grafik', [DashboardApiController::class, 'grafik']);
+Route::get('/dashboard/riwayat', [DashboardApiController::class, 'riwayat']);
+
+Route::get('/getbb/{id}', [GrafikController::class, 'getBB']);
+Route::get('/jadwalnotif/{id}', [NotifController::class, 'index']);
+Route::get('/jadwal/check/{id}', [NotifController::class, 'checkStatus']);
