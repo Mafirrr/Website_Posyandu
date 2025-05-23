@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('usg_trimester_3', function (Blueprint $table) {
             $table->id();
             $table->enum('usg_trimester3', ['ya', 'tidak']);
-            $table->float('umur_kehamilan_usg_trimester_3');
+            $table->integer('umur_kehamilan_usg_trimester_1');
+            $table->integer('umur_kehamilan_usg_trimester_3');
             $table->enum('selisih_uk_usg_1_hpht_dengan_trimester_3', ['ya', 'tidak']);
             $table->enum('jumlah_bayi', ['tunggal', 'kembar']);
             $table->enum('letak_bayi', ['intrauterin', 'extrauterin', 'tidak_dapat_ditentukan']);

@@ -13,6 +13,7 @@ class UsgTrimester3 extends Model
 
     protected $fillable = [
         'usg_trimester3',
+        'umur_kehamilan_usg_trimester_1',
         'umur_kehamilan_usg_trimester_3',
         'selisih_uk_usg_1_hpht_dengan_trimester_3',
         'jumlah_bayi',

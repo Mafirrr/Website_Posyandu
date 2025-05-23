@@ -485,45 +485,6 @@
                                         </table>
                                     </div>
                                 </div>
-                                {{-- <div class="row g-3 mt-4">
-                                    <h5>Riwayat Kehamilan dan Proses Melahirkan</h5>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered align-middle text-center">
-                                            <thead class="table-dark">
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Tahun</th>
-                                                    <th>BB <small>gram</small></th>
-                                                    <th>Proses Melahirkan</th>
-                                                    <th>Penolong Proses Melahirkan</th>
-                                                    <th>Masalah</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td><input type="number" name="tahun1"
-                                                            class="form-control form-control-sm"></td>
-                                                    <td><input type="number" step="any" name="bb1"
-                                                            class="form-control form-control-sm"></td>
-                                                    <td>
-                                                        <select name="proses1" class="form-select form-select-sm">
-                                                            <option value="">-- Pilih --</option>
-                                                            <option value="normal">Puskesmas</option>
-                                                            <option value="operasi">Rumah Sakit</option>
-                                                            <option value="vakum">Bidan</option>
-                                                            <option value="lainnya">Lainnya</option>
-                                                        </select>
-                                                    </td>
-                                                    <td><input type="text" name="penolong1"
-                                                            class="form-control form-control-sm"></td>
-                                                    <td><input type="text" name="masalah1"
-                                                            class="form-control form-control-sm"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="step-section d-none step-3" id="">
                                 <div class="row g-3 mb-2">
@@ -1711,6 +1672,19 @@
 
         </div>
     </section>
+    @push('scripts')
+        <script>
+            @if (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            @endif
+        </script>
+    @endpush
     <script>
         let currentForm = '#form-trimester-1';
 
