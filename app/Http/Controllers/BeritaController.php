@@ -11,11 +11,11 @@ use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $perPage = request()->input('per_page', 5);
-        $search = request()->input('search');
-        $kategori = request()->input('kesehatan'); // variabel pakai huruf kecil sesuai konvensi
+       $perPage = $request->input('per_page', 5); // Default 5 jika tidak ada
+        $search = $request->input('search');
+        $kategori = $request->input('kesehatan'); // variabel pakai huruf kecil sesuai konvensi
 
         $artikels = Artikel::when($search, function ($query, $search) {
             $query->where('judul', 'like', "%{$search}%");
@@ -24,7 +24,9 @@ class BeritaController extends Controller
                 $query->where('kategori_edukasi', $kategori); // Sesuaikan nama kolom
             })
             ->orderBy('created_at', 'desc')
-            ->paginate($perPage);
+              ->paginate($perPage)
+
+            ->appends(request()->query());
 
         return view('artikel.berita', compact('artikels'));
     }
@@ -56,13 +58,14 @@ class BeritaController extends Controller
             'slug' => 'required|unique:artikels,slug',
             'isi' => 'required',
             'tanggal' => 'required|date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif',
             'kategori_edukasi' => 'required|string|max:255',
         ]);
         $berita = new artikel();
         $berita->judul = $validated['judul'];
         $berita->slug = $validated['slug'];
         $berita->isi = $validated['isi'];
+
         $berita->kategori_edukasi = $validated['kategori_edukasi'];
         if ($request->hasFile('gambar')) {
             $berita->gambar = $request->file('gambar')->store('images/artikel', 'public'); // Simpan nama file ke database
@@ -94,7 +97,7 @@ class BeritaController extends Controller
             'slug' => "required|unique:artikels,slug,$id,id",
             'isi' => 'required',
             'tanggal' => 'required|date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'kategori_edukasi' => 'required|string|max:255',
         ]);
 
@@ -102,6 +105,7 @@ class BeritaController extends Controller
         $berita->judul = $validated['judul'];
         $berita->slug = $validated['slug'];
         $berita->isi = $validated['isi'];
+
         $berita->kategori_edukasi = $validated['kategori_edukasi'];
 
 
