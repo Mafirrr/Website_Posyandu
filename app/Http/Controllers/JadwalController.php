@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use App\Models\Anggota;
+use App\Models\Kehamilan;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
@@ -34,7 +35,12 @@ class JadwalController extends Controller
 
         $jadwal = Jadwal::create($request->all());
 
-        $tokens = Anggota::whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
+        $tokens = Anggota::whereNotNull('fcm_token')
+            ->whereHas('kehamilan', function($query) {
+                $query->where('status', 'dalam_pemantauan');
+            })
+            ->pluck('fcm_token')
+            ->toArray();
 
         if (!empty($tokens)) {
             $firebase = (new Factory)
@@ -62,7 +68,6 @@ class JadwalController extends Controller
                 try {
                     $firebase->send($message->withChangedTarget('token', $token));
                 } catch (\Kreait\Firebase\Exception\Messaging\NotFound $e) {
-                    // Token tidak valid atau kadaluarsa
                     Log::warning('Token FCM tidak valid: ' . $token);
                     continue;
                 } catch (\Kreait\Firebase\Exception\MessagingException $e) {
@@ -102,7 +107,12 @@ class JadwalController extends Controller
         $jadwal = Jadwal::findOrFail($id);
         $jadwal->update($request->all());
 
-        $tokens = Anggota::whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
+        $tokens = Anggota::whereNotNull('fcm_token')
+            ->whereHas('kehamilan', function($query) {
+                $query->where('status', 'dalam_pemantauan');
+            })
+            ->pluck('fcm_token')
+            ->toArray();
 
         if (!empty($tokens)) {
             $firebase = (new Factory)
@@ -130,7 +140,6 @@ class JadwalController extends Controller
                 try {
                     $firebase->send($message->withChangedTarget('token', $token));
                 } catch (\Kreait\Firebase\Exception\Messaging\NotFound $e) {
-                    // Token tidak valid atau kadaluarsa
                     Log::warning('Token FCM tidak valid: ' . $token);
                     continue;
                 } catch (\Kreait\Firebase\Exception\MessagingException $e) {
