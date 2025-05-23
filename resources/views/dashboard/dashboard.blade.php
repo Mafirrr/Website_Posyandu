@@ -13,8 +13,15 @@
                         <div>
                             <select class="form-select w-auto" id="yearSelector">
                                 @foreach (array_keys($chartData) as $year)
-                                    <option value="{{ $year }}">{{ $year }}</option>
+                                    <option value="{{ $year }}" {{ $year == date('Y') ? 'selected' : '' }}>
+                                        {{ $year }}
+                                    </option>
                                 @endforeach
+                                @if (!array_key_exists(date('Y'), $chartData))
+                                    <option value="{{ date('Y') }}" selected>
+                                        {{ date('Y') }}
+                                    </option>
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -43,15 +50,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($merged as $item)
+                                @forelse ($mapped as $item)
                                     <tr>
-                                        <td>{{ $item->nama_anggota }}</td>
-                                        <td>{{ $item->jenis_pemeriksaan }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($item->tanggal_pemeriksaan)->format('d-m-Y') }}</td>
-                                        <td>{{ $item->waktu_pemeriksaan }}</td>
-                                        <td>{{ $item->lokasi ?? 'Posyandu' }}</td>
+                                        <td>{{ $item['nama_anggota'] }}</td>
+                                        <td>{{ $item['jenis_pemeriksaan'] }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item['tanggal_pemeriksaan'])->format('d-m-Y') }}</td>
+                                        <td>{{ $item['waktu'] }}</td>
+                                        <td>{{ $item['lokasi'] ?? 'Posyandu' }}</td>
                                         <td>
-                                            <a href="{{ route('pemeriksaan.detail', ['jenis' => $item->jenis_pemeriksaan, 'id' => $item->id]) }}"
+                                            <a href="{{ route('pemeriksaan.show', ['jenis' => $item['jenis_pemeriksaan'], 'pemeriksaan' => $item['id']]) }}"
                                                 class="badge bg-primary text-decoration-none">
                                                 Detail
                                             </a>
