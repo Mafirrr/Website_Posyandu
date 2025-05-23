@@ -39,15 +39,17 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            <div class="">
-                                <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                                <input type="text" id="password" name="password" placeholder="Masukkan password"
-                                    value="{{ old('password', $petugas->password) }}" class="form-control">
-                                @error('password')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
+                            @if ($method === 'POST' || $can_edit_password)
+                                <div class="">
+                                    <label for="password" class="form-label">Password <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="password" name="password"
+                                        value="{{ old('password', $petugas->password ?? '') }}" class="form-control">
+                                    @error('password')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            @endif
                             <div class="">
                                 <label for="nama" class="form-label">Nama Lengkap <span
                                         class="text-danger">*</span></label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Petugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PetugasController extends Controller
 {
@@ -31,6 +32,7 @@ class PetugasController extends Controller
 
         return view('petugas.petugas', compact('petugas'));
     }
+
     public function create()
     {
         $params = [
@@ -39,7 +41,7 @@ class PetugasController extends Controller
             "method" => "POST",
             "petugas" => (object)[
                 "nip" => "",
-                'password' => "",
+                'password' => "bidan123",
                 'nama' => "",
                 'no_telepon' => "",
                 'email' => "",
@@ -52,7 +54,6 @@ class PetugasController extends Controller
     {
         $validated = $request->validate([
             'nip' => 'required|string|max:20|unique:petugas,nip',
-            'password' => 'required|string|min:6',
             'nama' => 'required|string|max:255',
             'no_telepon' => 'required|string|max:20',
             'email' => 'required|email|unique:petugas,email',
@@ -60,12 +61,13 @@ class PetugasController extends Controller
 
         $petugas = new Petugas();
         $petugas->nip = $validated['nip'];
-        $petugas->password = bcrypt($validated['password']);
+        $petugas->password = bcrypt('bidan123');
         $petugas->nama = $validated['nama'];
         $petugas->no_telepon = $validated['no_telepon'];
         $petugas->email = $validated['email'];
         $petugas->role = 'bidan';
         $petugas->save();
+
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil ditambahkan.');
     }
 
@@ -76,7 +78,8 @@ class PetugasController extends Controller
             "title" => "Edit Petugas",
             "action_form" => route("petugas.update", $id),
             "method" => "PUT",
-            "petugas" => $petugas
+            "petugas" => $petugas,
+            "can_edit_password" => Auth::user()->role === 'bidan'
         ];
         return view('petugas.petugasform', $params);
     }
@@ -85,7 +88,6 @@ class PetugasController extends Controller
     {
         $validated = $request->validate([
             'nip' => 'required|string|max:20|unique:petugas,nip,' . $id,
-            'password' => 'nullable|string|min:6',
             'nama' => 'required|string|max:255',
             'no_telepon' => 'required|string|max:20',
             'email' => 'required|email|unique:petugas,email,' . $id,
@@ -93,14 +95,16 @@ class PetugasController extends Controller
 
         $petugas = Petugas::findOrFail($id);
         $petugas->nip = $validated['nip'];
-        if (!empty($validated['password'])) {
-            $petugas->password = bcrypt($validated['password']);
-        }
         $petugas->nama = $validated['nama'];
         $petugas->no_telepon = $validated['no_telepon'];
         $petugas->email = $validated['email'];
-        $petugas->save();
 
+        if (Auth::user()->role === 'bidan' && $request->filled('password')) {
+            $request->validate(['password' => 'nullable|string|min:6']);
+            $petugas->password = bcrypt($request->input('password'));
+        }
+
+        $petugas->save();
 
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil diperbarui.');
     }
