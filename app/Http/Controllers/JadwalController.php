@@ -9,6 +9,7 @@ use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
 use Kreait\Firebase\Factory;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -48,7 +49,7 @@ class JadwalController extends Controller
             $messageText = "{$hari}\nTanggal: {$tanggalFormatted}\nJam: {$jadwal->jam_mulai}\n- {$jadwal->jam_selesai}";
 
             $data = [
-                'title' => 'Jadwal Posyandu!',
+                'title' => 'Jadwal Posyandu Diperbarui!',
                 'body' => $messageText,
             ];
 
@@ -57,7 +58,16 @@ class JadwalController extends Controller
                     ->withNotification(Notification::create($data['title'], $data['body']))
                     ->withData($data);
 
-                $firebase->send($message->withChangedTarget('token', $token));
+                try {
+                    $firebase->send($message->withChangedTarget('token', $token));
+                } catch (\Kreait\Firebase\Exception\Messaging\NotFound $e) {
+                    // Token tidak valid atau kadaluarsa
+                    Log::warning('Token FCM tidak valid: ' . $token);
+                    continue;
+                } catch (\Kreait\Firebase\Exception\MessagingException $e) {
+                    Log::error('Gagal kirim notifikasi ke token: ' . $token . '. Error: ' . $e->getMessage());
+                    continue;
+                }
             }
         }
 
@@ -116,7 +126,16 @@ class JadwalController extends Controller
                     ->withNotification(Notification::create($data['title'], $data['body']))
                     ->withData($data);
 
-                $firebase->send($message->withChangedTarget('token', $token));
+                try {
+                    $firebase->send($message->withChangedTarget('token', $token));
+                } catch (\Kreait\Firebase\Exception\Messaging\NotFound $e) {
+                    // Token tidak valid atau kadaluarsa
+                    Log::warning('Token FCM tidak valid: ' . $token);
+                    continue;
+                } catch (\Kreait\Firebase\Exception\MessagingException $e) {
+                    Log::error('Gagal kirim notifikasi ke token: ' . $token . '. Error: ' . $e->getMessage());
+                    continue;
+                }
             }
         }
 

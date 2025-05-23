@@ -67,7 +67,8 @@
                                 {{-- Fasilitas Kesehatan 1 --}}
                                 <label for="faskes-1" class="form-label">Fasilitas Kesehatan Tingkat 1 <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="faskes-1" name="faskes_tk1" placeholder="Fasilitas Kesehatan Tingkat 1"
+                                <input type="text" id="faskes-1" name="faskes_tk1"
+                                    placeholder="Fasilitas Kesehatan Tingkat 1"
                                     value="{{ old('faskes_tk1', $anggota->faskes_tk1) }}" class="form-control">
                                 @error('faskes_tk1')
                                     <small class="text-danger">{{ $message }}</small>
@@ -78,7 +79,8 @@
                                 {{-- Fasilitas Rujukan --}}
                                 <label for="faskes-rujukan" class="form-label">Fasilitas Kesehatan Rujukan <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="faskes-rujukan" name="faskes_rujukan" placeholder="Fasilitas Kesehatan Rujukan"
+                                <input type="text" id="faskes-rujukan" name="faskes_rujukan"
+                                    placeholder="Fasilitas Kesehatan Rujukan"
                                     value="{{ old('faskes_rujukan', $anggota->faskes_rujukan) }}" class="form-control">
                                 @error('faskes_rujukan')
                                     <small class="text-danger">{{ $message }}</small>
@@ -145,7 +147,7 @@
                                 {{-- Pekerjaan --}}
                                 <label for="pekerjaan" class="form-label">Pekerjaan <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="pekerjaan" name="pekerjaan" placeholder=" Alamat"
+                                <input type="text" id="pekerjaan" name="pekerjaan" placeholder="Pekerjaan"
                                     value="{{ old('pekerjaan', $anggota->pekerjaan) }}" class="form-control">
                                 @error('pekerjaan')
                                     <small class="text-danger">{{ $message }}</small>

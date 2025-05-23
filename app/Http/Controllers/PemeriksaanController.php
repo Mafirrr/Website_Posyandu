@@ -58,6 +58,8 @@ class PemeriksaanController extends Controller
             default:
                 abort(400, 'Trimester tidak valid');
         }
+
+        return redirect()->back()->with("success", "Data berhasil ditambahkan");
     }
 
     /**
@@ -352,7 +354,9 @@ class PemeriksaanController extends Controller
             $rutin->save();
 
             DB::commit();
-            return response()->json(['message' => 'Data berhasil disimpan'], 201);
+            return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil disimpan.');
+
+            // return response()->json(['message' => 'Data berhasil disimpan'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['message' => 'Gagal menyimpan data', 'error' => $e->getMessage()], 500);
@@ -493,7 +497,8 @@ class PemeriksaanController extends Controller
             //usg
             $usg = new UsgTrimester3();
             $usg->usg_trimester3 = $validated['usg_tr3'];
-            $usg->umur_kehamilan_usg_trimester_3 = $validated['umur_kehamilan_usg3'];
+            $usg->umur_kehamilan_usg_trimester_1 = $validated['umur_kehamilan_usg3'] ?? $validated['umur_kehamilan_hpht3'];
+            $usg->umur_kehamilan_usg_trimester_3 = $validated['umur_kehamilan_biometrik3'];
             $usg->selisih_uk_usg_1_hpht_dengan_trimester_3 = $validated['selisih_3_minggu'];
             $usg->jumlah_bayi = $validated['jumlah_bayi3'];
             $usg->letak_bayi = $validated['letak3'];
@@ -547,7 +552,8 @@ class PemeriksaanController extends Controller
             $tr3->save();
 
             DB::commit();
-            return response()->json(['message' => 'Data berhasil disimpan'], 201);
+            return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil disimpan.');
+            // return response()->json(['message' => 'Data berhasil disimpan'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['message' => 'Gagal menyimpan data', 'error' => $e->getMessage()], 500);
