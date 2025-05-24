@@ -41,7 +41,7 @@ class AnggotaKaderController extends Controller
         // Create anggota
         $anggota = new Anggota();
         $anggota->nik = $validated['nik'];
-        $anggota->password = bcrypt('password123'); // Default password
+        $anggota->password = bcrypt('password123');
         $anggota->nama = $validated['nama'];
         $anggota->no_jkn = $validated['no_jkn'];
         $anggota->faskes_tk1 = $validated['faskes_tk1'];
@@ -50,7 +50,13 @@ class AnggotaKaderController extends Controller
         $anggota->tempat_lahir = $validated['tempat_lahir'];
         $anggota->pekerjaan = $validated['pekerjaan'];
         $anggota->alamat = $validated['alamat'];
-        $anggota->no_telepon = $validated['no_telepon'];
+        $noTelepon = $validated['no_telepon'];
+
+        if (substr($noTelepon, 0, 2) === '08') {
+            $noTelepon = '+628' . substr($noTelepon, 2);
+        }
+
+        $anggota->no_telepon = $noTelepon;
         $anggota->golongan_darah = $validated['golongan_darah'];
         $anggota->aktif = true;
         $anggota->save();

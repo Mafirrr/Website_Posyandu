@@ -12,26 +12,25 @@ use App\Http\Controllers\Api\UploadImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PetugasbidanController;
-use App\Http\Controllers\Api\AnggotaController;
-use PHPUnit\Framework\Attributes\Group;
 use App\Http\Controllers\Api\FCMTokenController;
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Api\AnggotaKaderController;
 use App\Http\Controllers\Api\GrafikController;
 use App\Http\Controllers\API\DashboardApiController;
 use App\Http\Controllers\API\NotifController;
 
-
 // Rute API untuk AnggotaKader
 Route::prefix('anggota')->group(function () {
-    Route::get('/', [AnggotaKaderController::class, 'index']);          // GET: Retrieve all anggota
-    Route::post('/', [AnggotaKaderController::class, 'store']);         // POST: Create a new anggota
-    Route::get('/{id}', [AnggotaKaderController::class, 'show']);       // GET: Retrieve a specific anggota by ID
-    Route::put('/{id}', [AnggotaKaderController::class, 'update']);     // PUT: Update a specific anggota by ID
-    Route::delete('/{id}', [AnggotaKaderController::class, 'destroy']); // DELETE: Delete a specific anggota by ID
+    Route::get('/', [AnggotaKaderController::class, 'index']);
+    Route::post('/', [AnggotaKaderController::class, 'store']);
+    Route::get('/{id}', [AnggotaKaderController::class, 'show']);
+    Route::put('/{id}', [AnggotaKaderController::class, 'update']);
+    Route::delete('/{id}', [AnggotaKaderController::class, 'destroy']);
 });
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/lupa-password', [LoginController::class, 'lupaPass']);
+Route::post('/send-otp', [LoginController::class, 'sendOtp']);
+Route::post('/verify-otp', [LoginController::class, 'verifyOtp']);
+Route::post('/resetPass', [LoginController::class, 'resetPassword']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', [LoginController::class, 'logout']);
@@ -65,9 +64,6 @@ Route::get('/kategori/{id}', [KategoriController::class, 'show']);
 
 
 Route::apiResource('petugas', PetugasbidanController::class);
-
-Route::post('/upload-image', [UploadImage::class, 'uploadPhoto']);
-Route::post('/image', [UploadImage::class, 'getImage']);
 
 Route::get('/jadwal_FD', [DashboardFController::class, 'show']);
 Route::middleware('auth:sanctum')->post('/update_fcm_token', [FCMTokenController::class, 'update']);
