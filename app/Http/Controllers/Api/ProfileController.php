@@ -52,6 +52,9 @@ class ProfileController extends Controller
         $data = $request->only([
             'nama',
             'nik',
+            'no_jkn',
+            'faskes_tk1',
+            'faskes_rujukan',
             'no_telepon',
             'tempat_lahir',
             'tanggal_lahir',
