@@ -97,7 +97,7 @@ class BeritaController extends Controller
             'slug' => "required|unique:artikels,slug,$id,id",
             'isi' => 'required',
             'tanggal' => 'required|date',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'kategori_edukasi' => 'required|string|max:255',
         ]);
 
@@ -105,7 +105,6 @@ class BeritaController extends Controller
         $berita->judul = $validated['judul'];
         $berita->slug = $validated['slug'];
         $berita->isi = $validated['isi'];
-
         $berita->kategori_edukasi = $validated['kategori_edukasi'];
 
 
@@ -114,7 +113,7 @@ class BeritaController extends Controller
                 Storage::disk('public')->delete($berita->gambar);
             }
 
-            $berita->gambar = $request->file('gambar')->store('images', 'public');
+            $berita->gambar = $request->file('gambar')->store('images/isiberita', 'public');
         }
 
         $berita->save();
