@@ -52,6 +52,9 @@ class ProfileController extends Controller
         $data = $request->only([
             'nama',
             'nik',
+            'no_jkn',
+            'faskes_tk1',
+            'faskes_rujukan',
             'no_telepon',
             'tempat_lahir',
             'tanggal_lahir',
@@ -122,19 +125,29 @@ class ProfileController extends Controller
     public function change(Request $request)
     {
         $validated = $request->validate([
-            'id' => 'required|exists:anggota,id',
+            'id' => 'required|integer',
+            'type' => 'required|in:anggota,petugas',
             'password' => 'required|string',
             'new_password' => 'required|string|min:6',
         ]);
 
-        $anggota = Anggota::find($validated['id']);
+        $user = null;
+        if ($validated['type'] === 'anggota') {
+            $user = Anggota::find($validated['id']);
+        } elseif ($validated['type'] === 'petugas') {
+            $user = Petugas::find($validated['id']);
+        }
 
-        if (!Hash::check($validated['password'], $anggota->password)) {
+        if (!$user) {
+            return response()->json(['message' => 'User tidak ditemukan'], 404);
+        }
+
+        if (!Hash::check($validated['password'], $user->password)) {
             return response()->json(['message' => 'Password lama salah'], 401);
         }
 
-        $anggota->password = Hash::make($validated['new_password']);
-        $anggota->save();
+        $user->password = Hash::make($validated['new_password']);
+        $user->save();
 
         return response()->json(['message' => 'Password berhasil diubah'], 200);
     }
