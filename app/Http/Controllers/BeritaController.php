@@ -64,8 +64,7 @@ class BeritaController extends Controller
         $berita = new artikel();
         $berita->judul = $validated['judul'];
         $berita->slug = $validated['slug'];
-        $berita->isi = $validated['isi'];
-
+        $berita->isi = strip_tags($validated['isi']);
         $berita->kategori_edukasi = $validated['kategori_edukasi'];
         if ($request->hasFile('gambar')) {
             $berita->gambar = $request->file('gambar')->store('images/isiberita', 'public'); // Simpan nama file ke database
@@ -104,7 +103,7 @@ class BeritaController extends Controller
         $berita =  artikel::find($id);
         $berita->judul = $validated['judul'];
         $berita->slug = $validated['slug'];
-        $berita->isi = $validated['isi'];
+        $berita->isi = strip_tags($validated['isi']);
         $berita->kategori_edukasi = $validated['kategori_edukasi'];
 
 

@@ -122,18 +122,27 @@
                                     }).catch(error => {
                                         console.error(error);
                                     });
+                                    
                                 </script>
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <label for="kategori_edukasi" class="form-label">Kategori Edukasi</label>
                                         <select id="kategori_edukasi" name="kategori_edukasi" class="form-control">
                                             <option value="">Pilih</option>
-                                            <option value="kesehatan"
-                                                {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'kesehatan' ? 'selected' : '' }}>
-                                                kesehatan</option>
-                                            <option value="sosial"
-                                                {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'sosial' ? 'selected' : '' }}>
-                                                sosial</option>
+                                            <option value="Kesehatan Ibu dan Janin"
+                                                {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'Kesehatan Ibu dan Janin' ? 'selected' : '' }}>
+                                                Kesehatan Ibu dan Janin</option>
+                                                {{ old('Persiapan Persalinan', $berita->kategori_edukasi ?? '') == 'Persiapan Persalinan' ? 'selected' : '' }}>
+                                                Persiapan Persalinan</option>
+                                            <option value="Perawatan Pasca Persalinan (Postpartum)"
+                                                {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'Perawatan Pasca Persalinan (Postpartum)' ? 'selected' : '' }}>
+                                                Perawatan Pasca Persalinan (Postpartum)</option>
+                                                <option value="Edukasi untuk Pasangan"
+                                                {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'Edukasi untuk Pasangan' ? 'selected' : '' }}>
+                                                Edukasi untuk Pasangan</option>
+                                                <option value="Komplikasi Kehamilan"
+                                                {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'Komplikasi Kehamilan' ? 'selected' : '' }}>
+                                                Komplikasi Kehamilan</option>
                                             <option value="lainnya"
                                                 {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'lainnya' ? 'selected' : '' }}>
                                                 lainnya</option>
