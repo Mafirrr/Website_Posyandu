@@ -43,6 +43,7 @@ class PemeriksaanController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'anggota_id' => 'required',
             'trimester' => 'required'
@@ -95,7 +96,7 @@ class PemeriksaanController extends Controller
     }
 
     public function trimester1(Request $request)
-    {
+    {   
 
         $validated = $request->validate([
             'anggota_id' => 'required|exists:anggota,id',
@@ -314,6 +315,7 @@ class PemeriksaanController extends Controller
     }
     public function trimester2(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'anggota_id' => 'required|exists:anggota,id',
 

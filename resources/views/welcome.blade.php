@@ -229,9 +229,11 @@
                     <img src="storage/images/2.png" loading="lazy" alt="Kader"
                         class="w-32 h-32 md:w-48 md:h-48 object-cover rounded-xl">
                     <div>
-                        <h3 class="text-blue-700 font-bold text-lg mb-2">Dr. Sarah Johnson (Cardiologist)</h3>
-                        <p class="text-sm text-gray-600 mb-4">Kader Posyandu yang siap membantu ibu hamil dalam
-                            pemantauan rutin.</p>
+                        <h3 class="text-blue-700 font-bold text-lg mb-2">Rani Selvia(Kader Posyandu)</h3>
+                        <p class="text-sm text-gray-600 mb-4">Posyandu adalah tempat pelayanan kesehatan dasar bagi ibu
+                            hamil, bayi, dan balita. Sebagai kader, saya bertugas menimbang dan memantau pertumbuhan
+                            balita, memberi penyuluhan gizi, membantu imunisasi, serta mengajak masyarakat agar rutin
+                            datang ke Posyandu untuk menjaga kesehatan keluarga.</p>
                         <a href="#" class="text-sm text-white bg-blue-500 px-4 py-2 rounded">Kader Posyandu</a>
                     </div>
                 </div>
@@ -239,9 +241,12 @@
                     <img src="storage/images/2.png" loading="lazy" alt="Bidan"
                         class="w-32 h-32 md:w-48 md:h-48 object-cover rounded-xl">
                     <div>
-                        <h3 class="text-blue-700 font-bold text-lg mb-2">Dr. Mark Lee (Dermatologist)</h3>
-                        <p class="text-sm text-gray-600 mb-4">Bidan Posyandu yang akan membantu dalam edukasi dan
-                            pemeriksaan berkala.</p>
+                        <h3 class="text-blue-700 font-bold text-lg mb-2">Yulia Kusuma Ningrum, A.Md.Keb (Bidan)</h3>
+                        <p class="text-sm text-gray-600 mb-4">Posyandu merupakan layanan kesehatan masyarakat berbasis
+                            komunitas yang berfokus pada ibu hamil, bayi, dan balita. Sebagai bidan, saya bertugas
+                            memberikan pelayanan kesehatan seperti pemeriksaan kehamilan, imunisasi, pemantauan tumbuh
+                            kembang anak, serta pembinaan kepada kader dan edukasi kepada masyarakat. Posyandu berperan
+                            penting dalam upaya pencegahan stunting dan meningkatkan kualitas kesehatan keluarga.</p>
                         <a href="#" class="text-sm text-white bg-blue-500 px-4 py-2 rounded">Bidan Posyandu</a>
                     </div>
                 </div>
