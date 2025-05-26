@@ -19,7 +19,7 @@
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body">
                             <a href="{{ route('profile.edit') }}" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-lock fs-6"></i>
+                                <i class="ti ti-key fs-6"></i>
                                 <p class="mb-0 fs-3">Edit Password</p>
                             </a>
                             <a href="{{ route('logout') }}" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
