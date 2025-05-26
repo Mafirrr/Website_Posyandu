@@ -211,6 +211,12 @@ class PemeriksaanController extends Controller
             $rutin->konseling = $validated['konseling1'];
             $rutin->save();
 
+            //Anggota
+            $anggota = Anggota::find($validated['anggota_id']);
+            $anggota->update([
+                'golongan_darah' => $validated['gol_darah1'],
+            ]);
+
             //pemeriksaan awal
             $awal = new PemeriksaanAwal();
             $awal->tinggi_badan = $validated['tinggi_badan1'];

@@ -66,7 +66,7 @@
                     <span class="hide-menu">Pelayanan Posyandu</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./jadwal" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('jadwal.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-calendar"></i>
                         </span>
