@@ -64,9 +64,11 @@
                                     <tbody>
                                         @foreach ($artikels as $berita)
                                             <tr>
-                                               <th scope="row">{{ ($artikels->currentPage() - 1) * $artikels->perPage() + $loop->iteration }}</th>
+                                                <th scope="row">
+                                                    {{ ($artikels->currentPage() - 1) * $artikels->perPage() + $loop->iteration }}
+                                                </th>
                                                 <td>
-                                                    <img src="storage/{{ $berita->gambar }}" alt="Thumbnail"
+                                                    <img src="{{ asset('storage/' . $berita->gambar) }}" alt="Thumbnail"
                                                         class="img-thumbnail"
                                                         style="width: 64px; height: 64px; object-fit: cover;">
                                                 </td>
