@@ -19,7 +19,7 @@
             <div class="card-body">
                 <h4 class="card-title mb-4">Pembuatan Jadwal</h4>
 
-                <form action="{{ route('jadwal.store') }}" method="POST">
+                <form action="{{ route('jadwal.store') }}" method="POST" id="jadwalForm">
                     @csrf
 
                     <div class="mb-3">
@@ -40,10 +40,12 @@
                         <div class="col">
                             <label for="jam_selesai" class="form-label">Jam Selesai</label>
                             <input type="time" name="jam_selesai" id="jam_selesai" class="form-control" required>
+                            <div class="invalid-feedback" id="jam_selesai_error"></div>
                         </div>
                         <div class="col">
                             <label for="tanggal" class="form-label">Hari & Tanggal</label>
-                            <input type="date" name="tanggal" id="tanggal" class="form-control" required>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control" required
+                                   min="{{ date('Y-m-d') }}">
                         </div>
                     </div>
 
@@ -110,4 +112,51 @@
             </div>
         </div>
     </div>
+
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const jamMulai = document.getElementById('jam_mulai');
+            const jamSelesai = document.getElementById('jam_selesai');
+            const jamSelesaiError = document.getElementById('jam_selesai_error');
+            const form = document.getElementById('jadwalForm');
+
+            function validateTime() {
+                if (jamMulai.value && jamSelesai.value) {
+                    if (jamSelesai.value <= jamMulai.value) {
+                        jamSelesai.classList.add('is-invalid');
+                        jamSelesaiError.textContent = 'Jam selesai harus lebih dari jam mulai';
+                        return false;
+                    } else {
+                        jamSelesai.classList.remove('is-invalid');
+                        jamSelesaiError.textContent = '';
+                        return true;
+                    }
+                }
+                return true;
+            }
+            jamMulai.addEventListener('change', validateTime);
+            jamSelesai.addEventListener('change', validateTime);
+
+            form.addEventListener('submit', function(e) {
+                if (!validateTime()) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Waktu Salah!',
+                        html: '<div style="text-align: center;"><strong>Jam selesai harus lebih dari jam mulai</strong><br></div>',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            jamSelesai.focus();
+                        }
+                    });
+                }
+            });
+
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('tanggal').setAttribute('min', today);
+        });
+    </script>
 @endsection
