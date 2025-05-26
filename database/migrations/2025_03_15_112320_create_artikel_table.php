@@ -17,17 +17,12 @@ return new class extends Migration
             $table->string('slug', 100);
             $table->text('isi');
             $table->string('gambar', 255);
-            // $table->enum('Kategori_edukasi', array('kesehata', 'sosial', 'lainnya'));
-             $table->enum('kategori_edukasi', ['kesehatan', 'sosial', 'lainnya']);
-            // $table->foreignId('kategori_id')->references('id')->on('kategori');
+             $table->enum('kategori_edukasi', ['Kesehatan Ibu dan Janin', 'Persiapan Persalinan','Perawatan Pasca Persalinan (Postpartum)','Edukasi untuk Pasangan','Komplikasi Kehamilan', 'lainnya']);
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('artikels');
