@@ -194,7 +194,6 @@
                                 </div>
                             @endif
                         </div>
-
                         {{-- Tombol Aksi --}}
                         <div class="flex justify-between gap-4 mt-5 ">
                             <a href="{{ route('anggota.index') }}" class="btn btn-danger px-5">
@@ -204,9 +203,203 @@
                                 Simpan
                             </button>
                         </div>
+                        <div class="mt-4">
+                            <label class="form-label">Riwayat Kehamilan</label>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Tahun</th>
+                                        <th>Berat Badan Bayi (kg)</th>
+                                        <th>Proses Melahirkan</th>
+                                        <th>Penolong</th>
+                                        <th>Masalah</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="riwayat-table-body">
+                                    @if (old('riwayat'))
+                                        @foreach (old('riwayat') as $index => $item)
+                                            <tr>
+                                                <td><input type="text" name="riwayat[{{ $index }}][tahun]"
+                                                        value="{{ $item['tahun'] }}" class="form-control"></td>
+                                                <td><input type="text"
+                                                        name="riwayat[{{ $index }}][berat_badan_bayi]"
+                                                        value="{{ $item['berat_badan_bayi'] }}" class="form-control">
+                                                </td>
+                                                <td><input type="text"
+                                                        name="riwayat[{{ $index }}][proses_melahirkan]"
+                                                        value="{{ $item['proses_melahirkan'] }}" class="form-control">
+                                                </td>
+                                                <td><input type="text" name="riwayat[{{ $index }}][penolong]"
+                                                        value="{{ $item['penolong'] }}" class="form-control"></td>
+                                                <td><input type="text" name="riwayat[{{ $index }}][masalah]"
+                                                        value="{{ $item['masalah'] }}" class="form-control"></td>
+                                                <td>
+                                                    <select name="riwayat[{{ $index }}][status]"
+                                                        class="form-control" name="status">
+                                                        <option value="dalam_pemantauan"
+                                                            {{ $item->status == 'dalam_pemantauan' ? 'selected' : '' }}>
+                                                            Dalam Pemantauan</option>
+                                                        <option value="keguguran"
+                                                            {{ $item->status == 'keguguran' ? 'selected' : '' }}>Keguguran
+                                                        </option>
+                                                        <option value="berhasil"
+                                                            {{ $item->status == 'berhasil' ? 'selected' : '' }}>Berhasil
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                                <td><button type="button" class="btn btn-primary btn-sm"
+                                                        onclick="toggleEditSimpan(this, {{ $item->id }})">Edit</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @elseif(isset($riwayat))
+                                        @foreach ($riwayat as $index => $item)
+                                            <tr>
+                                                <td><input type="hidden" name="riwayat[{{ $index }}][id]"
+                                                        value="{{ $item->id }}">
+                                                    <input type="text" name="riwayat[{{ $index }}][tahun]"
+                                                        value="{{ $item->tahun }}" class="form-control">
+                                                </td>
+                                                <td><input type="text"
+                                                        name="riwayat[{{ $index }}][berat_badan_bayi]"
+                                                        value="{{ $item->berat_badan_bayi }}" class="form-control"></td>
+                                                <td><input type="text"
+                                                        name="riwayat[{{ $index }}][proses_melahirkan]"
+                                                        value="{{ $item->proses_melahirkan }}" class="form-control"></td>
+                                                <td><input type="text" name="riwayat[{{ $index }}][penolong]"
+                                                        value="{{ $item->penolong }}" class="form-control"></td>
+                                                <td><input type="text" name="riwayat[{{ $index }}][masalah]"
+                                                        value="{{ $item->masalah }}" class="form-control"></td>
+                                                <td>
+                                                    <select name="riwayat[{{ $index }}][status]"
+                                                        class="form-control">
+                                                        <option value="dalam_pemantauan"
+                                                            {{ $item->status == 'dalam_pemantauan' ? 'selected' : '' }}>
+                                                            Dalam Pemantauan</option>
+                                                        <option value="keguguran"
+                                                            {{ $item->status == 'keguguran' ? 'selected' : '' }}>Keguguran
+                                                        </option>
+                                                        <option value="berhasil"
+                                                            {{ $item->status == 'berhasil' ? 'selected' : '' }}>Berhasil
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                                <td><button type="button" class="btn btn-primary btn-sm"
+                                                        onclick="toggleEditSimpan(this, {{ $item->id }})">Edit</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td><input type="text" name="riwayat[0][tahun]" class="form-control"></td>
+                                            <td><input type="text" name="riwayat[0][berat_badan_bayi]"
+                                                    class="form-control"></td>
+                                            <td><input type="text" name="riwayat[0][proses_melahirkan]"
+                                                    class="form-control"></td>
+                                            <td><input type="text" name="riwayat[0][penolong]" class="form-control">
+                                            </td>
+                                            <td><input type="text" name="riwayat[0][masalah]" class="form-control">
+                                            </td>
+                                            <td>
+                                                <select name="riwayat[0][status]" class="form-control">
+                                                    <option value="" disabled selected>Pilih Status</option>
+                                                    <option value="dalam_pemantauan">Dalam Pemantauan</option>
+                                                    <option value="keguguran">Keguguran</option>
+                                                    <option value="berhasil">Berhasil</option>
+                                                </select>
+                                            </td>
+                                            <td><button type="button" class="btn btn-primary btn-sm"
+                                                    onclick="toggleEditSimpan(this, {{ $item->id }})">Simpan</button>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+
                     </form>
                 </div>
             </div>
         </div>
     </section>
 @endsection
+@push('scripts')
+    <script>
+        function toggleEditSimpan(button, id) {
+            const row = button.closest('tr');
+            const inputs = row.querySelectorAll('input[type="text"]');
+            const isReadonly = inputs[0].hasAttribute('readonly');
+
+            const route = `{{ route('pemeriksaan.update', ':id') }}`.replace(':id', id);
+
+            if (isReadonly) {
+                // Ganti ke mode edit
+                inputs.forEach(input => input.removeAttribute('readonly'));
+                button.textContent = 'Simpan';
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-success');
+            } else {
+                // Kumpulkan data untuk disimpan
+                const data = {};
+                inputs.forEach(input => {
+                    const match = input.name.match(/\[(\w+)\]$/);
+                    if (match) {
+                        data[match[1]] = input.value;
+                    }
+
+                    const select = row.querySelector('select[name$="[status]"]');
+                    if (select) {
+                        const match = select.name.match(/\[(\w+)\]$/);
+                        if (match) {
+                            data[match[1]] = select.value;
+                        }
+                    }
+                });
+                console.log(data);
+                fetch(route, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(async response => {
+                        const resData = await response.json().catch(() => null);
+                        if (response.ok && resData?.success) {
+                            // Berhasil
+                            inputs.forEach(input => input.setAttribute('readonly', true));
+                            button.textContent = 'Edit';
+                            button.classList.remove('btn-success');
+                            button.classList.add('btn-primary');
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil',
+                                text: resData.message,
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                        } else {
+                            // Gagal dari server (misal validasi gagal)
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                text: 'Gagal menyimpan data.'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Fetch error:", error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Terjadi Kesalahan',
+                            text: 'Tidak dapat menghubungi server atau error parsing JSON.'
+                        });
+                    });
+            }
+        }
+    </script>
+@endpush

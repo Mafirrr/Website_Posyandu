@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anggota;
 use App\Models\Kehamilan;
 use App\Models\LabTrimester1;
 use App\Models\LabTrimester3;
@@ -75,6 +76,11 @@ class Trimester extends Controller
             $pemeriksaanRutin = PemeriksaanRutin::create(array_merge($data['pemeriksaan_rutin'], [
                 'pemeriksaan_id' => $pemeriksaan->id
             ]));
+
+            $anggota = Anggota::find($validated['pemeriksaan_kehamilan']['kehamilan_id']);
+            $anggota->update([
+                'golongan_darah' => $pemeriksaanRutin->golongan_darah,
+            ]);
 
             $skriningKesehatan = SkriningKesehatanJiwa::create($data['skrining_kesehatan']);
             $pemeriksaanFisik = PemeriksaanFisik::create($data['pemeriksaan_fisik']);

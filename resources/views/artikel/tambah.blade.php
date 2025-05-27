@@ -122,7 +122,6 @@
                                     }).catch(error => {
                                         console.error(error);
                                     });
-                                    
                                 </script>
                                 <div class="row">
                                     <div class="col-md-6 col-12">
@@ -132,15 +131,15 @@
                                             <option value="Kesehatan Ibu dan Janin"
                                                 {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'Kesehatan Ibu dan Janin' ? 'selected' : '' }}>
                                                 Kesehatan Ibu dan Janin</option>
-                                                {{ old('Persiapan Persalinan', $berita->kategori_edukasi ?? '') == 'Persiapan Persalinan' ? 'selected' : '' }}>
-                                                Persiapan Persalinan</option>
+                                            {{ old('Persiapan Persalinan', $berita->kategori_edukasi ?? '') == 'Persiapan Persalinan' ? 'selected' : '' }}>
+                                            Persiapan Persalinan</option>
                                             <option value="Perawatan Pasca Persalinan (Postpartum)"
                                                 {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'Perawatan Pasca Persalinan (Postpartum)' ? 'selected' : '' }}>
                                                 Perawatan Pasca Persalinan (Postpartum)</option>
-                                                <option value="Edukasi untuk Pasangan"
+                                            <option value="Edukasi untuk Pasangan"
                                                 {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'Edukasi untuk Pasangan' ? 'selected' : '' }}>
                                                 Edukasi untuk Pasangan</option>
-                                                <option value="Komplikasi Kehamilan"
+                                            <option value="Komplikasi Kehamilan"
                                                 {{ old('kategori_edukasi', $berita->kategori_edukasi ?? '') == 'Komplikasi Kehamilan' ? 'selected' : '' }}>
                                                 Komplikasi Kehamilan</option>
                                             <option value="lainnya"
@@ -171,7 +170,7 @@
                                             Batal
                                         </a>
                                         <button type="submit" class="btn btn-primary ms-2 px-5">
-                                            Tambah
+                                            Simpan
                                         </button>
                                     </div>
 

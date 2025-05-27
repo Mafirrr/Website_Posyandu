@@ -33,7 +33,7 @@
 
                             <div class="">
                                 <label for="nip" class="form-label">NIP <span class="text-danger">*</span></label>
-                                <input type="text" id="nip" name="nip" placeholder="Masukkan NIP"
+                                <input type="number" id="nip" name="nip" placeholder="Masukkan NIP"
                                     value="{{ old('nip', $petugas->nip) }}" class="form-control">
                                 @error('nip')
                                     <small class="text-danger">{{ $message }}</small>
@@ -44,12 +44,15 @@
                                     <label for="password" class="form-label">Password <span
                                             class="text-danger">*</span></label>
                                     <input type="text" id="password" name="password"
-                                        value="{{ old('password', $petugas->password ?? '') }}" class="form-control">
+                                        value="{{ old('password', $method === 'POST' ? 'bidan123' : $petugas->password ?? '') }}"
+                                        class="form-control"
+                                        @if ($method === 'POST') readonly style="background-color: #e9ecef;" @endif>
                                     @error('password')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             @endif
+
                             <div class="">
                                 <label for="nama" class="form-label">Nama Lengkap <span
                                         class="text-danger">*</span></label>
@@ -60,14 +63,19 @@
                                 @enderror
                             </div>
                             <div class="">
-                                <label for="phone-number" class="form-label">Phone number <span
+                                <label for="phone-number" class="form-label">Nomor Telepon <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="phone-number" name="no_telepon" placeholder="Phone Number"
-                                    value="{{ old('no_telepon', $petugas->no_telepon) }}" class="form-control">
+                                <div class="input-group">
+                                    <span class="input-group-text">+62</span>
+                                    <input type="text" id="phone-number" name="no_telepon" placeholder="81234567890"
+                                        value="{{ old('no_telepon', ltrim($petugas->no_telepon, '+62')) }}"
+                                        class="form-control" oninput="thi`s.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
                                 @error('no_telepon')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+
                             <div class="">
                                 <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
                                 <input type="text" id="email" name="email" placeholder="Email"

@@ -13,7 +13,7 @@ class BeritaController extends Controller
 {
     public function index(Request $request)
     {
-       $perPage = $request->input('per_page', 5); // Default 5 jika tidak ada
+        $perPage = $request->input('per_page', 5); // Default 5 jika tidak ada
         $search = $request->input('search');
         $kategori = $request->input('kesehatan'); // variabel pakai huruf kecil sesuai konvensi
 
@@ -24,7 +24,7 @@ class BeritaController extends Controller
                 $query->where('kategori_edukasi', $kategori); // Sesuaikan nama kolom
             })
             ->orderBy('created_at', 'desc')
-              ->paginate($perPage)
+            ->paginate($perPage)
 
             ->appends(request()->query());
 
