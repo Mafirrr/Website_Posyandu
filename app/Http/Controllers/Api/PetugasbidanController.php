@@ -59,8 +59,8 @@ class PetugasbidanController extends Controller
         $petugas = Petugas::findOrFail($id);
         $petugas->nip = $validated['nip'];
 
-        if (!empty($validated['password'])) {
-            $petugas->password = bcrypt($validated['password']);
+        if (!empty($validated['bidan123'])) {
+            $petugas->password = bcrypt($validated['bidan123']);
         }
 
         $petugas->nama = $validated['nama'];
