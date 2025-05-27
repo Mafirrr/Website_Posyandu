@@ -69,7 +69,7 @@
                                     <span class="input-group-text">+62</span>
                                     <input type="text" id="phone-number" name="no_telepon" placeholder="81234567890"
                                         value="{{ old('no_telepon', ltrim($petugas->no_telepon, '+62')) }}"
-                                        class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                        class="form-control" oninput="thi`s.value = this.value.replace(/[^0-9]/g, '')">
                                 </div>
                                 @error('no_telepon')
                                     <small class="text-danger">{{ $message }}</small>

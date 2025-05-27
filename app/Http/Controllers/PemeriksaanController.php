@@ -84,7 +84,34 @@ class PemeriksaanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $riwayat = Kehamilan::find($id);
+
+        if (!$riwayat) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+
+        $validated = $request->validate([
+            'tahun' => 'required|numeric',
+            'berat_badan_bayi' => 'required|numeric',
+            'proses_melahirkan' => 'required|string|max:255',
+            'penolong' => 'nullable|string|max:255',
+            'masalah' => 'nullable|string|max:255',
+            'status' => 'required|in:dalam_pemantauan,keguguran,berhasil',
+        ]);
+
+        $riwayat->tahun = $validated['tahun'];
+        $riwayat->berat_badan_bayi = $validated['berat_badan_bayi'];
+        $riwayat->proses_melahirkan = $validated['proses_melahirkan'];
+        $riwayat->penolong = $validated['penolong'];
+        $riwayat->masalah = $validated['masalah'];
+        $riwayat->status = $validated['status'];
+
+        $riwayat->update();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diperbarui.'
+        ], 200);
     }
 
     /**
@@ -96,7 +123,7 @@ class PemeriksaanController extends Controller
     }
 
     public function trimester1(Request $request)
-    {   
+    {
 
         $validated = $request->validate([
             'anggota_id' => 'required|exists:anggota,id',

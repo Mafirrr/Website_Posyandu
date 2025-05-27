@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggota;
+use App\Models\Kehamilan;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
@@ -100,12 +101,15 @@ class AnggotaController extends Controller
     public function edit($id)
     {
         $anggota = Anggota::findOrFail($id);
+        $kehamilan = Kehamilan::where('anggota_id', $id)->get();
         $params = [
             "title" => "Ubah Anggota",
             "action_form" => route("anggota.update", $id),
             "method" => "PUT",
-            "anggota" => $anggota
+            "anggota" => $anggota,
+            "riwayat" => $kehamilan,
         ];
+
         return view('anggota.form', $params);
     }
 
