@@ -17,9 +17,9 @@ return new class extends Migration
             $table->enum('golongan_darah', array('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'));
             $table->enum('status_imunisasi_td', ['t1', 't2', 't3', 't4', 't5']);
             $table->float('hemoglobin');
-            $table->json('riwayat_kesehatan_ibu_sekarang');
-            $table->json('riwayat_perilaku');
-            $table->json('riwayat_penyakit_keluarga');
+            $table->json('riwayat_kesehatan_ibu_sekarang')->nullable();
+            $table->json('riwayat_perilaku')->nullable();
+            $table->json('riwayat_penyakit_keluarga')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

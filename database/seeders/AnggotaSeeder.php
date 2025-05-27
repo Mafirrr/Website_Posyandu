@@ -10,6 +10,6 @@ class AnggotaSeeder extends Seeder
 {
     public function run(): void
     {
-        Anggota::factory()->count(10)->create(); // Buat 10 data anggota
+        Anggota::factory()->count(3)->create(); // Buat 10 data anggota
     }
 }

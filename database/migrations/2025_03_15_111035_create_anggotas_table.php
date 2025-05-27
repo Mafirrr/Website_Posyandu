@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('pekerjaan', 100);
             $table->text('alamat');
             $table->char('no_telepon', 16)->unique();
-            $table->enum('golongan_darah', array('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'));
+            $table->enum('golongan_darah', array('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'))->nullable();
             $table->boolean('aktif')->default(true);
             $table->timestamps();
             $table->softDeletes();
