@@ -28,8 +28,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="lokasi" class="form-label">Lokasi</label>
-                        <input type="text" name="lokasi" id="lokasi" class="form-control" required>
+                        <label for="lokasi" class="form-label">Pilih Posyandu</label>
+                        <select name="lokasi" id="lokasi" class="form-select" data-temp-required="true" required>
+                            <option value="">-- Pilih Posyandu --</option>
+                            @foreach ($posyandus as $pos)
+                                <option value="{{ $pos->id }}">{{ $pos->nama }} </option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="row mb-3">
@@ -45,7 +50,7 @@
                         <div class="col">
                             <label for="tanggal" class="form-label">Hari & Tanggal</label>
                             <input type="date" name="tanggal" id="tanggal" class="form-control" required
-                                   min="{{ date('Y-m-d') }}">
+                                min="{{ date('Y-m-d') }}">
                         </div>
                     </div>
 
@@ -82,14 +87,14 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $jadwal->judul }}</td>
-                                    <td>{{ $jadwal->lokasi }}</td>
+                                    <td>{{ $jadwal->posyandu->nama }}</td>
                                     <td>{{ $jadwal->jam_mulai }}</td>
                                     <td>{{ $jadwal->jam_selesai }}</td>
                                     <td>{{ $jadwal->tanggal }}</td>
                                     <td>
                                         @if (\Carbon\Carbon::parse($jadwal->tanggal)->isFuture())
-                                            <a href="{{ route('jadwal.edit', $jadwal->id) }}" class="btn btn-sm btn-warning"
-                                                title="Edit">
+                                            <a href="{{ route('jadwal.edit', $jadwal->id) }}"
+                                                class="btn btn-sm btn-warning" title="Edit">
                                                 <i class="ti ti-edit"></i>
                                             </a>
                                         @endif
@@ -113,7 +118,7 @@
         </div>
     </div>
 
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const jamMulai = document.getElementById('jam_mulai');

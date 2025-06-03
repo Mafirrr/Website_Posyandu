@@ -16,9 +16,17 @@ class Posyandu extends Model
         'alamat',
     ];
 
-    // Relasi: Satu posyandu punya banyak ibu hamil
-    public function ibuHamil()
+    public function anggota()
     {
         return $this->hasMany(Anggota::class, 'posyandu_id');
+    }
+
+    public function pemeriksaanKehamilan()
+    {
+        return $this->hasMany(PemeriksaanKehamilan::class, 'tempat_pemeriksaan');
+    }
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class, 'lokasi');
     }
 }

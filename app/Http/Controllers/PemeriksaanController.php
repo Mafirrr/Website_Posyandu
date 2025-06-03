@@ -11,6 +11,7 @@ use App\Models\PemeriksaanFisik;
 use App\Models\PemeriksaanKehamilan;
 use App\Models\PemeriksaanKhusus;
 use App\Models\PemeriksaanRutin;
+use App\Models\Posyandu;
 use App\Models\RencanaKonsultasi;
 use App\Models\SkriningKesehatanJiwa;
 use App\Models\Trimester1;
@@ -27,7 +28,9 @@ class PemeriksaanController extends Controller
      */
     public function index()
     {
-        return view('pemeriksaan.pemeriksaan');
+        $posyandus = Posyandu::all();
+
+        return view('pemeriksaan.pemeriksaan', compact('posyandus'));
     }
 
     /**
@@ -43,7 +46,6 @@ class PemeriksaanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validated = $request->validate([
             'anggota_id' => 'required',
             'trimester' => 'required'
@@ -130,7 +132,7 @@ class PemeriksaanController extends Controller
 
             // Pemeriksaan dasar
             'tanggal_periksa1' => 'required|date',
-            'tempat_periksa1' => 'required|string',
+            'tempat_periksa1' => 'required',
             'berat_badan1' => 'required|numeric',
             'tinggi_badan1' => 'required|numeric',
             'lingkar_lengan1' => 'required|numeric',
@@ -342,7 +344,6 @@ class PemeriksaanController extends Controller
     }
     public function trimester2(Request $request)
     {
-        // dd($request->all());
         $validated = $request->validate([
             'anggota_id' => 'required|exists:anggota,id',
 

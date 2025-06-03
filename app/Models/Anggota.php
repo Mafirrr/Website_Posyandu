@@ -46,19 +46,10 @@ class Anggota extends  Authenticatable
         $this->attributes['aktif'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
-    public function isKader()
-    {
-        return $this->role === 'kader' || $this->role === 'ibu_hamil_kader';
-    }
 
     public function anggota()
     {
         return $this->belongsTo(Anggota::class);
-    }
-
-    public function isIbuHamil()
-    {
-        return $this->role === 'ibu_hamil' || $this->role === 'ibu_hamil_kader';
     }
 
     public function kehamilan()
@@ -68,6 +59,6 @@ class Anggota extends  Authenticatable
 
     public function posyandu()
     {
-        return $this->belongsTo(Posyandu::class);
+        return $this->belongsTo(Posyandu::class, 'posyandu_id');
     }
 }

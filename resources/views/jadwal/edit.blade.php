@@ -17,9 +17,17 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="lokasi" class="form-label">Lokasi</label>
-                        <input type="text" name="lokasi" id="lokasi" class="form-control"
-                            value="{{ old('lokasi', $jadwal->lokasi) }}" required>
+                        <label for="lokasi" class="form-label">Pilih Posyandu</label>
+                        <select name="lokasi" id="lokasi" class="form-select" required>
+                            <option value="">-- Pilih Posyandu --</option>
+                            @foreach ($posyandu as $pos)
+                                <option value="{{ $pos->id }}"
+                                    {{ old('lokasi', $jadwal->lokasi ?? '') == $pos->id ? 'selected' : '' }}>
+                                    {{ $pos->nama }}
+                                </option>
+                            @endforeach
+
+                        </select>
                     </div>
 
                     <div class="row mb-3">
@@ -72,7 +80,8 @@
                 if (startTime && endTime) {
                     if (endTime <= startTime) {
                         jamSelesai.classList.add('is-invalid');
-                        document.getElementById('jam_selesai_error').textContent = 'Jam selesai harus lebih dari jam mulai';
+                        document.getElementById('jam_selesai_error').textContent =
+                            'Jam selesai harus lebih dari jam mulai';
                         return false;
                     } else {
                         jamSelesai.classList.remove('is-invalid');
@@ -89,7 +98,8 @@
 
                 if (selectedDate && selectedDate < todayDate) {
                     tanggal.classList.add('is-invalid');
-                    document.getElementById('tanggal_error').textContent = 'Tanggal tidak boleh kurang dari hari ini';
+                    document.getElementById('tanggal_error').textContent =
+                        'Tanggal tidak boleh kurang dari hari ini';
                     return false;
                 } else {
                     tanggal.classList.remove('is-invalid');

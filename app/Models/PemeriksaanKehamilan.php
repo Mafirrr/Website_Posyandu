@@ -27,6 +27,10 @@ class PemeriksaanKehamilan extends Model
         return $this->belongsTo(Kehamilan::class, 'kehamilan_id');
     }
 
+    public function posyandu()
+    {
+        return $this->belongsTo(Posyandu::class, 'tempat_pemeriksaan');
+    }
     /**
      * Relasi ke tabel petugas
      */

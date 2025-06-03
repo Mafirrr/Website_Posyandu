@@ -21,6 +21,22 @@ return new class extends Migration
         Schema::table('anggota', function (Blueprint $table) {
             $table->foreignId('posyandu_id')->after('alamat')->constrained('posyandu')->onDelete('cascade');
         });
+
+        Schema::table('pemeriksaan_kehamilan', function (Blueprint $table) {
+            $table->dropColumn('tempat_pemeriksaan');
+        });
+
+        Schema::table('pemeriksaan_kehamilan', function (Blueprint $table) {
+            $table->foreignId('tempat_pemeriksaan')->after('tanggal_pemeriksaan')->constrained('posyandu')->onDelete('cascade');
+        });
+
+        Schema::table('jadwal', function (Blueprint $table) {
+            $table->dropColumn('lokasi');
+        });
+
+        Schema::table('jadwal', function (Blueprint $table) {
+            $table->foreignId('lokasi')->after('keterangan')->constrained('posyandu')->onDelete('cascade');
+        });
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use App\Models\Anggota;
-use App\Models\Kehamilan;
+use App\Models\Posyandu;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
@@ -19,12 +19,14 @@ class JadwalController extends Controller
     public function index()
     {
         $jadwals = Jadwal::orderBy('tanggal', 'desc')->get();
-        return view('jadwal.jadwal', compact('jadwals'));
+        $posyandus = Posyandu::all();
+        return view('jadwal.jadwal', compact('jadwals', 'posyandus'));
     }
 
 
     public function store(Request $request)
     {
+
         $request->validate([
             'judul' => 'required',
             'lokasi' => 'required',
@@ -36,7 +38,7 @@ class JadwalController extends Controller
         $jadwal = Jadwal::create($request->all());
 
         $tokens = Anggota::whereNotNull('fcm_token')
-            ->whereHas('kehamilan', function($query) {
+            ->whereHas('kehamilan', function ($query) {
                 $query->where('status', 'dalam_pemantauan');
             })
             ->pluck('fcm_token')
@@ -91,7 +93,8 @@ class JadwalController extends Controller
     public function edit($id)
     {
         $jadwal = Jadwal::findOrFail($id);
-        return view('jadwal.edit', compact('jadwal'));
+        $posyandu = Posyandu::all();
+        return view('jadwal.edit', compact('jadwal', 'posyandu'));
     }
 
     public function update(Request $request, $id)
@@ -108,7 +111,7 @@ class JadwalController extends Controller
         $jadwal->update($request->all());
 
         $tokens = Anggota::whereNotNull('fcm_token')
-            ->whereHas('kehamilan', function($query) {
+            ->whereHas('kehamilan', function ($query) {
                 $query->where('status', 'dalam_pemantauan');
             })
             ->pluck('fcm_token')

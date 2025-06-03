@@ -90,9 +90,14 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label class="form-label">Tempat Periksa</label>
-                                        <input type="text" name="tempat_periksa1" class="form-control"
+                                        <label for="tempat_periksa1" class="form-label">Pilih Posyandu</label>
+                                        <select name="tempat_periksa1" id="tempat_periksa1" class="form-select"
                                             data-temp-required="true">
+                                            <option value="">-- Pilih Posyandu --</option>
+                                            @foreach ($posyandus as $pos)
+                                                <option value="{{ $pos->id }}">{{ $pos->nama }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="col-md-6">
@@ -966,9 +971,14 @@
                                             data-temp-required="true">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Tempat Periksa</label>
-                                        <input type="text" name="tempat_periksa2" class="form-control"
+                                        <label for="tempat_periksa2" class="form-label">Pilih Posyandu</label>
+                                        <select name="tempat_periksa2" id="tempat_periksa2" class="form-select"
                                             data-temp-required="true">
+                                            <option value="">-- Pilih Posyandu --</option>
+                                            @foreach ($posyandus as $pos)
+                                                <option value="{{ $pos->id }}">{{ $pos->nama }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Timbang BB</label>
@@ -1042,9 +1052,14 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label class="form-label">Tempat Periksa</label>
-                                        <input type="text" name="tempat_periksa3" class="form-control"
+                                        <label for="tempat_periksa3" class="form-label">Pilih Posyandu</label>
+                                        <select name="tempat_periksa3" id="tempat_periksa3" class="form-select"
                                             data-temp-required="true">
+                                            <option value="">-- Pilih Posyandu --</option>
+                                            @foreach ($posyandus as $pos)
+                                                <option value="{{ $pos->id }}">{{ $pos->nama }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="col-md-6">

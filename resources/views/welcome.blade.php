@@ -13,7 +13,7 @@
     <header x-data="{ open: false }"
         class="sticky top-0 z-50 flex justify-between items-center px-6 py-4 shadow-md bg-white">
         <div class="flex items-center gap-2">
-            <img src="storage/images/logo.png" alt="Logo" class="h-14">
+            <img src="{{ asset('storage/images/logo.png') }}" alt="Logo" class="h-14">
             <span class="font-bold text-xl text-blue-900">Posyandu</span>
         </div>
 
@@ -112,7 +112,7 @@
             </div>
 
             <div class="flex-1 relative">
-                <img src="storage/images/1.png" loading="lazy" alt="Dokter" class="rounded-lg">
+                <img src="{{ asset('storage/images/1.png') }}" loading="lazy" alt="Dokter" class="rounded-lg">
             </div>
         </div>
     </section>
@@ -226,7 +226,7 @@
             <h2 class="text-2xl text-center font-bold mb-8">Lihat Profile tentang Kader dan Bidan di Posyandu Ini.</h2>
             <div class="grid gap-6">
                 <div class="bg-white rounded-2xl shadow p-6 flex gap-4 items-center">
-                    <img src="storage/images/2.png" loading="lazy" alt="Kader"
+                    <img src="{{ asset('storage/images/2.png') }}" loading="lazy" alt="Kader"
                         class="w-32 h-32 md:w-48 md:h-48 object-cover rounded-xl">
                     <div>
                         <h3 class="text-blue-700 font-bold text-lg mb-2">Rani Selvia(Kader Posyandu)</h3>
@@ -238,7 +238,7 @@
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl shadow p-6 flex gap-4 items-center">
-                    <img src="storage/images/2.png" loading="lazy" alt="Bidan"
+                    <img src="{{ asset('storage/images/2.png') }}" loading="lazy" alt="Bidan"
                         class="w-32 h-32 md:w-48 md:h-48 object-cover rounded-xl">
                     <div>
                         <h3 class="text-blue-700 font-bold text-lg mb-2">Yulia Kusuma Ningrum, A.Md.Keb (Bidan)</h3>
@@ -263,7 +263,8 @@
         </h2>
         <div
             class="bg-white rounded-3xl shadow p-8 border border-[#95DDFF] flex flex-col md:flex-row items-center gap-8">
-            <img src="storage/images/3.png" loading="lazy" alt="Posyandu Tapen" class="w-50 h-50 object-cover">
+            <img src="{{ asset('storage/images/3.png') }}" loading="lazy" alt="Posyandu Tapen"
+                class="w-50 h-50 object-cover">
             <div class="flex-2">
                 <p class="text-sm text-gray-600 font-normal mb-8 text-center md:text-left">
                     Posyandu Ibu Hamil di Tapen, Bondowoso bukan sekadar layanan kesehatan—ini adalah wujud nyata
@@ -329,7 +330,7 @@
                 </div>
             </div>
             <div class="flex-1 self-center">
-                <img src="storage/images/4.png" loading="lazy" alt="Ilustrasi Langkah-langkah"
+                <img src="{{ asset('storage/images/4.png') }}" loading="lazy" alt="Ilustrasi Langkah-langkah"
                     class="w-full max-w-sm md:ml-auto" />
             </div>
         </div>
@@ -356,7 +357,8 @@
         data-aos-delay="300" data-aos-duration="800" style="background-color: #F2FAFF;">
         <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-24">
             <div>
-                <img src="storage/images/logo.png" loading="lazy" alt="Logo Posyandu" class="w-24 mb-4">
+                <img src="{{ asset('storage/images/logo.png') }}" loading="lazy" alt="Logo Posyandu"
+                    class="w-24 mb-4">
                 <h3 class="text-2xl font-bold mb-4" style="color: #0069AB;">Posyandu</h3>
                 <p class="text-sm text-gray-500">
                     Platform digital untuk membantu pemantauan kesehatan ibu dan anak serta edukasi masyarakat secara

@@ -38,6 +38,7 @@ Route::middleware(['auth.multi', 'roleAkses:admin,bidan,kader,ibu_hamil_kader'])
     Route::resource('/jadwal', JadwalController::class);
     Route::resource('pemeriksaan', PemeriksaanController::class);
 }));
+
 Route::get('/anggota/saran', [AnggotaController::class, 'suggest']);
 
 require __DIR__ . '/auth.php';

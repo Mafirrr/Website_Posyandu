@@ -27,7 +27,7 @@ return new class extends Migration
             $table->float('crl');
             $table->integer('crl_hari');
             $table->integer('crl_minggu');
-            $table->enum('letak_produk_kehamilan', ['intrauterin', 'ekstrauterin']);
+            $table->enum('letak_produk_kehamilan', ['intrauterin', 'extrauterin', 'tidak_dapat_ditentukan']);
             $table->enum('pulsasi_jantung', ['tampak', 'tidak_tampak']);
             $table->enum('kecurigaan_temuan_abnormal', ['ya', 'tidak']);
             $table->text('keterangan')->nullable();
