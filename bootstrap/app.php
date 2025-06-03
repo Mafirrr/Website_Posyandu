@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'roleAkses' => \App\Http\Middleware\RoleAkses::class,
+            'auth.multi' => \App\Http\Middleware\MultiAuth::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

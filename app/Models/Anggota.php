@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Anggota extends Model
+class Anggota extends  Authenticatable
 {
     use Notifiable, HasFactory, SoftDeletes, HasApiTokens;
     protected $table = 'anggota';
@@ -17,6 +17,7 @@ class Anggota extends Model
         'nik',
         'password',
         'nama',
+        'role',
         'no_jkn',
         'faskes_tk1',
         'faskes_rujukan',
@@ -24,6 +25,7 @@ class Anggota extends Model
         'tempat_lahir',
         'pekerjaan',
         'alamat',
+        'posyandu_id',
         'no_telepon',
         'golongan_darah',
         'aktif',
@@ -34,15 +36,38 @@ class Anggota extends Model
         'password',
     ];
 
+    public function getAuthIdentifierName()
+    {
+        return 'nik';
+    }
+
     public function setAktifAttribute($value)
     {
         $this->attributes['aktif'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
+    public function isKader()
+    {
+        return $this->role === 'kader' || $this->role === 'ibu_hamil_kader';
+    }
 
-    // Relasi ke tabel lain (jika ada)
+    public function anggota()
+    {
+        return $this->belongsTo(Anggota::class);
+    }
+
+    public function isIbuHamil()
+    {
+        return $this->role === 'ibu_hamil' || $this->role === 'ibu_hamil_kader';
+    }
+
     public function kehamilan()
     {
         return $this->hasMany(Kehamilan::class, 'anggota_id');
+    }
+
+    public function posyandu()
+    {
+        return $this->belongsTo(Posyandu::class);
     }
 }

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Anggota;
+use App\Models\Petugas;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -27,16 +30,33 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $login = $request->input('login');
+
+        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            $request->validate([
+                'login' => ['required', 'email', 'max:255', Rule::unique(Petugas::class, 'email')->ignore($user->id)],
+            ]);
+            $user->email = $login;
+        } else {
+            $request->validate([
+                'login' => ['required', 'string', 'max:16', Rule::unique(Anggota::class, 'nik')->ignore($user->id)],
+            ]);
+            $user->nik = $login;
         }
 
-        $request->user()->save();
+        $user->nama = $request->nama;
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
 
 
     /**

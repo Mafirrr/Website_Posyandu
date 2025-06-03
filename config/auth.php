@@ -45,6 +45,11 @@ return [
             'provider' => 'anggota',
         ],
 
+        'kader' => [
+            'driver' => 'session',
+            'provider' => 'anggota',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admin',

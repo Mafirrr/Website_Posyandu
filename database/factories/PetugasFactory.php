@@ -19,11 +19,11 @@ class PetugasFactory extends Factory
     {
         return [
             'nip' => fake()->unique()->numerify('19########'),
-            'nama' => "Rani Selvia",
+            'nama' => "Admin",
             'no_telepon' => fake()->unique()->numerify('08###########'),
             'email' => "jedurekos@gmail.com",
             'password' => Hash::make('admin123'),
-            'role' => fake()->randomElement(['kader'])
+            'role' => fake()->randomElement(['admin'])
         ];
     }
 }

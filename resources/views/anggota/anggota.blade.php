@@ -25,7 +25,7 @@
 
                                     <a href="{{ route('anggota.create') }}" id="btn-add-contact"
                                         class="btn btn-primary d-flex align-items-center">
-                                        <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah anggota
+                                        <i class="ti ti-plus text-white me-1 fs-5"></i> Tambah Ibu Hamil
                                     </a>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                             <th>No</th>
                                             <th>NIK</th>
                                             <th>Name</th>
-                                            <th>Alamat</th>
+                                            <th>Posyandu</th>
                                             <th>No Telepon</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -98,7 +98,7 @@
                                                 </th>
                                                 <td class="px-4 py-3">{{ $anggota->nik }}</td>
                                                 <td class="px-4 py-3">{{ $anggota->nama }}</td>
-                                                <td class="px-4 py-3">{{ $anggota->alamat }}</td>
+                                                <td class="px-4 py-3">{{ $anggota->posyandu->nama ?? '-' }}</td>
                                                 <td class="px-4 py-3">{{ $anggota->no_telepon }}</td>
                                                 <td class="px-4 py-3 ">
                                                     <div class="badge {{ $anggota->aktif ? 'bg-success' : 'bg-danger' }}">

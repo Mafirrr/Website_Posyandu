@@ -11,20 +11,20 @@
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
 
-        <!-- Email Address -->
+        <!-- Email or NIK -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+            <x-input-label for="login" :value="__('Email atau NIK')" />
+            <x-text-input id="login" class="block mt-1 w-full" type="text" name="login" :value="old('login')" required
                 autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-error :messages="$errors->get('login')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
             <button type="submit"
                 class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition">
-                {{ __('Email Password Reset Link') }}
+                {{ __('Kirim Link Reset Password') }}
             </button>
-
         </div>
     </form>
+
 </x-guest-layout>

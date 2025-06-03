@@ -53,6 +53,25 @@
                             </div>
 
                             <div class="">
+                                <label for="role" class="form-label">Role</label>
+                                <select id="role" name="role" class="form-control">
+                                    <option value="">Pilih</option>
+                                    <option value="ibu_hamil"
+                                        {{ old('role', $anggota->role ?? '') == 'ibu_hamil' ? 'selected' : '' }}>
+                                        Ibu Hamil</option>
+                                    <option value="kader"
+                                        {{ old('role', $anggota->role ?? '') == 'kader' ? 'selected' : '' }}>
+                                        Kader</option>
+                                    <option value="ibu_hamil_kader"
+                                        {{ old('role', $anggota->role ?? '') == 'ibu_hamil_kader' ? 'selected' : '' }}>
+                                        Ibu Hamil dan Kader</option>
+                                </select>
+                                @error('role')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="">
                                 {{-- Nomor JKN --}}
                                 <label for="nomor-jkn" class="form-label">Nomor JKN <span
                                         class="text-danger">*</span></label>
@@ -165,6 +184,28 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3 position-relative">
+                                <label for="posyandu_select" class="form-label">Pilih Posyandu</label>
+                                <select name="posyandu_id" id="posyandu_select" class="form-select"
+                                    onchange="togglePosyanduInput(this)">
+                                    <option value="">-- Pilih Posyandu --</option>
+                                    @foreach ($posyandus as $pos)
+                                        <option value="{{ $pos->id }}"
+                                            {{ old('posyandu_id', $anggota->posyandu_id ?? '') == $pos->id ? 'selected' : '' }}>
+                                            {{ $pos->nama }}
+                                        </option>
+                                    @endforeach
+                                    <option value="lainnya"
+                                        {{ old('posyandu_id', $anggota->posyandu_id ?? '') === 'lainnya' ? 'selected' : '' }}>
+                                        Lainnya...
+                                    </option>
+                                </select>
+
+                                <input type="text" name="posyandu_baru" class="form-control mt-2 d-none"
+                                    id="posyandu_manual_input" placeholder="Masukkan nama posyandu baru"
+                                    value="{{ old('posyandu_baru') }}">
+                            </div>
+
                             <div class="">
                                 {{-- Alamat --}}
                                 <label for="alamat" class="form-label">Alamat</label>
@@ -203,122 +244,91 @@
                                 Simpan
                             </button>
                         </div>
-                        <div class="mt-4">
-                            <label class="form-label">Riwayat Kehamilan</label>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Tahun</th>
-                                        <th>Berat Badan Bayi (kg)</th>
-                                        <th>Proses Melahirkan</th>
-                                        <th>Penolong</th>
-                                        <th>Masalah</th>
-                                        <th>Status</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="riwayat-table-body">
-                                    @if (old('riwayat'))
-                                        @foreach (old('riwayat') as $index => $item)
+                        @if (old('riwayat') && count(old('riwayat')) > 0)
+                            @php
+                                $riwayatData = old('riwayat');
+                            @endphp
+                        @elseif(isset($riwayat) && count($riwayat) > 0)
+                            @php
+                                $riwayatData = $riwayat;
+                            @endphp
+                        @else
+                            @php
+                                $riwayatData = null;
+                            @endphp
+                        @endif
+
+                        @if ($riwayatData)
+                            <div class="mt-4">
+                                <label class="form-label">Riwayat Kehamilan</label>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Tahun</th>
+                                            <th>Berat Badan Bayi (kg)</th>
+                                            <th>Proses Melahirkan</th>
+                                            <th>Penolong</th>
+                                            <th>Masalah</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="riwayat-table-body">
+                                        @foreach ($riwayatData as $index => $item)
                                             <tr>
-                                                <td><input type="text" name="riwayat[{{ $index }}][tahun]"
-                                                        value="{{ $item['tahun'] }}" class="form-control"></td>
-                                                <td><input type="text"
-                                                        name="riwayat[{{ $index }}][berat_badan_bayi]"
-                                                        value="{{ $item['berat_badan_bayi'] }}" class="form-control">
-                                                </td>
-                                                <td><input type="text"
-                                                        name="riwayat[{{ $index }}][proses_melahirkan]"
-                                                        value="{{ $item['proses_melahirkan'] }}" class="form-control">
-                                                </td>
-                                                <td><input type="text" name="riwayat[{{ $index }}][penolong]"
-                                                        value="{{ $item['penolong'] }}" class="form-control"></td>
-                                                <td><input type="text" name="riwayat[{{ $index }}][masalah]"
-                                                        value="{{ $item['masalah'] }}" class="form-control"></td>
                                                 <td>
-                                                    <select name="riwayat[{{ $index }}][status]"
-                                                        class="form-control" name="status">
-                                                        <option value="dalam_pemantauan"
-                                                            {{ $item->status == 'dalam_pemantauan' ? 'selected' : '' }}>
-                                                            Dalam Pemantauan</option>
-                                                        <option value="keguguran"
-                                                            {{ $item->status == 'keguguran' ? 'selected' : '' }}>Keguguran
-                                                        </option>
-                                                        <option value="berhasil"
-                                                            {{ $item->status == 'berhasil' ? 'selected' : '' }}>Berhasil
-                                                        </option>
-                                                    </select>
-                                                </td>
-                                                <td><button type="button" class="btn btn-primary btn-sm"
-                                                        onclick="toggleEditSimpan(this, {{ $item->id }})">Edit</button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @elseif(isset($riwayat))
-                                        @foreach ($riwayat as $index => $item)
-                                            <tr>
-                                                <td><input type="hidden" name="riwayat[{{ $index }}][id]"
-                                                        value="{{ $item->id }}">
+                                                    <input type="hidden" name="riwayat[{{ $index }}][id]"
+                                                        value="{{ $item['id'] ?? ($item->id ?? '') }}">
                                                     <input type="text" name="riwayat[{{ $index }}][tahun]"
-                                                        value="{{ $item->tahun }}" class="form-control">
+                                                        value="{{ $item['tahun'] ?? ($item->tahun ?? '') }}"
+                                                        class="form-control">
                                                 </td>
-                                                <td><input type="text"
+                                                <td>
+                                                    <input type="text"
                                                         name="riwayat[{{ $index }}][berat_badan_bayi]"
-                                                        value="{{ $item->berat_badan_bayi }}" class="form-control"></td>
-                                                <td><input type="text"
+                                                        value="{{ $item['berat_badan_bayi'] ?? ($item->berat_badan_bayi ?? '') }}"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="text"
                                                         name="riwayat[{{ $index }}][proses_melahirkan]"
-                                                        value="{{ $item->proses_melahirkan }}" class="form-control"></td>
-                                                <td><input type="text" name="riwayat[{{ $index }}][penolong]"
-                                                        value="{{ $item->penolong }}" class="form-control"></td>
-                                                <td><input type="text" name="riwayat[{{ $index }}][masalah]"
-                                                        value="{{ $item->masalah }}" class="form-control"></td>
+                                                        value="{{ $item['proses_melahirkan'] ?? ($item->proses_melahirkan ?? '') }}"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="riwayat[{{ $index }}][penolong]"
+                                                        value="{{ $item['penolong'] ?? ($item->penolong ?? '') }}"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="riwayat[{{ $index }}][masalah]"
+                                                        value="{{ $item['masalah'] ?? ($item->masalah ?? '') }}"
+                                                        class="form-control">
+                                                </td>
                                                 <td>
                                                     <select name="riwayat[{{ $index }}][status]"
                                                         class="form-control">
                                                         <option value="dalam_pemantauan"
-                                                            {{ $item->status == 'dalam_pemantauan' ? 'selected' : '' }}>
+                                                            {{ ($item['status'] ?? ($item->status ?? '')) == 'dalam_pemantauan' ? 'selected' : '' }}>
                                                             Dalam Pemantauan</option>
                                                         <option value="keguguran"
-                                                            {{ $item->status == 'keguguran' ? 'selected' : '' }}>Keguguran
-                                                        </option>
+                                                            {{ ($item['status'] ?? ($item->status ?? '')) == 'keguguran' ? 'selected' : '' }}>
+                                                            Keguguran</option>
                                                         <option value="berhasil"
-                                                            {{ $item->status == 'berhasil' ? 'selected' : '' }}>Berhasil
-                                                        </option>
+                                                            {{ ($item['status'] ?? ($item->status ?? '')) == 'berhasil' ? 'selected' : '' }}>
+                                                            Berhasil</option>
                                                     </select>
                                                 </td>
-                                                <td><button type="button" class="btn btn-primary btn-sm"
-                                                        onclick="toggleEditSimpan(this, {{ $item->id }})">Edit</button>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-sm"
+                                                        onclick="toggleEditSimpan(this, {{ $item['id'] ?? ($item->id ?? 'null') }})">Edit</button>
                                                 </td>
                                             </tr>
                                         @endforeach
-                                    @else
-                                        <tr>
-                                            <td><input type="text" name="riwayat[0][tahun]" class="form-control"></td>
-                                            <td><input type="text" name="riwayat[0][berat_badan_bayi]"
-                                                    class="form-control"></td>
-                                            <td><input type="text" name="riwayat[0][proses_melahirkan]"
-                                                    class="form-control"></td>
-                                            <td><input type="text" name="riwayat[0][penolong]" class="form-control">
-                                            </td>
-                                            <td><input type="text" name="riwayat[0][masalah]" class="form-control">
-                                            </td>
-                                            <td>
-                                                <select name="riwayat[0][status]" class="form-control">
-                                                    <option value="" disabled selected>Pilih Status</option>
-                                                    <option value="dalam_pemantauan">Dalam Pemantauan</option>
-                                                    <option value="keguguran">Keguguran</option>
-                                                    <option value="berhasil">Berhasil</option>
-                                                </select>
-                                            </td>
-                                            <td><button type="button" class="btn btn-primary btn-sm"
-                                                    onclick="toggleEditSimpan(this, {{ $item->id }})">Simpan</button>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>
@@ -399,6 +409,16 @@
                             text: 'Tidak dapat menghubungi server atau error parsing JSON.'
                         });
                     });
+            }
+        }
+    </script>
+    <script>
+        function togglePosyanduInput(select) {
+            const manualInput = document.getElementById('posyandu_manual_input');
+            if (select.value === 'lainnya') {
+                manualInput.classList.remove('d-none');
+            } else {
+                manualInput.classList.add('d-none');
             }
         }
     </script>

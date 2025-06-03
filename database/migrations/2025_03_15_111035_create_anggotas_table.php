@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('nik', 16)->unique();
             $table->string('password');
             $table->string('nama', 70);
-            $table->string('no_jkn', 13)->unique();
-            $table->string('faskes_tk1', 100);
-            $table->string('faskes_rujukan', 100);
+            $table->enum('role', ['ibu_hamil', 'kader', 'ibu_hamil_kader'])->default('ibu_hamil');
+            $table->string('no_jkn', 13)->unique()->nullable();
+            $table->string('faskes_tk1', 100)->nullable();
+            $table->string('faskes_rujukan', 100)->nullable();
             $table->date('tanggal_lahir');
             $table->string('tempat_lahir', 100);
             $table->string('pekerjaan', 100);

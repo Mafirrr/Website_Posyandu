@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Anggota;
 use App\Models\Petugas;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -17,15 +18,8 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'login' => ['required', 'string'],
             'nama' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                Rule::unique(Petugas::class)->ignore($this->user()->id),
-            ],
         ];
     }
 }

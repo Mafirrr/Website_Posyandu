@@ -50,7 +50,15 @@
                         <span class="hide-menu">Ibu Hamil</span>
                     </a>
                 </li>
-                @if (Auth::user()->role == 'kader')
+                @if (Auth::user()->role == 'admin')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kader.index') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-users"></i>
+                            </span>
+                            <span class="hide-menu">Kader</span>
+                        </a>
+                    </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('petugas.index') }}" aria-expanded="false">
                             <span>

@@ -3,12 +3,10 @@
     <p class="text-gray-500 mb-6">
         Buat kata sandi baru. Pastikan berbeda dari sebelumnya untuk keamanan.
     </p>
-    <form method="POST" action="{{ route('password.store') }}">
+    <form method="POST" action="{{ route('otp.store') }}">
         @csrf
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
-        <input type="hidden" name="email" value="{{ $request->email }}">
+        <input type="hidden" name="user_id" value="{{ session('reset_user_id') }}">
 
         <!-- Password -->
         <div class="mt-4">

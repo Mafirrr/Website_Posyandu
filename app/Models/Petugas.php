@@ -39,10 +39,4 @@ class Petugas extends Authenticatable implements CanResetPassword
     {
         return $this->hasMany(PemeriksaanKehamilan::class, 'petugas_id');
     }
-
-    // Relasi ke tabel Nifas
-    public function nifas()
-    {
-        return $this->hasMany(Nifas::class, 'petugas_id');
-    }
 }

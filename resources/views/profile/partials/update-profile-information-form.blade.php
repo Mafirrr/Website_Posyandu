@@ -26,9 +26,9 @@
         </div>
 
         <div class="mb-3">
-            <label for="email" class="form-label">{{ __('Email') }}</label>
-            <input id="email" name="email" type="email" class="form-control"
-                value="{{ old('email', $user->email) }}" required autocomplete="username">
+            <label for="login" class="form-label">Email atau NIK</label>
+            <input id="login" name="login" type="text" class="form-control"
+                value="{{ old('login', $user->email ?? $user->nik) }}" required autocomplete="username">
             @error('email')
                 <div class="text-danger small mt-1">{{ $message }}</div>
             @enderror
