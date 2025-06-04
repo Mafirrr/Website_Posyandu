@@ -62,6 +62,9 @@
                         onclick="showForm('form-trimester-2', 2)">Trimester 2</button>
                     <button type="button" class="btn btn-outline-primary btn-toggle-form"
                         onclick="showForm('form-trimester-3', 3)">Trimester 3</button>
+                    <button type="button" class="btn btn-outline-primary btn-toggle-form"
+                        onclick="showForm('form-nifas', 4)">Nifas</button>
+
                     <div class="flex-grow-1"></div>
                     <div class="position-relative" style="max-width: 300px;">
                         <div class="input-group">
@@ -1824,6 +1827,173 @@
 
                             </div>
                         </div>
+                        <div id="form-nifas" class="form-section d-none">
+                            <div class="mb-3">
+                                <label for="bagian_kf" class="form-label">6 Jam - 42 Hari Setelah Bersalin</label>
+                                <select class="form-select" name="bagian_kf" id="bagian_kf" required>
+                                    <option value="" selected disabled>-- Pilih Bagian KF --</option>
+                                    <option value="kf1">KF1</option>
+                                    <option value="kf2">KF2</option>
+                                    <option value="kf3">KF3</option>
+                                    <option value="kf4">KF4</option>
+                                    <option value="kf5">KF5</option>
+                                </select>
+                            </div>
+                            <h5 class="mt-4 mb-4">Form Pemeriksaan Nifas</h5>
+
+                            <div class="mb-3">
+                                <label for="tanggal_pemeriksaan_nifas" class="form-label">Tanggal Pemeriksaan</label>
+                                <input type="date" class="form-control" name="tanggal_pemeriksaan_nifas" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="tempat_periksa_nifas" class="form-label">Pilih Posyandu</label>
+                                <select name="tempat_periksa_nifas" id="tempat_periksa_nifas" class="form-select"
+                                    data-temp-required="true">
+                                    <option value="">-- Pilih Posyandu --</option>
+                                    @foreach ($posyandus as $pos)
+                                        <option value="{{ $pos->id }}">{{ $pos->nama }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="periksa_payudara" class="form-label">Periksa Payudara (ASI)</label>
+                                <input type="text" class="form-control" name="periksa_payudara" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="periksa_pendarahan" class="form-label">Periksa Pendarahan</label>
+                                <input type="text" class="form-control" name="periksa_pendarahan" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="periksa_jalan_lahir" class="form-label">Periksa Jalan Lahir</label>
+                                <input type="text" class="form-control" name="periksa_jalan_lahir" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="vitamin_a" class="form-label">Vitamin A</label>
+                                <input type="text" class="form-control" name="vitamin_a" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="kb_pasca_melahirkan" class="form-label">KB Pasca Melahirkan</label>
+                                <input type="text" class="form-control" name="kb_pasca_melahirkan" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="skrining_kesehatan_jiwa" class="form-label">Skrining Kesehatan Jiwa</label>
+                                <input type="text" class="form-control" name="skrining_kesehatan_jiwa" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="konseling" class="form-label">Konseling</label>
+                                <textarea class="form-control" name="konseling" rows="2" required></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="tata_laksana_kasus" class="form-label">Tata Laksana Kasus</label>
+                                <textarea class="form-control" name="tata_laksana_kasus" rows="2" required></textarea>
+                            </div>
+                            <h5 class="mt-4 mb-4">Kesimpulan Akhir Nifas</h5>
+                            <div class="mb-3">
+                                <label class="form-label d-block">Keadaan Ibu</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="kesimpulan_ibu[]"
+                                        value="Sehat" id="ibu_sehat">
+                                    <label class="form-check-label" for="ibu_sehat">Sehat</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="kesimpulan_ibu[]"
+                                        value="Sakit" id="ibu_sakit">
+                                    <label class="form-check-label" for="ibu_sakit">Sakit</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="kesimpulan_ibu[]"
+                                        value="Meninggal" id="ibu_meninggal">
+                                    <label class="form-check-label" for="ibu_meninggal">Meninggal</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label d-block">Keadaan Ibu</label>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="kesimpulan_ibu[]"
+                                            value="Sehat" id="ibu_sehat">
+                                        <label class="form-check-label" for="ibu_sehat">Sehat</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="kesimpulan_ibu[]"
+                                            value="Sakit" id="ibu_sakit">
+                                        <label class="form-check-label" for="ibu_sakit">Sakit</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="kesimpulan_ibu[]"
+                                            value="Meninggal" id="ibu_meninggal">
+                                        <label class="form-check-label" for="ibu_meninggal">Meninggal</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label d-block">Keadaan Bayi</label>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="kesimpulan_bayi[]"
+                                            value="Sehat" id="bayi_sehat">
+                                        <label class="form-check-label" for="bayi_sehat">Sehat</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="kesimpulan_bayi[]"
+                                            value="Sakit" id="bayi_sakit">
+                                        <label class="form-check-label" for="bayi_sakit">Sakit</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="kesimpulan_bayi[]"
+                                            value="Kelainan Bawaan" id="bayi_kelainan">
+                                        <label class="form-check-label" for="bayi_kelainan">Kelainan Bawaan</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="kesimpulan_bayi[]"
+                                            value="Meninggal" id="bayi_meninggal">
+                                        <label class="form-check-label" for="bayi_meninggal">Meninggal</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label d-block">Masalah Nifas</label>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="masalah_nifas[]"
+                                            value="Pendarahan" id="masalah_pendarahan">
+                                        <label class="form-check-label" for="masalah_pendarahan">Pendarahan</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="masalah_nifas[]"
+                                            value="Infeksi" id="masalah_infeksi">
+                                        <label class="form-check-label" for="masalah_infeksi">Infeksi</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="masalah_nifas[]"
+                                            value="Hipertensi" id="masalah_hipertensi">
+                                        <label class="form-check-label" for="masalah_hipertensi">Hipertensi</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="masalah_nifas[]"
+                                            value="Lainnya" id="masalah_lainnya">
+                                        <label class="form-check-label" for="masalah_lainnya">Lainnya</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="kesimpulan" class="form-label">Kesimpulan</label>
+                                <textarea class="form-control" name="kesimpulan" rows="2" required></textarea>
+                            </div>
+                        </div>
+
                         <div class="d-flex justify-content-end gap-2 mt-4">
                             <button type="button" class="btn btn-danger" id="btnKembali"
                                 style="display:none;">Kembali</button>
@@ -1856,7 +2026,6 @@
 
         function showForm(formId, trimesterActive) {
             currentForm = '#' + formId;
-            console.log('formId:', formId);
 
             // Sembunyikan semua form
             document.querySelectorAll('.form-section').forEach(function(section) {
@@ -1875,8 +2044,17 @@
 
             currentStep = 1;
 
-            showStep(currentStep);
+            if (trimesterActive === 4) {
+                // Nifas: langsung tombol submit
+                btnKembali.style.display = 'none';
+                btnLanjutkan.textContent = 'Simpan';
+                btnLanjutkan.type = 'submit';
+            } else {
+                // Trimester 1-3: multi-step
+                showStep(currentStep);
+            }
         }
+
 
         function showStep(step) {
             prevStep = step;

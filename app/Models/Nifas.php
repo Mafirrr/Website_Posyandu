@@ -16,22 +16,23 @@ class Nifas extends Model
         'anggota_id',
         'petugas_id',
         'tanggal_pemeriksaan',
+        'tempat_pemeriksaan',
         'periksa_payudara',
         'periksa_pendarahan',
         'periksa_jalan_lahir',
         'vitamin_a',
-        'kb_pasca_persalinan',
+        'kb_pasca_melahirkan',
+        'skrining_kesehatan_jiwa',
         'konseling',
-        'tata_laksana_kasus'
+        'tata_laksana_kasus',
+        'kesimpulan_ibu',
+        'kesimpulan_bayi',
+        'masalah_nifas',
+        'kesimpulan'
     ];
 
     protected $casts = [
         'tanggal_pemeriksaan' => 'date',
-        'periksa_payudara' => 'boolean',
-        'periksa_pendarahan' => 'boolean',
-        'periksa_jalan_lahir' => 'boolean',
-        'vitamin_a' => 'boolean',
-        'kb_pasca_persalinan' => 'boolean',
     ];
 
     // Relasi ke tabel Anggota
