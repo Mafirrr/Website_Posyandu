@@ -38,7 +38,7 @@ class JadwalController extends Controller
         $jadwal = Jadwal::create($request->all());
 
         $tokens = Anggota::whereNotNull('fcm_token')
-            // ->where('lokasi', $request->lokasi)
+            ->where('posyandu_id', $request->lokasi)
             ->whereHas('kehamilan', function ($query) {
                 $query->where('status', 'dalam_pemantauan');
             })

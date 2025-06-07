@@ -41,12 +41,12 @@ class PemeriksaanKehamilan extends Model
 
     public function trimester1()
     {
-        return $this->hasOne(Trimester1::class, 'pemeriksaan_id');
+        return $this->hasMany(Trimester1::class, 'pemeriksaan_id');
     }
 
     public function trimester3()
     {
-        return $this->hasOne(Trimester3::class, 'pemeriksaan_id');
+        return $this->hasMany(Trimester3::class, 'pemeriksaan_id');
     }
 
     /**
@@ -55,5 +55,9 @@ class PemeriksaanKehamilan extends Model
     public function pemeriksaanRutin()
     {
         return $this->hasOne(PemeriksaanRutin::class, 'pemeriksaan_id');
+    }
+    public function nifas()
+    {
+        return $this->hasMany(Nifas::class, 'pemeriksaan_id');
     }
 }

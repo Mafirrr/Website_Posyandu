@@ -57,13 +57,13 @@
                 </div>
                 <div class="d-flex gap-2 mb-4">
                     <button type="button" class="btn btn-outline-primary btn-toggle-form active"
-                        onclick="showForm('form-trimester-1', 1)">Trimester 1</button>
+                        onclick="showForm('form-trimester-1', 1, event)">Trimester 1</button>
                     <button type="button" class="btn btn-outline-primary btn-toggle-form"
-                        onclick="showForm('form-trimester-2', 2)">Trimester 2</button>
+                        onclick="showForm('form-trimester-2', 2, event)">Trimester 2</button>
                     <button type="button" class="btn btn-outline-primary btn-toggle-form"
-                        onclick="showForm('form-trimester-3', 3)">Trimester 3</button>
+                        onclick="showForm('form-trimester-3', 3, event)">Trimester 3</button>
                     <button type="button" class="btn btn-outline-primary btn-toggle-form"
-                        onclick="showForm('form-nifas', 4)">Nifas</button>
+                        onclick="showForm('form-nifas', 4, event)">Nifas</button>
 
                     <div class="flex-grow-1"></div>
                     <div class="position-relative" style="max-width: 300px;">
@@ -79,9 +79,9 @@
                 </div>
                 <div class="card card-body border">
                     <form action="{{ route('pemeriksaan.store') }}" method="POST" id="formTrimester1">
+                        @csrf
+                        <input type="hidden" name="anggota_id" id="anggota-id">
                         <div id="form-trimester-1" class="form-section">
-                            @csrf
-                            <input type="hidden" name="anggota_id" id="anggota-id">
                             <div class="step-section step-1">
                                 <div class="row g-3">
                                     <h5>Catatan Pemeriksaan</h5>
@@ -1827,6 +1827,7 @@
 
                             </div>
                         </div>
+
                         <div id="form-nifas" class="form-section d-none">
                             <div class="mb-3">
                                 <label for="bagian_kf" class="form-label">6 Jam - 42 Hari Setelah Bersalin</label>
@@ -1915,28 +1916,6 @@
                                     <label class="form-check-label" for="ibu_meninggal">Meninggal</label>
                                 </div>
                             </div>
-
-                            <div class="mb-3">
-                                <label class="form-label d-block">Keadaan Ibu</label>
-                                <div class="d-flex flex-wrap gap-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="kesimpulan_ibu[]"
-                                            value="Sehat" id="ibu_sehat">
-                                        <label class="form-check-label" for="ibu_sehat">Sehat</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="kesimpulan_ibu[]"
-                                            value="Sakit" id="ibu_sakit">
-                                        <label class="form-check-label" for="ibu_sakit">Sakit</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="kesimpulan_ibu[]"
-                                            value="Meninggal" id="ibu_meninggal">
-                                        <label class="form-check-label" for="ibu_meninggal">Meninggal</label>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="mb-3">
                                 <label class="form-label d-block">Keadaan Bayi</label>
                                 <div class="d-flex flex-wrap gap-3">
@@ -2024,15 +2003,25 @@
         let currentForm = '#form-trimester-1';
         let currentStep = 1;
 
-        function showForm(formId, trimesterActive) {
+        function showForm(formId, trimesterActive, event) {
             currentForm = '#' + formId;
 
+            console.log(currentForm)
             // Sembunyikan semua form
             document.querySelectorAll('.form-section').forEach(function(section) {
                 section.classList.add('d-none');
+                section.querySelectorAll('input, select, textarea').forEach(function(el) {
+                    el.removeAttribute('required'); // ← Tambahkan ini juga!
+                });
             });
 
-            document.getElementById(formId).classList.remove('d-none');
+            const activeForm = document.getElementById(formId);
+            activeForm.classList.remove('d-none');
+            activeForm.querySelectorAll('input, select, textarea').forEach(function(el) {
+                if (el.hasAttribute('data-temp-required')) {
+                    el.setAttribute('required', 'true');
+                }
+            });
 
             // Set tombol aktif
             document.querySelectorAll('.btn-toggle-form').forEach(function(btn) {
@@ -2070,8 +2059,8 @@
 
             // 1. Hapus semua required di semua trimester
             allForms.forEach(form => {
-                form.querySelectorAll('[data-temp-required="true"]').forEach(input => {
-                    input.removeAttribute('required');
+                form.querySelectorAll('input, select, textarea').forEach(el => {
+                    el.removeAttribute('required');
                 });
             });
 
@@ -2085,6 +2074,8 @@
                 section.classList.toggle('d-none', !isActiveStep);
 
                 if (isActiveStep) {
+                    section.querySelectorAll('input, select, textarea, button').forEach(el => {
+                    });
                     section.querySelectorAll('[data-temp-required="true"]').forEach(input => {
                         input.setAttribute('required', 'true');
                     });

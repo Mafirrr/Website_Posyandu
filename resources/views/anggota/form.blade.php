@@ -59,12 +59,14 @@
                                     <option value="ibu_hamil"
                                         {{ old('role', $anggota->role ?? '') == 'ibu_hamil' ? 'selected' : '' }}>
                                         Ibu Hamil</option>
-                                    <option value="kader"
-                                        {{ old('role', $anggota->role ?? '') == 'kader' ? 'selected' : '' }}>
-                                        Kader</option>
-                                    <option value="ibu_hamil_kader"
-                                        {{ old('role', $anggota->role ?? '') == 'ibu_hamil_kader' ? 'selected' : '' }}>
-                                        Ibu Hamil dan Kader</option>
+                                    @if (Auth::user()->role == 'admin')
+                                        <option value="kader"
+                                            {{ old('role', $anggota->role ?? '') == 'kader' ? 'selected' : '' }}>
+                                            Kader</option>
+                                        <option value="ibu_hamil_kader"
+                                            {{ old('role', $anggota->role ?? '') == 'ibu_hamil_kader' ? 'selected' : '' }}>
+                                            Ibu Hamil dan Kader</option>
+                                    @endif
                                 </select>
                                 @error('role')
                                     <small class="text-danger">{{ $message }}</small>

@@ -6,6 +6,7 @@ use App\Models\Anggota;
 use App\Models\Kehamilan;
 use App\Models\LabTrimester1;
 use App\Models\LabTrimester3;
+use App\Models\Nifas;
 use App\Models\PemeriksaanAwal;
 use App\Models\PemeriksaanFisik;
 use App\Models\PemeriksaanKehamilan;
@@ -46,6 +47,7 @@ class PemeriksaanController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'anggota_id' => 'required',
             'trimester' => 'required'
@@ -58,6 +60,8 @@ class PemeriksaanController extends Controller
                 return $this->trimester2($request);
             case 3:
                 return $this->trimester3($request);
+            case 4:
+                return $this->nifas($request);
             default:
                 abort(400, 'Trimester tidak valid');
         }
@@ -126,7 +130,6 @@ class PemeriksaanController extends Controller
 
     public function trimester1(Request $request)
     {
-
         $validated = $request->validate([
             'anggota_id' => 'required|exists:anggota,id',
 
@@ -253,8 +256,8 @@ class PemeriksaanController extends Controller
             $awal->golongan_darah = $validated['gol_darah1'];
             $awal->status_imunisasi_td = 't' . $validated['tt'];
             $awal->hemoglobin = $validated['hemoglobin1'];
-            $awal->riwayat_kesehatan_ibu_sekarang = $validated['riwayat_kesehatan_ibu'];
-            $awal->riwayat_perilaku = $validated['riwayat_kesehatan'];
+            $awal->riwayat_kesehatan_ibu_sekarang = $validated['riwayat_kesehatan_ibu'] ?? [];
+            $awal->riwayat_perilaku = $validated['riwayat_kesehatan'] ?? [];
             $awal->riwayat_penyakit_keluarga = $validated['riwayat_kesehatan_keluarga'];
             $awal->save();
 
@@ -401,7 +404,6 @@ class PemeriksaanController extends Controller
     public function trimester3(Request $request)
     {
 
-        // dd($request->all());
         $validated = $request->validate([
             'anggota_id' => 'required|exists:anggota,id',
 
@@ -590,6 +592,69 @@ class PemeriksaanController extends Controller
             DB::commit();
             return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil disimpan.');
             // return response()->json(['message' => 'Data berhasil disimpan'], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Gagal menyimpan data', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function nifas(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'anggota_id' => 'required|exists:anggota,id',
+
+            'bagian_kf' => 'required|in:kf1,kf2,kf3,kf4,kf5',
+            'tanggal_pemeriksaan_nifas' => 'required|date',
+            'tempat_periksa_nifas' => 'required|string|max:255',
+
+            'periksa_payudara' => 'nullable|string|max:500',
+            'periksa_pendarahan' => 'nullable|string|max:500',
+            'periksa_jalan_lahir' => 'nullable|string|max:500',
+
+            'vitamin_a' => 'nullable|string|max:255',
+            'kb_pasca_melahirkan' => 'nullable|string|max:255',
+            'skrining_kesehatan_jiwa' => 'nullable|string|max:255',
+            'konseling' => 'nullable|string|max:255',
+            'tata_laksana_kasus' => 'nullable|string|max:255',
+
+            'kesimpulan_ibu' => 'nullable|array',
+            'kesimpulan_bayi' => 'nullable|array',
+            'masalah_nifas' => 'nullable|array',
+
+            'kesimpulan' => 'nullable|string|max:500',
+        ]);
+
+        try {
+            $kehamilan = Kehamilan::where('anggota_id', $validated['anggota_id'])->latest()->first();
+            DB::beginTransaction();
+
+            $pemeriksaan = new PemeriksaanKehamilan();
+            $pemeriksaan->kehamilan_id = $kehamilan->id;
+            $pemeriksaan->petugas_id = auth()->user()->id;
+            $pemeriksaan->tanggal_pemeriksaan = $validated['tanggal_pemeriksaan_nifas'];
+            $pemeriksaan->tempat_pemeriksaan = $validated['tempat_periksa_nifas'];
+            $pemeriksaan->jenis_pemeriksaan = 'nifas';
+            $pemeriksaan->save();
+
+            $nifas = new Nifas();
+            $nifas->pemeriksaan_id = $pemeriksaan->id;
+            $nifas->periksa_payudara = $validated['periksa_payudara'];
+            $nifas->periksa_pendarahan = $validated['periksa_pendarahan'];
+            $nifas->periksa_jalan_lahir = $validated['periksa_jalan_lahir'];
+            $nifas->vitamin_a = $validated['vitamin_a'];
+            $nifas->kb_pasca_melahirkan = $validated['kb_pasca_melahirkan'];
+            $nifas->skrining_kesehatan_jiwa = $validated['skrining_kesehatan_jiwa'];
+            $nifas->konseling = $validated['konseling'];
+            $nifas->tata_laksana_kasus = $validated['tata_laksana_kasus'];
+            $nifas->kesimpulan_ibu = isset($validated['kesimpulan_ibu']) ? implode(',', $validated['kesimpulan_ibu']) : null;
+            $nifas->kesimpulan_bayi = isset($validated['kesimpulan_bayi']) ? implode(',', $validated['kesimpulan_bayi']) : null;
+            $nifas->masalah_nifas = isset($validated['masalah_nifas']) ? implode(',', $validated['masalah_nifas']) : null;
+            $nifas->kesimpulan = $validated['kesimpulan'];
+            $nifas->save();
+
+            DB::commit();
+            return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil disimpan.');
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['message' => 'Gagal menyimpan data', 'error' => $e->getMessage()], 500);

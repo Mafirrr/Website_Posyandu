@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('nifas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anggota_id')->references('id')->on('anggota');
-            $table->foreignId('petugas_id')->references('id')->on('petugas');
-            $table->date('tanggal_pemeriksaan');
-            $table->string('tempat_pemeriksaan');
+            $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
             $table->text('periksa_payudara');
             $table->text('periksa_pendarahan');
             $table->text('periksa_jalan_lahir');

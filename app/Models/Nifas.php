@@ -13,10 +13,7 @@ class Nifas extends Model
     protected $table = 'nifas';
 
     protected $fillable = [
-        'anggota_id',
-        'petugas_id',
-        'tanggal_pemeriksaan',
-        'tempat_pemeriksaan',
+        'pemeriksaan_id',
         'periksa_payudara',
         'periksa_pendarahan',
         'periksa_jalan_lahir',
@@ -35,15 +32,9 @@ class Nifas extends Model
         'tanggal_pemeriksaan' => 'date',
     ];
 
-    // Relasi ke tabel Anggota
-    public function anggota()
+    //relasi table pemeriksaan
+    public function pemeriksaan()
     {
-        return $this->belongsTo(Anggota::class, 'anggota_id');
-    }
-
-    // Relasi ke tabel Petugas
-    public function petugas()
-    {
-        return $this->belongsTo(Petugas::class, 'petugas_id');
+        return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');
     }
 }
