@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Anggota;
+use App\Models\Posyandu;
 
 class AnggotaKaderController extends Controller
 {
@@ -14,7 +15,13 @@ class AnggotaKaderController extends Controller
     public function index()
     {
         // Retrieve all anggota data
-        $anggota = Anggota::all();
+        $anggota = Anggota::whereIn('role', ['ibu_hamil', 'ibu_hamil_kader'])->with('posyandu')->get();
+        $anggota->transform(function ($item) {
+            if (substr($item->no_telepon, 0, 4) === '+628') {
+                $item->no_telepon = '08' . substr($item->no_telepon, 4);
+            }
+            return $item;
+        });
         return response()->json($anggota);
     }
 
@@ -36,6 +43,7 @@ class AnggotaKaderController extends Controller
             'alamat' => 'required|string',
             'no_telepon' => 'required|string|max:20',
             'golongan_darah' => 'required|in:A+,A-,B+,B-,AB+,AB-,O+,O-',
+            'posyandu_id' => 'required',
         ]);
 
         // Create anggota
@@ -44,6 +52,7 @@ class AnggotaKaderController extends Controller
         $anggota->password = bcrypt('password123');
         $anggota->nama = $validated['nama'];
         $anggota->no_jkn = $validated['no_jkn'];
+        $anggota->role = 'ibu_hamil';
         $anggota->faskes_tk1 = $validated['faskes_tk1'];
         $anggota->faskes_rujukan = $validated['faskes_rujukan'];
         $anggota->tanggal_lahir = $validated['tanggal_lahir'];
@@ -58,6 +67,7 @@ class AnggotaKaderController extends Controller
 
         $anggota->no_telepon = $noTelepon;
         $anggota->golongan_darah = $validated['golongan_darah'];
+        $anggota->posyandu_id = $validated['posyandu_id'];
         $anggota->aktif = true;
         $anggota->save();
 
@@ -70,7 +80,7 @@ class AnggotaKaderController extends Controller
      */
     public function show(string $id)
     {
-        $anggota = Anggota::findOrFail($id);
+        $anggota = Anggota::with('posyandu')->findOrFail($id);
         return response()->json($anggota);
     }
 
@@ -93,6 +103,7 @@ class AnggotaKaderController extends Controller
             'alamat' => 'string',
             'no_telepon' => 'string|max:20',
             'golongan_darah' => 'in:A+,A-,B+,B-,AB+,AB-,O+,O-',
+            'posyandu_id' => 'required',
         ]);
 
         $anggota->update($validated);
@@ -109,5 +120,11 @@ class AnggotaKaderController extends Controller
         $anggota->delete();
 
         return response()->json(['message' => 'Anggota deleted successfully.'], 200);
+    }
+
+    public function posyandu()
+    {
+        $posyandu = Posyandu::all();
+        return response()->json($posyandu);
     }
 }

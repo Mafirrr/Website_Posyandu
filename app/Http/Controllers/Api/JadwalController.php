@@ -13,7 +13,7 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        return Jadwal::orderByDesc('id')->get();
+        return Jadwal::with('posyandu')->orderByDesc('id')->get();
     }
 
     /**
@@ -23,7 +23,7 @@ class JadwalController extends Controller
     {
         $validated = $request->validate([
             'judul' => 'required|string',
-            'lokasi' => 'required|string',
+            'lokasi' => 'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
             'tanggal' => 'required|date',
@@ -50,7 +50,7 @@ class JadwalController extends Controller
     {
         $validated = $request->validate([
             'judul' => 'required|string',
-            'lokasi' => 'required|string',
+            'lokasi' => 'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
             'tanggal' => 'required|date',

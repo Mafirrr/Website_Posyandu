@@ -70,6 +70,8 @@ Route::middleware('auth:sanctum')->post('/update_fcm_token', [FCMTokenController
 
 Route::apiResource('/jadwal', JadwalController::class);
 
+Route::get('/posyandu', [AnggotaKaderController::class, 'posyandu']);
+
 Route::get('/dashboard/grafik', [DashboardApiController::class, 'grafik']);
 Route::get('/dashboard/riwayat', [DashboardApiController::class, 'riwayat']);
 

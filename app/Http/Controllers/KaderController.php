@@ -91,7 +91,7 @@ class KaderController extends Controller
                 $posyandu_id = $posyanduBaru->id;
             } else {
                 $request->validate([
-                    'posyandu_id' => 'required|exists:posyandu,id',
+                    'posyandu_id' => 'required',
                 ]);
 
                 $posyandu_id = $request->posyandu_id;
@@ -113,7 +113,6 @@ class KaderController extends Controller
                 $noTelepon = '+628' . substr($noTelepon, 2);
             }
             $anggota->no_telepon = $noTelepon;
-
             $anggota->aktif = true;
             $anggota->save();
 

@@ -9,16 +9,17 @@ use App\Models\Jadwal;
 
 class DashboardFController extends Controller
 {
-public function show()
-{
-    $today = now()->toDateString();
-    $jadwal = Jadwal::whereDate('tanggal', '>=', $today)
-                    ->orderBy('tanggal', 'asc')
-                    ->first();
+    public function show()
+    {
+        $today = now()->toDateString();
+        $jadwal = Jadwal::whereDate('tanggal', '>=', $today)
+            ->with('posyandu')
+            ->orderBy('tanggal', 'asc')
+            ->first();
 
-    return response()->json([
-        'success' => true,
-        'data' => $jadwal,
-    ]);
-}
+        return response()->json([
+            'success' => true,
+            'data' => $jadwal,
+        ]);
+    }
 }
