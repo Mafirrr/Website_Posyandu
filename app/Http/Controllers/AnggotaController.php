@@ -76,7 +76,12 @@ class AnggotaController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        $formattedPhone = $this->formatNoTelepon($request->input('no_telepon'));
+
+        // Ganti di request agar validasi & old() pakai nilai benar
+        $request->merge([
+            'no_telepon' => $formattedPhone,
+        ]);
         $validated = $request->validate([
             'nik' => 'required|string|max:20|unique:anggota,nik',
             'nama' => 'required|string|max:255',
@@ -126,11 +131,11 @@ class AnggotaController extends Controller
             $anggota->pekerjaan = $validated['pekerjaan'];
             $anggota->alamat = $validated['alamat'];
             $anggota->posyandu_id = $posyandu_id;
-            $noTelepon = '+62' . ltrim($validated['no_telepon'], '0');
+            $noTelepon = $validated['no_telepon'];
 
-            if (substr($noTelepon, 0, 2) === '08') {
-                $noTelepon = '+628' . substr($noTelepon, 2);
-            }
+            // if (substr($noTelepon, 0, 2) === '08') {
+            //     $noTelepon = '+628' . substr($noTelepon, 2);
+            // }
 
             $anggota->no_telepon = $noTelepon;
             $anggota->golongan_darah = $validated['golongan_darah'];
@@ -167,6 +172,12 @@ class AnggotaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $formattedPhone = $this->formatNoTelepon($request->input('no_telepon'));
+
+        // Ganti di request agar validasi & old() pakai nilai benar
+        $request->merge([
+            'no_telepon' => $formattedPhone,
+        ]);
         $validated = $request->validate([
             'nik' => 'required|string|max:20|unique:anggota,nik,' . $id,
             'password' => 'nullable|string|min:6',
@@ -219,7 +230,7 @@ class AnggotaController extends Controller
             $anggota->tempat_lahir = $validated['tempat_lahir'];
             $anggota->pekerjaan = $validated['pekerjaan'];
             $anggota->alamat = $validated['alamat'];
-            $noTelepon = $validated['no_telepon'];
+            $noTelepon = '+62' . ltrim($validated['no_telepon'], '0');
 
             if (substr($noTelepon, 0, 2) === '08') {
                 $noTelepon = '+628' . substr($noTelepon, 2);
@@ -262,5 +273,18 @@ class AnggotaController extends Controller
             ->get(['id', 'nama']);
 
         return response()->json($anggota);
+    }
+    private function formatNoTelepon($no)
+    {
+        $no = preg_replace('/[^0-9+]/', '', $no); // hilangkan karakter non-digit
+        if (str_starts_with($no, '+62')) {
+            return $no;
+        } elseif (str_starts_with($no, '62')) {
+            return '+' . $no;
+        } elseif (str_starts_with($no, '0')) {
+            return '+62' . substr($no, 1);
+        } else {
+            return '+62' . $no;
+        }
     }
 }

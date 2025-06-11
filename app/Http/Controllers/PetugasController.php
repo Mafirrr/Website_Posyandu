@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class PetugasController extends Controller
 {
@@ -52,10 +53,23 @@ class PetugasController extends Controller
 
     public function store(Request $request)
     {
+        // Normalisasi nomor telepon dulu
+     $formattedPhone = $this->formatNoTelepon($request->input('no_telepon'));
+
+    // Ganti di request agar validasi & old() pakai nilai benar
+    $request->merge([
+        'no_telepon' => $formattedPhone,
+    ]);
+        // dd($noTeleponFormatted);
         $validated = $request->validate([
             'nip' => 'required|string|max:20|unique:petugas,nip',
             'nama' => 'required|string|max:255',
-            'no_telepon' => 'required|string|max:20',
+            'no_telepon' => [
+            'required',
+            'string',
+            'regex:/^\+628[0-9]{6,12}$/',   // pastikan format +62...
+            'unique:petugas,no_telepon',    // sekarang cocok ↔ DB
+        ],
             'email' => 'required|email|unique:petugas,email',
         ]);
 
@@ -63,14 +77,13 @@ class PetugasController extends Controller
         $petugas->nip = $validated['nip'];
         $petugas->password = bcrypt('bidan123');
         $petugas->nama = $validated['nama'];
-        $petugas->no_telepon = '+62' . ltrim($validated['no_telepon'], '0');
+        $petugas->no_telepon = $validated['no_telepon'];
         $petugas->email = $validated['email'];
         $petugas->role = 'bidan';
         $petugas->save();
 
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil ditambahkan.');
     }
-
     public function edit($id)
     {
         $petugas = Petugas::findOrFail($id);
@@ -116,4 +129,18 @@ class PetugasController extends Controller
 
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil dihapus.');
     }
+    private function formatNoTelepon($no)
+{
+    $no = preg_replace('/[^0-9+]/', '', $no); // hilangkan karakter non-digit
+
+    if (str_starts_with($no, '+62')) {
+        return $no;
+    } elseif (str_starts_with($no, '62')) {
+        return '+' . $no;
+    } elseif (str_starts_with($no, '0')) {
+        return '+62' . substr($no, 1);
+    } else {
+        return '+62' . $no;
+    }
+}
 }
