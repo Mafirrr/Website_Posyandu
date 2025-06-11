@@ -262,7 +262,14 @@
 
                         @if ($riwayatData)
                             <div class="mt-4">
-                                <label class="form-label">Riwayat Kehamilan</label>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label class="form-label mb-0">Riwayat Kehamilan</label>
+                                    <a href="{{ route('riwayat.anggota', $anggota->id) }}"
+                                        class="btn btn-primary btn-sm">
+                                        Detail Pemeriksaan
+                                    </a>
+                                </div>
+
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>

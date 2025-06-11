@@ -67,8 +67,9 @@
                                                     {{ request('jenis_pemeriksaan') == '' ? 'selected' : '' }}>
                                                     -- Semua Jenis Pemeriksaan --
                                                 </option>
-                                                @foreach($jenisPemeriksaans as $key => $label)
-                                                    <option value="{{ $key }}" {{ request('jenis_pemeriksaan') == $key ? 'selected' : '' }}>
+                                                @foreach ($jenisPemeriksaans as $key => $label)
+                                                    <option value="{{ $key }}"
+                                                        {{ request('jenis_pemeriksaan') == $key ? 'selected' : '' }}>
                                                         {{ $label }}
                                                     </option>
                                                 @endforeach
@@ -157,13 +158,14 @@
                                 <!-- Per Page inside card body -->
                                 <form method="GET" action="{{ route('riwayat.index') }}">
                                     <!-- Preserve existing filters -->
-                                    @if(request('search'))
+                                    @if (request('search'))
                                         <input type="hidden" name="search" value="{{ request('search') }}">
                                     @endif
-                                    @if(request('jenis_pemeriksaan'))
-                                        <input type="hidden" name="jenis_pemeriksaan" value="{{ request('jenis_pemeriksaan') }}">
+                                    @if (request('jenis_pemeriksaan'))
+                                        <input type="hidden" name="jenis_pemeriksaan"
+                                            value="{{ request('jenis_pemeriksaan') }}">
                                     @endif
-                                    
+
                                     <div class="py-4 px-3">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center mb-3">

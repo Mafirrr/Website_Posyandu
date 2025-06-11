@@ -18,6 +18,11 @@ class PemeriksaanKehamilan extends Model
         'tempat_pemeriksaan',
         'jenis_pemeriksaan',
     ];
+    // app/Models/PemeriksaanKehamilan.php
+    protected $casts = [
+        'tanggal_pemeriksaan' => 'datetime',
+    ];
+
 
     /**
      * Relasi ke tabel kehamilan

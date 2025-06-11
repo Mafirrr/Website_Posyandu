@@ -6,6 +6,8 @@ use App\Models\PemeriksaanKehamilan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Anggota;
+
 
 class RiwayatPemeriksaanController extends Controller
 {
@@ -66,13 +68,76 @@ class RiwayatPemeriksaanController extends Controller
         // List jenis pemeriksaan untuk filter di view
         $jenisPemeriksaans = [
             'trimester1' => 'Trimester 1',
-            'trimester2' => 'Trimester 2', 
+            'trimester2' => 'Trimester 2',
             'trimester3' => 'Trimester 3',
             'nifas' => 'Nifas',
         ];
 
         return view('riwayat_pemeriksaan.riwayat_pemeriksaan', compact('paginatedGrouped', 'jenisPemeriksaans'));
     }
+
+    public function byAnggota(Request $request, Anggota $anggota)
+    {
+        $perPage          = (int) $request->input('per_page', 10);
+        $search           = $request->input('search');
+        $jenisPemeriksaan = $request->input('jenis_pemeriksaan');
+
+        $query = PemeriksaanKehamilan::whereHas('kehamilan', function ($q) use ($anggota) {
+            $q->where('anggota_id', $anggota->id);
+        })
+            ->with('kehamilan')
+            ->orderByDesc('tanggal_pemeriksaan');
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('catatan', 'like', "%$search%")
+                    ->orWhere('jenis_pemeriksaan', 'like', "%$search%");
+            });
+        }
+        if ($jenisPemeriksaan) {
+            $query->where('jenis_pemeriksaan', $jenisPemeriksaan);
+        }
+
+        $grouped = $query->get()
+            ->groupBy(fn($row) => $row->tanggal_pemeriksaan->format('Y-m-d'))   // ⬅️
+            ->map(function ($items, $tgl) {
+                return [
+                    'tanggal'      => $tgl,
+                    'pemeriksaans' => $items->map(function ($p) {
+                        return [
+                            'id'                => $p->id,
+                            'nama_anggota'      => $p->kehamilan->anggota->nama,
+                            'jenis_pemeriksaan' => $p->jenis_pemeriksaan,
+                            'tanggal'           => $p->tanggal_pemeriksaan,       // ⬅️
+                            'waktu'             => $p->created_at->format('H:i:s'),
+                        ];
+                    }),
+                ];
+            })
+            ->values();
+
+        $page      = LengthAwarePaginator::resolveCurrentPage();
+        $slice     = $grouped->slice(($page - 1) * $perPage, $perPage)->values();
+        $paginated = new LengthAwarePaginator(
+            $slice,
+            $grouped->count(),
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
+
+        return view('riwayat_pemeriksaan.riwayat_pemeriksaan', [
+            'paginatedGrouped' => $paginated,
+            'jenisPemeriksaans' => [
+                'trimester1' => 'Trimester 1',
+                'trimester2' => 'Trimester 2',
+                'trimester3' => 'Trimester 3',
+                'nifas'      => 'Nifas',
+            ],
+            'anggota' => $anggota,
+        ]);
+    }
+
 
     public function show($id)
     {
@@ -87,13 +152,13 @@ class RiwayatPemeriksaanController extends Controller
                 // Ambil data trimester 1 dengan semua relasinya
                 $detail = $pemeriksaan->trimester1()->with([
                     'pemeriksaanAwal',
-                    'pemeriksaanFisik', 
+                    'pemeriksaanFisik',
                     'pemeriksaanKhusus',
                     'labTrimester1',
                     'skriningKesehatan',
                     'usgTrimester1',
                 ])->first();
-                
+
                 // Ambil juga data pemeriksaan rutin
                 $pemeriksaanRutin = $pemeriksaan->pemeriksaanRutin;
                 break;
@@ -109,12 +174,12 @@ class RiwayatPemeriksaanController extends Controller
                 $detail = $pemeriksaan->trimester3()->with([
                     'pemeriksaanRutin',
                     'pemeriksaanFisik',
-                    'labTrimester3', 
+                    'labTrimester3',
                     'skriningKesehatan',
                     'rencanaKonsultasi',
                     'usgTrimester3',
                 ])->first();
-                
+
                 // Ambil juga data pemeriksaan rutin
                 $pemeriksaanRutin = $pemeriksaan->pemeriksaanRutin;
                 break;
@@ -146,7 +211,7 @@ class RiwayatPemeriksaanController extends Controller
         $labels = [
             'trimester1' => 'Trimester 1',
             'trimester2' => 'Trimester 2',
-            'trimester3' => 'Trimester 3', 
+            'trimester3' => 'Trimester 3',
             'nifas' => 'Nifas',
         ];
 
