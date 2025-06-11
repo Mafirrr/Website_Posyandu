@@ -76,7 +76,7 @@ class AnggotaController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $validated = $request->validate([
             'nik' => 'required|string|max:20|unique:anggota,nik',
             'nama' => 'required|string|max:255',
@@ -126,7 +126,7 @@ class AnggotaController extends Controller
             $anggota->pekerjaan = $validated['pekerjaan'];
             $anggota->alamat = $validated['alamat'];
             $anggota->posyandu_id = $posyandu_id;
-            $anggota->no_telepon = '+62' . ltrim($validated['no_telepon'], '0');
+            $noTelepon = '+62' . ltrim($validated['no_telepon'], '0');
 
             if (substr($noTelepon, 0, 2) === '08') {
                 $noTelepon = '+628' . substr($noTelepon, 2);
