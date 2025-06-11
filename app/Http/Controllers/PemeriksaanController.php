@@ -657,7 +657,7 @@ class PemeriksaanController extends Controller
             return redirect()->route('pemeriksaan.index')->with('success', 'Pemeriksaan berhasil disimpan.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Gagal menyimpan data', 'error' => $e->getMessage()], 500);
+            return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data: ' . $e->getMessage()]);
         }
     }
 }

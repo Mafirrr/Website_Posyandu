@@ -26,6 +26,11 @@
                 </div>
 
                 <div class="card card-body border ">
+                    @if ($errors->has('error'))
+                        <div class="alert alert-danger">
+                            {{ $errors->first('error') }}
+                        </div>
+                    @endif
                     <form action="{{ $action_form }}" method="post">
                         @csrf
                         @method($method)
@@ -175,17 +180,18 @@
                                 @enderror
                             </div>
                             <div class="">
-
-                                {{-- Nomor Telepon --}}
-                                <label for="phone-number" class="form-label">Phone number <span
+                                <label for="phone-number" class="form-label">Nomor Telepon <span
                                         class="text-danger">*</span></label>
-                                <input type="tel" id="phone-number" name="no_telepon" placeholder="Phone Number"
-                                    value="{{ old('no_telepon', $anggota->no_telepon) }}" class="form-control">
+                                <div class="input-group">
+                                    <span class="input-group-text">+62</span>
+                                    <input type="text" id="phone-number" name="no_telepon" placeholder="81234567890"
+                                        value="{{ old('no_telepon', ltrim($anggota->no_telepon, '+62')) }}"
+                                        class="form-control" oninput="thi`s.value = this.value.replace(/[^0-9]/g, '')">
+                                </div>
                                 @error('no_telepon')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-
                             <div class="mb-3 position-relative">
                                 <label for="posyandu_select" class="form-label">Pilih Posyandu</label>
                                 <select name="posyandu_id" id="posyandu_select" class="form-select"
