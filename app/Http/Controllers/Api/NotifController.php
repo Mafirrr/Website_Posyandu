@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Kehamilan;
 use App\Models\Jadwal;
+use App\Models\Anggota;
 
 class NotifController extends Controller
 {
@@ -22,7 +23,19 @@ class NotifController extends Controller
             ], 200);
         }
 
-        $jadwals = Jadwal::orderBy('created_at', 'desc')->get();
+        $anggota = Anggota::find($anggotaId);
+
+        if (!$anggota) {
+            return response()->json([
+                'message' => 'Anggota tidak ditemukan',
+                'data' => []
+            ], 404);
+        }
+
+        $jadwals = Jadwal::where('lokasi', $anggota->posyandu_id)
+            ->with('posyandu')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return response()->json([
             'message' => 'Berhasil mengambil data jadwal',
