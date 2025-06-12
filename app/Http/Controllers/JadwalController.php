@@ -12,8 +12,6 @@ use Kreait\Firebase\Factory;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
-
-
 class JadwalController extends Controller
 {
     public function index()
@@ -23,10 +21,8 @@ class JadwalController extends Controller
         return view('jadwal.jadwal', compact('jadwals', 'posyandus'));
     }
 
-
     public function store(Request $request)
     {
-
         $request->validate([
             'judul' => 'required',
             'lokasi' => 'required',
@@ -59,7 +55,7 @@ class JadwalController extends Controller
             $messageText = "{$hari}\nTanggal: {$tanggalFormatted}\nJam: {$jadwal->jam_mulai}\n- {$jadwal->jam_selesai}";
 
             $data = [
-                'title' => 'Jadwal Posyandu Diperbarui!',
+                'title' => 'Jadwal Posyandu Baru!',
                 'body' => $messageText,
             ];
 
@@ -82,7 +78,6 @@ class JadwalController extends Controller
 
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil disimpan dan notifikasi terkirim.');
     }
-
 
     public function destroy($id)
     {
@@ -112,6 +107,7 @@ class JadwalController extends Controller
         $jadwal->update($request->all());
 
         $tokens = Anggota::whereNotNull('fcm_token')
+            ->where('posyandu_id', $request->lokasi)
             ->whereHas('kehamilan', function ($query) {
                 $query->where('status', 'dalam_pemantauan');
             })
