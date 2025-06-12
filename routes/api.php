@@ -65,7 +65,7 @@ Route::get('/kategori/{id}', [KategoriController::class, 'show']);
 
 Route::apiResource('petugas', PetugasbidanController::class);
 
-Route::get('/jadwal_FD', [DashboardFController::class, 'show']);
+Route::get('/jadwal_FD/{id}', [DashboardFController::class, 'show']);
 Route::middleware('auth:sanctum')->post('/update_fcm_token', [FCMTokenController::class, 'update']);
 
 Route::apiResource('/jadwal', JadwalController::class);

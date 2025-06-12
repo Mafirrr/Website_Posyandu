@@ -2,17 +2,28 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\DashboardController;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Jadwal;
+use App\Models\Anggota;
 
 class DashboardFController extends Controller
 {
-    public function show()
+    public function show($id)
     {
         $today = now()->toDateString();
+        $anggotaId = $id;
+        $anggota = Anggota::find($anggotaId);
+
+        if (!$anggota) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Anggota tidak ditemukan',
+            ], 404);
+        }
+
         $jadwal = Jadwal::whereDate('tanggal', '>=', $today)
+            ->where('lokasi', $anggota->posyandu_id)
             ->with('posyandu')
             ->orderBy('tanggal', 'asc')
             ->first();
