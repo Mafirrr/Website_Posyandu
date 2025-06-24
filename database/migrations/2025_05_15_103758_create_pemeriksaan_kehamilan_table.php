@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('pemeriksaan_kehamilan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kehamilan_id')->references('id')->on('kehamilan');
-            $table->foreignId('petugas_id')->references('id')->on('petugas');
+            $table->foreignId('petugas_id')->nullable()->references('id')->on('petugas');
+            $table->foreignId('kader_id')->nullable()->references('id')->on('anggota');
             $table->date('tanggal_pemeriksaan');
             $table->string('tempat_pemeriksaan');
             $table->enum('jenis_pemeriksaan', ['trimester1', 'trimester2', 'trimester3', 'nifas']);

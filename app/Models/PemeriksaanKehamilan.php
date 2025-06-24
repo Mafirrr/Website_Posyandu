@@ -14,6 +14,7 @@ class PemeriksaanKehamilan extends Model
     protected $fillable = [
         'kehamilan_id',
         'petugas_id',
+        'kader_id',
         'tanggal_pemeriksaan',
         'tempat_pemeriksaan',
         'jenis_pemeriksaan',

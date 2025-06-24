@@ -7,6 +7,7 @@ use App\Models\Anggota;
 use App\Models\Kehamilan;
 use App\Models\LabTrimester1;
 use App\Models\LabTrimester3;
+use App\Models\Nifas;
 use App\Models\PemeriksaanAwal;
 use App\Models\PemeriksaanFisik;
 use App\Models\PemeriksaanKehamilan;
@@ -37,6 +38,8 @@ class Trimester extends Controller
                 return $this->trimester2($request);
             case "trimester3":
                 return $this->trimester3($request);
+            case "nifas":
+                return $this->nifas($request);
             default:
                 abort(400, 'Trimester tidak valid');
         }
@@ -64,7 +67,7 @@ class Trimester extends Controller
             $pemeriksaan = PemeriksaanKehamilan::create([
                 'jenis_pemeriksaan' => $validated['pemeriksaan_kehamilan']['jenis_pemeriksaan'],
                 'kehamilan_id' => $kehamilan->id,
-                'petugas_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
+                'kader_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
                 'tanggal_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tanggal_pemeriksaan'],
                 'tempat_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tempat_pemeriksaan'],
             ]);
@@ -124,7 +127,7 @@ class Trimester extends Controller
             $pemeriksaan = PemeriksaanKehamilan::create([
                 'jenis_pemeriksaan' => $validated['pemeriksaan_kehamilan']['jenis_pemeriksaan'],
                 'kehamilan_id' => $kehamilan->id,
-                'petugas_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
+                'kader_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
                 'tanggal_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tanggal_pemeriksaan'],
                 'tempat_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tempat_pemeriksaan'],
             ]);
@@ -149,6 +152,56 @@ class Trimester extends Controller
             return response()->json(['message' => 'Gagal menyimpan data', 'error' => $e->getMessage()], 500);
         }
     }
+    public function nifas(Request $request)
+    {
+        $validated = $request->validate([
+            'pemeriksaan_kehamilan.jenis_pemeriksaan' => 'required',
+            'pemeriksaan_kehamilan.kehamilan_id' => 'required',
+            'pemeriksaan_kehamilan.petugas_id' => 'required',
+            'pemeriksaan_kehamilan.tanggal_pemeriksaan' => 'required',
+            'pemeriksaan_kehamilan.tempat_pemeriksaan' => 'required',
+        ]);
+
+        try {
+            $kehamilan = Kehamilan::where('anggota_id', $validated['pemeriksaan_kehamilan']['kehamilan_id'])->latest()->first();
+
+            if (!$kehamilan) {
+                return response()->json(['message' => 'Data kehamilan tidak ditemukan.'], 404);
+            }
+
+            DB::beginTransaction();
+
+            $pemeriksaan = PemeriksaanKehamilan::create([
+                'jenis_pemeriksaan' => $validated['pemeriksaan_kehamilan']['jenis_pemeriksaan'],
+                'kehamilan_id' => $kehamilan->id,
+                'kader_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
+                'tanggal_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tanggal_pemeriksaan'],
+                'tempat_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tempat_pemeriksaan'],
+            ]);
+
+            $dataNifas = $request->input('nifas');
+
+            if (!$dataNifas) {
+                return response()->json([
+                    'message' => 'Data pemeriksaan nifas kosong.',
+                    'body' => $request->all()
+                ], 422);
+            }
+
+            $dataNifas['pemeriksaan_id'] = $pemeriksaan->id;
+            Nifas::create($dataNifas);
+
+            DB::commit();
+
+            return response()->json(['message' => 'Data pemeriksaan nifas berhasil disimpan.'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Gagal menyimpan data pemeriksaan nifas',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
     public function trimester3(Request $request)
     {
         try {
@@ -169,7 +222,7 @@ class Trimester extends Controller
             $pemeriksaan = PemeriksaanKehamilan::create([
                 'jenis_pemeriksaan' => $validated['pemeriksaan_kehamilan']['jenis_pemeriksaan'],
                 'kehamilan_id' => $kehamilan->id,
-                'petugas_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
+                'kader_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
                 'tanggal_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tanggal_pemeriksaan'],
                 'tempat_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tempat_pemeriksaan'],
             ]);

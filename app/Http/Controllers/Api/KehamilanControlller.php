@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kehamilan;
+use App\Models\Nifas;
 use App\Models\PemeriksaanKehamilan;
 use App\Models\PemeriksaanRutin;
 use App\Models\PemeriksaanTrimester1;
@@ -55,6 +56,7 @@ class KehamilanControlller extends Controller
         $tri1_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester1')->pluck('id')->values();
         $tri2_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester2')->pluck('id')->values();
         $tri3_id = $pemeriksaan->where('jenis_pemeriksaan', 'trimester3')->pluck('id')->values();
+        $nifas_id = $pemeriksaan->where('jenis_pemeriksaan', 'nifas')->pluck('id')->values();
 
         $tri1 = Trimester1::with([
             'pemeriksaanRutin',
@@ -124,6 +126,10 @@ class KehamilanControlller extends Controller
 
                 return $item;
             });
+
+        $nifas = Nifas::whereIn('pemeriksaan_id', $nifas_id)->get()
+            ->makeHidden(['updated_at', 'deleted_at']);
+
         return response()->json([
             'status' => 'success',
             'message' => 'Data berhasil diambil',
@@ -132,6 +138,7 @@ class KehamilanControlller extends Controller
                 'trimester1' => $tri1,
                 'trimester2' => $tri2,
                 'trimester3' => $tri3,
+                'nifas' => $nifas,
             ],
         ]);
     }

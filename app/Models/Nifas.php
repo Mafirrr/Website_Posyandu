@@ -14,6 +14,7 @@ class Nifas extends Model
 
     protected $fillable = [
         'pemeriksaan_id',
+        'bagian_kf',
         'periksa_payudara',
         'periksa_pendarahan',
         'periksa_jalan_lahir',

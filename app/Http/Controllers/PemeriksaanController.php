@@ -224,7 +224,7 @@ class PemeriksaanController extends Controller
             //pemeriksaan kehamilan
             $pemeriksaan = new PemeriksaanKehamilan();
             $pemeriksaan->kehamilan_id = $kehamilan->id;
-            $pemeriksaan->petugas_id = auth()->user()->id;
+            (auth()->user()->role == "kader") ? $pemeriksaan->kader_id = auth()->user()->id : $pemeriksaan->petugas_id = auth()->user()->id;
             $pemeriksaan->tanggal_pemeriksaan = $validated['tanggal_periksa1'];
             $pemeriksaan->tempat_pemeriksaan = $validated['tempat_periksa1'];
             $pemeriksaan->jenis_pemeriksaan = 'trimester1';
@@ -371,7 +371,8 @@ class PemeriksaanController extends Controller
 
             $pemeriksaan = new PemeriksaanKehamilan();
             $pemeriksaan->kehamilan_id = $kehamilan->id;
-            $pemeriksaan->petugas_id = auth()->user()->id;
+            (auth()->user()->role == "kader") ? $pemeriksaan->kader_id = auth()->user()->id : $pemeriksaan->petugas_id = auth()->user()->id;
+
             $pemeriksaan->tanggal_pemeriksaan = $validated['tanggal_periksa2'];
             $pemeriksaan->tempat_pemeriksaan = $validated['tempat_periksa2'];
             $pemeriksaan->jenis_pemeriksaan = 'trimester2';
@@ -489,7 +490,7 @@ class PemeriksaanController extends Controller
 
             $pemeriksaan = new PemeriksaanKehamilan();
             $pemeriksaan->kehamilan_id = $kehamilan->id;
-            $pemeriksaan->petugas_id = auth()->user()->id;
+            (auth()->user()->role == "kader") ? $pemeriksaan->kader_id = auth()->user()->id : $pemeriksaan->petugas_id = auth()->user()->id;
             $pemeriksaan->tanggal_pemeriksaan = $validated['tanggal_periksa3'];
             $pemeriksaan->tempat_pemeriksaan = $validated['tempat_periksa3'];
             $pemeriksaan->jenis_pemeriksaan = 'trimester3';
@@ -600,7 +601,7 @@ class PemeriksaanController extends Controller
 
     public function nifas(Request $request)
     {
-        // dd($request->all());
+
         $validated = $request->validate([
             'anggota_id' => 'required|exists:anggota,id',
 
@@ -631,14 +632,16 @@ class PemeriksaanController extends Controller
 
             $pemeriksaan = new PemeriksaanKehamilan();
             $pemeriksaan->kehamilan_id = $kehamilan->id;
-            $pemeriksaan->petugas_id = auth()->user()->id;
+            (auth()->user()->role === "kader") ? $pemeriksaan->kader_id = auth()->user()->id : $pemeriksaan->petugas_id = auth()->user()->id;
             $pemeriksaan->tanggal_pemeriksaan = $validated['tanggal_pemeriksaan_nifas'];
             $pemeriksaan->tempat_pemeriksaan = $validated['tempat_periksa_nifas'];
             $pemeriksaan->jenis_pemeriksaan = 'nifas';
+
             $pemeriksaan->save();
 
             $nifas = new Nifas();
             $nifas->pemeriksaan_id = $pemeriksaan->id;
+            $nifas->bagian_kf = $validated['bagian_kf'];
             $nifas->periksa_payudara = $validated['periksa_payudara'];
             $nifas->periksa_pendarahan = $validated['periksa_pendarahan'];
             $nifas->periksa_jalan_lahir = $validated['periksa_jalan_lahir'];

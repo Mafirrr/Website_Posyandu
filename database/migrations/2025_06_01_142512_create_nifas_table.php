@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('nifas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pemeriksaan_id')->references('id')->on('pemeriksaan_kehamilan');
+            $table->string('bagian_kf');
             $table->text('periksa_payudara');
             $table->text('periksa_pendarahan');
             $table->text('periksa_jalan_lahir');
