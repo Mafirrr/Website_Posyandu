@@ -56,9 +56,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                            <td>Tempat Pemeriksaan</td>
+                                            <td>{{ $pemeriksaan->posyandu->nama ?? 'Tidak diketahui' }}</td>
+                                        </tr>
+
                                         @foreach ($pemeriksaan->toArray() as $key => $value)
                                             @php
-                                                $excludedKeys = ['id', 'pemeriksaan_id', 'created_at', 'updated_at', 'deleted_at', 'kehamilan', 'pemeriksaanKehamilan', 'petugas_id', 'kehamilan_id', 'pemeriksaan'];
+                                                $excludedKeys = [
+                                                    'id',
+                                                    'pemeriksaan_id',
+                                                    'created_at',
+                                                    'updated_at',
+                                                    'deleted_at',
+                                                    'kehamilan',
+                                                    'pemeriksaanKehamilan',
+                                                    'petugas_id',
+                                                    'kader_id',
+                                                    'tempat_pemeriksaan',
+                                                    'kehamilan_id',
+                                                    'pemeriksaan',
+                                                ];
                                                 $isRelation = is_array($value) || is_object($value);
                                             @endphp
 
@@ -89,7 +107,12 @@
                                                 <tbody>
                                                     @foreach ($relationData->toArray() as $key => $value)
                                                         @php
-                                                            $excludedKeys = ['id','created_at', 'updated_at', 'deleted_at'];
+                                                            $excludedKeys = [
+                                                                'id',
+                                                                'created_at',
+                                                                'updated_at',
+                                                                'deleted_at',
+                                                            ];
                                                             $isRelationValue = is_array($value) || is_object($value);
                                                         @endphp
 
@@ -121,7 +144,7 @@
                                         <tbody>
                                             @foreach ($pemeriksaanRutin->toArray() as $key => $value)
                                                 @php
-                                                    $excludedKeys = ['id','created_at', 'updated_at', 'deleted_at'];
+                                                    $excludedKeys = ['id', 'created_at', 'updated_at', 'deleted_at'];
                                                     $isRelation = is_array($value) || is_object($value);
                                                 @endphp
 

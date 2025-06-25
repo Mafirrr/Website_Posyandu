@@ -141,7 +141,7 @@ class RiwayatPemeriksaanController extends Controller
 
     public function show($id)
     {
-        $pemeriksaan = PemeriksaanKehamilan::with(['kehamilan.anggota'])->findOrFail($id);
+        $pemeriksaan = PemeriksaanKehamilan::with(['kehamilan.anggota', 'posyandu'])->findOrFail($id);
         $jenis = $pemeriksaan->jenis_pemeriksaan;
 
         $detail = null;
@@ -173,6 +173,7 @@ class RiwayatPemeriksaanController extends Controller
                 // Ambil data trimester 3 dengan semua relasinya
                 $detail = $pemeriksaan->trimester3()->with([
                     'pemeriksaanRutin',
+                    'posyandu',
                     'pemeriksaanFisik',
                     'labTrimester3',
                     'skriningKesehatan',
@@ -185,9 +186,8 @@ class RiwayatPemeriksaanController extends Controller
                 break;
 
             case 'nifas':
-                // Untuk nifas, data ada di pemeriksaan kehamilan itu sendiri
-                $detail = $pemeriksaan;
-                $pemeriksaanRutin = null;
+                $detail = $pemeriksaan->nifas()->first();
+                $pemeriksaanRutin = $detail;
                 break;
 
             default:
