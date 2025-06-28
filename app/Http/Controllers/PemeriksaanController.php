@@ -130,6 +130,9 @@ class PemeriksaanController extends Controller
 
     public function trimester1(Request $request)
     {
+
+
+
         $validated = $request->validate([
             'anggota_id' => 'required|exists:anggota,id',
 
@@ -176,12 +179,12 @@ class PemeriksaanController extends Controller
             'tungkai1' => 'nullable|in:normal,tidak_normal',
 
             // Riwayat haid & kehamilan
-            'hpht' => 'nullable|string',
+            'hpht' => 'nullable|date',
             'haid' => 'nullable|in:teratur,tidak_teratur',
             'umur_kehamilan_hpht' => 'nullable|numeric',
-            'hpl_hpht' => 'nullable|string',
+            'hpl_hpht' => 'nullable|date',
             'umur_kehamilan_usg' => 'nullable|numeric',
-            'hpl_usg' => 'nullable|string',
+            'hpl_usg' => 'nullable|date',
 
             // USG
             'jumlah_gs' => 'nullable|string',
@@ -258,7 +261,7 @@ class PemeriksaanController extends Controller
             $awal->hemoglobin = $validated['hemoglobin1'];
             $awal->riwayat_kesehatan_ibu_sekarang = $validated['riwayat_kesehatan_ibu'] ?? [];
             $awal->riwayat_perilaku = $validated['riwayat_kesehatan'] ?? [];
-            $awal->riwayat_penyakit_keluarga = $validated['riwayat_kesehatan_keluarga'];
+            $awal->riwayat_penyakit_keluarga = $validated['riwayat_kesehatan_keluarga'] ?? [];
             $awal->save();
 
             //pemeriksaan fisik

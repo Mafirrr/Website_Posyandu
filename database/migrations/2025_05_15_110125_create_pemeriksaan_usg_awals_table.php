@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('usg_trimester_1', function (Blueprint $table) {
             $table->id();
-            $table->string('hpht')->nullable();
+            $table->date('hpht')->nullable();
             $table->enum('keteraturan_haid', ['teratur', 'tidak_teratur']);
             $table->integer('umur_kehamilan_berdasar_hpht');
             $table->integer('umur_kehamilan_berdasarkan_usg');
-            $table->string('hpl_berdasarkan_hpht')->nullable();
-            $table->string('hpl_berdasarkan_usg')->nullable();
+            $table->date('hpl_berdasarkan_hpht')->nullable();
+            $table->date('hpl_berdasarkan_usg')->nullable();
             $table->enum('jumlah_bayi', ['tunggal', 'kembar']);
             $table->enum('jumlah_gs', ['tunggal', 'kembar',]);
             $table->float('diametes_gs');

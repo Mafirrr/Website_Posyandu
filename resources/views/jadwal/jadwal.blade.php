@@ -24,7 +24,7 @@
 
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
-                        <input type="text" name="judul" id="judul" class="form-control">
+                        <input type="text" name="judul" id="judul" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
@@ -32,7 +32,7 @@
                         <select name="lokasi" id="lokasi" class="form-select" data-temp-required="true" required>
                             <option value="">-- Pilih Posyandu --</option>
                             @foreach ($posyandus as $pos)
-                                <option value="{{ $pos->id }}">{{ $pos->nama }} </option>
+                                <option value="{{ $pos->id }}">{{ $pos->nama }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -54,10 +54,75 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-between gap-4 mt-5 ">
+                    <div class="mb-3">
+                        <label class="form-label">Anggota yang Menghadiri</label>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                            data-bs-target="#anggotaModal">
+                            Pilih Anggota
+                        </button>
+                        <button type="button" class="btn btn-outline-danger ms-2" id="clearAnggotaBtn">
+                            Bersihkan Pilihan
+                        </button>
+                        <div id="anggotaTerpilihLabel" class="mt-2 text-muted">Belum ada anggota dipilih</div>
+
+                        <!-- Container input tersembunyi -->
+                        <div id="anggotaHiddenInputs"></div>
+                    </div>
+
+                    <div class="flex justify-between gap-4 mt-5">
                         <button type="submit" class="btn btn-primary ms-2 px-5">Simpan</button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Modal Pilih Anggota -->
+        <div class="modal fade" id="anggotaModal" tabindex="-1" aria-labelledby="anggotaModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="anggotaModalLabel">Pilih Anggota</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Filter Posyandu -->
+                        <div class="mb-3">
+                            <label>Filter Posyandu</label>
+                            <select id="filterPosyanduModal" class="form-select">
+                                <option value="semua">-- Semua Posyandu --</option>
+                                @foreach ($posyandus as $pos)
+                                    <option value="{{ $pos->id }}">{{ $pos->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Pencarian -->
+                        <div class="mb-3">
+                            <label>Cari Nama atau NIK</label>
+                            <input type="text" id="searchAnggota" class="form-control"
+                                placeholder="Ketik nama atau NIK...">
+                        </div>
+
+                        <!-- Daftar Anggota -->
+                        <div style="max-height: 300px; overflow-y: auto;" id="anggotaList">
+                            @foreach ($anggota as $item)
+                                <div class="form-check anggota-item" data-posyandu="{{ $item->posyandu_id }}">
+                                    <input class="form-check-input anggota-checkbox" type="checkbox"
+                                        value="{{ $item->id }}" id="anggotaModal_{{ $item->id }}">
+                                    <label class="form-check-label" for="anggotaModal_{{ $item->id }}">
+                                        {{ $item->nama }} ({{ $item->nik }})
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" id="simpanAnggotaBtn"
+                            data-bs-dismiss="modal">Simpan Pilihan</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -119,6 +184,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const jamMulai = document.getElementById('jam_mulai');
@@ -140,6 +206,7 @@
                 }
                 return true;
             }
+
             jamMulai.addEventListener('change', validateTime);
             jamSelesai.addEventListener('change', validateTime);
 
@@ -162,6 +229,79 @@
 
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('tanggal').setAttribute('min', today);
+        });
+
+        // Sync checkbox with filter & search
+        document.getElementById('searchAnggota').addEventListener('input', filterAnggota);
+        document.getElementById('filterPosyanduModal').addEventListener('change', filterAnggota);
+
+        function filterAnggota() {
+            const selectedPos = document.getElementById('filterPosyanduModal').value;
+            const keyword = document.getElementById('searchAnggota').value.toLowerCase();
+
+            document.querySelectorAll('.anggota-item').forEach(item => {
+                const posId = item.getAttribute('data-posyandu');
+                const text = item.textContent.toLowerCase();
+
+                const matchPos = (selectedPos === 'semua' || posId === selectedPos);
+                const matchKeyword = text.includes(keyword);
+
+                if (matchPos && matchKeyword) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                    item.querySelector('input').checked = false;
+                }
+            });
+        }
+
+        // Simpan anggota terpilih ke hidden input dan label
+        document.getElementById('simpanAnggotaBtn').addEventListener('click', function() {
+            const selectedCheckboxes = document.querySelectorAll('.anggota-checkbox:checked');
+            const container = document.getElementById('anggotaHiddenInputs');
+            const label = document.getElementById('anggotaTerpilihLabel');
+
+            container.innerHTML = '';
+
+            if (selectedCheckboxes.length === 0) {
+                label.innerText = 'Belum ada anggota dipilih';
+                return;
+            }
+
+            selectedCheckboxes.forEach(cb => {
+                const hidden = document.createElement('input');
+                hidden.type = 'hidden';
+                hidden.name = 'yang_menghadiri[]';
+                hidden.value = cb.value;
+                container.appendChild(hidden);
+            });
+
+            label.innerText = selectedCheckboxes.length + ' anggota dipilih';
+        });
+
+        // Bersihkan pilihan anggota
+        document.getElementById('clearAnggotaBtn').addEventListener('click', function() {
+            document.querySelectorAll('.anggota-checkbox').forEach(cb => cb.checked = false);
+            document.getElementById('anggotaHiddenInputs').innerHTML = '';
+            document.getElementById('anggotaTerpilihLabel').innerText = 'Belum ada anggota dipilih';
+        });
+
+        // Saat modal dibuka, sinkronkan checkbox dengan hidden inputs yang sudah ada
+        var anggotaModal = document.getElementById('anggotaModal');
+        anggotaModal.addEventListener('show.bs.modal', function() {
+            // Reset filter dan search
+            document.getElementById('filterPosyanduModal').value = 'semua';
+            document.getElementById('searchAnggota').value = '';
+            filterAnggota();
+
+            // Ambil nilai anggota yang sudah dipilih di hidden inputs
+            const selectedValues = Array.from(document.querySelectorAll('#anggotaHiddenInputs input')).map(input =>
+                input.value);
+
+            // Sync checkbox
+            document.querySelectorAll('.anggota-checkbox').forEach(cb => {
+                cb.checked = selectedValues.includes(cb.value);
+            });
         });
     </script>
 @endsection

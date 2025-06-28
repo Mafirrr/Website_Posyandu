@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('lokasi');
             $table->time('jam_mulai');
             $table->time('jam_selesai');
+            $table->json('yang_menghadiri');
             $table->timestamps();
         });
     }

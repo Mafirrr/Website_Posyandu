@@ -41,7 +41,27 @@ class UsgTrimester1 extends Model
         'crl' => 'float',
         'crl_hari' => 'integer',
         'crl_minggu' => 'integer',
+        'hpht' => 'date',
+        'hpl_berdasarkan_hpht' => 'date',
+        'hpl_berdasarkan_usg' => 'date',
     ];
+
+    public function getHphtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function getHplBerdasarkanHphtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function getHplBerdasarkanUsgAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
+
+
     public function trimester1()
     {
         return $this->hasMany(Trimester1::class, 'usg_trimester_1');

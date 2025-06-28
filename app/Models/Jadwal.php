@@ -13,7 +13,19 @@ class Jadwal extends Model
         'jam_mulai',
         'jam_selesai',
         'tanggal',
+        'yang_menghadiri',
     ];
+
+    protected $casts = [
+        'yang_menhadiri' => 'array',
+        'tanggal' => 'date',
+    ];
+
+    public function getTanggalAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
+
     public $timestamps = false;
 
     public function posyandu()

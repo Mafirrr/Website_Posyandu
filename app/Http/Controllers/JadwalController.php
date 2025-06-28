@@ -16,25 +16,32 @@ class JadwalController extends Controller
 {
     public function index()
     {
+        $anggota = Anggota::all();
         $jadwals = Jadwal::orderBy('tanggal', 'desc')->get();
         $posyandus = Posyandu::all();
-        return view('jadwal.jadwal', compact('jadwals', 'posyandus'));
+        return view('jadwal.jadwal', compact('jadwals', 'posyandus', 'anggota'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'judul' => 'required',
-            'lokasi' => 'required',
+        $data = $request->validate([
+            'judul' => 'required|string',
+            'lokasi' => 'required|exists:posyandu,id',
             'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
+            'jam_selesai' => 'required|after:jam_mulai',
             'tanggal' => 'required|date',
+            'yang_menghadiri' => 'nullable|array',
+            'yang_menghadiri.*' => 'exists:anggota,id',
         ]);
 
-        $jadwal = Jadwal::create($request->all());
+        // Encode array anggota yang hadir jadi JSON, atau simpan null jika kosong
+        $data['yang_menghadiri'] = isset($data['yang_menghadiri']) ? json_encode($data['yang_menghadiri']) : null;
 
-        $tokens = Anggota::whereNotNull('fcm_token')
-            ->where('posyandu_id', $request->lokasi)
+        $jadwal = Jadwal::create($data);
+
+        $selectIds = $jadwal->yang_menghadiri;
+        $tokens = Anggota::whereIn('id', $selectIds)
+            ->whereNotNull('fcm_token')
             ->whereHas('kehamilan', function ($query) {
                 $query->where('status', 'dalam_pemantauan');
             })
@@ -88,26 +95,34 @@ class JadwalController extends Controller
 
     public function edit($id)
     {
+        $anggota = Anggota::all();
         $jadwal = Jadwal::findOrFail($id);
         $posyandu = Posyandu::all();
-        return view('jadwal.edit', compact('jadwal', 'posyandu'));
+        return view('jadwal.edit', compact('jadwal', 'posyandu', 'anggota'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'judul' => 'required',
-            'lokasi' => 'required',
+
+        $data = $request->validate([
+            'judul' => 'required|string',
+            'lokasi' => 'required|exists:posyandu,id',
             'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
+            'jam_selesai' => 'required|after:jam_mulai',
             'tanggal' => 'required|date',
+            'yang_menghadiri' => 'nullable|array',
+            'yang_menghadiri.*' => 'exists:anggota,id',
         ]);
 
-        $jadwal = Jadwal::findOrFail($id);
-        $jadwal->update($request->all());
+        $selectIds = $data['yang_menghadiri'] ?? [];
 
-        $tokens = Anggota::whereNotNull('fcm_token')
-            ->where('posyandu_id', $request->lokasi)
+        $data['yang_menghadiri'] = isset($data['yang_menghadiri']) ? json_encode($data['yang_menghadiri']) : null;
+
+        $jadwal = Jadwal::findOrFail($id);
+        $jadwal->update($data);
+
+        $tokens = Anggota::whereIn('id', $selectIds)
+            ->whereNotNull('fcm_token')
             ->whereHas('kehamilan', function ($query) {
                 $query->where('status', 'dalam_pemantauan');
             })

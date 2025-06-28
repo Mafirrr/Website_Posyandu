@@ -624,7 +624,8 @@
 
                                     <div style="margin-bottom: 12px; display: flex; align-items: center;">
                                         <label for="hpht" style="width: 300px; font-weight: normal;">HPHT</label>
-                                        <input type="text" id="hpht" name="hpht" data-temp-required="true"
+                                        <input type="date" id="hpht" name="hpht" data-temp-required="true"
+                                            class="form-control"
                                             style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
                                     </div>
 
@@ -651,7 +652,8 @@
                                     <div style="margin-bottom: 12px; display: flex; align-items: center;">
                                         <label for="hpl_hpht" style="width: 300px; font-weight: normal;">HPL Berdasarkan
                                             HPHT</label>
-                                        <input type="text" id="hpl_hpht" name="hpl_hpht" data-temp-required="true"
+                                        <input type="date" id="hpl_hpht" name="hpl_hpht" data-temp-required="true"
+                                            class="form-control"
                                             style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
                                     </div>
 
@@ -667,7 +669,7 @@
                                     <div style="margin-bottom: 12px; display: flex; align-items: center;">
                                         <label for="hpl_usg" style="width: 300px; font-weight: normal;">HPL Berdasarkan
                                             USG</label>
-                                        <input type="text" id="hpl_usg" name="hpl_usg" data-temp-required="true"
+                                        <input type="date" id="hpl_usg" name="hpl_usg" data-temp-required="true"
                                             style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 7px;">
                                     </div>
 
@@ -2234,6 +2236,63 @@
             if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
                 suggestionBox.innerHTML = '';
             }
+        });
+    </script>
+
+    <script>
+        const hphtInput = document.getElementById('hpht');
+        const umurInput = document.getElementById('umur_kehamilan_hpht');
+        const hplInput = document.getElementById('hpl_hpht');
+
+        function hitungUmurKehamilanDanHPL() {
+            const hphtValue = hphtInput.value;
+            if (!hphtValue) {
+                umurInput.value = '';
+                hplInput.value = '';
+                return;
+            }
+
+            const hphtDate = new Date(hphtValue);
+            const today = new Date();
+
+            // Hitung selisih hari dan minggu
+            const diffTime = today.getTime() - hphtDate.getTime();
+            const diffDays = Math.floor(diffTime / (1000 * 3600 * 24));
+            const minggu = Math.floor(diffDays / 7);
+
+            umurInput.value = minggu >= 0 ? minggu : 0;
+
+            // Hitung HPL = HPHT + 7 hari - 3 bulan + 1 tahun
+            const hplDate = new Date(hphtDate);
+            hplDate.setDate(hplDate.getDate() + 7);
+            hplDate.setMonth(hplDate.getMonth() - 3);
+            hplDate.setFullYear(hplDate.getFullYear() + 1);
+
+            hplInput.value = hplDate.toISOString().split('T')[0];
+        }
+
+        hphtInput.addEventListener('change', hitungUmurKehamilanDanHPL);
+    </script>
+
+    <script>
+        const umurUsgInput = document.getElementById('umur_kehamilan_usg');
+        const hplUsgInput = document.getElementById('hpl_usg');
+
+        umurUsgInput.addEventListener('input', () => {
+            const usiaMinggu = parseInt(umurUsgInput.value);
+
+            if (isNaN(usiaMinggu) || usiaMinggu <= 0 || usiaMinggu > 42) {
+                hplUsgInput.value = '';
+                return;
+            }
+
+            const today = new Date();
+            const sisaMinggu = 40 - usiaMinggu;
+
+            const hpl = new Date(today);
+            hpl.setDate(today.getDate() + (sisaMinggu * 7));
+
+            hplUsgInput.value = hpl.toISOString().split('T')[0];
         });
     </script>
 @endsection
