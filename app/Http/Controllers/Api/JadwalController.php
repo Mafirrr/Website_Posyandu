@@ -40,8 +40,12 @@ class JadwalController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Jadwal::whereJsonContains('yang_menghadiri', (string) $id)
+            ->with('posyandu')
+            ->orderByDesc('id')
+            ->get();
     }
+
 
     /**
      * Update the specified resource in storage.

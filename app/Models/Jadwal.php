@@ -17,7 +17,7 @@ class Jadwal extends Model
     ];
 
     protected $casts = [
-        'yang_menhadiri' => 'array',
+        'yang_menghadiri' => 'array',
         'tanggal' => 'date',
     ];
 

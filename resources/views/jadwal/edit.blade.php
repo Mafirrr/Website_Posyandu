@@ -61,12 +61,8 @@
                     </div>
 
                     <div class="flex justify-between gap-4 mt-5">
-                        <a href="{{ route('jadwal.index') }}" class="btn btn-danger px-5">
-                            Batal
-                        </a>
-                        <button type="submit" class="btn btn-primary ms-2 px-5">
-                            Update
-                        </button>
+                        <a href="{{ route('jadwal.index') }}" class="btn btn-danger px-5">Batal</a>
+                        <button type="submit" class="btn btn-primary ms-2 px-5">Update</button>
                     </div>
                 </form>
             </div>
@@ -78,7 +74,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="anggotaModalLabel">Pilih Anggota</h5>
+                    <h5 class="modal-title">Pilih Anggota</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
                 <div class="modal-body">
@@ -91,6 +87,14 @@
                                 <option value="{{ $pos->id }}">{{ $pos->nama }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <!-- Tombol Pilih Semua / Batal -->
+                    <div class="mb-3 d-flex justify-content-between">
+                        <button type="button" class="btn btn-sm btn-success" id="pilihSemuaBtn">Pilih Semua
+                            Anggota</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" id="batalPilihSemuaBtn">Batal Pilih
+                            Semua</button>
                     </div>
 
                     <!-- Pencarian -->
@@ -127,65 +131,44 @@
             const jamMulai = document.getElementById('jam_mulai');
             const jamSelesai = document.getElementById('jam_selesai');
             const tanggal = document.getElementById('tanggal');
-            const form = document.getElementById('editjadwalForm');
+            const anggotaTerpilihLabel = document.getElementById('anggotaTerpilihLabel');
+            const anggotaHiddenInputs = document.getElementById('anggotaHiddenInputs');
+            const anggotaCheckboxes = document.querySelectorAll('.anggota-checkbox');
+            const anggotaDipilih = @json(old('yang_menghadiri', $jadwal->yang_menghadiri ?? []));
 
+            // Set tanggal minimum hari ini
             const today = new Date().toISOString().split('T')[0];
             tanggal.setAttribute('min', today);
 
+            // Validasi waktu
             function validateTime() {
-                const startTime = jamMulai.value;
-                const endTime = jamSelesai.value;
-
-                if (startTime && endTime) {
-                    if (endTime <= startTime) {
-                        jamSelesai.classList.add('is-invalid');
-                        document.getElementById('jam_selesai_error').textContent =
-                            'Jam selesai harus lebih dari jam mulai';
-                        return false;
-                    } else {
-                        jamSelesai.classList.remove('is-invalid');
-                        document.getElementById('jam_selesai_error').textContent = '';
-                        return true;
-                    }
+                const start = jamMulai.value;
+                const end = jamSelesai.value;
+                if (start && end && end <= start) {
+                    jamSelesai.classList.add('is-invalid');
+                    document.getElementById('jam_selesai_error').textContent =
+                        'Jam selesai harus lebih dari jam mulai';
+                    return false;
                 }
+                jamSelesai.classList.remove('is-invalid');
+                document.getElementById('jam_selesai_error').textContent = '';
                 return true;
             }
 
+            // Validasi tanggal
             function validateDate() {
-                const selectedDate = tanggal.value;
-                const todayDate = new Date().toISOString().split('T')[0];
-
-                if (selectedDate && selectedDate < todayDate) {
+                const selected = tanggal.value;
+                if (selected && selected < today) {
                     tanggal.classList.add('is-invalid');
                     document.getElementById('tanggal_error').textContent =
                         'Tanggal tidak boleh kurang dari hari ini';
                     return false;
-                } else {
-                    tanggal.classList.remove('is-invalid');
-                    document.getElementById('tanggal_error').textContent = '';
-                    return true;
                 }
+                tanggal.classList.remove('is-invalid');
+                document.getElementById('tanggal_error').textContent = '';
+                return true;
             }
 
-            jamMulai.addEventListener('change', validateTime);
-            jamSelesai.addEventListener('change', validateTime);
-            tanggal.addEventListener('change', validateDate);
-
-            form.addEventListener('submit', function(e) {
-                const isTimeValid = validateTime();
-                const isDateValid = validateDate();
-
-                if (!isTimeValid || !isDateValid) {
-                    e.preventDefault();
-                    alert('Mohon perbaiki kesalahan pada form sebelum melanjutkan');
-                }
-            });
-
-            const anggotaTerpilihLabel = document.getElementById('anggotaTerpilihLabel');
-            const anggotaHiddenInputs = document.getElementById('anggotaHiddenInputs');
-            const anggotaCheckboxes = document.querySelectorAll('.anggota-checkbox');
-
-            const anggotaDipilih = @json(old('yang_menghadiri', $jadwal->yang_menghadiri ?? []));
 
             function updateAnggotaTerpilih() {
                 const checked = Array.from(anggotaCheckboxes).filter(cb => cb.checked);
@@ -200,57 +183,64 @@
                         input.value = cb.value;
                         anggotaHiddenInputs.appendChild(input);
                     });
-                    anggotaTerpilihLabel.innerText = checked.length + ' anggota dipilih';
+                    anggotaTerpilihLabel.innerText = `${checked.length} anggota dipilih`;
                 }
             }
 
-            // Centang yang sudah dipilih & update label saat halaman pertama kali dibuka
             anggotaCheckboxes.forEach(cb => {
                 cb.checked = anggotaDipilih.includes(parseInt(cb.value));
             });
             updateAnggotaTerpilih();
 
-            // Saat modal dibuka ulang
-            const anggotaModal = document.getElementById('anggotaModal');
-            anggotaModal.addEventListener('show.bs.modal', function() {
-                anggotaCheckboxes.forEach(cb => {
-                    cb.checked = anggotaDipilih.includes(parseInt(cb.value));
+            document.getElementById('simpanAnggotaBtn').addEventListener('click', updateAnggotaTerpilih);
+
+            document.getElementById('pilihSemuaBtn').addEventListener('click', function() {
+                const selectedPos = document.getElementById('filterPosyanduModal').value;
+                document.querySelectorAll('.anggota-item').forEach(item => {
+                    const posId = item.getAttribute('data-posyandu');
+                    if ((selectedPos === 'semua' || posId === selectedPos) && item.style.display !==
+                        'none') {
+                        item.querySelector('input').checked = true;
+                    }
                 });
                 updateAnggotaTerpilih();
             });
 
-            document.getElementById('simpanAnggotaBtn').addEventListener('click', function() {
+            // Tombol batal pilih semua (hapus semua centang)
+            document.getElementById('batalPilihSemuaBtn').addEventListener('click', function() {
+                document.querySelectorAll('.anggota-checkbox').forEach(cb => cb.checked = false);
                 updateAnggotaTerpilih();
             });
 
-            // Filter pencarian dan filter posyandu
+            // Filter list anggota berdasar posyandu dan pencarian
             document.getElementById('filterPosyanduModal').addEventListener('change', filterAnggota);
             document.getElementById('searchAnggota').addEventListener('input', filterAnggota);
 
             function filterAnggota() {
                 const selectedPos = document.getElementById('filterPosyanduModal').value;
-                const searchText = document.getElementById('searchAnggota').value.toLowerCase();
-
+                const search = document.getElementById('searchAnggota').value.toLowerCase();
                 document.querySelectorAll('.anggota-item').forEach(item => {
                     const posId = item.getAttribute('data-posyandu');
-                    const labelText = item.textContent.toLowerCase();
-
-                    const matchPos = (selectedPos === 'semua' || posId === selectedPos);
-                    const matchSearch = labelText.includes(searchText);
-
-                    if (matchPos && matchSearch) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                        item.querySelector('input').checked = false;
-                    }
+                    const label = item.textContent.toLowerCase();
+                    const match = (selectedPos === 'semua' || posId === selectedPos) && label.includes(
+                        search);
+                    item.style.display = match ? 'block' : 'none';
                 });
             }
 
-            // Jalankan filter awal
-            filterAnggota();
+            // Validasi form sebelum submit
+            document.getElementById('editjadwalForm').addEventListener('submit', function(e) {
+                const validTime = validateTime();
+                const validDate = validateDate();
+                const anggotaSelectedCount = document.querySelectorAll('#anggotaHiddenInputs input').length;
 
-            // Validasi awal
+                if (!validTime || !validDate || anggotaSelectedCount === 0) {
+                    e.preventDefault();
+                    alert('Mohon lengkapi form dengan benar dan pilih minimal 1 anggota.');
+                }
+            });
+
+            // Jalankan validasi awal
             validateTime();
             validateDate();
         });

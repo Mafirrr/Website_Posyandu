@@ -103,6 +103,15 @@
                                 placeholder="Ketik nama atau NIK...">
                         </div>
 
+                        <div class="mb-3 d-flex justify-content-between">
+                            <button type="button" class="btn btn-sm btn-success" id="pilihSemuaBtn">
+                                Pilih Semua Anggota
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="batalPilihSemuaBtn">
+                                Batal Pilih Semua
+                            </button>
+                        </div>
+
                         <!-- Daftar Anggota -->
                         <div style="max-height: 300px; overflow-y: auto;" id="anggotaList">
                             @foreach ($anggota as $item)
@@ -191,6 +200,9 @@
             const jamSelesai = document.getElementById('jam_selesai');
             const jamSelesaiError = document.getElementById('jam_selesai_error');
             const form = document.getElementById('jadwalForm');
+            const anggotaHiddenInputs = document.getElementById('anggotaHiddenInputs');
+            const anggotaTerpilihLabel = document.getElementById('anggotaTerpilihLabel');
+            const anggotaCheckboxes = document.querySelectorAll('.anggota-checkbox');
 
             function validateTime() {
                 if (jamMulai.value && jamSelesai.value) {
@@ -206,9 +218,6 @@
                 }
                 return true;
             }
-
-            jamMulai.addEventListener('change', validateTime);
-            jamSelesai.addEventListener('change', validateTime);
 
             form.addEventListener('submit', function(e) {
                 const anggotaTerpilih = document.querySelectorAll('#anggotaHiddenInputs input');
@@ -243,78 +252,99 @@
 
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('tanggal').setAttribute('min', today);
-        });
 
-        // Sync checkbox with filter & search
-        document.getElementById('searchAnggota').addEventListener('input', filterAnggota);
-        document.getElementById('filterPosyanduModal').addEventListener('change', filterAnggota);
+            // Fungsi update hidden input dan label anggota terpilih
+            function updateAnggotaTerpilih() {
+                const checkedBoxes = document.querySelectorAll('.anggota-checkbox:checked');
+                anggotaHiddenInputs.innerHTML = '';
 
-        function filterAnggota() {
-            const selectedPos = document.getElementById('filterPosyanduModal').value;
-            const keyword = document.getElementById('searchAnggota').value.toLowerCase();
-
-            document.querySelectorAll('.anggota-item').forEach(item => {
-                const posId = item.getAttribute('data-posyandu');
-                const text = item.textContent.toLowerCase();
-
-                const matchPos = (selectedPos === 'semua' || posId === selectedPos);
-                const matchKeyword = text.includes(keyword);
-
-                if (matchPos && matchKeyword) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                    item.querySelector('input').checked = false;
+                if (checkedBoxes.length === 0) {
+                    anggotaTerpilihLabel.innerText = 'Belum ada anggota dipilih';
+                    return;
                 }
-            });
-        }
 
-        // Simpan anggota terpilih ke hidden input dan label
-        document.getElementById('simpanAnggotaBtn').addEventListener('click', function() {
-            const selectedCheckboxes = document.querySelectorAll('.anggota-checkbox:checked');
-            const container = document.getElementById('anggotaHiddenInputs');
-            const label = document.getElementById('anggotaTerpilihLabel');
+                checkedBoxes.forEach(cb => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'yang_menghadiri[]';
+                    input.value = cb.value;
+                    anggotaHiddenInputs.appendChild(input);
+                });
 
-            container.innerHTML = '';
-
-            if (selectedCheckboxes.length === 0) {
-                label.innerText = 'Belum ada anggota dipilih';
-                return;
+                anggotaTerpilihLabel.innerText = `${checkedBoxes.length} anggota dipilih`;
             }
 
-            selectedCheckboxes.forEach(cb => {
-                const hidden = document.createElement('input');
-                hidden.type = 'hidden';
-                hidden.name = 'yang_menghadiri[]';
-                hidden.value = cb.value;
-                container.appendChild(hidden);
+            // Filter dan pencarian anggota
+            function filterAnggota() {
+                const selectedPos = document.getElementById('filterPosyanduModal').value;
+                const keyword = document.getElementById('searchAnggota').value.toLowerCase();
+
+                document.querySelectorAll('.anggota-item').forEach(item => {
+                    const posId = item.getAttribute('data-posyandu');
+                    const text = item.textContent.toLowerCase();
+
+                    const matchPos = (selectedPos === 'semua' || posId === selectedPos);
+                    const matchKeyword = text.includes(keyword);
+
+                    if (matchPos && matchKeyword) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                        // Jangan otomatis uncheck jika tidak tampil supaya bisa tetap menambah anggota
+                        // item.querySelector('input').checked = false; // Jangan pakai ini kalau ingin tambah anggota
+                    }
+                });
+            }
+
+            document.getElementById('searchAnggota').addEventListener('input', filterAnggota);
+            document.getElementById('filterPosyanduModal').addEventListener('change', filterAnggota);
+
+            // Tombol simpan anggota (simpan pilihan modal ke hidden input)
+            document.getElementById('simpanAnggotaBtn').addEventListener('click', updateAnggotaTerpilih);
+
+            // Tombol bersihkan semua pilihan
+            document.getElementById('clearAnggotaBtn').addEventListener('click', function() {
+                document.querySelectorAll('.anggota-checkbox').forEach(cb => cb.checked = false);
+                anggotaHiddenInputs.innerHTML = '';
+                anggotaTerpilihLabel.innerText = 'Belum ada anggota dipilih';
             });
 
-            label.innerText = selectedCheckboxes.length + ' anggota dipilih';
-        });
+            // Tombol pilih semua berdasarkan filter (menambah anggota yang belum dicek)
+            document.getElementById('pilihSemuaBtn').addEventListener('click', function() {
+                const selectedPos = document.getElementById('filterPosyanduModal').value;
 
-        // Bersihkan pilihan anggota
-        document.getElementById('clearAnggotaBtn').addEventListener('click', function() {
-            document.querySelectorAll('.anggota-checkbox').forEach(cb => cb.checked = false);
-            document.getElementById('anggotaHiddenInputs').innerHTML = '';
-            document.getElementById('anggotaTerpilihLabel').innerText = 'Belum ada anggota dipilih';
-        });
+                document.querySelectorAll('.anggota-item').forEach(item => {
+                    const posId = item.getAttribute('data-posyandu');
+                    const checkbox = item.querySelector('input');
 
-        // Saat modal dibuka, sinkronkan checkbox dengan hidden inputs yang sudah ada
-        var anggotaModal = document.getElementById('anggotaModal');
-        anggotaModal.addEventListener('show.bs.modal', function() {
-            // Reset filter dan search
-            document.getElementById('filterPosyanduModal').value = 'semua';
-            document.getElementById('searchAnggota').value = '';
-            filterAnggota();
+                    if ((selectedPos === 'semua' || posId === selectedPos) && item.style.display !==
+                        'none' && !checkbox.checked) {
+                        checkbox.checked = true; // hanya tambah yang belum dicek
+                    }
+                });
 
-            // Ambil nilai anggota yang sudah dipilih di hidden inputs
-            const selectedValues = Array.from(document.querySelectorAll('#anggotaHiddenInputs input')).map(input =>
-                input.value);
+                updateAnggotaTerpilih();
+            });
 
-            // Sync checkbox
-            document.querySelectorAll('.anggota-checkbox').forEach(cb => {
-                cb.checked = selectedValues.includes(cb.value);
+            // Tombol batal pilih semua (membatalkan semua pilihan di modal)
+            document.getElementById('batalPilihSemuaBtn').addEventListener('click', function() {
+                document.querySelectorAll('.anggota-checkbox').forEach(cb => cb.checked = false);
+                updateAnggotaTerpilih();
+            });
+
+            // Sinkronisasi ketika modal dibuka (checkbox sync dengan hidden inputs)
+            var anggotaModal = document.getElementById('anggotaModal');
+            anggotaModal.addEventListener('show.bs.modal', function() {
+                document.getElementById('filterPosyanduModal').value = 'semua';
+                document.getElementById('searchAnggota').value = '';
+                filterAnggota();
+
+                const selectedValues = Array.from(document.querySelectorAll('#anggotaHiddenInputs input'))
+                    .map(input => input.value);
+
+                document.querySelectorAll('.anggota-checkbox').forEach(cb => {
+                    cb.checked = selectedValues.includes(cb.value);
+                });
             });
         });
     </script>
