@@ -30,16 +30,15 @@ class JadwalController extends Controller
             'jam_mulai' => 'required',
             'jam_selesai' => 'required|after:jam_mulai',
             'tanggal' => 'required|date',
-            'yang_menghadiri' => 'nullable|array',
+            'yang_menghadiri' => 'required|array',
             'yang_menghadiri.*' => 'exists:anggota,id',
         ]);
 
-        // Encode array anggota yang hadir jadi JSON, atau simpan null jika kosong
         $data['yang_menghadiri'] = isset($data['yang_menghadiri']) ? json_encode($data['yang_menghadiri']) : null;
 
         $jadwal = Jadwal::create($data);
 
-        $selectIds = $jadwal->yang_menghadiri;
+        $selectIds = json_decode($jadwal->yang_menghadiri, true) ?? [];
         $tokens = Anggota::whereIn('id', $selectIds)
             ->whereNotNull('fcm_token')
             ->whereHas('kehamilan', function ($query) {

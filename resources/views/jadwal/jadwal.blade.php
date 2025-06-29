@@ -211,6 +211,20 @@
             jamSelesai.addEventListener('change', validateTime);
 
             form.addEventListener('submit', function(e) {
+                const anggotaTerpilih = document.querySelectorAll('#anggotaHiddenInputs input');
+
+                if (anggotaTerpilih.length === 0) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Anggota Belum Dipilih!',
+                        html: '<div style="text-align: center;"><strong>Silakan pilih minimal 1 anggota yang akan menghadiri.</strong><br></div>',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6'
+                    });
+                    return;
+                }
+
                 if (!validateTime()) {
                     e.preventDefault();
                     Swal.fire({
