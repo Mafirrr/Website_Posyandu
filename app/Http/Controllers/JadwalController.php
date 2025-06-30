@@ -34,6 +34,8 @@ class JadwalController extends Controller
             'yang_menghadiri.*' => 'exists:anggota,id',
         ]);
 
+        $data['yang_menghadiri'] = array_map('intval', $data['yang_menghadiri']);
+
         $jadwal = Jadwal::create($data);
 
 
@@ -111,6 +113,8 @@ class JadwalController extends Controller
             'yang_menghadiri' => 'nullable|array',
             'yang_menghadiri.*' => 'exists:anggota,id',
         ]);
+
+        $data['yang_menghadiri'] = array_map('intval', $data['yang_menghadiri']);
 
         $selectIds = $data['yang_menghadiri'] ?? [];
         $jadwal = Jadwal::findOrFail($id);
