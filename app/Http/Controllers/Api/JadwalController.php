@@ -27,6 +27,7 @@ class JadwalController extends Controller
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
             'tanggal' => 'required|date',
+            'yang_menghadiri' => 'required|array',
             'keterangan' => 'nullable|string',
             'anggota_id' => 'nullable|exists:anggota,id',
         ]);
@@ -58,6 +59,7 @@ class JadwalController extends Controller
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
             'tanggal' => 'required|date',
+            'yang_menghadiri' => 'required|array',
             'keterangan' => 'nullable|string',
             'anggota_id' => 'nullable|exists:anggota,id',
         ]);

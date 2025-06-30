@@ -34,11 +34,10 @@ class JadwalController extends Controller
             'yang_menghadiri.*' => 'exists:anggota,id',
         ]);
 
-        $data['yang_menghadiri'] = isset($data['yang_menghadiri']) ? json_encode($data['yang_menghadiri']) : null;
-
         $jadwal = Jadwal::create($data);
 
-        $selectIds = json_decode($jadwal->yang_menghadiri, true) ?? [];
+
+        $selectIds = $jadwal->yang_menghadiri;
         $tokens = Anggota::whereIn('id', $selectIds)
             ->whereNotNull('fcm_token')
             ->whereHas('kehamilan', function ($query) {
@@ -114,9 +113,6 @@ class JadwalController extends Controller
         ]);
 
         $selectIds = $data['yang_menghadiri'] ?? [];
-
-        $data['yang_menghadiri'] = isset($data['yang_menghadiri']) ? json_encode($data['yang_menghadiri']) : null;
-
         $jadwal = Jadwal::findOrFail($id);
         $jadwal->update($data);
 

@@ -32,7 +32,7 @@ class NotifController extends Controller
             ], 404);
         }
 
-        $jadwals = Jadwal::where('lokasi', $anggota->posyandu_id)
+        $jadwals = Jadwal::whereJsonContains('yang_menghadiri', (string) $anggota->id)
             ->with('posyandu')
             ->orderBy('created_at', 'desc')
             ->get();

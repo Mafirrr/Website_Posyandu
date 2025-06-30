@@ -27,6 +27,10 @@ Route::post('/lupa-password', [LoginController::class, 'lupaPass']);
 Route::post('/send-otp', [LoginController::class, 'sendOtp']);
 Route::post('/verify-otp', [LoginController::class, 'verifyOtp']);
 Route::post('/resetPass', [LoginController::class, 'resetPassword']);
+Route::prefix('kehamilan')->group(function () {
+    Route::get('/{id}', [KehamilanControlller::class, 'handle']);
+    Route::get('/', [KehamilanControlller::class, 'getAnggota']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('anggota')->group(function () {
@@ -47,9 +51,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/keluarga', [ProfileController::class, 'putData']);
     });
 
-    Route::prefix('kehamilan')->group(function () {
-        Route::get('/{id}', [KehamilanControlller::class, 'handle']);
-    });
 
     Route::apiResource('/konsultasi', konsultasiController::class);
 

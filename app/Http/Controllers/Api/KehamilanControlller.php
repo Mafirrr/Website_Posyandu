@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anggota;
 use App\Models\Kehamilan;
 use App\Models\Nifas;
 use App\Models\PemeriksaanKehamilan;
 use App\Models\PemeriksaanRutin;
 use App\Models\PemeriksaanTrimester1;
 use App\Models\PemeriksaanTrimester3;
+use App\Models\Posyandu;
 use App\Models\Trimester1;
 use App\Models\Trimester3;
 use Illuminate\Http\Request;
@@ -140,6 +142,16 @@ class KehamilanControlller extends Controller
                 'trimester3' => $tri3,
                 'nifas' => $nifas,
             ],
+        ]);
+    }
+
+    public function getAnggota()
+    {
+        $anggota = Anggota::all();
+        $posyandu = Posyandu::all();
+        return response()->json([
+            'posyandu' => $posyandu,
+            'anggota' => $anggota,
         ]);
     }
 }

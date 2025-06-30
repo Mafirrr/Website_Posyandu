@@ -53,7 +53,7 @@ class Trimester extends Controller
             $validated = $request->validate([
                 'pemeriksaan_kehamilan.jenis_pemeriksaan' => 'required',
                 'pemeriksaan_kehamilan.kehamilan_id' => 'required',
-                'pemeriksaan_kehamilan.petugas_id' => 'required',
+                'pemeriksaan_kehamilan.kader_id' => 'required',
                 'pemeriksaan_kehamilan.tanggal_pemeriksaan' => 'required|date',
                 'pemeriksaan_kehamilan.tempat_pemeriksaan' => 'required',
             ]);
@@ -67,7 +67,7 @@ class Trimester extends Controller
             $pemeriksaan = PemeriksaanKehamilan::create([
                 'jenis_pemeriksaan' => $validated['pemeriksaan_kehamilan']['jenis_pemeriksaan'],
                 'kehamilan_id' => $kehamilan->id,
-                'kader_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
+                'kader_id' => $validated['pemeriksaan_kehamilan']['kader_id'],
                 'tanggal_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tanggal_pemeriksaan'],
                 'tempat_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tempat_pemeriksaan'],
             ]);
@@ -115,7 +115,7 @@ class Trimester extends Controller
         $validated = $request->validate([
             'pemeriksaan_kehamilan.jenis_pemeriksaan' => 'required',
             'pemeriksaan_kehamilan.kehamilan_id' => 'required',
-            'pemeriksaan_kehamilan.petugas_id' => 'required',
+            'pemeriksaan_kehamilan.kader_id' => 'required',
             'pemeriksaan_kehamilan.tanggal_pemeriksaan' => 'required|date',
             'pemeriksaan_kehamilan.tempat_pemeriksaan' => 'required',
         ]);
@@ -127,7 +127,7 @@ class Trimester extends Controller
             $pemeriksaan = PemeriksaanKehamilan::create([
                 'jenis_pemeriksaan' => $validated['pemeriksaan_kehamilan']['jenis_pemeriksaan'],
                 'kehamilan_id' => $kehamilan->id,
-                'kader_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
+                'kader_id' => $validated['pemeriksaan_kehamilan']['kader_id'],
                 'tanggal_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tanggal_pemeriksaan'],
                 'tempat_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tempat_pemeriksaan'],
             ]);
@@ -157,7 +157,7 @@ class Trimester extends Controller
         $validated = $request->validate([
             'pemeriksaan_kehamilan.jenis_pemeriksaan' => 'required',
             'pemeriksaan_kehamilan.kehamilan_id' => 'required',
-            'pemeriksaan_kehamilan.petugas_id' => 'required',
+            'pemeriksaan_kehamilan.kader_id' => 'required',
             'pemeriksaan_kehamilan.tanggal_pemeriksaan' => 'required',
             'pemeriksaan_kehamilan.tempat_pemeriksaan' => 'required',
         ]);
@@ -174,7 +174,7 @@ class Trimester extends Controller
             $pemeriksaan = PemeriksaanKehamilan::create([
                 'jenis_pemeriksaan' => $validated['pemeriksaan_kehamilan']['jenis_pemeriksaan'],
                 'kehamilan_id' => $kehamilan->id,
-                'kader_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
+                'kader_id' => $validated['pemeriksaan_kehamilan']['kader_id'],
                 'tanggal_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tanggal_pemeriksaan'],
                 'tempat_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tempat_pemeriksaan'],
             ]);
@@ -210,7 +210,7 @@ class Trimester extends Controller
             $validated = $request->validate([
                 'pemeriksaan_kehamilan.jenis_pemeriksaan' => 'required',
                 'pemeriksaan_kehamilan.kehamilan_id' => 'required',
-                'pemeriksaan_kehamilan.petugas_id' => 'required',
+                'pemeriksaan_kehamilan.kader_id' => 'required',
                 'pemeriksaan_kehamilan.tanggal_pemeriksaan' => 'required|date',
                 'pemeriksaan_kehamilan.tempat_pemeriksaan' => 'required',
             ]);
@@ -222,7 +222,7 @@ class Trimester extends Controller
             $pemeriksaan = PemeriksaanKehamilan::create([
                 'jenis_pemeriksaan' => $validated['pemeriksaan_kehamilan']['jenis_pemeriksaan'],
                 'kehamilan_id' => $kehamilan->id,
-                'kader_id' => $validated['pemeriksaan_kehamilan']['petugas_id'],
+                'kader_id' => $validated['pemeriksaan_kehamilan']['kader_id'],
                 'tanggal_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tanggal_pemeriksaan'],
                 'tempat_pemeriksaan' => $validated['pemeriksaan_kehamilan']['tempat_pemeriksaan'],
             ]);
