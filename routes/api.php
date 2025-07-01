@@ -27,12 +27,13 @@ Route::post('/lupa-password', [LoginController::class, 'lupaPass']);
 Route::post('/send-otp', [LoginController::class, 'sendOtp']);
 Route::post('/verify-otp', [LoginController::class, 'verifyOtp']);
 Route::post('/resetPass', [LoginController::class, 'resetPassword']);
-Route::prefix('kehamilan')->group(function () {
-    Route::get('/{id}', [KehamilanControlller::class, 'handle']);
-    Route::get('/', [KehamilanControlller::class, 'getAnggota']);
-});
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('kehamilan')->group(function () {
+        Route::get('/{id}', [KehamilanControlller::class, 'handle']);
+        Route::get('/', [KehamilanControlller::class, 'getAnggota']);
+    });
+
     Route::prefix('anggota')->group(function () {
         Route::get('/', [AnggotaKaderController::class, 'index']);
         Route::post('/', [AnggotaKaderController::class, 'store']);

@@ -23,7 +23,7 @@ class DashboardFController extends Controller
         }
 
         $jadwal = Jadwal::whereDate('tanggal', '>=', $today)
-            ->whereJsonContains('yang_menghadiri', (string) $anggota->id)
+            ->whereJsonContains('yang_menghadiri',  $anggota->id)
             ->with('posyandu')
             ->orderBy('tanggal', 'asc')
             ->first();
