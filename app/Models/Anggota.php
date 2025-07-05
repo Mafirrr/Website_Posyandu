@@ -36,6 +36,10 @@ class Anggota extends  Authenticatable
         'password',
     ];
 
+    protected $casts = [
+        'posyandu_id' => 'integer',
+    ];
+
     public function getAuthIdentifierName()
     {
         return 'nik';

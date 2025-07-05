@@ -30,6 +30,7 @@ class Nifas extends Model
     ];
 
     protected $casts = [
+        'pemeriksaan_id' => 'integer',
         'tanggal_pemeriksaan' => 'date',
     ];
 

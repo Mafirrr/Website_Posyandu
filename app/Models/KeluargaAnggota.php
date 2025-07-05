@@ -27,6 +27,9 @@ class KeluargaAnggota extends Model
         'no_telepon',
     ];
 
+    protected $casts = [
+        'anggota_id' => 'integer',
+    ];
     protected $dates = ['tanggal_lahir', 'deleted_at'];
 
     public function anggota()

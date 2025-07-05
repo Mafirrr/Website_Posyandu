@@ -21,6 +21,10 @@ class PemeriksaanKehamilan extends Model
     ];
     // app/Models/PemeriksaanKehamilan.php
     protected $casts = [
+        'kehamilan_id' => 'integer',
+        'petugas_id' => 'integer',
+        'kader_id' => 'integer',
+        'tempat_pemeriksaan' => 'integer',
         'tanggal_pemeriksaan' => 'datetime',
     ];
 

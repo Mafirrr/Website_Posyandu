@@ -27,7 +27,7 @@ class PemeriksaanAwal extends Model
         'riwayat_perilaku' => 'array',
         'riwayat_penyakit_keluarga' => 'array',
         'gula_darah_puasa' => 'float',
-        'hemogoblin' => 'float',
+        'hemoglobin' => 'float',
         'tinggi_badan' => 'float',
     ];
 

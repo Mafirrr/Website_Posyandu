@@ -19,6 +19,9 @@ class Trimester3 extends Model
         'usg_trimester_3',
         'rencana_konsultasi',
     ];
+    protected $casts = [
+        'pemeriksaan_id' => 'integer',
+    ];
 
     public function pemeriksaan()
     {

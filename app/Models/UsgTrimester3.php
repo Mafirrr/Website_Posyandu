@@ -40,7 +40,10 @@ class UsgTrimester3 extends Model
     ];
 
     protected $casts = [
+        'umur_kehamilan_usg_trimester_1' => 'float',
         'umur_kehamilan_usg_trimester_3' => 'float',
+        'djj' => 'float',
+        'sdp' => 'float',
         'BPD' => 'float',
         'HC' => 'float',
         'AC' => 'float',

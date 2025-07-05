@@ -20,6 +20,10 @@ class Trimester1 extends Model
         'usg_trimester_1',
     ];
 
+    protected $casts = [
+        'pemeriksaan_id' => 'integer',
+    ];
+
     public function pemeriksaan()
     {
         return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');

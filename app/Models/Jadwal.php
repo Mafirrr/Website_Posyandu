@@ -17,6 +17,7 @@ class Jadwal extends Model
     ];
 
     protected $casts = [
+        'lokasi' => 'integer',
         'yang_menghadiri' => 'array',
         'tanggal' => 'date',
     ];

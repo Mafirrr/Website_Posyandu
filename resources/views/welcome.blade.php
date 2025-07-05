@@ -6,7 +6,9 @@
     <title>Posyandu Digital</title>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('template') }}/assets/css/icons/tabler-icons/tabler-icons.css" />
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset(path: 'build/assets/app-BkZyq8oV.css') }}">
+    <script src="{{ asset(path: 'build/assets/app-C15Rxuth.js') }}" defer></script>
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
 
 <body class="text-gray-800 bg-white">

@@ -29,6 +29,14 @@ class PemeriksaanRutin extends Model
     /**
      * Relasi ke tabel pemeriksaan_kehamilan
      */
+
+    protected $casts = [
+        'pemeriksaan_id' => 'integer',
+        'berat_badan' => 'float',
+        'tekanan_darah_sistol' => 'integer',
+        'tekanan_darah_diastol' => 'integer',
+        'lingkar_lengan_atas' => 'float',
+    ];
     public function pemeriksaan()
     {
         return $this->belongsTo(PemeriksaanKehamilan::class, 'pemeriksaan_id');

@@ -22,6 +22,7 @@ class Kehamilan extends Model
     ];
 
     protected $casts = [
+        'anggota_id' => 'integer',
         'usia_kehamilan_awal' => 'integer',
         'perkiraan_kehamilan' => 'date',
         'status' => 'string'
